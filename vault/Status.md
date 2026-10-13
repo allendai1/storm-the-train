@@ -18,7 +18,7 @@ Pre-production. The [[Game Design Document]] is drafted: core decisions are made
 
 ## Next up
 - Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions.
-- Review the [[Score and Combo]] draft, and decide whether score boosters and gem revives count on leaderboards.
+- [[Score and Combo]]: the leaderboard rules are decided (squad and individual boards, unboosted score, gem-revived runs count). Point values still need a playtest.
 - [[Launch Agents]]: the six concepts are accepted (names are placeholders). Still open: the Invisible Bow's charge formula.
 - [[Gadgets and Mayhem]]: the key rules are decided (pick your gadget, one Air Strike per party, the Healer pauses bleed-out, mech upgrades add duration only). Fill rates and armour still need a playtest.
 - Review the [[Wild West Enemies]] roster draft and its open questions. Player HP, toughness and speed are now decided, and charge speeds were raised to match.

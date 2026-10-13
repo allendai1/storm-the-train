@@ -1,11 +1,13 @@
 ---
 tags: [design, feature, score, combo, leaderboards]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Score and Combo
 
-> **Status: proposed.** This is Claude's draft of how score is earned in a run, for review.
+> **Status: planned.** This is Claude's draft of how score is earned in a run. The
+> developer settled the leaderboard rules on 2026-10-13 (marked **[decided]**). The point
+> values are still proposals.
 > The [[Game Design Document]] has already decided on **co-op leaderboards** (best run
 > score and furthest train). This note defines the score that the "best run score"
 > board ranks. The original's per-kill score values weren't recovered
@@ -69,9 +71,18 @@ combo**, and the rest comes from clearing trains, events and helping teammates.
 ### Run score
 - Each player has a **personal score**: their knockouts × combo, plus their bonuses.
   It's used for missions ("GET %s POINTS") and their personal best.
-- The **squad score** is the **sum of personal scores**. It's what the "best run score"
-  leaderboard ranks. Boards are split by party size (solo, duo, 3–4), so bigger parties
-  don't crowd out smaller ones.
+- **[decided] Both scores have a board.** The **squad score** (the **sum of personal
+  scores**) ranks on the squad board, which is split by party size (solo, duo, 3–4) so
+  bigger parties don't crowd out smaller ones. The **personal score** ranks on the
+  **individual** board (see the GDD for brackets).
+  - **[proposed]** The individual board invites kill-stealing. Two rules work against it:
+    assists keep your combo alive, and every boss helper gets 500.
+- **[decided] Boosters don't count on boards.** Score boosters (×2/×3) multiply your
+  personal score for missions and your personal best. Every leaderboard ranks the
+  **unboosted** score. **[proposed]** If run-end coins end up tied to score, they use the
+  boosted score, so the booster still pays off.
+- **[decided] Gem-revived runs count** on every board. The revive price doubles each use,
+  which limits buying a deep run.
 - **Server-side only.** The server tracks knockouts, combo timers and bonuses, and
   submits the score when the run ends. The client only displays it.
 
@@ -93,12 +104,7 @@ _Not started._
 - [ ] Run-end screen: squad score, per-player breakdown and callouts.
 
 ## Open questions
-- **Score boosters vs. leaderboards.** The original sold ×2/×3 score boosters for gems.
-  On a leaderboard that's pay-to-rank.
-- **Gem revives vs. leaderboards.** Paid revives make runs longer, and longer runs score
-  more. The rising price limits this, but doesn't remove it.
-- Is the squad score (sum of players) right for the board, or should it rank the best
-  individual score?
+- Are run-end coins tied to score at all? That's for the economy pass.
 - Is the 2.5 s combo window too tight on mobile? Playtest it.
 
 ## Implementation notes

@@ -272,10 +272,16 @@ numbers.
 
 ## Leaderboards
 - **[decided]** **Co-op leaderboards only. No PvP.**
+- **[decided]** There are **three boards**: **furthest train reached**, **best squad
+  score** (the sum of the party's scores) and **best individual score**. Scoring is in
+  [[Score and Combo]].
+- **[decided]** Boards rank **unboosted** score, so paid score boosters can't buy a
+  rank. **Gem-revived runs count normally.** The doubling revive price is the limit.
 - **[proposed]** The details:
-  - There are two boards: **furthest train reached** and **best run score**.
-  - Each comes in **global** and **friends** versions.
-  - Each is **split by party size**: solo, duo, and 3–4 players.
+  - Each board comes in **global** and **friends** versions.
+  - The furthest-train and squad boards are **split by party size**: solo, duo, and 3–4
+    players. The individual board is **one bracket** for co-op runs (2–4 players), since
+    solo personal scores already appear on the solo squad board.
   - Scores are counted by the server only and submitted when the run ends.
   - Boards are shown on a wall of the hub train and on the run-end screen.
   - They ship with the meta systems in M4.
@@ -315,7 +321,6 @@ party lobby.
 - Review the Wild West roster draft ([[Wild West Enemies]]).
 - Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
-- Review the score draft ([[Score and Combo]]), including whether score boosters and
-  gem revives should count on leaderboards.
+- Playtest the score values and the 2.5 s combo window ([[Score and Combo]]).
 
 Related: [[Home]] · [[Status]] · [[Art Direction]] · [[Original Game]] · [[0003-2.5d-side-scroller]]
