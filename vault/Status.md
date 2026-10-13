@@ -25,21 +25,28 @@ Three things are not settled yet:
   lighting, which waits for a mobile test. No reference images yet,
 - **number tuning**, which needs playtests. The original's numbers are loose reference only.
 
-**M0 and M1 Sessions 2–4 are built** in Studio (place `71855801375130`). You play as a
-greybox Dash Daring on a 7-car train, with the Service Rifle, the Pocket Rocket from weapon
-crates, and the spin attack. The Rattler Gang (Bandana Bandit, Rodeo Kid, Six-Shooter,
-Dynamite Dan and Big Bart) spawns from a budget timeline, fights, and ragdolls when knocked
-out. Health is in attributes. There's no downed state yet: a player at 0 HP is just
-ignored.
-**Next step: Session 5** of [[First Playable (M1)]] (RunStateService, SquadService,
-HudGui / TouchControlsGui / RunEndGui and their controllers), from a local Claude Code
-session with the Studio MCP connected.
+**M0 and M1 Sessions 2–5 are built** in Studio (place `71855801375130`). **The full M1 loop
+plays:**
+1. Ready up in the lobby → ALL ABOARD.
+2. As greybox Dash Daring (rifle, crate rocket, spin), fight the Rattler Gang's budget
+   timeline across a 7-car train.
+3. Get downed and revived.
+4. TRAIN CLEARED on the engine roof, or SQUAD WIPED.
+5. The results screen, then PLAY AGAIN.
+
+It has a hand-built HUD, touch controls and a run-end screen.
+
+**Next step: Session 6** of [[First Playable (M1)]]: a multi-client test (Studio → Test →
+Clients and Servers, 2–4 players), the performance budget and a tuning pass. Do it from a
+local Claude Code session with the Studio MCP connected; the multi-client test needs you at
+the keyboard.
 
 ## In progress
 - [[First Playable (M1)]]: Sessions 1–4 are done. Systems: [[ModeService]], [[Guard]],
   [[TrainService]], [[CharacterService]], [[InputController]], [[CameraController]],
   [[ParallaxController]], [[CombatService]], [[PickupService]], [[EffectsController]],
-  [[EnemyService]] and [[SpawnService]].
+  [[EnemyService]], [[SpawnService]], [[RunStateService]], [[SquadService]] and
+  [[HudController]]. Only Session 6 (measure, tune, playtest) is left.
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
@@ -52,9 +59,13 @@ session with the Studio MCP connected.
   - Studio settings (§5).
 - **Install Signal and Trove** into `ReplicatedStorage.Packages` and record them in
   [[Packages]]. This is the last Session 1 item; nothing needs them yet.
-- **Session 5:** RunStateService (Ready countdown → it takes over starting
-  `SpawnService.begin()`; PLAY AGAIN needs an enemy/projectile clear and a crate reset),
-  SquadService (downed, revive, wipe) and the hand-built HUD, touch and run-end GUIs.
+- **Session 6:**
+  - a multi-client test,
+  - check the unverified Session 4–5 items (below),
+  - the perf budget (≤ 30 enemies + 4 players + 12 ragdolls),
+  - tuning.
+- **Compare the Session 5 GUIs with the Figma mockups** by hand. The Figma MCP was
+  blocked by the Starter plan limit, so they follow [[Art Direction]] §10 as written.
 - **Review the greybox carriages, background layers, Dash, enemies, weapons and effects** in
   Studio (`ServerStorage.Assets.Carriages.WildWest`, `ServerStorage.Assets.Enemies`,
   `ReplicatedStorage.Assets.Backgrounds.WildWest`, `ReplicatedStorage.Assets.Agents`,
@@ -92,12 +103,20 @@ session with the Studio MCP connected.
   - Dan's knockout blast hurting other enemies,
   - jumping over Six-Shooter bullets (needs a person playing),
   - picking up a dropped crate.
+- Session 5 is not checked yet. These need 2+ players or a touch device:
+  - revives, and a revive interrupted by damage,
+  - bleed-out → spectating,
+  - the teammate cards and the revive prompt,
+  - the touch controls (a finger sliding off a button may stick).
+- PLAY AGAIN waits for **every** player. Someone who joins during Results or never
+  presses it blocks the reset (no timeout yet).
 - Enemy spawns can be on screen: the 20-stud minimum is less than the ~35-stud half-width
   of the camera. Tune this in Session 6.
 
 ## Unsaved work in Studio
-- **2026-10-13: Session 4 needs a save or publish** (File → Publish to Roblox). You saved
-  partway through. Since then the following changed:
-  - EnemyService, SpawnService and `Shared.Config.SpawnTimeline` were added,
-  - Constants and the effect hooks were edited,
-  - the Caboose roof was trimmed.
+- **2026-10-13: Session 5 needs a save or publish** (File → Publish to Roblox). It added:
+  - the three GUIs,
+  - RunStateService and SquadService,
+  - three controllers,
+  - edits to Constants, Types, CombatService, SpawnService, EnemyService, PickupService,
+    InputController and CameraController.

@@ -14,12 +14,14 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
   (`Modes = { "Run" }`)
 
 ## Expects in the place
-- Nothing hand-built. Touch buttons come with `TouchControlsGui` (Session 5).
+- Nothing hand-built. The touch buttons live in `TouchControlsGui` and are wired by
+  TouchControlsController ([[HudController]]).
 - Runtime-generated content: _none_
 
 ## Public API
-None yet. Session 5's `TouchControlsController` will need a way to feed in the move axis
-and jump presses.
+- `InputController.setTouchAxis(x)`, `setTouchFire(on)` and `setInteract(on)`: touch
+  button state.
+- `InputController.jump()`: a jump, or a spin when airborne.
 
 ## Remotes
 | Name | Direction | Payload | Server validation |
@@ -55,3 +57,8 @@ and jump presses.
 - Verified 2026-10-13 in a playtest: holding D for 0.5 s moved about 16.5 studs facing
   +X. The jump, the spin and the ignored third press all behaved as above. In Session 3,
   a mouse hold fired both weapons and a release stopped them.
+- Session 5 (2026-10-13):
+  - **Interact** is `E`, held. It resends `RequestInteract` every `INTERACT_SEND_INTERVAL`
+    (0.3 s) for revives ([[SquadService]]).
+  - While `Downed` or `BledOut`, movement and jumping stop.
+  - The touch axis adds to the keys, and touch fire ORs with the mouse.

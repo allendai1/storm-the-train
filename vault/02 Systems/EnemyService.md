@@ -57,6 +57,7 @@ damage to enemies.
   (`CharacterService.lockToPlane`).
 - `EnemyService.aliveCost() -> number`: the total `SpawnCost` of live enemies.
 - `EnemyService.cost(name) -> number`: a template's `SpawnCost`.
+- `EnemyService.clear()`: removes every enemy, ragdoll and enemy projectile (PLAY AGAIN).
 
 ## Remotes
 None of its own. It sends `Effects` records through `CombatService.effect`: `R` with a
@@ -141,4 +142,3 @@ template and gravity, `P`, `A`, `N` and `X` (see [[CombatService]]).
   (an interpretation of the spec).
 - Ragdolls fade on the server: 4 transparency steps replicated. Move that to the clients if
   the Session 6 budget check flags it.
-- There's no `clear()` for PLAY AGAIN yet (Session 5, RunStateService).

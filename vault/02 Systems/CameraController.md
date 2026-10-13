@@ -40,8 +40,10 @@ None.
 
 ## Notes
 - Still to come:
-  - spectating a teammate while downed (Session 5),
   - edge-of-screen teammate arrows,
   - a slight camera sway for the motion illusion (ADR 0009).
 - Verified 2026-10-13 in a playtest: Scriptable, FOV 40, Z ≈ 48 in the Studio viewport,
   and it follows with the lead. The screen capture showed the train side-on.
+- Session 5 (2026-10-13): after bleeding out (`BledOut`) it follows the nearest teammate
+  who's still up (the M1 spec's proposed answer), falling back to your own character. Not
+  verified yet; it needs 2+ players.

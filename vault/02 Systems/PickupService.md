@@ -38,6 +38,9 @@ flips you to your agent's other weapon. It comes back for you after `WEAPON_CRAT
   Player attribute `Blueprints` (not saved in M1). It's removed once every current player
   has it.
 
+- `PickupService.reset()`: PLAY AGAIN. Clears every `CrateReadyAt_*`, removes blueprints and
+  sets `Blueprints = 0`.
+
 ## Remotes
 None. The state is the **Player attribute `CrateReadyAt_<index>`**: the server time
 (`GetServerTimeNow`) when that spot's crate is back. Missing means ready.
@@ -58,7 +61,6 @@ None. The state is the **Player attribute `CrateReadyAt_<index>`**: the server t
   and every train starting on the primary weapon (CharacterService equips it on spawn).
 - **Not yet done:**
   - the agent's one-line bark on pickup, which needs the HUD (Session 5).
-  - resetting `CrateReadyAt_*` on PLAY AGAIN (Session 5).
 - The blueprint is one shared model, so everyone sees it until the last player takes it.
   Make it per-player if that's confusing in co-op.
 - Verified 2026-10-13 (Session 4): Bart's knockout made a dropped crate spot, and the

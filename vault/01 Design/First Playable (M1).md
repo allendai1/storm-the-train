@@ -239,13 +239,13 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   spawn-location rules, and Bart's solo intro.
 
 ### Session 5 — Co-op flow, HUD, run end
-- [ ] **`RunStateService`:** Lobby (Ready and countdown) → InTrain → Cleared or Wiped
+- [x] **`RunStateService`:** Lobby (Ready and countdown) → InTrain → Cleared or Wiped
   → Results → PLAY AGAIN. The state is the Attribute `RunState`. **Don't name it
   `RunService`**, which clashes with Roblox's own service.
-- [ ] **`SquadService`:** downed and bleed-out, revives through `RequestInteract`
+- [x] **`SquadService`:** downed and bleed-out, revives through `RequestInteract`
   (the server picks the nearest downed teammate), interruption by damage, spectating
   and wipe detection.
-- [ ] **GUIs** built by hand in `StarterGui` with `ResetOnSpawn = false`, following the
+- [x] **GUIs** built by hand in `StarterGui` with `ResetOnSpawn = false`, following the
   [Figma mockups](https://www.figma.com/design/dYELw7ZfOV3nZAh34vtCtL):
   - `HudGui`: the player panel (portrait, HP, **active weapon icon**), teammate cards,
     train progress ("TRAIN 1 · CABOOSE → ENGINE"), the revive prompt template, the
@@ -255,7 +255,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
     PLAY AGAIN.
 
   The Mayhem ring and gadget fan come in M2.
-- [ ] **Controllers:** `HudController`, `TouchControlsController`, `RunEndController`.
+- [x] **Controllers:** `HudController`, `TouchControlsController`, `RunEndController`.
   They only connect events and set text and visibility.
 
 ### Session 6 — Measure, tune, playtest
@@ -290,7 +290,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
 - Should a crate also refill or reset anything (e.g. the rocket's cooldown)? Proposed:
   no, it only switches weapons.
 - How should a downed player's camera spectate? Proposed: it follows the nearest
-  living teammate.
+  living teammate. *(Built that way in Session 5; confirm it in the co-op playtest.)*
 
 ## Implementation notes
 - **Session 1 (M0), 2026-10-13: done except Packages.** Built in place 71855801375130
@@ -344,5 +344,34 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   - Playtests checked melee, bullets, dynamite, Bart's wind-up, charge, stagger and
     knockback, the ragdoll and its fade, the crate and blueprint drops, and a full timeline
     to `TimelineDone`. The console was clean. Details are in [[EnemyService]].
+- **Session 5, 2026-10-13: done.**
+  - Built: `HudGui`, `TouchControlsGui` and `RunEndGui` in `StarterGui`. The Figma file
+    couldn't be read (Starter plan limit), so they follow [[Art Direction]] §10 as written.
+  - Systems: [[RunStateService]], [[SquadService]] and [[HudController]] (+
+    TouchControlsController and RunEndController).
+  - Hooks:
+    - `SpawnService.stop` (it no longer starts itself),
+    - `EnemyService.clear`,
+    - `PickupService.reset`,
+    - knockout credit in `CombatService.damageEnemy`,
+    - the touch, Interact (E) and downed handling in [[InputController]],
+    - spectating in [[CameraController]].
+  - Decisions made while building:
+    - PLAY AGAIN needs every player and returns to a Lobby where everyone is already
+      Ready (a 5 s countdown),
+    - revives are a held Interact that resends `RequestInteract` every 0.3 s,
+    - downed players lie down (PlatformStand),
+    - the revive prompt is on screen, not a billboard,
+    - the weapon shows as text.
+  - A one-player playtest checked:
+    - READY → countdown → ALL ABOARD,
+    - live HUD health, weapon and progress,
+    - a KO credited,
+    - Health 0 → downed → SQUAD WIPED → the results screen,
+    - PLAY AGAIN → a full reset → a new run,
+    - the engine roof with the timeline done → TRAIN CLEARED → results,
+    - a clean console.
+  - Revives, bleed-out, spectating, the teammate cards and the touch controls are left for
+    the Session 6 multi-client and device tests.
 
 Related: [[Game Design Document]] · [[Wild West Enemies]] · [[Launch Agents]] · [[Art Direction]] · [[0004-single-place-hub-and-run-modes]] · [[0005-side-on-movement-and-camera]] · [[0006-humanoid-enemies-and-combat]] · [[0007-networking-and-remotes]] · [[0009-static-trains-scrolling-world]] · [[Home]]

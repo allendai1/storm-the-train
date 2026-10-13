@@ -29,8 +29,10 @@ Plays the M1 **spawn timeline** ([[First Playable (M1)]] → Spawn timeline):
 - Remote `Announce`.
 
 ## Public API
-- `SpawnService.begin()`: plays the timeline once and yields until it ends. Calling it
-  again while it runs does nothing.
+- `SpawnService.begin()`: plays the timeline, yielding until it ends or `stop()` is
+  called. Each call gets a new run id; an older timeline stops at its next step.
+- `SpawnService.stop()`: ends the current timeline and sets `TimelineDone = false` (wipe,
+  PLAY AGAIN).
 
 ## Remotes
 | Name | Direction | Payload | Server validation |
@@ -55,12 +57,10 @@ Plays the M1 **spawn timeline** ([[First Playable (M1)]] → Spawn timeline):
 
 ## Depends on
 - [[EnemyService]], [[TrainService]] (`getCarriages`), `Shared.Constants`
-  (`COOP_SCALE`, `ENEMY_SPAWN_MIN_DISTANCE`, `SPAWN_START_DELAY`)
+  (`COOP_SCALE`, `ENEMY_SPAWN_MIN_DISTANCE`)
 
 ## Notes
-- **Temporary start:** `start()` waits for the first living player, then
-  `SPAWN_START_DELAY` (5 s), then calls `begin()`. RunStateService's Ready countdown
-  replaces this in Session 5.
+- [[RunStateService]] starts it at ALL ABOARD (Session 5). It no longer starts itself.
 - Phase timing runs on the clock: if every player is down, waves spawn nothing but the
   phases still advance.
 - "Never on screen" isn't enforced. The camera is about 70 studs wide, so a spawn 20

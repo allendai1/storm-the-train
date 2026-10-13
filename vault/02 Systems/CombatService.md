@@ -39,8 +39,10 @@ Session 5). Both react to `Health` reaching 0.
   to the HumanoidRootPart at `Constants.WEAPON_HOLD_OFFSET`.
 
 ## Public API
-- `CombatService.damageEnemy(enemy: Model, amount: number)`: lowers `Health` (to a minimum
-  of 0). It sends a hit spark, or a KO pop when Health reaches 0.
+- `CombatService.damageEnemy(enemy: Model, amount: number, by: Player?)`: lowers `Health`
+  (to a minimum of 0). It sends a hit spark, or a KO pop when Health reaches 0. A knockout
+  adds 1 to `by`'s Player attribute `Knockouts` (run results). Rifle, rocket (direct and
+  splash) and spin damage pass the shooter.
 - `CombatService.damagePlayer(player: Player, raw: number)`: applies `raw × Toughness` to
   the Player attribute `Health`.
 - `CombatService.setWeapon(player, name)`: equips the named template and sets the Player
@@ -106,5 +108,4 @@ Session 5). Both react to `Health` reaching 0.
   "13 direct + 13 splash", and this reads it as yes. Tune in Session 6.
 - No lag compensation (ADR 0006). The airborne check for the spin could reject a spin made
   right after take-off under lag. Watch for this in multi-client tests.
-- A `Downed` check comes with SquadService (Session 5). Until then, Health ≤ 0 already
-  blocks firing and spinning.
+- Downed players have Health 0, which already blocks firing and spinning ([[SquadService]]).
