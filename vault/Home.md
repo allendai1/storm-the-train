@@ -39,6 +39,8 @@ Architecture decision records. Create from [[Templates/Decision|Decision templat
 
 ## Devlog
 Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to put them there).
+- [[2026-10-13]] — first design session: GDD, design notes, art direction, ADRs, M1/M2 specs
+- New entries use the [[Templates/Devlog|Devlog template]].
 
 ## Inbox
 Unsorted and proposed ideas go in `00 Inbox/` (`status: proposed`) until they're triaged.

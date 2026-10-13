@@ -5,8 +5,7 @@ updated: 2026-10-13
 ---
 # Loop (M2) — spec and Studio build checklist
 
-> **Status: planned.** This turns milestone **M2 (Loop)** from the [[Game Design
-> Document]] into a checklist that continues from [[First Playable (M1)]] (sessions
+> **Status: planned.** This turns milestone **M2 (Loop)** from the [[Game Design Document]] into a checklist that continues from [[First Playable (M1)]] (sessions
 > 7–13). M2 is: **hub train, next-train leap, checkpoint, agent swap, Mayhem and
 > gadgets, coins and saving.** It assumes M1 is built and its playtest questions are
 > answered. **Revisit every first-guess number with what M1 taught.** Nothing here is
@@ -71,8 +70,7 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 ### Checkpoint (after every 3rd train)
 - The **hub checkpoint train** (template `HubCheckpoint`) arrives like a next train.
   Leaping onto it shows **"HUB TRAIN ALONGSIDE!"**.
-- **Free full heal** for everyone on arrival, from the medbay ([[Economy and
-  Monetization]]). Downed and spectating players come back at full HP.
+- **Free full heal** for everyone on arrival, from the medbay ([[Economy and Monetization]]). Downed and spectating players come back at full HP.
 - **Commits:** run coins and stats are saved ([[0008-player-data-profilestore]]).
   Blueprint banking arrives in M4.
 - **First checkpoint ever:** Brick is granted, and the swap tutorial plays
@@ -130,8 +128,7 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   10–20), and the **run-end bonus of 1 coin per 25 points of personal score**. Coins
   are always kept, whether you cash out or wipe. They're committed at each checkpoint
   and at run end.
-- The target is about **2,000 coins per average 12-minute run** ([[Economy and
-  Monetization]]). Measure it in M2.
+- The target is about **2,000 coins per average 12-minute run** ([[Economy and Monetization]]). Measure it in M2.
 
 ### Saving (ProfileStore, schema v1 subset)
 - **Fields:** `SchemaVersion`, `Coins`, `OwnedAgents` (Dash; Brick after the first

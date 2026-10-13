@@ -238,8 +238,7 @@ by the player's mission tier (tiers 1–3).
   you don't own them. The original's "challenge chopper" idea is kept.
 - Each agent has a **5-step chain**, one step per day. Missing a day doesn't reset the
   chain; it just waits.
-- Finishing all 5 gives a **one-time 25% discount** on that agent ([[Economy and
-  Monetization]]). If you already own them, you get 20 gems instead.
+- Finishing all 5 gives a **one-time 25% discount** on that agent ([[Economy and Monetization]]). If you already own them, you get 20 gems instead.
 - Step rewards: **500 coins → 3 gems → 1,000 coins → 5 gems → 10 gems plus the
   discount**.
 - Survival challenges are **one-hit death** (the original's "survival mode"). Waves
