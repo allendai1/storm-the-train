@@ -139,6 +139,7 @@ _Each session ends with a playtest (`start_stop_play`, `get_console_output`) and
 save or publish reminder, per `CLAUDE.md`._
 
 ### Session 1 — M0 Bootstrap
+_Do the [[Studio Setup Checklist]] first. The setup script and module sources are in [[M0 Bootstrap Code]]._
 - [ ] **Folders:**
   - `ServerScriptService.Server` (Script) with an Attribute `ForceMode = "Run"`, plus
     `Services`, `Util`

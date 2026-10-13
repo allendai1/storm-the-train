@@ -19,7 +19,7 @@ per shot would be expensive and easy to abuse.
 
   | Remote | Type | Payload | Rate limit |
   |---|---|---|---|
-  | `SetInput` | **UnreliableRemoteEvent** | `{ fire: boolean, aim: number }` with aim from −1 to 1 (up/down tilt). Sent only when it changes | 30/s |
+  | `SetInput` | **UnreliableRemoteEvent** | Two scalars: `fire: boolean`, `aim: number` (−1 to 1, up/down tilt). Sent only when they change. Scalars are safer to validate than a table | 30/s |
   | `RequestSpin` | RemoteEvent | none | 4/s |
   | `RequestSwap` | RemoteEvent | `direction: 1 \| -1` | 2/s |
   | `RequestGadget` | RemoteEvent | `slot: 1 \| 2 \| 3` | 2/s |
