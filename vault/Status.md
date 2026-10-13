@@ -32,6 +32,10 @@ session with the Studio MCP connected.
 - _(nothing yet)_
 
 ## Next up
+- Review the proposed technical ADRs: [[0005-side-on-movement-and-camera]],
+  [[0007-networking-and-remotes]], [[0009-static-trains-scrolling-world]] and
+  [[0010-third-party-packages]]. Also decide what happens when a player falls into a gap
+  between cars (0005).
 - **M0 Bootstrap** in Studio: server/client bootstraps, Remotes, Constants and Types (see
   `CLAUDE.md` → architecture). This needs a local session; cloud sessions can't reach
   Studio.

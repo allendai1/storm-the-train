@@ -194,6 +194,7 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
   and caps scale with party size.
 - **[decided]** Matchmaking: parties are formed on the hub, with quick-join for open
   slots. The run takes place in a reserved server, with Teleport from the lobby place.
+  The hub and runs are **one place in two modes** ([[0004-single-place-hub-and-run-modes]]).
 
 ## Key mechanics
 **[decided]** These are adapted from the original. See the reference notes for its
