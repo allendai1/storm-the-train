@@ -22,7 +22,8 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 
 ## Systems
 One note per code system in Studio (path, API, remotes). Create from [[Templates/System|System template]].
-- _(none yet)_
+- [[ModeService]] — Hub vs Run mode, plus the server/client bootstraps (implemented)
+- [[Guard]] — remote validation and rate limiting (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].

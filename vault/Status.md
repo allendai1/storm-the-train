@@ -25,22 +25,27 @@ Three things are not settled yet:
   lighting, which waits for a mobile test. No reference images yet,
 - **number tuning**, which needs playtests. The original's numbers are loose reference only.
 
-**Next step: M0 Bootstrap in Studio**, which must be done from a local Claude Code
-session with the Studio MCP connected.
+**M0 Bootstrap is built** in Studio (place `71855801375130`), apart from packages.
+**Next step: Session 2** of [[First Playable (M1)]] (train, movement, camera), from a
+local Claude Code session with the Studio MCP connected.
 
 ## In progress
-- _(nothing yet)_
+- [[First Playable (M1)]]: Session 1 is done. Systems: [[ModeService]], [[Guard]].
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
 - Review [[Writing and Dialogue]] (barks, tutorial, missions, challenge chains) and the
   open points in [[Loop (M2)]] (tie = continue, 90 s AFK safeguard).
-- **Before Session 1:** work through the [[Studio Setup Checklist]], then use [[M0 Bootstrap Code]].
-- **Start building from [[First Playable (M1)]].** It lists sessions 1–6, from M0
-  Bootstrap to the M1 playtest, in order.
-- **M0 Bootstrap** in Studio: server/client bootstraps, Remotes, Constants and Types (see
-  `CLAUDE.md` → architecture). This needs a local session; cloud sessions can't reach
-  Studio.
+- **Manual [[Studio Setup Checklist]] items still to do in Studio:**
+  - **Game Settings** (§3): devices, R15, free private servers, voice off.
+  - **`Lighting.Technology` = ShadowMap** (§4). Scripts can't set it.
+  - Atmosphere and ColorCorrection.
+  - Studio settings (§5).
+- **Install Signal and Trove** into `ReplicatedStorage.Packages` and record them in
+  [[Packages]]. This is the last Session 1 item; nothing needs them yet.
+- **Session 2**: carriage templates, `Map.Run` staging, TrainService, CharacterService,
+  and the Input, Camera and Parallax controllers. Movement is Scriptable now, so the
+  character can't move until InputController exists.
 - Figma UI mockups (linked in [[Art Direction]] §10). These are done: PC HUD, mobile
   HUD, run end, Party Lobby, Squad Select and Armory. The Figma Starter plan's
   tool-call limit was hit, so these are still to do:
@@ -64,4 +69,5 @@ session with the Studio MCP connected.
 - _(none yet)_
 
 ## Unsaved work in Studio
-- _(note here if the place has changes that still need saving/publishing)_
+- **2026-10-13: the M0 bootstrap needs a save or publish** (File → Publish to Roblox),
+  unless you've saved since this session.

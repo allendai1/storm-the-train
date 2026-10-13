@@ -452,6 +452,16 @@ return table.freeze(Constants)
   `require()` it directly and only call into it from `start()`.
 
 ## Example
-- _Fill in after Session 1: which snippets needed changes and why._
+- **Run on 2026-10-13** (place `71855801375130`). The changes from this page were:
+  - **Scripts were created with `multi_edit`** (with className) **before** the setup
+    script ran, and the setup script no longer creates the script instances.
+    `Instance.new` gives empty scripts, which `multi_edit` can't fill without a
+    matching old string.
+  - The bootstraps call `(require :: any)(child)` so `--!strict` accepts a dynamic
+    ModuleScript.
+  - `COOP_SCALE` is frozen as well.
+  - `workspace.StreamingEnabled = false` works from `execute_luau`.
+    **`Lighting.Technology` can't be read or written from it** (it lacks the
+    RobloxScript capability), so set it by hand.
 
 Related: [[Techniques]] · [[Studio Setup Checklist]] · [[First Playable (M1)]] · [[0004-single-place-hub-and-run-modes]] · [[0007-networking-and-remotes]]

@@ -140,30 +140,30 @@ save or publish reminder, per `CLAUDE.md`._
 
 ### Session 1 — M0 Bootstrap
 _Do the [[Studio Setup Checklist]] first. The setup script and module sources are in [[M0 Bootstrap Code]]._
-- [ ] **Folders:**
+- [x] **Folders:**
   - `ServerScriptService.Server` (Script) with an Attribute `ForceMode = "Run"`, plus
     `Services`, `Util`
   - `StarterPlayer.StarterPlayerScripts.Client` (LocalScript) plus `Controllers`
   - `ReplicatedStorage.Shared` (`Constants`, `Types`), `ReplicatedStorage.Assets`,
     `ReplicatedStorage.Packages`, `ReplicatedStorage.Remotes`
   - `ServerStorage.Assets`, `ServerStorage.Packages`
-- [ ] **Bootstraps** with the `init` → `start` pattern and mode filtering
+- [x] **Bootstraps** with the `init` → `start` pattern and mode filtering
   ([[0004-single-place-hub-and-run-modes]]). The mode service reads `ForceMode` in
   Studio.
 - [ ] **Packages:** Signal and Trove from their official releases. Record them in
   [[Packages]]. ProfileStore isn't needed until saving arrives in M2.
-- [ ] **`Shared.Constants`:** every global number in this spec (plane Z, gap, revive
+- [x] **`Shared.Constants`:** every global number in this spec (plane Z, gap, revive
   timings, co-op factors, ragdoll cap and fade, jump, spin, crate respawn).
   **`Shared.Types`:** `InputState`, `WeaponStats`, `EnemyStats`, `AgentStats`.
-- [ ] **Remotes for M1:**
+- [x] **Remotes for M1:**
   - `SetInput` (UnreliableRemoteEvent),
   - `RequestSpin`, `RequestInteract`, `RequestReady`,
   - `Effects` (UnreliableRemoteEvent), `Announce`, `RunEnded`.
-- [ ] **`Server.Util.Guard`**, the shared validator and token bucket
+- [x] **`Server.Util.Guard`**, the shared validator and token bucket
   ([[0007-networking-and-remotes]]).
-- [ ] **Collision groups:** `Players`, `Enemies`, `Hitboxes` (no physical collision),
+- [x] **Collision groups:** `Players`, `Enemies`, `Hitboxes` (no physical collision),
   `Ragdolls` (no collision with `Players` or `Hitboxes`), `Pickups`.
-- [ ] **StarterPlayer:** `DevComputerMovementMode` and `DevTouchMovementMode` set to
+- [x] **StarterPlayer:** `DevComputerMovementMode` and `DevTouchMovementMode` set to
   `Scriptable`. Default jump and controls are off.
 
 ### Session 2 — Train, movement, camera
@@ -293,7 +293,11 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   living teammate.
 
 ## Implementation notes
-_Not built. Fill this in as sessions complete: what was built, where it is in Studio,
-and what was verified._
+- **Session 1 (M0), 2026-10-13: done except Packages.** Built in place 71855801375130
+  from [[M0 Bootstrap Code]]. A playtest prints `[Server] Run mode, 1 service(s)` and
+  `[Client] Run mode, 0 controller(s)` with no errors. Collision groups, `StreamingEnabled
+  = false` and Scriptable movement were checked in the Server datamodel. Signal and Trove
+  aren't installed yet (nothing uses them). `Shared.Types` has no `InputState`, since
+  `SetInput` sends scalars (ADR 0007). Systems: [[ModeService]], [[Guard]].
 
 Related: [[Game Design Document]] · [[Wild West Enemies]] · [[Launch Agents]] · [[Art Direction]] · [[0004-single-place-hub-and-run-modes]] · [[0005-side-on-movement-and-camera]] · [[0006-humanoid-enemies-and-combat]] · [[0007-networking-and-remotes]] · [[0009-static-trains-scrolling-world]] · [[Home]]
