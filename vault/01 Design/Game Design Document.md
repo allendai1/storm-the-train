@@ -61,6 +61,27 @@ publishing (see [[Title Ideas]]).
 **[decided]** Run-based: a run is a chain of hostile trains, with returns to a hub
 train between runs.
 
+**[decided]** Runs are **endless**, as in the original, and are split into **legs of 3
+hostile trains**:
+- A hostile train has **6–8 carriages** and takes about **2–3 minutes** to clear.
+- The hub train pulls alongside after **every 3rd train** (a checkpoint).
+- The **3rd train of each leg is an event train**. Every 2nd leg, that event is a **boss**.
+- **Difficulty ramps across the whole run**, not per train. The spawn timeline runs on
+  the run's elapsed combat time and carries on between trains, which answers the open
+  question in [[Original Game - Enemies and Spawning]].
+- The run ends when the squad is **wiped** or **cashes out** at a checkpoint.
+
+**[proposed]** Run anatomy:
+| Leg | Train 1 | Train 2 | Train 3 | Then |
+|---|---|---|---|---|
+| 1 | Normal | Normal | Event (hostage, blueprint thief or survival) | Checkpoint |
+| 2 | Normal | Normal | **Boss** | Checkpoint |
+| 3 | Normal | Normal | Event | Checkpoint |
+| 4 | Normal | Normal | **Boss** | … and so on |
+
+A leg takes about 8–9 minutes, so the 10–15 minute target means an average run reaches
+leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
+
 **[proposed]** The loop in detail:
 1. **Gear up on the hub train.** Pick a squad, spend coins on upgrades, equip up to 3
    boosters, choose missions.
@@ -68,7 +89,7 @@ train between runs.
    An event may trigger: boss, hostage, blueprint thief, survival waves.
 3. **Leap to the next train.** "Next train" is announced, the squad jumps across, and
    the theme may change. Loose coins sit between trains.
-4. **Checkpoint.** Every N trains the hub train pulls alongside: heal, bank blueprints,
+4. **Checkpoint.** After every 3rd train the hub train pulls alongside: heal, bank blueprints,
    buy upgrades, re-equip boosters, then continue or cash out.
 5. **Run ends** when the squad is wiped or cashes out. Coins, blueprints and mission
    progress are kept. The target run length is about 10–15 minutes (the original
@@ -78,8 +99,19 @@ train between runs.
 - **[decided]** A **2.5D side-scroller** with 3D models and a camera locked side-on.
   Characters move along the length of the train (one axis) and jump up and down. See
   [[0003-2.5d-side-scroller]].
-- **[proposed]** Scale is about **15 original px = 1 stud**. That makes short and long
+- **[decided]** Scale is **15 original px = 1 stud**. That makes short and long
   carriages about 17 and 33 studs, and light enemies move at about 6–11 studs/s.
+- **[decided]** Player movement uses the **original's speeds at that scale**: agents
+  move at **18–33 studs/s** (the original's 275–500 px/s), set per agent. That's
+  faster than Roblox's default WalkSpeed of 16, and two to three times faster than
+  light enemies, so players control the fight. A fast agent crosses a long carriage in
+  about one second.
+  - **[proposed]** The starter agent sits at about **28 studs/s** (the original's free
+    agent had 425 px/s). Speed upgrades and the Mayhem speed perk can't push an agent
+    past 33.
+  - **[proposed]** Enemy attacks meant to be dodged must be **jumped**, not outrun,
+    because players outrun nearly everything. Any charge or rush has to be faster than
+    33 studs/s or cover the whole carriage.
 
 | Action | Keyboard/mouse | Gamepad | Mobile |
 |---|---|---|---|
@@ -97,13 +129,31 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
 - **[decided]** **Co-op squad of 1–4 players.** Each player controls one agent on screen.
 - **[decided]** Health is pooled **per player**, not across the party, and downed
   players can be **revived**.
+- **[decided]** Each player's pool is **100 HP**. The active agent's **toughness**
+  multiplies the damage that player takes, as the original's `resillence` stat did.
+  Lower means tougher.
+  - Agents keep the **original's spread** (0.20–0.76 on its shipped agents), so
+    toughness pairs with speed: fast agents are fragile and slow agents are tanky. For
+    example, a 500 px/s agent took 0.76 and a 275 px/s agent took 0.20.
+  - Enemy damage is tuned against a **starter agent at 0.52**. A light grunt's 3-damage
+    punch costs the starter about 1.6 HP.
+  - **[proposed]** The UI shows toughness as 1–5 stars rather than the raw multiplier.
 - **[proposed]** Each player brings a **squad of 2 agents** and swaps between them.
   The two agents share that player's health pool, which was the original's core hook.
-- **[proposed]** Revive options:
-  - A downed player can be **revived by a teammate** standing next to them within a
-    time window.
-  - A player can also self-revive by spending gems, as in the original.
-  - If everyone is down, the run ends.
+- **[decided]** Revive rules:
+  - At 0 HP a player is **downed** and **bleeds out over 15 s**.
+  - A teammate standing next to them holds **Interact for 2 s** to revive them at
+    **40% HP**. Teammate revives are **unlimited**.
+  - A downed player can **self-revive with gems**. The price **doubles with each use
+    in a run**, for example 5 → 10 → 20 gems.
+  - If the **whole squad is down**, anyone has **10 s** to gem-revive. Otherwise the run
+    ends. Solo players get the same 10 s prompt.
+- **[proposed]** Details still to confirm:
+  - The starting gem price (5 is a placeholder until the gem economy is set).
+  - A player who bleeds out with teammates still standing **spectates** and rejoins at
+    the next checkpoint with full HP.
+  - Reviving is interrupted if the reviver takes damage, so teammates have to clear
+    space first.
 - **[proposed]** Solo play is the same game with a 1-player party. Enemy spawn budget
   and caps scale with party size.
 - **[proposed]** Matchmaking: parties are formed on the hub, with quick-join for open
@@ -224,11 +274,10 @@ party lobby.
 ## Open questions
 - Final title (working title is Train Runner), and names for the agency, the hub
   train and the agents ([[Title Ideas]]).
-- Revive details: time window, how long a revive takes, the gem price, and whether
-  revives are limited per run.
+- Revive gem price, and what happens to a player who bleeds out (spectate until the
+  checkpoint is proposed).
 - Review the Wild West roster draft ([[Wild West Enemies]]).
-- Player health pool and movement speed (all enemy damage and speed numbers depend on them).
-- How many hostile trains between checkpoints, and how long is a train?
+- Which event types can roll on non-boss event trains, and how are they weighted?
 - Starting roster size, and which agents are free at launch.
 - Should runs have score leaderboards, and is there a PvP or competitive angle at all?
 

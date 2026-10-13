@@ -108,8 +108,10 @@ a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at
 by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED!"
 
 ## Rules & numbers
-- **[proposed] Enemy damage.** These are the original's base values. They assume a player
-  health pool of about 100, which still has to be decided.
+- **[proposed] Enemy damage.** These are the original's base values, applied to the
+  decided **100 HP pool** and scaled by the active agent's toughness (see the GDD). The
+  starter agent takes 0.52 of each hit, so a light punch costs it about 1.6 HP, and
+  Dynamite about 5.
   - Light melee: 3.
   - Mid melee: 6.
   - Boss melee: 8.
@@ -132,9 +134,13 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
 - **[proposed] Co-op scaling.** Multiply the spawn budget and alive-cap by 1.0 / 1.6 /
   2.2 / 2.8 for 1 / 2 / 3 / 4 players. Multiply boss HP by 1.0 / 1.5 / 2.0 / 2.5. These
   are guesses to tune in playtesting.
-- **Note on boss speed.** McGraw's charge (16.7 studs/s) is faster than Roblox's default
-  WalkSpeed of 16. That's intended, since the charge should be dodged by jumping rather
-  than by outrunning him, but it depends on player movement speed, which isn't decided.
+- **[proposed] Charge speeds.** Player speed is now decided at **18–33 studs/s** (see the
+  GDD), so every agent outruns McGraw's 16.7 studs/s charge and Big Bart's 10.7 studs/s
+  walk. Charges are meant to be **jumped, not outrun**, so raise them:
+  - Big Bart's charge: about **36 studs/s** (540 px/s).
+  - McGraw's berserk charge: about **40 studs/s** (600 px/s).
+  Walking speeds stay as listed. Rattler Runts (15 studs/s) are slower than every agent,
+  which is fine because they're a swarm, not a chase.
 
 ## Art & audio needs
 See [[Art Direction]] (still empty). Each enemy needs:
@@ -148,8 +154,9 @@ Shared needs:
 - comedic voice barks and taunts.
 
 ## Open questions
-- Player health pool and movement speed. These set the scale for all the damage and
-  speed numbers above.
+- Is damage high enough? Against the starter agent, a single light grunt needs about 48 s
+  to down a player alone. Threat comes from crowds and mids. Check this in the first
+  playtest.
 - Should knocked-off bandits be able to **climb back onto the train**, as a Wild West
   take on the original's undead reviving? It could be a later-theme gimmick instead.
 - Is Lasso Lucy's grapple too punishing solo? Possible fixes: a solo-only auto-break
