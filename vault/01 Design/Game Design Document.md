@@ -144,7 +144,8 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 |---|---|---|---|
 | Move | A / D (or ← / →) | Left stick | Left/right buttons |
 | Jump / **double jump = spin attack** | Space | A | Jump button |
-| Shoot (aim follows facing, light auto-aim) | Left mouse / J | RT | Shoot button |
+| Shoot the active weapon (aim follows facing, light auto-aim) | Left mouse / J | RT | Shoot button |
+| Switch weapon | Walk into a **weapon crate** | Walk into a crate | Walk into a crate |
 | Swap agent | Q / E | LB / RB | Swipe or swap button |
 | Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad (Y repeats the last pick) | Tap the glowing Mayhem ring, then 1 of 3 |
 | Interact (free hostage, grab keys, enter a carriage or hub pod) | W (or ↑) | X | Context button |
@@ -210,6 +211,9 @@ numbers.
 - **Agents.** Each has 2 fixed weapons, 1–3 gadgets and traits: resilience, speed,
   spin-attack strength, and a bonus against one enemy faction. Swapping is instant
   with a short cooldown.
+- **Weapon crates.** **[decided]** You switch between your agent's two weapons by walking
+  into a **weapon crate** on the train, as in the original. There's no secondary fire
+  button and no weapon-swap button. Crate rules are in [[First Playable (M1)]].
 - **Weapons.** Archetypes are carried over (rifle, dual SMGs, shotgun, minigun, rocket,
   sticky bombs, flamethrower, poison, lightning, rail/charge gun, plasma), each with
   10 upgrade levels. Use [[Original Game - APK Balance Audit]] as the baseline
@@ -252,7 +256,7 @@ numbers.
 | Event | Summary | Milestone |
 |---|---|---|
 | Normal train | Clear carriages front to back | First playable |
-| Blueprint thief | An enemy carrying a blueprint; kill it and grab the drop | First playable |
+| Blueprint thief | An enemy carrying a blueprint; kill it and grab the drop | First playable (a stub: counted, not saved; banking arrives in M4) |
 | Boss | Boss fight on a flatbed, with taunts and summoned minions | M3 |
 | Hostage | Kill the key-holder mid, grab the key, free the hostage | M3 |
 | Survival | Survive N waves; one-hit death | M3 |
@@ -335,7 +339,7 @@ party lobby.
 **[decided]**
 1. **M0, Bootstrap.** Server/client bootstraps, Remotes, Constants and Types in
    Studio (see `CLAUDE.md`).
-2. **M1, First playable.** One theme, one hostile train built from carriage templates,
+2. **M1, First playable.** Spec and Studio checklist: [[First Playable (M1)]]. One theme, one hostile train built from carriage templates,
    the 2.5D movement lock, 1 agent with 2 weapons, 4 light enemies and 1 mid, budget
    spawning, and 1–4 player co-op with a shared run.
 3. **M2, Loop.** Hub train, next-train leap, checkpoint, agent swap, Mayhem and
