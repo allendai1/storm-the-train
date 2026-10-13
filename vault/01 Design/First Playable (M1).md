@@ -39,7 +39,7 @@ and co-op revives, on a side-on train.
 ## Player experience (M1 loop)
 1. Players join a Run-mode test server and land on a staging platform at the
    caboose. **READY** starts a 5 s countdown, or it starts automatically after 20 s.
-2. "STORM THE TRAIN!" The spawn timeline starts. Bandits pour onto the carriages
+2. "ALL ABOARD!" ([[Writing and Dialogue]]) The spawn timeline starts. Bandits pour onto the carriages
    ahead and behind.
 3. Players move, jump between cars, spin-attack crowds, and grab weapon crates to
    flip between the rifle and the rocket.

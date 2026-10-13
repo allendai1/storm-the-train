@@ -116,6 +116,9 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
    the theme may change. Loose coins sit between trains.
 4. **Checkpoint.** After every 3rd train the hub train pulls alongside: heal, bank blueprints,
    buy upgrades, re-equip boosters, then continue or cash out.
+   **[decided]** In a party, continue or cash out is a **majority vote**, and there's
+   **no checkpoint timer**: the train waits for every vote. Tie handling and an AFK
+   safeguard are proposed in [[Loop (M2)]].
 5. **Run ends** when the squad is wiped or cashes out. Coins, blueprints and mission
    progress are kept. The target run length is about 10–15 minutes (the original
    ran 11–16).
@@ -342,7 +345,7 @@ party lobby.
 2. **M1, First playable.** Spec and Studio checklist: [[First Playable (M1)]]. One theme, one hostile train built from carriage templates,
    the 2.5D movement lock, 1 agent with 2 weapons, 4 light enemies and 1 mid, budget
    spawning, and 1–4 player co-op with a shared run.
-3. **M2, Loop.** Hub train, next-train leap, checkpoint, agent swap, Mayhem and
+3. **M2, Loop.** Spec and Studio checklist: [[Loop (M2)]]. Hub train, next-train leap, checkpoint, agent swap, Mayhem and
    gadgets, coins and saving (DataStore service).
 4. **M3, Content.** Bosses, hostages, survival, the remaining themes, more agents and
    weapons.

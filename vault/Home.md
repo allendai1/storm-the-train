@@ -10,6 +10,8 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 ## Design
 - [[Game Design Document]] — pitch, core loop, pillars, open questions
 - [[Art Direction]] — visual style, palettes, readability rules, budgets; consult before any modeling (planned)
+- [[Loop (M2)]] — M2 spec and Studio checklist, sessions 7–13 (planned)
+- [[Writing and Dialogue]] — voice rules, barks, announcements, tutorial, missions, challenge chains (proposed)
 - [[First Playable (M1)]] — M0+M1 spec and Studio build checklist, in session order (planned)
 - [[Wild West Enemies]] — the Rattler Gang roster for the first-playable theme (planned)
 - [[Gadgets and Mayhem]] — Mayhem meter, 6 drones, 3 mech suits, Air Strike (planned)

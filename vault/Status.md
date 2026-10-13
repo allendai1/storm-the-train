@@ -33,6 +33,8 @@ session with the Studio MCP connected.
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
+- Review [[Writing and Dialogue]] (barks, tutorial, missions, challenge chains) and the
+  open points in [[Loop (M2)]] (tie = continue, 90 s AFK safeguard).
 - **Start building from [[First Playable (M1)]].** It lists sessions 1–6, from M0
   Bootstrap to the M1 playtest, in order.
 - **M0 Bootstrap** in Studio: server/client bootstraps, Remotes, Constants and Types (see
