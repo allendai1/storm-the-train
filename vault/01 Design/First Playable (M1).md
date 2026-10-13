@@ -264,6 +264,13 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
 - [ ] Check the **performance budget**: ≤ 30 live enemies + 4 players + 12 ragdolls.
   Use the MicroProfiler and server stats. Record the results in this note and in
   [[0006-humanoid-enemies-and-combat]].
+  - *First pass done (Studio, 1 client).* Server Heartbeat 1.6 ms and physics 2.75 ms on
+    average with ~30 enemies, and the client held 60 fps. Server send is about 10 kbps per
+    enemy (330 kbps at 31), which is the item to watch. Details are in
+    [[0006-humanoid-enemies-and-combat]]. Re-check on a live server with 4 clients and a
+    phone.
+  - Ragdolls: the 12-body cap is enforced, but bodies already fading (0.4 s) and burst
+    knockouts (Dan chains) briefly showed up to 19 bodies. That's fine for now.
 - [ ] Do a **tuning pass** on the first-guess numbers. Record what changed and why.
 
 ## Systems involved (notes to create in `02 Systems/` as each is built)

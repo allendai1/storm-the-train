@@ -74,6 +74,20 @@ ragdolls that stay on the train, and knockback can push living enemies off the t
   - Measure in M1 with the MicroProfiler and the server stats.
   - If the budget fails, write a new ADR that **supersedes this one**. The fallback is
     a server-side 2D simulation with lightweight, non-Humanoid models.
+  - **Measured 2026-10-13 (first pass: Studio Play, 1 client, dev PC).** A temporary
+    flood phase held 27–31 live enemies. One knockout per second kept bodies fading
+    (6–19 present, including bodies mid-fade).
+    - **Server:** Heartbeat 1.6 ms average, 4.9 ms peak; physics step 2.75 ms average,
+      7.2 ms peak. That's comfortable inside a 16.7 ms frame.
+    - **Client:** a steady 60 fps (Studio's cap), worst frame 22 ms.
+    - **Network:** the server sent about 330 kbps (≈ 41 KB/s) to the one client at 31
+      enemies, against 14 kbps with none. That's about 10 kbps (1.3 KB/s) per live
+      Humanoid enemy, per client. It's under the usual ~50 KB/s per-client guideline but
+      close to it, so it's **the item to watch**.
+    - **Verdict:** the budget **holds so far**, and no fallback ADR is needed. It still
+      has to be re-checked on a live server with 4 clients and on a mid-range phone.
+      If bandwidth is too high, the first levers are a lower alive cap, or enemies
+      paused/simplified when far from every player, before the 2D-sim fallback.
 
 ## Alternatives considered
 - **Server-side 2D simulation with non-Humanoid models and client-side ragdolls:**
