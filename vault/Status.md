@@ -17,6 +17,7 @@ Pre-production: project knowledge base set up; game design not yet written.
 - _(nothing yet)_
 
 ## Next up
+- Use [[Original Game]] (data pulled from the 2016 APK) as the starting point for the [[Game Design Document]]: decide what to keep, change or drop for Roblox.
 - Fill in the [[Game Design Document]] (pitch, core loop, pillars).
 - Define the [[Art Direction]] and add reference images to `05 Assets/References/`.
 - Build the bootstrap structure in Studio (see `CLAUDE.md` → architecture).

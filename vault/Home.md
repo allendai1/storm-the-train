@@ -28,6 +28,7 @@ Unsorted and proposed ideas go in `00 Inbox/` (`status: proposed`) until they're
 ## Assets & packages
 - [[Packages]] — third-party Luau libraries in `ReplicatedStorage.Packages`
 - [[References]] — reference images for art and modeling
+- [[Original Game]] — data from the 2016 Storm the Train Android APK: enemies, spawning, economy, assets (reference, not canon)
 
 ## Techniques
 - [[Techniques]] — reusable Blender modeling and other how-tos

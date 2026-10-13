@@ -253,6 +253,8 @@ vault/
 - **Distinguish proposed ideas from implemented features** using the frontmatter
   `status` field: `proposed` → `planned` → `in-progress` → `implemented`
   (or `deprecated`). Unapproved ideas live in `00 Inbox/` with `status: proposed`.
+  Source material that describes something outside this project (e.g. the original
+  2016 game in `05 Assets/Original Game/`) uses `status: reference` and is never canon.
 - For a meaningful session, add a short entry to `04 Devlog/YYYY-MM-DD.md`.
 
 ### Memory rules
