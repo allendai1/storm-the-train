@@ -206,7 +206,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   - Spin attack via `RequestSpin`.
   - Damage is scaled by toughness, and health lives in Attributes.
   - Visuals go out on the batched `Effects` event.
-- [x] **`PickupService`:** _(mid-knockout drop → Session 4, with Big Bart)_
+- [x] **`PickupService`:** _(the mid-knockout drop was added in Session 4)_
   - Spawns `WeaponCrate` per player at `WeaponCrateSpot`s, from the template
     `ReplicatedStorage.Assets.Pickups.WeaponCrate`.
   - Toggles the active weapon on touch (checked by server proximity).
@@ -217,7 +217,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   (`CLAUDE.md`). Note it in the system's note.
 
 ### Session 4 — Enemies and spawning
-- [ ] **Enemy templates** in `ServerStorage.Assets.Enemies.WildWest`: BandanaBandit,
+- [x] **Enemy templates** in `ServerStorage.Assets.Enemies.WildWest`: BandanaBandit,
   RodeoKid, SixShooter, DynamiteDan, BigBart. Each is an R15 Humanoid, tagged `Enemy`,
   and has:
   - Attributes `Slot`, `Archetype`, `MaxHealth`, `Speed`, `SpawnCost`, `Damage`,
@@ -226,15 +226,15 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   - a `Hitbox` part,
   - **pre-built ragdoll `BallSocketConstraint`s, disabled**,
   - a red bandana ([[Art Direction]]).
-- [ ] **A saddlebag accessory** for the blueprint thief, and a Blueprint pickup template.
-- [ ] **`EnemyService`:**
+- [x] **A saddlebag accessory** for the blueprint thief, and a Blueprint pickup template.
+- [x] **`EnemyService`:**
   - the AI loop at 10–15 Hz, with behaviours Walker, Leaper, Shooter, Lobber and
     Charger,
   - disabled Humanoid states,
   - knockout → ragdoll (ownership to the nearest player, cap 12, 3 s fade),
   - below the track = knockout,
   - all per [[0006-humanoid-enemies-and-combat]].
-- [ ] **`SpawnService`**, or part of EnemyService: the timeline table above, read from a
+- [x] **`SpawnService`**, or part of EnemyService: the timeline table above, read from a
   `Shared.Config.SpawnTimeline` ModuleScript (data only). It handles co-op scaling, the
   spawn-location rules, and Bart's solo intro.
 
@@ -321,5 +321,28 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   - A playtest against a temporary dummy enemy checked the rocket and rifle damage and
     cadence, release, the spin, gap-fall damage and a crate pickup, with no script
     errors.
+- **Session 4, 2026-10-13: done.**
+  - Built: five enemy templates (the Dash R15 rig reskinned, with ball sockets disabled and
+    tunables as attributes), the Saddlebag prop, the Blueprint pickup, and the `EnemyBullet`,
+    `Dynamite` and `Alert` effect templates.
+  - Systems: [[EnemyService]] and [[SpawnService]], with `Shared.Config.SpawnTimeline`.
+    Hooks were added to [[CombatService]] (`effect`, `newProjectileId`, `distanceTo`),
+    [[CharacterService]] (`lockToPlane`), [[PickupService]] (`dropCrate`, `dropBlueprint`),
+    `WeaponCrates` (dropped spots sort last) and [[EffectsController]] (`R` with a template,
+    `P`, `A`, `N`).
+  - Decisions made while building:
+    - a charge stops at gaps and walls instead of jumping,
+    - the off-train check uses feet height,
+    - the "!" pop is the only telegraph for now,
+    - Dan's thrown dynamite hurts only players, while his knockout blast also hurts
+      enemies,
+    - Bart's hitbox is 2.4 × 6.5 (not 5.7), to cover the 1.15× rig,
+    - lights have `FreezeScalar` 1,
+    - the Caboose roof was trimmed flush (it had a 1-stud overhang).
+  - SpawnService starts itself 5 s after the first spawn, until RunStateService arrives
+    (Session 5).
+  - Playtests checked melee, bullets, dynamite, Bart's wind-up, charge, stagger and
+    knockback, the ragdoll and its fade, the crate and blueprint drops, and a full timeline
+    to `TimelineDone`. The console was clean. Details are in [[EnemyService]].
 
 Related: [[Game Design Document]] · [[Wild West Enemies]] · [[Launch Agents]] · [[Art Direction]] · [[0004-single-place-hub-and-run-modes]] · [[0005-side-on-movement-and-camera]] · [[0006-humanoid-enemies-and-combat]] · [[0007-networking-and-remotes]] · [[0009-static-trains-scrolling-world]] · [[Home]]

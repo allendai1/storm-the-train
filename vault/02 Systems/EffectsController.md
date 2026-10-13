@@ -26,6 +26,9 @@ explosions, hit sparks, spin rings and KO pops. Everything is client-only and co
   | `HitSpark` | A white neon ball |
   | `SpinRing` | A neon disc (cylinder) facing the camera |
   | `KnockoutPop` | An invisible anchor with a BillboardGui `Label` reading "KO!" in Luckiest Guy |
+  | `EnemyBullet` | A neon `#FF5A2A` capsule (enemy projectile colour) |
+  | `Dynamite` | A red `#C8322A` cylinder |
+  | `Alert` | A copy of `KnockoutPop` reading "!" in telegraph orange `#FF4A1C` |
 
 - Runtime-generated content: `Workspace.Effects` (a client-only folder) holds template
   clones that are tweened and then destroyed. Code only animates their size, transparency
@@ -51,6 +54,12 @@ explosions, hit sparks, spin rings and KO pops. Everything is client-only and co
 - **Hit:** a 1.6-stud spark.
 - **Spin:** the ring grows to the spin radius over 0.25 s.
 - **KO pop:** rises 3 studs and fades over 0.8 s.
+- **Enemy projectiles** (`R` with a template): drawn like rockets, with gravity for
+  dynamite. Removed by `P` or `X`, or after 3 s.
+- **Alert:** a "!" 4 studs above the enemy that fades over 0.6 s.
+- **Knockback** (`N`): if the userId is this player's, it sets the HumanoidRootPart's
+  velocity. That's the one non-cosmetic record: the client owns its character's physics,
+  so the server can't push it. It's on the unreliable remote, so a knockback can be lost.
 
 ## Depends on
 - [[CameraController]] (`shake`), `Shared.Constants`

@@ -32,6 +32,8 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 - [[CombatService]] — server fire loop, hitscan + rockets, spin, damage, Effects (implemented)
 - [[PickupService]] — personal weapon crates, plus PickupController (implemented)
 - [[EffectsController]] — tracers, rockets, explosions, sparks, KO pops (implemented)
+- [[EnemyService]] — enemy spawning, AI archetypes, enemy projectiles, ragdoll knockouts (implemented)
+- [[SpawnService]] — plays the spawn timeline: budget waves, solo mids, blueprint thief (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].

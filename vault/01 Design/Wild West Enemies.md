@@ -165,6 +165,12 @@ Shared needs:
   playtest.
 
 ## Implementation notes
-_Not built. Design only. Studio work starts once the design is complete._
+- **M1 Session 4 (2026-10-13):** the four lights and Big Bart are built as greybox templates
+  in `ServerStorage.Assets.Enemies.WildWest`. They run in [[EnemyService]] (archetypes Walker,
+  Leaper, Shooter, Lobber and Charger) and spawn from [[SpawnService]].
+  - The numbers are this note's first guesses, stored as template attributes.
+  - The stagger threshold is implemented as proposed: 30 damage during the 1 s wind-up.
+  - The Grappler, Shielded and boss archetypes, the other mids, the bosses and the Runts
+    come in M3.
 
 Related: [[Game Design Document]] · [[Original Game - Enemies and Spawning]] · [[Home]]

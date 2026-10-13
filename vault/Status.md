@@ -25,16 +25,21 @@ Three things are not settled yet:
   lighting, which waits for a mobile test. No reference images yet,
 - **number tuning**, which needs playtests. The original's numbers are loose reference only.
 
-**M0 and M1 Sessions 2–3 are built** in Studio (place `71855801375130`). You play as a
-greybox Dash Daring on a 7-car train, with the Service Rifle (mouse to fire and aim), the
-Pocket Rocket from personal weapon crates, and the spin attack. Health is in attributes.
-**Next step: Session 4** of [[First Playable (M1)]] (enemy templates, EnemyService,
-SpawnService), from a local Claude Code session with the Studio MCP connected.
+**M0 and M1 Sessions 2–4 are built** in Studio (place `71855801375130`). You play as a
+greybox Dash Daring on a 7-car train, with the Service Rifle, the Pocket Rocket from weapon
+crates, and the spin attack. The Rattler Gang (Bandana Bandit, Rodeo Kid, Six-Shooter,
+Dynamite Dan and Big Bart) spawns from a budget timeline, fights, and ragdolls when knocked
+out. Health is in attributes. There's no downed state yet: a player at 0 HP is just
+ignored.
+**Next step: Session 5** of [[First Playable (M1)]] (RunStateService, SquadService,
+HudGui / TouchControlsGui / RunEndGui and their controllers), from a local Claude Code
+session with the Studio MCP connected.
 
 ## In progress
-- [[First Playable (M1)]]: Sessions 1–3 are done. Systems: [[ModeService]], [[Guard]],
+- [[First Playable (M1)]]: Sessions 1–4 are done. Systems: [[ModeService]], [[Guard]],
   [[TrainService]], [[CharacterService]], [[InputController]], [[CameraController]],
-  [[ParallaxController]], [[CombatService]], [[PickupService]] and [[EffectsController]].
+  [[ParallaxController]], [[CombatService]], [[PickupService]], [[EffectsController]],
+  [[EnemyService]] and [[SpawnService]].
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
@@ -47,13 +52,13 @@ SpawnService), from a local Claude Code session with the Studio MCP connected.
   - Studio settings (§5).
 - **Install Signal and Trove** into `ReplicatedStorage.Packages` and record them in
   [[Packages]]. This is the last Session 1 item; nothing needs them yet.
-- **Session 4:** enemy templates (Models tagged `Enemy`, with a `Health` attribute and a
-  `Hitbox` in `Hitboxes`, which is the contract CombatService already hits), EnemyService
-  (it ragdolls on `Health` = 0) and SpawnService. Also from Session 3: a weapon-crate drop
-  on Big Bart's knockout (`PickupService`).
-- **Review the greybox carriages, background layers, Dash, weapons and effects** in Studio
-  (`ServerStorage.Assets.Carriages.WildWest`, `ReplicatedStorage.Assets.Backgrounds.WildWest`,
-  `ReplicatedStorage.Assets.Agents`, `.Weapons`, `.Pickups` and `.Effects`).
+- **Session 5:** RunStateService (Ready countdown → it takes over starting
+  `SpawnService.begin()`; PLAY AGAIN needs an enemy/projectile clear and a crate reset),
+  SquadService (downed, revive, wipe) and the hand-built HUD, touch and run-end GUIs.
+- **Review the greybox carriages, background layers, Dash, enemies, weapons and effects** in
+  Studio (`ServerStorage.Assets.Carriages.WildWest`, `ServerStorage.Assets.Enemies`,
+  `ReplicatedStorage.Assets.Backgrounds.WildWest`, `ReplicatedStorage.Assets.Agents`,
+  `.Weapons`, `.Pickups` and `.Effects`).
   Adjust them by hand if you like; the scripts only read their tags and attributes.
 - Figma UI mockups (linked in [[Art Direction]] §10). These are done: PC HUD, mobile
   HUD, run end, Party Lobby, Squad Select and Armory. The Figma Starter plan's
@@ -82,9 +87,17 @@ SpawnService), from a local Claude Code session with the Studio MCP connected.
   - Does a direct rocket hit taking splash too (26 total) feel right?
   - The Pocket Rocket's `Range` 60 is a guess.
   - `AIM_MAX_ANGLE` 30° is a guess.
-- On the caboose, the roof overhangs the rear porch by 1 stud, so jump from the porch's
-  outer edge to reach the roof. Check how this feels in the Session 6 playtest.
+- Session 4 is not checked yet:
+  - the Rodeo Kid leap by eye,
+  - Dan's knockout blast hurting other enemies,
+  - jumping over Six-Shooter bullets (needs a person playing),
+  - picking up a dropped crate.
+- Enemy spawns can be on screen: the 20-stud minimum is less than the ~35-stud half-width
+  of the camera. Tune this in Session 6.
 
 ## Unsaved work in Studio
-- **2026-10-13: the M0 bootstrap and the Session 2–3 builds need a save or publish**
-  (File → Publish to Roblox), unless you've saved since.
+- **2026-10-13: Session 4 needs a save or publish** (File → Publish to Roblox). You saved
+  partway through. Since then the following changed:
+  - EnemyService, SpawnService and `Shared.Config.SpawnTimeline` were added,
+  - Constants and the effect hooks were edited,
+  - the Caboose roof was trimmed.

@@ -33,6 +33,9 @@ their position; it only checks and corrects it.
   These are functional physics, with nothing to hand-edit.
 
 ## Public API
+- `CharacterService.lockToPlane(root: BasePart)`: adds the Z = 0 `PlaneConstraint`
+  (`PlaneLockAttachment` + `PlaneLock`). It's used for players, and for enemies by
+  [[EnemyService]].
 - `CharacterService.spawn(player)`: clones the agent, sets `player.Character`, parents it
   to `workspace` and destroys the old character. It runs on join; Session 5's PLAY AGAIN
   will call it too.

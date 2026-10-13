@@ -29,7 +29,7 @@ Session 5). Both react to `Health` reaching 0.
   | `ServiceRifle` | 12 | 0.175 | 45 | `AutoAimAngle` 6 |
   | `PocketRocket` | 13 | 0.5 | 60 *(first guess)* | `ProjectileSpeed` 70, `SplashRadius` 4, `SplashDamage` 13 |
 
-- **Enemies** (Session 4): Models tagged `Enemy` with a number attribute `Health` and a
+- **Enemies** ([[EnemyService]]): Models tagged `Enemy` with a number attribute `Health` and a
   `Hitbox` part in collision group `Hitboxes`.
 - **Collision group `Projectiles`** (query only): collides with `Default` and `Hitboxes`
   only. Shot rays use it with an Include filter of `workspace.Map` plus the live enemy
@@ -47,6 +47,12 @@ Session 5). Both react to `Health` reaching 0.
   attribute `ActiveWeapon`.
 - `CombatService.toggleWeapon(player)`: flips between the character's `PrimaryWeapon` and
   `SecondaryWeapon` attributes.
+- `CombatService.effect(kind, ...)`: queues an effect record for the next batch. [[EnemyService]]
+  uses it for its projectiles, alerts and knockback.
+- `CombatService.newProjectileId() -> number`: the shared id counter. Player rockets and enemy
+  projectiles share one id space on the client.
+- `CombatService.distanceTo(hitbox, point) -> number`: the distance on the plane from a point
+  to the closest point of an axis-aligned hitbox.
 
 ## Remotes
 | Name | Direction | Payload | Server validation |
@@ -62,6 +68,12 @@ Session 5). Both react to `Health` reaching 0.
 - `H` hit: x, y
 - `S` spin: x, y, radius
 - `K` knockout: x, y
+- Added by [[EnemyService]]:
+  - `R` with two extra fields, `template` and `gravity`, for an enemy projectile. Re-sending
+    `R` with the same id corrects it (landed dynamite).
+  - `P` projectile gone: id
+  - `A` alert "!": x, y
+  - `N` knockback: userId, vx, vy
 
 ## Data / state
 - **Per player:** `{ fire, aim, nextShot, lastSpin }`.

@@ -52,3 +52,6 @@ None.
 ## Notes
 - Verified 2026-10-13 in a playtest: 7 carriages, pivots at X 0, 20, 56, 76, 112, 148
   and 168.
+- 2026-10-13 (Session 4): the Caboose `Roof` was trimmed from 13 to 11 studs, flush with the
+  cabin. Its 1-stud overhang blocked enemies (and players) jumping from the porches onto the
+  roof.

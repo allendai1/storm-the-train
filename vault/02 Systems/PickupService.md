@@ -27,7 +27,16 @@ flips you to your agent's other weapon. It comes back for you after `WEAPON_CRAT
   (local only) and bobs and spins it.
 
 ## Public API
-None yet.
+- `PickupService.dropCrate(position)`: a mid knockout. It makes a `DroppedCrateSpot`
+  attachment tagged `WeaponCrateSpot` on the roof under `position`, with a `DroppedAt`
+  attribute, so it's a personal crate for every player. It lasts `WEAPON_CRATE_RESPAWN`
+  (20 s), then is removed. `WeaponCrates.spots()` sorts dropped spots **after** the train's
+  own spots, so a drop never renumbers the `CrateReadyAt_<i>` attributes.
+- `PickupService.dropBlueprint(position)`: clones `ReplicatedStorage.Assets.Pickups.Blueprint`
+  (a blue `#2F6FD6` scroll with white bands) onto the roof under `position`. Each player
+  collects it once by proximity (radius 6 from the HumanoidRootPart), which adds 1 to the
+  Player attribute `Blueprints` (not saved in M1). It's removed once every current player
+  has it.
 
 ## Remotes
 None. The state is the **Player attribute `CrateReadyAt_<index>`**: the server time
@@ -48,10 +57,13 @@ None. The state is the **Player attribute `CrateReadyAt_<index>`**: the server t
 - The crate rules are built as proposed in the M1 spec: personal crates, a 20 s respawn,
   and every train starting on the primary weapon (CharacterService equips it on spawn).
 - **Not yet done:**
-  - a crate drop on a **mid knockout**. It arrives with Big Bart in Session 4: drop a crate
-    for each player at the knockout position.
   - the agent's one-line bark on pickup, which needs the HUD (Session 5).
   - resetting `CrateReadyAt_*` on PLAY AGAIN (Session 5).
+- The blueprint is one shared model, so everyone sees it until the last player takes it.
+  Make it per-player if that's confusing in co-op.
+- Verified 2026-10-13 (Session 4): Bart's knockout made a dropped crate spot, and the
+  thief's knockout dropped a blueprint that set `Blueprints = 1`. Picking up a dropped
+  crate wasn't tried.
 - Verified 2026-10-13: walking the roofs in a playtest picked up a crate and switched
   `ActiveWeapon` to `PocketRocket`. A crate showed on the boxcar roof in the screen
   capture.
