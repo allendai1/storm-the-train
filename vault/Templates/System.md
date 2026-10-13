@@ -9,7 +9,7 @@ side: server | client | shared
 _What this system is responsible for (and what it is not)._
 
 ## Code
-- Path: `src/…/{{title}}.luau`
+- Studio path: `ServerScriptService.Server.Services.{{title}}`
 
 ## Public API
 - 
