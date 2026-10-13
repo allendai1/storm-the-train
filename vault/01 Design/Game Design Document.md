@@ -177,6 +177,7 @@ numbers.
 - **Roster.** **[decided]** **6 agents at launch, 2 of them free**: the starter plus
   one unlocked early through play. The other 4 cost gems, which can also be earned
   through play, more slowly. More agents, including costume agents, come after launch.
+  The roster draft is in [[Launch Agents]].
 - **Agents.** Each has 2 fixed weapons, 1–3 gadgets and traits: resilience, speed,
   spin-attack strength, and a bonus against one enemy faction. Swapping is instant
   with a short cooldown.
@@ -302,7 +303,7 @@ party lobby.
 - Revive gem price, and what happens to a player who bleeds out (spectate until the
   checkpoint is proposed).
 - Review the Wild West roster draft ([[Wild West Enemies]]).
-- Who are the 6 launch agents? (concepts, weapon pairs, speed and toughness pairings)
+- Review the launch agent draft ([[Launch Agents]]).
 - How is score calculated? It decides the score leaderboard. The combo multiplier,
   kills, train-clear bonuses and no-damage bonuses are candidates.
 

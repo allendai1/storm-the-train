@@ -17,7 +17,8 @@ Pre-production. The [[Game Design Document]] is drafted: core decisions are made
 - _(nothing yet)_
 
 ## Next up
-- Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions (the 6 launch agents, score formula).
+- Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions (score formula).
+- Review the [[Launch Agents]] draft: 6 agents, their loadouts and the theme matchups.
 - Review the [[Wild West Enemies]] roster draft and its open questions. Player HP, toughness and speed are now decided, and charge speeds were raised to match.
 - Name the agency, hub train and agents ([[Title Ideas]]).
 - Define the [[Art Direction]] and add reference images to `05 Assets/References/`.

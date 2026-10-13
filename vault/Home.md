@@ -11,6 +11,7 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 - [[Game Design Document]] — pitch, core loop, pillars, open questions
 - [[Art Direction]] — visual style; consult before any modeling
 - [[Wild West Enemies]] — the Rattler Gang roster for the first-playable theme (proposed)
+- [[Launch Agents]] — the 6 launch agents: loadouts, speed/toughness, theme matchups (proposed)
 - Feature specs: create from [[Templates/Feature|Feature template]]
 
 ## Systems
