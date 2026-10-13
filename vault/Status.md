@@ -11,21 +11,40 @@ Read this at the start of every session. Keep it short and current.
 Roblox Studio MCP server. See [[Game Design Document]] and [[Art Direction]].
 
 ## Current phase
-Pre-production. The [[Game Design Document]] is drafted: core decisions are made (new IP inspired by the 2016 original, 2.5D side-scroller, 1–4 player co-op, runs of trains with a hub, four themes, original-style economy). Player health (100 HP plus the original's toughness spread), movement speed (the original's 18–33 studs/s), revive rules, run structure (endless, legs of 3 trains), squads of up to 3 agents per player, a 6-agent launch roster with 2 free, rotating event trains and co-op leaderboards are also decided. The rest of it is proposals awaiting review.
+Pre-production. **The gameplay design is settled.** The [[Game Design Document]] and all its
+feature notes are `planned`:
+- [[Wild West Enemies]],
+- [[Launch Agents]],
+- [[Gadgets and Mayhem]],
+- [[Score and Combo]],
+- [[Economy and Monetization]].
+
+Three things are not settled yet:
+- **naming**: the title, agency, hub train, agents and gang,
+- **[[Art Direction]]**, which is still empty,
+- **number tuning**, which needs playtests. The original's numbers are loose reference only.
+
+**Next step: M0 Bootstrap in Studio**, which must be done from a local Claude Code
+session with the Studio MCP connected.
 
 ## In progress
 - _(nothing yet)_
 
 ## Next up
-- Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions.
-- [[Economy and Monetization]]: the key choices are decided (lose carried blueprints on a wipe, free medbay, no ads, products: gem packs, Starter Pack, Launch Squad and Coin Bonus). Prices and earn rates still need tuning.
-- [[Score and Combo]]: the leaderboard rules are decided (squad and individual boards, unboosted score, gem-revived runs count). Point values still need a playtest.
-- [[Launch Agents]]: the six concepts are accepted (names are placeholders). Still open: the Invisible Bow's charge formula.
-- [[Gadgets and Mayhem]]: the key rules are decided (pick your gadget, one Air Strike per party, the Healer pauses bleed-out, mech upgrades add duration only). Fill rates and armour still need a playtest.
-- [[Wild West Enemies]]: the open questions are cleared (knockouts are final, the lasso breaks faster solo, the gang name is a placeholder). The roster itself is still marked proposed until accepted. Enemy damage needs a playtest.
-- Name the agency, hub train and agents ([[Title Ideas]]).
-- Define the [[Art Direction]] and add reference images to `05 Assets/References/`.
-- Build the bootstrap structure in Studio (see `CLAUDE.md` → architecture). **Only once the design is fully fleshed out.**
+- **M0 Bootstrap** in Studio: server/client bootstraps, Remotes, Constants and Types (see
+  `CLAUDE.md` → architecture). This needs a local session; cloud sessions can't reach
+  Studio.
+- Define the [[Art Direction]] and add reference images to `05 Assets/References/`. This is
+  needed before any modelling (M1).
+- Name the agency, hub train, agents and gang ([[Title Ideas]]).
+- Design leftovers:
+  - Mimi's Invisible Bow charge formula ([[Launch Agents]]).
+  - The exact knock-out ragdoll limits (GDD → Tone).
+- Tune in playtests:
+  - enemy damage ([[Wild West Enemies]]),
+  - Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]),
+  - score values and the combo window ([[Score and Combo]]),
+  - prices and earn rates ([[Economy and Monetization]]).
 
 ## Known issues / open problems
 - _(none yet)_

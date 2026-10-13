@@ -40,7 +40,8 @@ boosters, skipping blueprints) but never replace it.
 - **[proposed] No paid random items.** Every Robux and gem purchase is deterministic:
   you see exactly what you get. Roblox requires odds disclosure for paid random items,
   and some regions restrict them, so we avoid the problem entirely.
-- **[proposed] Honest pricing for a young audience** (about 9–16):
+- **[proposed] Honest pricing**, because the game targets all ages and many Roblox players
+  are young:
   - no fake countdowns on Robux offers,
   - no "you'll lose this forever" pressure,
   - the price in Robux is always shown before the Roblox purchase prompt.

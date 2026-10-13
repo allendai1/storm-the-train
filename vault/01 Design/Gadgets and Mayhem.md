@@ -147,8 +147,8 @@ and can't be damaged. **[proposed]** Their weapon numbers are below.
 - It also finishes off downed enemies: it shakes the keys loose from a dazed key
   holder, and stops an undead enemy getting back up.
 - **[proposed] Change from the original.** The original's "corpse smasher" only
-  smashed corpses, which would do almost nothing in the Wild West, where knocked-out
-  bandits fly off the train. Its short duration (10–19 s) makes it a burst
+  smashed corpses, which would do almost nothing in the Wild West, where knockouts are
+  final and ragdolls fade out. Its short duration (10–19 s) makes it a burst
   crowd-clearer instead.
 
 ### Healer Drone

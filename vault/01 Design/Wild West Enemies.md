@@ -1,15 +1,16 @@
 ---
 tags: [design, feature, enemies, theme, wild-west]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Wild West Enemies — the Rattler Gang
 
-> **Status: proposed.** This is Claude's draft roster for the first-playable theme,
-> which the developer chose in the [[Game Design Document]]. All names, behaviours and
-> numbers are suggestions for review. The numbers start from the original game's stat
-> bands ([[Original Game - Enemies and Spawning]]). They're a starting point for
-> playtesting, not final balance.
+> **Status: planned.** This is the roster for the first-playable theme, which the
+> developer chose in the [[Game Design Document]]. The developer accepted it on
+> 2026-10-13. Names are placeholders until the naming pass. The numbers are **first
+> guesses**: they were drawn from the original's stat bands
+> ([[Original Game - Enemies and Spawning]]), which the GDD now treats as loose
+> reference only. Tune them fresh in playtests.
 
 ## Summary
 The **Rattler Gang** (**[decided]** a placeholder name, chosen for real in the naming
@@ -30,9 +31,9 @@ tone.
   forces a different answer: jumping, breaking a shield, or interrupting a charge.
 - Bosses are a showdown on a flatbed car, with taunts, a big telegraphed move and
   help arriving from the gang.
-- **No gore.** Knocked-out bandits go flying off the train in a spin with their hat
-  popping off and cartoon stars, or burst into a puff of dust. Shields and props break
-  into wood or metal chunks.
+- **No gore.** Knocked-out bandits **ragdoll onto the carriage**, their hat popping off
+  with cartoon stars circling, then fade out after a moment (GDD: ragdoll knock-outs
+  that stay on the train). Shields and props break into wood or metal chunks.
 
 ## Behaviour archetypes
 These are the reusable AI behaviours this roster needs. Later themes (Ninjas, Undead,
@@ -109,8 +110,8 @@ a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at
 by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED!"
 
 ## Rules & numbers
-- **[decided] A knockout is final.** Knocked-out bandits fly off the train and never
-  climb back on. "Gets back up unless you finish it" stays the **Undead** theme's
+- **[decided] A knockout is final.** Knocked-out bandits ragdoll, stay down and fade
+  out. They never get back up or climb back on. "Gets back up unless you finish it" stays the **Undead** theme's
   signature, so the themes play differently. (The Smasher Drone's finishing move
   matters most there; see [[Gadgets and Mayhem]].)
 - **[proposed] Enemy damage.** These are the original's base values, applied to the
@@ -150,7 +151,7 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
 ## Art & audio needs
 See [[Art Direction]] (still empty). Each enemy needs:
 - a readable silhouette and colour per slot: hat shape and bandana colour tell slots apart,
-- a hit reaction, a knockout launch, and a celebrate pose for when a player goes down.
+- a hit reaction, a ragdoll knockout (with the hat pop), and a celebrate pose for when a player goes down.
 
 Shared needs:
 - props: dynamite, lasso, saloon doors, key ring, saddlebag blueprints, rocking chair on

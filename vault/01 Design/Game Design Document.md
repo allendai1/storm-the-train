@@ -1,6 +1,6 @@
 ---
 tags: [design, gdd]
-status: draft
+status: planned
 updated: 2026-10-13
 ---
 # Game Design Document — Train Runner
@@ -12,7 +12,7 @@ updated: 2026-10-13
 > delete it or move it to [[#Open questions]].
 
 ## Pitch
-**[proposed]** A co-op, over-the-top action side-scroller where a squad of 1–4
+**[decided]** A co-op, over-the-top action side-scroller where a squad of 1–4
 secret agents storms hostile trains roof by roof. Players blast through themed
 enemy crews, swap between agents mid-fight, rescue hostages, take down bosses and
 leap from train to train. Between runs they head back to their own armoured hub
@@ -30,12 +30,16 @@ publishing (see [[Title Ideas]]).
 - **[decided]** Original names don't carry over: no Graham, Mason, Eagle-7, Chubwick,
   GOAT, Cabal, and so on. The original's art, audio, fonts and level-pattern data are
   reference only and never ship.
-- **[proposed]** The original's **numbers and system shapes**, such as the spawn budget
-  model, enemy stat bands and upgrade cost curve, are used as a **starting point for
-  balance**. They're tuned for a different medium, so playtest them before trusting them.
+- **[decided]** The original's **system shapes** (spawn budget model, enemy slots,
+  upgrade ladder, booster types) are kept. Its **numbers are loose reference only**,
+  not a balance baseline. Every number in the design notes that the developer hasn't
+  explicitly decided is a **first guess**, and gets tuned fresh in playtests.
+  - The values the developer chose on purpose stay decided. These include the agent
+    speeds (18–33 studs/s), the toughness spread, the 100 HP pool, and the revive and
+    run-structure rules.
 
 ## Design pillars
-**[proposed]**
+**[decided]**
 1. **Chaos you can read.** Big explosions, crowds and gags, but the side-on view keeps
    every threat readable at a glance.
 2. **Better together.** Every system should be fun solo and better in a squad: revives,
@@ -46,16 +50,32 @@ publishing (see [[Title Ideas]]).
    stays within Roblox community standards (stylised knock-outs, no realistic gore).
 
 ## Target audience & platforms
-- **[proposed]** Roblox players aged about 9–16 who like action and shooters, playing
-  with friends.
-- **[proposed]** PC, mobile and console. Controls are designed mobile-first, since the
-  original was a touch game, with keyboard/mouse and gamepad bindings.
+- **[decided]** **All ages, with no specific age target.** The design aims at Roblox
+  players who like co-op action with friends. The UI, reading level and difficulty
+  ramp should still work for younger players, because the Roblox audience skews
+  young.
+- **[decided]** **PC and mobile at launch. No console.** Console certification and
+  console-specific UI are out of scope.
+  - **[proposed]** Controls are still designed to work well on touch, as the original
+    was a touch game.
+  - **[proposed]** Gamepad bindings stay as a nice-to-have for PC players with a
+    controller, not a launch requirement.
 
 ## Tone
 - **[decided]** **Over-the-top comedy action.** Think silly secret-agent squad,
   costume-gag agents, bosses that taunt you, and enemies that go flying.
-- **[proposed]** Use cartoon knock-outs (enemies pop into stars or smoke, or fly off
-  the train) rather than the original's gibs, to stay within Roblox content rules.
+- **[decided]** **Ragdoll knock-outs that stay on the train.** A knocked-out enemy
+  ragdolls onto the carriage roof or floor, lies there briefly, then fades out.
+  - There's no gore, matching the "Silly, never mean" pillar and Roblox content rules.
+  - Strong hits can still launch a ragdoll down the carriage.
+- **[proposed]** The details:
+  - Ragdolls fade after about **3 s**.
+  - At most **about 12 ragdolls** exist at once; the oldest fade early. This protects
+    performance with 4 players and crowds.
+  - Knockback from charges, the Smasher Drone and the Melee Suit can still push a
+    *living* enemy off the edge of the train, and that counts as a knockout.
+  - The pause before fading is when "finish it" mechanics happen: shaking the keys
+    loose from a key holder, and stopping an undead enemy from getting back up.
 
 ## Core loop
 **[decided]** Run-based: a run is a chain of hostile trains, with returns to a hub
@@ -71,7 +91,7 @@ hostile trains**:
   question in [[Original Game - Enemies and Spawning]].
 - The run ends when the squad is **wiped** or **cashes out** at a checkpoint.
 
-**[proposed]** Run anatomy:
+**[decided]** Run anatomy:
 | Leg | Train 1 | Train 2 | Train 3 | Then |
 |---|---|---|---|---|
 | 1 | Normal | Normal | Event (hostage, blueprint thief or survival) | Checkpoint |
@@ -87,7 +107,7 @@ rule only matters from M3.)
 A leg takes about 8–9 minutes, so the 10–15 minute target means an average run reaches
 leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 
-**[proposed]** The loop in detail:
+**[decided]** The loop in detail:
 1. **Gear up on the hub train.** Pick a squad of up to 3 agents, spend coins on upgrades, equip up to 3
    boosters, choose missions.
 2. **Storm a hostile train.** Fight carriage by carriage against a themed enemy crew.
@@ -111,10 +131,10 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
   faster than Roblox's default WalkSpeed of 16, and two to three times faster than
   light enemies, so players control the fight. A fast agent crosses a long carriage in
   about one second.
-  - **[proposed]** The starter agent sits at about **28 studs/s** (the original's free
+  - **[decided]** The starter agent sits at about **28 studs/s** (the original's free
     agent had 425 px/s). Speed upgrades and the Mayhem speed perk can't push an agent
     past 33.
-  - **[proposed]** Enemy attacks meant to be dodged must be **jumped**, not outrun,
+  - **[decided]** Enemy attacks meant to be dodged must be **jumped**, not outrun,
     because players outrun nearly everything. Any charge or rush has to be faster than
     33 studs/s or cover the whole carriage.
 
@@ -127,11 +147,11 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 | Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad (Y repeats the last pick) | 3 gadget buttons light up |
 | Interact (free hostage, grab keys, enter a carriage or hub pod) | W (or ↑) | X | Context button |
 
-**[proposed]** Interact moved from E to **W / ↑**, so E stays "swap to next agent". In a
+**[decided]** Interact moved from E to **W / ↑**, so E stays "swap to next agent". In a
 side-scroller, up is the natural "go in / use" key, and W is otherwise unused because
 movement is on one axis. Nothing on PC shares a key now.
 
-**[proposed]** Aiming is along the facing direction, with optional slight up/down
+**[decided]** Aiming is along the facing direction, with optional slight up/down
 mouse aim on PC. Mobile buttons can be repositioned, as in the original.
 
 ## Multiplayer
@@ -146,14 +166,14 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
     example, a 500 px/s agent took 0.76 and a 275 px/s agent took 0.20.
   - Enemy damage is tuned against a **starter agent at 0.52**. A light grunt's 3-damage
     punch costs the starter about 1.6 HP.
-  - **[proposed]** The UI shows toughness as 1–5 stars rather than the raw multiplier.
+  - **[decided]** The UI shows toughness as 1–5 stars rather than the raw multiplier.
 - **[decided]** Each player brings a **squad of up to 3 agents**, as in the original,
   and swaps between them. Only the active agent is on screen, so a full party shows 4
   agents, not 12. All of a player's agents share that player's health pool, which was
   the original's core hook.
-  - **[proposed]** New players start with the 2 free agents, so they can swap from
+  - **[decided]** New players start with the 2 free agents, so they can swap from
     their first run. The third slot fills when they unlock a third agent.
-  - **[proposed]** Swap cycles to the next agent (Q/E or LB/RB pick a direction). On
+  - **[decided]** Swap cycles to the next agent (Q/E or LB/RB pick a direction). On
     mobile, a swipe cycles, or there's a squad strip of 3 portraits to tap. The HUD
     shows each teammate's active agent only, to keep 4-player screens clean.
 - **[decided]** Revive rules:
@@ -164,19 +184,19 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
     in a run**, for example 5 → 10 → 20 gems.
   - If the **whole squad is down**, anyone has **10 s** to gem-revive. Otherwise the run
     ends. Solo players get the same 10 s prompt.
-- **[proposed]** Details still to confirm:
-  - The starting gem price (5 is a placeholder until the gem economy is set).
+- **[decided]** More revive rules:
+  - The starting gem price is 5, tuned with the rest of the economy.
   - A player who bleeds out with teammates still standing **spectates** and rejoins at
     the next checkpoint with full HP.
   - Reviving is interrupted if the reviver takes damage, so teammates have to clear
     space first.
-- **[proposed]** Solo play is the same game with a 1-player party. Enemy spawn budget
+- **[decided]** Solo play is the same game with a 1-player party. Enemy spawn budget
   and caps scale with party size.
-- **[proposed]** Matchmaking: parties are formed on the hub, with quick-join for open
+- **[decided]** Matchmaking: parties are formed on the hub, with quick-join for open
   slots. The run takes place in a reserved server, with Teleport from the lobby place.
 
 ## Key mechanics
-**[proposed]** These are adapted from the original. See the reference notes for its
+**[decided]** These are adapted from the original. See the reference notes for its
 numbers.
 - **Roster.** **[decided]** **6 agents at launch, 2 of them free**: the starter plus
   one unlocked early through play. The other 4 cost gems, which can also be earned
@@ -207,7 +227,7 @@ numbers.
 ## Enemies & themes
 - **[decided]** Four themes: **Ninjas**, **Undead/horror**, **Robots/future** and
   **Wild West bandits** (new to this game).
-- **[proposed]** Each theme fills the same **10 enemy slots**, so one spawn script
+- **[decided]** Each theme fills the same **10 enemy slots**, so one spawn script
   drives every theme:
   - slots 0–3 are light grunts,
   - slots 4–6 are mids, who also carry keys and blueprints,
@@ -217,7 +237,7 @@ numbers.
   - lights have 18–45 HP,
   - mids have 160 HP,
   - bosses have 550–700 HP.
-- **[proposed]** Spawning uses a **budget model**. Each enemy has a cost, and waves are
+- **[decided]** Spawning uses a **budget model**. Each enemy has a cost, and waves are
   bought from a budget that ramps over time, with a cap on the total cost alive at
   once. Each new mid is introduced alone as a mini-boss beat.
 - **[decided]** The **first playable has 1 theme: Wild West bandits**. They're the
@@ -225,7 +245,7 @@ numbers.
   follow once the loop is fun. The roster draft is in [[Wild West Enemies]].
 
 ## Train events
-**[proposed]**
+**[decided]**
 | Event | Summary | Milestone |
 |---|---|---|
 | Normal train | Clear carriages front to back | First playable |
@@ -238,7 +258,7 @@ numbers.
 ## Progression & economy
 **[decided]** **Original-style** economy and monetization.
 
-**[proposed]** The structure is below, adapted from [[Original Game - Items and Economy]].
+**[decided]** The structure is below, adapted from [[Original Game - Items and Economy]].
 The full draft (earn rates, prices, boosters, surplus shop, Robux products, earn-time
 targets) is in [[Economy and Monetization]].
 - **Coins** are the soft currency. You earn them in runs and missions, and spend them
@@ -268,14 +288,14 @@ targets) is in [[Economy and Monetization]].
   [[Economy and Monetization]].
 - **[decided]** Carried blueprints are lost if the squad wipes before banking them. The
   medbay heals to full for free at every checkpoint.
-- **[proposed]** Guardrails, because this is co-op:
+- **[decided]** Guardrails, because this is co-op:
   - Paid power should never make a teammate's run worse.
   - Paid boosters affect only the buyer. A gems booster doesn't change your
     teammates' damage.
   - Damage and health boosters have a party-wide cap: in a party, at most +50% damage
     and ×0.67 damage taken. The strongest tiers are solo only.
   - Free players can earn every agent through play, more slowly.
-- **[proposed]** **Roblox policy:** any paid random item, such as a random booster offer
+- **[decided]** **Roblox policy:** any paid random item, such as a random booster offer
   bought with Robux-bought gems, must disclose odds. Keep paid offers deterministic,
   like the original's surplus shop, to avoid the issue.
 
@@ -286,7 +306,7 @@ targets) is in [[Economy and Monetization]].
   [[Score and Combo]].
 - **[decided]** Boards rank **unboosted** score, so paid score boosters can't buy a
   rank. **Gem-revived runs count normally.** The doubling revive price is the limit.
-- **[proposed]** The details:
+- **[decided]** The details:
   - Each board comes in **global** and **friends** versions.
   - The furthest-train and squad boards are **split by party size**: solo, duo, and 3–4
     players. The individual board is **one bracket** for co-op runs (2–4 players), since
@@ -296,19 +316,20 @@ targets) is in [[Economy and Monetization]].
   - They ship with the meta systems in M4.
 
 ## Hub train
-**[proposed]** This is our version of the original's Eagle-7, with a new name to pick.
+**[decided]** This is our version of the original's Eagle-7, with a new name to pick.
 It has walk-up pods for:
 - **Medbay**: heal,
 - **Barracks**: agents and squad,
 - **Armory**: upgrades,
 - **Missions**,
-- **Surplus shop**.
+- **Surplus shop**,
+- **Exchange** (gems to coins; see [[Economy and Monetization]]).
 
 It's a hand-built Workspace area that players walk around in, and it doubles as the
 party lobby.
 
 ## Milestones
-**[proposed]**
+**[decided]**
 1. **M0, Bootstrap.** Server/client bootstraps, Remotes, Constants and Types in
    Studio (see `CLAUDE.md`).
 2. **M1, First playable.** One theme, one hostile train built from carriage templates,
@@ -325,9 +346,6 @@ party lobby.
 ## Open questions
 - Final title (working title is Train Runner), and names for the agency, the hub
   train and the agents ([[Title Ideas]]).
-- Revive gem price, and what happens to a player who bleeds out (spectate until the
-  checkpoint is proposed).
-- Review the Wild West roster draft ([[Wild West Enemies]]).
 - Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
 - Playtest the score values and the 2.5 s combo window ([[Score and Combo]]).
