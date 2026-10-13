@@ -40,7 +40,7 @@ their position; it only checks and corrects it.
   default avatars. Hub mode (M2) will need its own spawning.
 
 ## Remotes
-None. `RequestSpin` is handled by CombatService in Session 3.
+None. `RequestSpin` is handled by [[CombatService]].
 
 ## Data / state
 - **On spawn:**
