@@ -35,6 +35,8 @@ session with the Studio MCP connected.
 - **M0 Bootstrap** in Studio: server/client bootstraps, Remotes, Constants and Types (see
   `CLAUDE.md` → architecture). This needs a local session; cloud sessions can't reach
   Studio.
+- Review the UI mockups in Figma (linked in [[Art Direction]] §10): PC HUD, mobile HUD
+  and run end.
 - Add reference images to `05 Assets/References/` (the list is in [[Art Direction]] §13)
   before modelling starts in M1.
 - Name the agency, hub train, agents and gang ([[Title Ideas]]).

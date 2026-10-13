@@ -181,6 +181,23 @@ Mimi's beret is a pink-leaning red so it doesn't read as gang red.
   must be at least 48 px**, with the mobile layout designed first and then adapted to
   PC.
 - HUD colours follow the colour language above. Player-colour frames show who's who.
+- **[proposed] Mockups:** [Train Runner — UI Mockups (Figma)](https://www.figma.com/design/dYELw7ZfOV3nZAh34vtCtL).
+  It has three screens: the PC in-run HUD, the mobile landscape HUD (844×390 pt) and
+  the run-end screen. They use a colour variable collection that mirrors this note, and
+  7 reusable components: AgentPortrait, HealthBar, GadgetSlot, TeammateCard,
+  TouchButton, Button and PlayerRow.
+  - Nunito stands in for Builder Sans, which Figma doesn't have.
+  - The characters are placeholder blocks.
+  - The proposed HUD layout:
+    - **top-left:** player panel (portrait, HP, a 10-chip Mayhem meter, squad
+      strip) and teammate cards,
+    - **top-centre:** train progress (leg, train, next event),
+    - **top-right:** score, combo badge and currencies,
+    - **bottom-centre:** the gadget picker, shown only when Mayhem is full.
+  - On mobile, move is bottom-left. Shoot, jump and swap are bottom-right, plus a
+    context button (Revive, Keys, Hostage) that only appears when needed. The gadget row
+    sits low, so it never covers enemies.
+  - These are the reference for building the ScreenGuis in `StarterGui`.
 
 ## 11. Technical budgets (starting targets; verify in Studio on a mid-range phone)
 | Asset | Triangles | Textures | Notes |
