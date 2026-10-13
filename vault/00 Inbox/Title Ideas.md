@@ -28,6 +28,9 @@ Names that also need choosing:
 - The agency, replacing the original's unnamed agency.
 - The hub train, replacing the Eagle-7.
 - The shopkeeper and surplus shop, replacing Chubwick.
-- The agents, replacing Graham, Mason, Carrera and the rest.
+- The Wild West gang (placeholder: the Rattler Gang; see [[Wild West Enemies]]).
+- The agents, replacing Graham, Mason, Carrera and the rest. Placeholder names are
+  proposed in [[Launch Agents]]: Dash Daring, Brick Broadsley, Turbo, Nana Nitro, Mimi
+  the Mime and Zorp.
 
 Related: [[Home]]

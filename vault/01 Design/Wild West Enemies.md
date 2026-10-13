@@ -1,18 +1,20 @@
 ---
 tags: [design, feature, enemies, theme, wild-west]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Wild West Enemies — the Rattler Gang
 
-> **Status: proposed.** This is Claude's draft roster for the first-playable theme,
-> which the developer chose in the [[Game Design Document]]. All names, behaviours and
-> numbers are suggestions for review. The numbers start from the original game's stat
-> bands ([[Original Game - Enemies and Spawning]]). They're a starting point for
-> playtesting, not final balance.
+> **Status: planned.** This is the roster for the first-playable theme, which the
+> developer chose in the [[Game Design Document]]. The developer accepted it on
+> 2026-10-13. Names are placeholders until the naming pass. The numbers are **first
+> guesses**: they were drawn from the original's stat bands
+> ([[Original Game - Enemies and Spawning]]), which the GDD now treats as loose
+> reference only. Tune them fresh in playtests.
 
 ## Summary
-The **Rattler Gang** are cartoon outlaws who have hijacked a freight train. They fill
+The **Rattler Gang** (**[decided]** a placeholder name, chosen for real in the naming
+pass with the agents and hub train; see [[Title Ideas]]) are cartoon outlaws who have hijacked a freight train. They fill
 the 10 standard enemy slots that every theme uses (see the GDD):
 - slots 0–3 are light grunts,
 - slots 4–6 are mids, who also hold keys and carry blueprints,
@@ -29,9 +31,9 @@ tone.
   forces a different answer: jumping, breaking a shield, or interrupting a charge.
 - Bosses are a showdown on a flatbed car, with taunts, a big telegraphed move and
   help arriving from the gang.
-- **No gore.** Knocked-out bandits go flying off the train in a spin with their hat
-  popping off and cartoon stars, or burst into a puff of dust. Shields and props break
-  into wood or metal chunks.
+- **No gore.** Knocked-out bandits **ragdoll onto the carriage**, their hat popping off
+  with cartoon stars circling, then fade out after a moment (GDD: ragdoll knock-outs
+  that stay on the train). Shields and props break into wood or metal chunks.
 
 ## Behaviour archetypes
 These are the reusable AI behaviours this roster needs. Later themes (Ninjas, Undead,
@@ -72,7 +74,7 @@ All mids have 160 HP, cost 15, a freeze scalar of 0.6 and a hitbox of about 2.4 
 
 | Slot | Name | Archetype | Speed | Attack | Gimmick |
 |---|---|---|---|---|---|
-| 4 | **Lasso Lucy** | Grappler + Leaper | 170 (11.3) | Medium melee, plus lasso | Every ~5 s she throws a lasso along the ground (0.6 s tell). If it catches a player, she reels them in for a beating. **Jump to dodge it.** A teammate can shoot the rope to free a caught player, and the caught player can mash Jump to break free in ~1.5 s. |
+| 4 | **Lasso Lucy** | Grappler + Leaper | 170 (11.3) | Medium melee, plus lasso | Every ~5 s she throws a lasso along the ground (0.6 s tell). If it catches a player, she reels them in for a beating. **Jump to dodge it.** A teammate can shoot the rope to free a caught player, and the caught player can mash Jump to break free: **[decided]** ~1.5 s in co-op, **~0.75 s solo**, where nobody can shoot the rope. |
 | 5 | **Big Bart** | Charger | 160 (10.7) | Medium melee; the charge knocks you back | Swigs from a jug as a wind-up (1 s), then charges down the carriage. Deal **30 damage during the wind-up** to stagger him. The charge can knock players into the gap between cars. |
 | 6 | **Saloon Door Sam** | Shielded | 180 (12) | Shotgun blast behind the door, melee up close | Carries a pair of saloon doors as a **90 HP wooden shield** that blocks frontal shots. Break the doors, or jump over and hit him from behind. Without the doors he panics. |
 
@@ -96,7 +98,7 @@ a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at
 
 **Proposed boss taunts:**
 - McGraw: "THIS TRAIN AIN'T BIG ENOUGH FOR THE BOTH OF US!", "DRAW!", "I'M THE FASTEST GUN ON THE RAILS!"
-- Ma Rattler: "GET 'EM, BOYS!", "NOBODY TOUCHES MY TRAIN!", "EAT YER VEGETABLES!"
+- Ma Rattler: "GET 'EM, BOYS!", "NOBODY TOUCHES MY TRAIN!", "EAT YER VEGETABLES!" (shared with Nana Nitro in [[Launch Agents]], kept as a running gag)
 
 ### Minion (slot 9)
 | Slot | Name | Archetype | HP | Speed | Cost | Notes |
@@ -108,8 +110,14 @@ a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at
 by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED!"
 
 ## Rules & numbers
-- **[proposed] Enemy damage.** These are the original's base values. They assume a player
-  health pool of about 100, which still has to be decided.
+- **[decided] A knockout is final.** Knocked-out bandits ragdoll, stay down and fade
+  out. They never get back up or climb back on. "Gets back up unless you finish it" stays the **Undead** theme's
+  signature, so the themes play differently. (The Smasher Drone's finishing move
+  matters most there; see [[Gadgets and Mayhem]].)
+- **[proposed] Enemy damage.** These are the original's base values, applied to the
+  decided **100 HP pool** and scaled by the active agent's toughness (see the GDD). The
+  starter agent takes 0.52 of each hit, so a light punch costs it about 1.6 HP, and
+  Dynamite about 5.
   - Light melee: 3.
   - Mid melee: 6.
   - Boss melee: 8.
@@ -132,14 +140,18 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
 - **[proposed] Co-op scaling.** Multiply the spawn budget and alive-cap by 1.0 / 1.6 /
   2.2 / 2.8 for 1 / 2 / 3 / 4 players. Multiply boss HP by 1.0 / 1.5 / 2.0 / 2.5. These
   are guesses to tune in playtesting.
-- **Note on boss speed.** McGraw's charge (16.7 studs/s) is faster than Roblox's default
-  WalkSpeed of 16. That's intended, since the charge should be dodged by jumping rather
-  than by outrunning him, but it depends on player movement speed, which isn't decided.
+- **[proposed] Charge speeds.** Player speed is now decided at **18–33 studs/s** (see the
+  GDD), so every agent outruns McGraw's 16.7 studs/s charge and Big Bart's 10.7 studs/s
+  walk. Charges are meant to be **jumped, not outrun**, so raise them:
+  - Big Bart's charge: about **36 studs/s** (540 px/s).
+  - McGraw's berserk charge: about **40 studs/s** (600 px/s).
+  Walking speeds stay as listed. Rattler Runts (15 studs/s) are slower than every agent,
+  which is fine because they're a swarm, not a chase.
 
 ## Art & audio needs
 See [[Art Direction]] (still empty). Each enemy needs:
 - a readable silhouette and colour per slot: hat shape and bandana colour tell slots apart,
-- a hit reaction, a knockout launch, and a celebrate pose for when a player goes down.
+- a hit reaction, a ragdoll knockout (with the hat pop), and a celebrate pose for when a player goes down.
 
 Shared needs:
 - props: dynamite, lasso, saloon doors, key ring, saddlebag blueprints, rocking chair on
@@ -148,13 +160,9 @@ Shared needs:
 - comedic voice barks and taunts.
 
 ## Open questions
-- Player health pool and movement speed. These set the scale for all the damage and
-  speed numbers above.
-- Should knocked-off bandits be able to **climb back onto the train**, as a Wild West
-  take on the original's undead reviving? It could be a later-theme gimmick instead.
-- Is Lasso Lucy's grapple too punishing solo? Possible fixes: a solo-only auto-break
-  after 1 s, or making the lasso dodgeable by rolling.
-- Gang name: is the **Rattler Gang** OK, or should the gang name tie into the final title?
+- Is damage high enough? Against the starter agent, a single light grunt needs about 48 s
+  to down a player alone. Threat comes from crowds and mids. Check this in the first
+  playtest.
 
 ## Implementation notes
 _Not built. Design only. Studio work starts once the design is complete._
