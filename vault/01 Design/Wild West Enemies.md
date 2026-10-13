@@ -96,7 +96,7 @@ a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at
 
 **Proposed boss taunts:**
 - McGraw: "THIS TRAIN AIN'T BIG ENOUGH FOR THE BOTH OF US!", "DRAW!", "I'M THE FASTEST GUN ON THE RAILS!"
-- Ma Rattler: "GET 'EM, BOYS!", "NOBODY TOUCHES MY TRAIN!", "EAT YER VEGETABLES!"
+- Ma Rattler: "GET 'EM, BOYS!", "NOBODY TOUCHES MY TRAIN!", "EAT YER VEGETABLES!" (shared with Nana Nitro in [[Launch Agents]], kept as a running gag)
 
 ### Minion (slot 9)
 | Slot | Name | Archetype | HP | Speed | Cost | Notes |

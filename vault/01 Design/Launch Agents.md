@@ -1,14 +1,15 @@
 ---
 tags: [design, feature, agents, roster, balance]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Launch Agents
 
-> **Status: proposed.** This is Claude's draft of the 6 launch agents. The developer
-> decided the roster size (6 agents, 2 free) in the [[Game Design Document]].
-> Everything here is a suggestion for review: names, concepts, loadouts and numbers.
-> Names are placeholders until the naming pass in [[Title Ideas]]. Before keeping any
+> **Status: planned.** The developer decided the roster size (6 agents, 2 free) in the
+> [[Game Design Document]] and **accepted these six concepts** on 2026-10-13. Lines marked
+> **[decided]** are settled. Loadouts and numbers not marked **[decided]** are still
+> proposals to tune. Names are **placeholders** and may change in the naming pass in
+> [[Title Ideas]]. Before keeping any
 > name, search Roblox and run a basic trademark check. The numbers come from the
 > original's agent and weapon tables
 > ([[Original Game - Items and Economy]], [[Original Game - APK Balance Audit]]). They're a
@@ -78,7 +79,8 @@ plays to a crowd that isn't there.
   "Mayhem from damage taken"). Tanking hits charges his gadget, which suits a front-line
   agent.
 - **Theme bonus:** none. As the second free agent he should be a safe pick too.
-- **Unlock:** free, given at the player's **first checkpoint**. That moment also triggers
+- **Unlock:** **[decided]** Brick is the second free agent, given at the player's **first
+  checkpoint**. That moment also triggers
   the squad-swap tutorial, so swapping is taught right when the player gets a second
   agent.
 - **Barks:** "ARE YOU NOT ENTERTAINED?!", "Ring the bell!", "*Flexes*"
@@ -94,7 +96,7 @@ agent on the rails and the most fragile.
 - **Gadgets:** Healer Drone, Smasher Drone, Air Strike.
 - **Spin attack:** level 3.
 - **Perk:** **Pit stop.** She heals a little on each kill (the original's "heal on kill").
-- **Theme bonus:** **+40% damage vs Robots** (lightning shorts them out), **−40% vs
+- **Theme bonus:** **+40% damage vs Robots** (lightning shorts them out), **−25% vs
   Undead** (you can't electrocute what's already dead).
 - **Co-op role:** with the top speed (33 studs/s) she can **reach downed teammates
   first**. Revives are a 2 s hold, so speed is a real support stat.
@@ -112,14 +114,14 @@ explosive and so is her temper.
 - **Spin attack:** level 4. It's a handbag swing.
 - **Perk:** **Knits fast.** Mayhem fills about 1.3× faster.
 - **Theme bonus:** **+40% damage vs Undead** ("I've buried three husbands, dear"),
-  **−40% vs Ninjas** (too fast for her eyes).
+  **−25% vs Ninjas** (too fast for her eyes).
 - **Co-op role:** the natural support. She has crowd control, a healer drone, and enough
   toughness to stand next to a downed teammate and revive them.
 - **Barks:** "Eat your vegetables!", "Who wants a cookie?", "In MY day trains had
   manners!"
 
-> Ma Rattler, the Wild West boss, also says "EAT YER VEGETABLES!" ([[Wild West Enemies]]).
-> It could be a running gag if the two ever meet, or one of them should change it.
+> **[decided]** Ma Rattler, the Wild West boss, also says "EAT YER VEGETABLES!"
+> ([[Wild West Enemies]]). Both keep the line for now, as a running gag.
 
 ### 5. Mimi the Mime — "…"
 A mime who never says a word, and whose invisible props work for real. She's
@@ -135,7 +137,7 @@ acrobatic and precise, and she's funnier the more serious things get.
 - **Spin attack:** level 8, the strongest at launch. Her cartwheel kick is her main
   answer to crowds.
 - **Perk:** none beyond her spin.
-- **Theme bonus:** **+40% damage vs Ninjas** (the only agent quieter than them), **−40%
+- **Theme bonus:** **+40% damage vs Ninjas** (the only agent quieter than them), **−25%
   vs Wild West** (cowboys heckle, and she loses her focus).
 - **Barks:** none, by design. She does silent reactions and props instead. Her "voice
   lines" are sound effects: a slide whistle, a kazoo, an exaggerated sigh.
@@ -153,22 +155,24 @@ is the best ride. He takes photos mid-fight.
 - **Perk:** **Alien regen.** He slowly regains health over time (the original's "heal over
   time").
 - **Theme bonus:** **+40% damage vs Wild West** (bandits panic at a flying saucer),
-  **−40% vs Robots** (they keep hacking his tech).
+  **−25% vs Robots** (they keep hacking his tech).
 - **Barks:** "Fascinating!", "Earthlings are so bouncy!", "Five stars, would ride again."
 
 ## Rules & numbers
-- **[proposed] Theme matchups.** Each theme has one specialist and one agent who struggles:
+- **[decided] Theme matchups.** Each theme has one specialist and one agent who struggles:
 
-  | Theme | +40% damage | −40% damage |
+  | Theme | +40% damage | −25% damage |
   |---|---|---|
   | Wild West | Zorp | Mimi |
   | Ninjas | Mimi | Nana |
   | Undead | Nana | Turbo |
   | Robots | Turbo | Zorp |
 
-  The ±40% values copy the original's costume agents. That's harsh, but it makes
-  swapping matter: when the next train's theme is announced, swap to your specialist. If
-  it's too harsh in co-op, soften the penalty to −25% and keep the bonus.
+  **[decided]** The bonus keeps the original's +40%, but the penalty is **softened to
+  −25%** for co-op. That way a player whose squad struggles with a theme still pulls
+  their weight for the team. Swapping still matters: when the next train's theme is
+  announced, swap to your specialist. **[proposed]** Solo uses the same −25%, so there's
+  one rule to learn and balance.
 - **[proposed] Agent stats are fixed.** As in the original, agents don't level up. Their
   speed, toughness, spin and perks never change. Progression comes from upgrading their
   weapons and gadgets (10 levels each, gated by coins and blueprints, per the GDD).
@@ -226,10 +230,7 @@ These are not part of the launch 6, just for later:
 - A cowboy sheriff, who would be the obvious Wild West specialist.
 
 ## Open questions
-- Are the 6 concepts right for the game's tone? Swap any you don't like.
-- Should Brick be the second free agent, or should it be someone faster, so a new
-  player's two free agents feel more different?
-- ±40% theme matchups, or soften the penalty to −25%?
+- Final agent names (the current ones are placeholders).
 - Mimi's Invisible Bow needs a charge formula (charge time, minimum and maximum damage).
 - What do the 3 mech suits do exactly? They're named here but not designed.
 
