@@ -12,7 +12,8 @@ updated: 2026-10-13
 > playtesting, not final balance.
 
 ## Summary
-The **Rattler Gang** are cartoon outlaws who have hijacked a freight train. They fill
+The **Rattler Gang** (**[decided]** a placeholder name, chosen for real in the naming
+pass with the agents and hub train; see [[Title Ideas]]) are cartoon outlaws who have hijacked a freight train. They fill
 the 10 standard enemy slots that every theme uses (see the GDD):
 - slots 0–3 are light grunts,
 - slots 4–6 are mids, who also hold keys and carry blueprints,
@@ -72,7 +73,7 @@ All mids have 160 HP, cost 15, a freeze scalar of 0.6 and a hitbox of about 2.4 
 
 | Slot | Name | Archetype | Speed | Attack | Gimmick |
 |---|---|---|---|---|---|
-| 4 | **Lasso Lucy** | Grappler + Leaper | 170 (11.3) | Medium melee, plus lasso | Every ~5 s she throws a lasso along the ground (0.6 s tell). If it catches a player, she reels them in for a beating. **Jump to dodge it.** A teammate can shoot the rope to free a caught player, and the caught player can mash Jump to break free in ~1.5 s. |
+| 4 | **Lasso Lucy** | Grappler + Leaper | 170 (11.3) | Medium melee, plus lasso | Every ~5 s she throws a lasso along the ground (0.6 s tell). If it catches a player, she reels them in for a beating. **Jump to dodge it.** A teammate can shoot the rope to free a caught player, and the caught player can mash Jump to break free: **[decided]** ~1.5 s in co-op, **~0.75 s solo**, where nobody can shoot the rope. |
 | 5 | **Big Bart** | Charger | 160 (10.7) | Medium melee; the charge knocks you back | Swigs from a jug as a wind-up (1 s), then charges down the carriage. Deal **30 damage during the wind-up** to stagger him. The charge can knock players into the gap between cars. |
 | 6 | **Saloon Door Sam** | Shielded | 180 (12) | Shotgun blast behind the door, melee up close | Carries a pair of saloon doors as a **90 HP wooden shield** that blocks frontal shots. Break the doors, or jump over and hit him from behind. Without the doors he panics. |
 
@@ -108,6 +109,10 @@ a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at
 by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED!"
 
 ## Rules & numbers
+- **[decided] A knockout is final.** Knocked-out bandits fly off the train and never
+  climb back on. "Gets back up unless you finish it" stays the **Undead** theme's
+  signature, so the themes play differently. (The Smasher Drone's finishing move
+  matters most there; see [[Gadgets and Mayhem]].)
 - **[proposed] Enemy damage.** These are the original's base values, applied to the
   decided **100 HP pool** and scaled by the active agent's toughness (see the GDD). The
   starter agent takes 0.52 of each hit, so a light punch costs it about 1.6 HP, and
@@ -157,11 +162,6 @@ Shared needs:
 - Is damage high enough? Against the starter agent, a single light grunt needs about 48 s
   to down a player alone. Threat comes from crowds and mids. Check this in the first
   playtest.
-- Should knocked-off bandits be able to **climb back onto the train**, as a Wild West
-  take on the original's undead reviving? It could be a later-theme gimmick instead.
-- Is Lasso Lucy's grapple too punishing solo? Possible fixes: a solo-only auto-break
-  after 1 s, or making the lasso dodgeable by rolling.
-- Gang name: is the **Rattler Gang** OK, or should the gang name tie into the final title?
 
 ## Implementation notes
 _Not built. Design only. Studio work starts once the design is complete._

@@ -22,7 +22,7 @@ Pre-production. The [[Game Design Document]] is drafted: core decisions are made
 - [[Score and Combo]]: the leaderboard rules are decided (squad and individual boards, unboosted score, gem-revived runs count). Point values still need a playtest.
 - [[Launch Agents]]: the six concepts are accepted (names are placeholders). Still open: the Invisible Bow's charge formula.
 - [[Gadgets and Mayhem]]: the key rules are decided (pick your gadget, one Air Strike per party, the Healer pauses bleed-out, mech upgrades add duration only). Fill rates and armour still need a playtest.
-- Review the [[Wild West Enemies]] roster draft and its open questions. Player HP, toughness and speed are now decided, and charge speeds were raised to match.
+- [[Wild West Enemies]]: the open questions are cleared (knockouts are final, the lasso breaks faster solo, the gang name is a placeholder). The roster itself is still marked proposed until accepted. Enemy damage needs a playtest.
 - Name the agency, hub train and agents ([[Title Ideas]]).
 - Define the [[Art Direction]] and add reference images to `05 Assets/References/`.
 - Build the bootstrap structure in Studio (see `CLAUDE.md` → architecture). **Only once the design is fully fleshed out.**
