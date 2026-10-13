@@ -26,7 +26,7 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
 ## Remotes
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
-| `SetInput` | client → server (unreliable) | `fire`, `aim` | See [[CombatService]] |
+| `SetInput` | client → server (unreliable) | `fire` | See [[CombatService]] |
 | `RequestSpin` | client → server | none | See [[CombatService]] |
 
 ## Data / state
@@ -38,12 +38,10 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
   - in the air: a **spin**, once per airborne stretch and no faster than
     `SPIN_COOLDOWN` (0.6 s). It sets the upward velocity for a `SPIN_LIFT` of 4 studs
     (the measured jump plus spin rise was 10.8).
-- **Left mouse button held:** fire. **Aim** is the mouse's up/down angle from the root
-  on the Z = 0 plane, as −1..1 of `AIM_MAX_ANGLE` (30°), rounded to `AIM_STEP` (0.05).
-  It's 0 without a mouse.
+- **Left mouse button held:** fire. There's no aiming (the mouse position is ignored);
+  shots go along the facing (2026-10-13).
 - **SetInput is sent:**
   - on a trigger change,
-  - on an aim change, at most every `INPUT_SEND_INTERVAL` (0.05 s),
   - and resent every `INPUT_RESEND_INTERVAL` (0.5 s), because the remote is unreliable
     and a lost release must recover.
 - `RequestSpin` is sent with each spin.

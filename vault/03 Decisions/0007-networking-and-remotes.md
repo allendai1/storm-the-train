@@ -54,6 +54,11 @@ per shot would be expensive and easy to abuse.
   - pickups (collected by server proximity checks),
   - currency, purchases, revives and checkpoint choices.
 
+**Amendment (2026-10-13):** aiming was removed (GDD → Controls), so `SetInput` now
+carries only `fire: boolean`. The `aim` scalar is gone from the client and the server,
+and the server fires along the character's facing. The rest of this decision is
+unchanged.
+
 ## Alternatives considered
 - **One remote per shot:** precise, but heavy and easy to spam. Input state plus
   server-side fire intervals removes both problems.

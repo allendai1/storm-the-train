@@ -241,6 +241,9 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
    rejoining and server shutdowns?
 
 ## Open questions
+- **Queue pads vs the Party pod menu** (raised 2026-10-13): should the hub form parties with
+  physical pads instead of, or alongside, `PartyGui`'s invite flow? The proposal is in
+  [[Queue Pads]] (recommended: pads replace the invite menu).
 - A **tie = continue** rule for the vote, and the **90 s AFK safeguard**: OK?
 - Should a player who **joins mid-run** be possible at all? Proposed: no. Run servers
   are locked to the party roster.

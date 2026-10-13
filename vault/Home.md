@@ -59,6 +59,7 @@ Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to
 ## Inbox
 Unsorted and proposed ideas go in `00 Inbox/` (`status: proposed`) until they're triaged.
 - [[Title Ideas]] — candidate titles and names for the new IP
+- [[Queue Pads]] — physical party lobby: step on a pad, countdown, the pad's squad teleports together (proposed, M2 roadmap)
 
 ## Assets & packages
 - [[Packages]] — third-party Luau libraries in `ReplicatedStorage.Packages`

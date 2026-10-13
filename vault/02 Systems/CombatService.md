@@ -59,7 +59,7 @@ Session 5). Both react to `Health` reaching 0.
 ## Remotes
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
-| `SetInput` | client → server (unreliable) | `fire: boolean`, `aim: number` | `Guard.boolean`, `Guard.number(-1, 1)`. 30/s, burst 10. A bad payload is a strike |
+| `SetInput` | client → server (unreliable) | `fire: boolean` | `Guard.boolean`. 30/s, burst 10. A bad payload is a strike |
 | `RequestSpin` | client → server | none | 4/s, burst 2. Cooldown is ≥ 0.8 × `SPIN_COOLDOWN` (a strike otherwise). The player must be alive and airborne: no map geometry within hip height + 0.5 below the root |
 | `Effects` | server → all clients (unreliable) | an array of up to `EFFECTS_BATCH_SIZE` (10) records per send, flushed every Heartbeat | — |
 
@@ -78,12 +78,13 @@ Session 5). Both react to `Health` reaching 0.
   - `N` knockback: userId, vx, vy
 
 ## Data / state
-- **Per player:** `{ fire, aim, nextShot, lastSpin }`.
+- **Per player:** `{ fire, nextShot, lastSpin }`.
 - **Firing:** the cadence stays steady while the trigger is held (`nextShot +=
   FireInterval`), and the first shot after a pause fires immediately. A player with
   Health ≤ 0 can't fire.
-- **Aim:** the facing (from the root's LookVector) is tilted by `aim × AIM_MAX_ANGLE` (30°).
-  Shots start at the Muzzle, projected onto Z = 0.
+- **Direction:** there's no player aim. Shots go straight along the facing (±X, from the
+  root's LookVector), starting at the Muzzle projected onto Z = 0. Mouse aim was removed
+  2026-10-13; verified with the mouse held high, where the steepest tracer was 2° (auto-aim).
   - The **rifle's auto-aim** bends the shot toward the live enemy with the smallest angle
     inside `AutoAimAngle` and in range.
 - **Rockets** are data (`position`, `velocity`, `travelled`), stepped every Heartbeat with

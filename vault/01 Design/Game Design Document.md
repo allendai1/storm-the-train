@@ -157,8 +157,10 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 side-scroller, up is the natural "go in / use" key, and W is otherwise unused because
 movement is on one axis. Nothing on PC shares a key now.
 
-**[decided]** Aiming is along the facing direction, with optional slight up/down
-mouse aim on PC. Mobile buttons can be repositioned, as in the original.
+**[decided]** There's **no aiming**: weapons shoot straight along the direction the agent
+faces, on every platform. The developer decided this on 2026-10-13, dropping the earlier
+optional up/down mouse aim on PC. The rifle's light auto-aim cone still applies. Mobile
+buttons can be repositioned, as in the original.
 
 ## Multiplayer
 - **[decided]** **Co-op squad of 1–4 players.** Each player controls one agent on screen.
