@@ -5,8 +5,10 @@ updated: 2026-10-13
 ---
 # Title Ideas
 
-> Proposed. The developer chooses. Before settling on a name, search Roblox for
-> existing experiences with that name, and run a basic trademark search.
+> **Working title chosen (2026-10-13): Train Runner.** The ideas below are kept as
+> alternatives in case it changes before launch. Before publishing under any name,
+> search Roblox for existing experiences with that name, and run a basic trademark
+> search.
 
 The game is moving away from the original's "Storm the Train" (see
 [[Game Design Document]]). Brainstormed options:

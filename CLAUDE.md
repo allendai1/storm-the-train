@@ -4,7 +4,8 @@ Guidance for Claude Code when working in this repository.
 
 ## Project
 
-**Storm the Train** is a Roblox experience written in **Luau**. Development is
+**Train Runner** (working title; the repo is named after *Storm the Train*, the 2016
+mobile game it's inspired by) is a Roblox experience written in **Luau**. Development is
 **Studio-first**: the game, including all scripts, lives in the Roblox place and is
 edited directly in Roblox Studio. Claude works on the place through the
 **Roblox Studio MCP server** (built into Studio). There is no Rojo and no file sync.

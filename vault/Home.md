@@ -1,9 +1,11 @@
 ---
 tags: [moc]
 ---
-# Storm the Train — Home
+# Train Runner — Home
 
 Map of content for the project. Start here, then read [[Status]].
+The working title is **Train Runner**; the repo is still named `storm-the-train` after the
+2016 game it's inspired by (see [[Original Game]]).
 
 ## Design
 - [[Game Design Document]] — pitch, core loop, pillars, open questions

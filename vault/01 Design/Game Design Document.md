@@ -3,7 +3,7 @@ tags: [design, gdd]
 status: draft
 updated: 2026-10-13
 ---
-# Game Design Document
+# Game Design Document — Train Runner
 
 > **How to read this.** Lines marked **[decided]** were chosen by the developer.
 > Lines marked **[proposed]** are Claude's suggestions, drafted from the
@@ -18,8 +18,9 @@ enemy crews, swap between agents mid-fight, rescue hostages, take down bosses an
 leap from train to train. Between runs they head back to their own armoured hub
 train to upgrade.
 
-**Working title:** "Storm the Train". **[decided]** We need a new final title
-before publishing (see [[Title Ideas]]).
+**Working title:** **Train Runner**. **[decided]** It replaces "Storm the Train", which
+belongs to the original. It's a working title for now: confirm the final name before
+publishing (see [[Title Ideas]]).
 
 ## Relationship to the original
 - **[decided]** This is a **new IP inspired by** the 2016 mobile game *Storm the Train*
@@ -94,10 +95,15 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
 
 ## Multiplayer
 - **[decided]** **Co-op squad of 1–4 players.** Each player controls one agent on screen.
+- **[decided]** Health is pooled **per player**, not across the party, and downed
+  players can be **revived**.
 - **[proposed]** Each player brings a **squad of 2 agents** and swaps between them.
   The two agents share that player's health pool, which was the original's core hook.
-  A downed player can be **revived by a teammate** within a time window. If everyone
-  is down, the run ends.
+- **[proposed]** Revive options:
+  - A downed player can be **revived by a teammate** standing next to them within a
+    time window.
+  - A player can also self-revive by spending gems, as in the original.
+  - If everyone is down, the run ends.
 - **[proposed]** Solo play is the same game with a 1-player party. Enemy spawn budget
   and caps scale with party size.
 - **[proposed]** Matchmaking: parties are formed on the hub, with quick-join for open
@@ -138,10 +144,9 @@ numbers.
 - **[proposed]** Spawning uses a **budget model**. Each enemy has a cost, and waves are
   bought from a budget that ramps over time, with a cap on the total cost alive at
   once. Each new mid is introduced alone as a mini-boss beat.
-- **[proposed]** The **first playable has 1 theme**. Wild West bandits are recommended
-  as the most "train" flavoured and the most clearly our own IP. Ninjas are the
-  alternative, since they map directly to the original's best-documented data. The
-  other themes follow once the loop is fun.
+- **[decided]** The **first playable has 1 theme: Wild West bandits**. They're the
+  most "train" flavoured theme and the most clearly our own IP. The other themes
+  follow once the loop is fun.
 
 ## Train events
 **[proposed]**
@@ -217,9 +222,11 @@ party lobby.
 6. **M5, Polish and launch.** Final title, art pass, onboarding and tutorial, analytics.
 
 ## Open questions
-- Final title, and names for the agency, the hub train and the agents ([[Title Ideas]]).
-- Which theme ships first: Wild West (recommended) or Ninjas?
-- In co-op, should health be pooled per player (proposed) or across the whole party?
+- Final title (working title is Train Runner), and names for the agency, the hub
+  train and the agents ([[Title Ideas]]).
+- Revive details: time window, how long a revive takes, the gem price, and whether
+  revives are limited per run.
+- Wild West enemy roster for the 10 slots (light, mid, boss, minion).
 - How many hostile trains between checkpoints, and how long is a train?
 - Starting roster size, and which agents are free at launch.
 - Should runs have score leaderboards, and is there a PvP or competitive angle at all?
