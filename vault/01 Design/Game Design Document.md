@@ -79,11 +79,16 @@ hostile trains**:
 | 3 | Normal | Normal | Event | Checkpoint |
 | 4 | Normal | Normal | **Boss** | … and so on |
 
+**[decided]** Non-boss event trains **rotate**: the event is picked at random, but never
+the same event twice in a row, so every leg feels different. The pool is hostage,
+blueprint thief and survival. (The first playable only has the blueprint thief, so the
+rule only matters from M3.)
+
 A leg takes about 8–9 minutes, so the 10–15 minute target means an average run reaches
 leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 
 **[proposed]** The loop in detail:
-1. **Gear up on the hub train.** Pick a squad, spend coins on upgrades, equip up to 3
+1. **Gear up on the hub train.** Pick a squad of up to 3 agents, spend coins on upgrades, equip up to 3
    boosters, choose missions.
 2. **Storm a hostile train.** Fight carriage by carriage against a themed enemy crew.
    An event may trigger: boss, hostage, blueprint thief, survival waves.
@@ -138,8 +143,15 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
   - Enemy damage is tuned against a **starter agent at 0.52**. A light grunt's 3-damage
     punch costs the starter about 1.6 HP.
   - **[proposed]** The UI shows toughness as 1–5 stars rather than the raw multiplier.
-- **[proposed]** Each player brings a **squad of 2 agents** and swaps between them.
-  The two agents share that player's health pool, which was the original's core hook.
+- **[decided]** Each player brings a **squad of up to 3 agents**, as in the original,
+  and swaps between them. Only the active agent is on screen, so a full party shows 4
+  agents, not 12. All of a player's agents share that player's health pool, which was
+  the original's core hook.
+  - **[proposed]** New players start with the 2 free agents, so they can swap from
+    their first run. The third slot fills when they unlock a third agent.
+  - **[proposed]** Swap cycles to the next agent (Q/E or LB/RB pick a direction). On
+    mobile, a swipe cycles, or there's a squad strip of 3 portraits to tap. The HUD
+    shows each teammate's active agent only, to keep 4-player screens clean.
 - **[decided]** Revive rules:
   - At 0 HP a player is **downed** and **bleeds out over 15 s**.
   - A teammate standing next to them holds **Interact for 2 s** to revive them at
@@ -162,6 +174,9 @@ mouse aim on PC. Mobile buttons can be repositioned, as in the original.
 ## Key mechanics
 **[proposed]** These are adapted from the original. See the reference notes for its
 numbers.
+- **Roster.** **[decided]** **6 agents at launch, 2 of them free**: the starter plus
+  one unlocked early through play. The other 4 cost gems, which can also be earned
+  through play, more slowly. More agents, including costume agents, come after launch.
 - **Agents.** Each has 2 fixed weapons, 1–3 gadgets and traits: resilience, speed,
   spin-attack strength, and a bonus against one enemy faction. Swapping is instant
   with a short cooldown.
@@ -244,6 +259,16 @@ numbers.
   bought with Robux-bought gems, must disclose odds. Keep paid offers deterministic,
   like the original's surplus shop, to avoid the issue.
 
+## Leaderboards
+- **[decided]** **Co-op leaderboards only. No PvP.**
+- **[proposed]** The details:
+  - There are two boards: **furthest train reached** and **best run score**.
+  - Each comes in **global** and **friends** versions.
+  - Each is **split by party size**: solo, duo, and 3–4 players.
+  - Scores are counted by the server only and submitted when the run ends.
+  - Boards are shown on a wall of the hub train and on the run-end screen.
+  - They ship with the meta systems in M4.
+
 ## Hub train
 **[proposed]** This is our version of the original's Eagle-7, with a new name to pick.
 It has walk-up pods for:
@@ -277,8 +302,8 @@ party lobby.
 - Revive gem price, and what happens to a player who bleeds out (spectate until the
   checkpoint is proposed).
 - Review the Wild West roster draft ([[Wild West Enemies]]).
-- Which event types can roll on non-boss event trains, and how are they weighted?
-- Starting roster size, and which agents are free at launch.
-- Should runs have score leaderboards, and is there a PvP or competitive angle at all?
+- Who are the 6 launch agents? (concepts, weapon pairs, speed and toughness pairings)
+- How is score calculated? It decides the score leaderboard. The combo multiplier,
+  kills, train-clear bonuses and no-damage bonuses are candidates.
 
 Related: [[Home]] · [[Status]] · [[Art Direction]] · [[Original Game]] · [[0003-2.5d-side-scroller]]

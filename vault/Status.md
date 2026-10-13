@@ -11,13 +11,13 @@ Read this at the start of every session. Keep it short and current.
 Roblox Studio MCP server. See [[Game Design Document]] and [[Art Direction]].
 
 ## Current phase
-Pre-production. The [[Game Design Document]] is drafted: core decisions are made (new IP inspired by the 2016 original, 2.5D side-scroller, 1–4 player co-op, runs of trains with a hub, four themes, original-style economy). Player health (100 HP plus the original's toughness spread), movement speed (the original's 18–33 studs/s), revive rules and run structure (endless, legs of 3 trains) are also decided. The rest of it is proposals awaiting review.
+Pre-production. The [[Game Design Document]] is drafted: core decisions are made (new IP inspired by the 2016 original, 2.5D side-scroller, 1–4 player co-op, runs of trains with a hub, four themes, original-style economy). Player health (100 HP plus the original's toughness spread), movement speed (the original's 18–33 studs/s), revive rules, run structure (endless, legs of 3 trains), squads of up to 3 agents per player, a 6-agent launch roster with 2 free, rotating event trains and co-op leaderboards are also decided. The rest of it is proposals awaiting review.
 
 ## In progress
 - _(nothing yet)_
 
 ## Next up
-- Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions (starting roster, squad size, event weighting, leaderboards).
+- Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions (the 6 launch agents, score formula).
 - Review the [[Wild West Enemies]] roster draft and its open questions. Player HP, toughness and speed are now decided, and charge speeds were raised to match.
 - Name the agency, hub train and agents ([[Title Ideas]]).
 - Define the [[Art Direction]] and add reference images to `05 Assets/References/`.
