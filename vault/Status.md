@@ -18,10 +18,10 @@ Pre-production. The [[Game Design Document]] is drafted: core decisions are made
 
 ## Next up
 - Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions (revive details, train length, roster).
-- Design the Wild West enemy roster (10 slots) for the first playable.
+- Review the [[Wild West Enemies]] roster draft and its open questions (player HP and speed first).
 - Name the agency, hub train and agents ([[Title Ideas]]).
 - Define the [[Art Direction]] and add reference images to `05 Assets/References/`.
-- Build the bootstrap structure in Studio (see `CLAUDE.md` → architecture).
+- Build the bootstrap structure in Studio (see `CLAUDE.md` → architecture). **Only once the design is fully fleshed out.**
 
 ## Known issues / open problems
 - _(none yet)_

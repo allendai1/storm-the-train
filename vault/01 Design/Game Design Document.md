@@ -146,7 +146,7 @@ numbers.
   once. Each new mid is introduced alone as a mini-boss beat.
 - **[decided]** The **first playable has 1 theme: Wild West bandits**. They're the
   most "train" flavoured theme and the most clearly our own IP. The other themes
-  follow once the loop is fun.
+  follow once the loop is fun. The roster draft is in [[Wild West Enemies]].
 
 ## Train events
 **[proposed]**
@@ -226,7 +226,8 @@ party lobby.
   train and the agents ([[Title Ideas]]).
 - Revive details: time window, how long a revive takes, the gem price, and whether
   revives are limited per run.
-- Wild West enemy roster for the 10 slots (light, mid, boss, minion).
+- Review the Wild West roster draft ([[Wild West Enemies]]).
+- Player health pool and movement speed (all enemy damage and speed numbers depend on them).
 - How many hostile trains between checkpoints, and how long is a train?
 - Starting roster size, and which agents are free at launch.
 - Should runs have score leaderboards, and is there a PvP or competitive angle at all?
