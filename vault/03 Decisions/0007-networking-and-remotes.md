@@ -1,6 +1,6 @@
 ---
 tags: [decision, networking, security, remotes]
-status: proposed
+status: accepted
 date: 2026-10-13
 ---
 # 0007 — Networking: remotes, input state and validation

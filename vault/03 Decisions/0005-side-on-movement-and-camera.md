@@ -1,6 +1,6 @@
 ---
 tags: [decision, movement, camera, controls]
-status: proposed
+status: accepted
 date: 2026-10-13
 ---
 # 0005 — Side-on movement lock and camera
@@ -48,9 +48,9 @@ Movement speeds are decided in the GDD: 18–33 studs/s per agent.
     height stays fixed near roof level, with gentle follow on jumps.
   - Each player has their own camera. Teammates off screen get edge-of-screen arrows in
     their player colour.
-- **Falling into a gap** between cars: **[open]** the GDD doesn't say what happens.
-  The proposal is that you reappear on the nearest roof after 1 s and take 15 raw
-  damage. Big Bart's charge can knock players into gaps.
+- **Falling into a gap** between cars (accepted 2026-10-13): you **reappear on the
+  nearest roof after 1 s** and take **15 raw damage**, scaled by toughness like any
+  hit. Big Bart's charge can knock players into gaps.
 
 ## Alternatives considered
 - **A custom character controller with no Humanoid:** the most control, but it breaks

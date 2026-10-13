@@ -1,6 +1,6 @@
 ---
 tags: [decision, trains, world, performance]
-status: proposed
+status: accepted
 date: 2026-10-13
 ---
 # 0009 — Static trains, scrolling world, carriage templates

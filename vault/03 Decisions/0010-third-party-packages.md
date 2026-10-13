@@ -1,6 +1,6 @@
 ---
 tags: [decision, packages, dependencies]
-status: proposed
+status: accepted
 date: 2026-10-13
 ---
 # 0010 — Third-party packages

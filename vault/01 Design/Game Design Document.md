@@ -134,6 +134,8 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
   - **[decided]** The starter agent sits at about **28 studs/s** (the original's free
     agent had 425 px/s). Speed upgrades and the Mayhem speed perk can't push an agent
     past 33.
+  - **[decided]** Falling into a gap between cars puts you back on the nearest roof after
+    1 s, with 15 raw damage ([[0005-side-on-movement-and-camera]]).
   - **[decided]** Enemy attacks meant to be dodged must be **jumped**, not outrun,
     because players outrun nearly everything. Any charge or rush has to be faster than
     33 studs/s or cover the whole carriage.

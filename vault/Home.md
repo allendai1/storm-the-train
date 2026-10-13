@@ -27,12 +27,12 @@ Architecture decision records. Create from [[Templates/Decision|Decision templat
 - [[0002-build-in-place-script-behavior]]
 - [[0003-2.5d-side-scroller]]
 - [[0004-single-place-hub-and-run-modes]] — one place; Hub vs Run mode via reserved servers (accepted)
-- [[0005-side-on-movement-and-camera]] — Z = 0 plane lock, scriptable controls and camera (proposed)
+- [[0005-side-on-movement-and-camera]] — Z = 0 plane lock, scriptable controls and camera (accepted)
 - [[0006-humanoid-enemies-and-combat]] — Humanoid enemies, server hitbox queries, ragdolls (accepted)
-- [[0007-networking-and-remotes]] — remotes list, input state, validation and rate limits (proposed)
+- [[0007-networking-and-remotes]] — remotes list, input state, validation and rate limits (accepted)
 - [[0008-player-data-profilestore]] — ProfileStore, schema v1, receipts, leaderboards (accepted)
-- [[0009-static-trains-scrolling-world]] — anchored trains, client parallax, carriage templates (proposed)
-- [[0010-third-party-packages]] — ProfileStore, Signal, Trove, Promise; no framework (proposed)
+- [[0009-static-trains-scrolling-world]] — anchored trains, client parallax, carriage templates (accepted)
+- [[0010-third-party-packages]] — ProfileStore, Signal, Trove, Promise; no framework (accepted)
 
 ## Devlog
 Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to put them there).
