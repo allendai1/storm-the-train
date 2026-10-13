@@ -124,7 +124,7 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 | Jump / **double jump = spin attack** | Space | A | Jump button |
 | Shoot (aim follows facing, light auto-aim) | Left mouse / J | RT | Shoot button |
 | Swap agent | Q / E | LB / RB | Swipe or swap button |
-| Use gadget (when Mayhem is full) | F | Y | Gadget button |
+| Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad | 3 gadget buttons light up |
 | Interact (free hostage, enter hub pod) | E (context) | X | Context button |
 
 **[proposed]** Aiming is along the facing direction, with optional slight up/down
@@ -191,7 +191,8 @@ numbers.
   enemies.
 - **Mayhem meter.** Kills fill it. When full, you get a free gadget: a drone (turret,
   melee, healer, freeze, defender, smasher), a mech suit, or an air strike. In co-op,
-  each player has their own meter.
+  each player has their own meter. The full design (fill rates, choosing a gadget,
+  drones, mech suits, Air Strike) is in [[Gadgets and Mayhem]] (proposed).
 - **Combo multiplier.** Chained kills multiply score.
 - **Visible armour damage.** Agents' outfits break apart in 3 stages as health drops,
   as cartoon costume damage.
@@ -305,8 +306,9 @@ party lobby.
 - Revive gem price, and what happens to a player who bleeds out (spectate until the
   checkpoint is proposed).
 - Review the Wild West roster draft ([[Wild West Enemies]]).
-- Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula and
-  what the 3 mech suits do.
+- Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
+- Review the gadget and Mayhem draft ([[Gadgets and Mayhem]]).
+- Controls: Swap (Q/E) and Interact (E) share the E key on PC. One of them needs a new key.
 - How is score calculated? It decides the score leaderboard. The combo multiplier,
   kills, train-clear bonuses and no-damage bonuses are candidates.
 

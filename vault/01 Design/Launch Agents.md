@@ -73,7 +73,7 @@ plays to a crowd that isn't there.
     Devastating at short range.
   - **Crowd Pleaser** (Minigun archetype): 6 damage every 0.07 s after a short spin-up.
     It holds a whole carriage.
-- **Gadgets:** Defender Drone, Melee Suit ("the Championship Belt"), Air Strike.
+- **Gadgets:** Defender Drone, Melee Suit ("the Heavyweight": he puts on the Championship Belt and grows into it), Air Strike.
 - **Spin attack:** level 6. It's his signature move.
 - **Perk:** **Feeds off the crowd.** He gains Mayhem when he takes damage (the original's
   "Mayhem from damage taken"). Tanking hits charges his gadget, which suits a front-line
@@ -185,7 +185,7 @@ is the best ride. He takes photos mid-fight.
 - **[proposed] Gem prices:** 80 / 100 / 100 / 150, which is **430 gems** for the paid
   four. This follows the original's tiers (80, 100 and 150). The real prices wait for
   the gem economy.
-- **[proposed] Co-op gadget rules:** the Healer Drone and Heal Suit heal **every
+- **[proposed] Co-op gadget rules** (full gadget design in [[Gadgets and Mayhem]]): the Healer Drone and Heal Suit heal **every
   teammate in range**, not just the owner. The Defender Drone blocks projectiles for
   anyone behind it. This keeps "Better together" true for support agents.
 - **[proposed] DPS reference at weapon level 1.** These are nominal numbers (damage ÷
@@ -232,9 +232,8 @@ These are not part of the launch 6, just for later:
 ## Open questions
 - Final agent names (the current ones are placeholders).
 - Mimi's Invisible Bow needs a charge formula (charge time, minimum and maximum damage).
-- What do the 3 mech suits do exactly? They're named here but not designed.
 
 ## Implementation notes
 _Not built. Design only._
 
-Related: [[Game Design Document]] · [[Wild West Enemies]] · [[Title Ideas]] · [[Home]]
+Related: [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Wild West Enemies]] · [[Title Ideas]] · [[Home]]
