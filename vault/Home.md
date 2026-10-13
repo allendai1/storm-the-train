@@ -9,7 +9,7 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 
 ## Design
 - [[Game Design Document]] — pitch, core loop, pillars, open questions
-- [[Art Direction]] — visual style; consult before any modeling
+- [[Art Direction]] — visual style; consult before any modeling (core choices decided)
 - [[Wild West Enemies]] — the Rattler Gang roster for the first-playable theme (planned)
 - [[Gadgets and Mayhem]] — Mayhem meter, 6 drones, 3 mech suits, Air Strike (planned)
 - [[Score and Combo]] — knockout points, combo multiplier, bonuses, squad and individual boards (planned)
@@ -33,6 +33,7 @@ Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to
 ## Inbox
 Unsorted and proposed ideas go in `00 Inbox/` (`status: proposed`) until they're triaged.
 - [[Title Ideas]] — candidate titles and names for the new IP
+- [[Art Direction Proposal]] — detailed art direction draft: palettes, readability rules, budgets, UI, VFX (proposed)
 
 ## Assets & packages
 - [[Packages]] — third-party Luau libraries in `ReplicatedStorage.Packages`
