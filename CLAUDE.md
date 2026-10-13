@@ -11,7 +11,8 @@ edited directly in Roblox Studio. Claude works on the place through the
 
 This repository holds the project's knowledge, not its code:
 
-- **Obsidian vault** (`vault/`) — design docs, system notes, decisions, devlog.
+- **Obsidian vault** (`vault/`) — persistent project knowledge: status, design,
+  art direction, system notes, decisions, techniques, devlog.
 - **Graphify** (`graphify-out/`) — a knowledge graph built over the vault.
 - This file and Claude Code settings (`.claude/`).
 
@@ -136,38 +137,84 @@ ServerStorage                  -- server-only assets and modules
 - Data persistence goes through a single server module wrapping DataStores (session
   locking, retries, `BindToClose` saves). Never call DataStores ad hoc.
 
-## Obsidian vault (`vault/`)
+## Obsidian knowledge management
 
-The vault is the project's design memory and — because code lives in Studio, not in
-git — the **only versioned description of the codebase**. Open `vault/` as a vault in
-Obsidian. Claude reads and writes it as plain Markdown.
+### Knowledge base
+
+The Obsidian vault is the **`vault/` folder at the root of this repository**
+(e.g. `C:\Users\<you>\...\storm-the-train\vault` on Windows). Open that folder
+as a vault in Obsidian. Claude reads and writes it as plain Markdown with its
+normal file tools — it does not need Obsidian running.
+
+**Use this vault as persistent knowledge across development sessions.** Because the
+code lives in Studio rather than git, the vault is also the **only versioned
+description of the codebase**. Keeping it in the repo means every session — local
+or cloud — sees the same notes.
 
 ```
 vault/
-├── Home.md                 # entry point / map of content — start here
-├── 00 Inbox/               # unsorted ideas and notes
-├── 01 Design/              # game design doc, core loop, mechanics, economy
+├── Home.md                 # entry point / map of content — links to everything
+├── Status.md               # project overview, current development status, known issues
+├── 00 Inbox/               # unsorted / proposed ideas awaiting triage
+├── 01 Design/              # GDD, feature specs, Art Direction
 ├── 02 Systems/             # one note per code system (Studio path, API, remotes)
 ├── 03 Decisions/           # architecture decision records (ADRs)
-├── 04 Devlog/              # dated session logs (YYYY-MM-DD.md)
-├── 05 Assets/              # assets, packages and their sources
-└── Templates/              # note templates (System, Decision, Devlog)
+├── 04 Devlog/              # dated logs of meaningful sessions (YYYY-MM-DD.md)
+├── 05 Assets/              # packages, asset tracking, References/ (reference images)
+├── 06 Techniques/          # reusable how-tos, e.g. Blender modeling techniques
+└── Templates/              # note templates (System, Feature, Decision, Devlog, Technique)
 ```
 
-1. **Read before designing.** Before implementing or changing a feature, read
-   `vault/Home.md` and the relevant `01 Design/` and `02 Systems/` notes.
-2. **Keep systems notes in sync with Studio.** When you add or materially change a
-   service/controller, create or update its note in `02 Systems/` from
-   `Templates/System.md`: Studio path (e.g. `ServerScriptService.Server.Services.TrainService`),
-   purpose, public API, remotes, data, dependencies. Link it from `Home.md`.
-3. **Record decisions.** Non-trivial architecture or design choices get an ADR in
-   `03 Decisions/` (`NNNN-short-title.md`, from `Templates/Decision.md`).
-4. **Log sessions.** At the end of a meaningful session, append to today's
-   `04 Devlog/YYYY-MM-DD.md`: what changed in Studio, what's next, open questions,
-   and whether the place still needs saving/publishing.
-5. Use `[[wikilinks]]` between notes and YAML frontmatter (`tags`, `status`) so
-   Graphify and Obsidian's graph view can connect them.
-6. Don't edit `vault/.obsidian/` beyond the shared config already committed.
+### At the start of each session
+
+- Read `vault/Status.md` (project overview and current development status) and
+  `vault/Home.md`.
+- **Search for relevant notes before implementing a new feature**: `/graphify query`
+  if the graph exists, otherwise grep the vault for the feature's names and keywords
+  (and follow `[[wikilinks]]` from `Home.md`). Check `01 Design/` for the spec and
+  `02 Systems/` for affected systems.
+- **Consult `01 Design/Art Direction.md` and the reference images in
+  `05 Assets/References/` before any 3D modeling**, mesh/material generation, or
+  inserting assets — and check `06 Techniques/` for established Blender methods.
+- **Load only the notes relevant to the task.** Don't read the whole vault.
+
+### During development
+
+- Document important architecture decisions as ADRs in `03 Decisions/`
+  (`NNNN-short-title.md`, from `Templates/Decision.md`).
+- Update feature specs in `01 Design/` when designs change.
+- Keep `02 Systems/` notes in sync with Studio: when you add or materially change a
+  service/controller, create or update its note from `Templates/System.md` (Studio
+  path such as `ServerScriptService.Server.Services.TrainService`, purpose, public API,
+  remotes, data, dependencies) and link it from `Home.md`.
+- Record reusable Blender modeling techniques in `06 Techniques/`
+  (from `Templates/Technique.md`).
+- Track implementation progress and unresolved problems in `Status.md`.
+- **Avoid duplicate notes**: search for an existing note on the topic first and
+  extend it instead.
+
+### At the end of each task
+
+- Update affected notes with **confirmed** changes only (things verified in Studio).
+- Summarize important decisions and their reasoning (in the ADR or feature note).
+- Record unfinished tasks and known issues in `Status.md`, and note whether the place
+  still needs saving/publishing in Studio.
+- **Distinguish proposed ideas from implemented features** using the frontmatter
+  `status` field: `proposed` → `planned` → `in-progress` → `implemented`
+  (or `deprecated`). Unapproved ideas live in `00 Inbox/` with `status: proposed`.
+- For a meaningful session, add a short entry to `04 Devlog/YYYY-MM-DD.md`.
+
+### Memory rules
+
+- Do not document every conversation.
+- Save information that will be useful in future sessions.
+- Prefer updating existing notes rather than creating new ones.
+- **Ask before overwriting major design decisions** (GDD, Art Direction, accepted
+  ADRs). Supersede an ADR with a new one rather than rewriting it.
+- **Never store credentials, API keys, cookies, or other secrets** in the vault.
+- Use `[[wikilinks]]` and YAML frontmatter (`tags`, `status`) so Graphify and
+  Obsidian's graph view can connect notes.
+- Don't edit `vault/.obsidian/` beyond the shared config already committed.
 
 ## Graphify (knowledge graph)
 
