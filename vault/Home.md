@@ -13,7 +13,7 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 - [[Wild West Enemies]] — the Rattler Gang roster for the first-playable theme (proposed)
 - [[Gadgets and Mayhem]] — Mayhem meter, 6 drones, 3 mech suits, Air Strike (planned)
 - [[Score and Combo]] — knockout points, combo multiplier, bonuses, squad and individual boards (planned)
-- [[Economy and Monetization]] — currencies, earn rates, prices, boosters, Robux products (proposed)
+- [[Economy and Monetization]] — currencies, earn rates, prices, boosters, Robux products (planned)
 - [[Launch Agents]] — the 6 launch agents: loadouts, speed/toughness, theme matchups (planned; names are placeholders)
 - Feature specs: create from [[Templates/Feature|Feature template]]
 

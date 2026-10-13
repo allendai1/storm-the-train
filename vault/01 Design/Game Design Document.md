@@ -261,9 +261,13 @@ targets) is in [[Economy and Monetization]].
 ## Monetization
 - **[decided]** In the **original's style**: premium currency buys agents and
   boosters, and coins buy upgrades.
-- **[proposed]** Gem packs (Developer Products), a starter pack, a "Launch Squad"
-  Game Pass for the 4 paid launch agents, revive-for-gems, cosmetic skins, and a
-  cosmetic first-purchase gift. Details are in [[Economy and Monetization]].
+- **[decided]** The Robux products are gem packs (Developer Products), a one-per-account
+  **Starter Pack**, a **Launch Squad** Game Pass for the 4 paid launch agents, and a
+  **Coin Bonus** Game Pass (×1.5 coin pickups). Gems buy revives and cosmetic skins.
+  There are **no ads** and no first-purchase gift. Prices and details are in
+  [[Economy and Monetization]].
+- **[decided]** Carried blueprints are lost if the squad wipes before banking them. The
+  medbay heals to full for free at every checkpoint.
 - **[proposed]** Guardrails, because this is co-op:
   - Paid power should never make a teammate's run worse.
   - Paid boosters affect only the buyer. A gems booster doesn't change your
@@ -327,7 +331,6 @@ party lobby.
 - Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
 - Playtest the score values and the 2.5 s combo window ([[Score and Combo]]).
-- Review the economy draft ([[Economy and Monetization]]): Robux prices, blueprint loss
-  on a wipe, free medbay, rewarded ads.
+- Tune the economy ([[Economy and Monetization]]): Robux prices and earn rates.
 
 Related: [[Home]] · [[Status]] · [[Art Direction]] · [[Original Game]] · [[0003-2.5d-side-scroller]]

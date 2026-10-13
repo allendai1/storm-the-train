@@ -18,7 +18,7 @@ Pre-production. The [[Game Design Document]] is drafted: core decisions are made
 
 ## Next up
 - Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions.
-- Review the [[Economy and Monetization]] draft: Robux prices, blueprint loss on a wipe, free medbay, rewarded ads, Coin Bonus pass.
+- [[Economy and Monetization]]: the key choices are decided (lose carried blueprints on a wipe, free medbay, no ads, products: gem packs, Starter Pack, Launch Squad and Coin Bonus). Prices and earn rates still need tuning.
 - [[Score and Combo]]: the leaderboard rules are decided (squad and individual boards, unboosted score, gem-revived runs count). Point values still need a playtest.
 - [[Launch Agents]]: the six concepts are accepted (names are placeholders). Still open: the Invisible Bow's charge formula.
 - [[Gadgets and Mayhem]]: the key rules are decided (pick your gadget, one Air Strike per party, the Healer pauses bleed-out, mech upgrades add duration only). Fill rates and armour still need a playtest.

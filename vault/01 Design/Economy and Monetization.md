@@ -1,12 +1,13 @@
 ---
 tags: [design, feature, economy, monetization, progression, boosters]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Economy and Monetization
 
-> **Status: proposed.** This is Claude's draft of currencies, earn rates, prices, boosters,
-> the surplus shop and Robux products, for review. The [[Game Design Document]] has already
+> **Status: planned.** This is Claude's draft of currencies, earn rates, prices, boosters,
+> the surplus shop and Robux products. The developer settled its key choices on
+> 2026-10-13 (marked **[decided]**). Prices and earn rates are still proposals to tune. The [[Game Design Document]] has already
 > decided on an **original-style** economy and monetization: gems buy agents and
 > boosters, and coins buy upgrades. This note fills in the numbers and the co-op rules.
 > Prices with a source are the original's defaults
@@ -76,7 +77,7 @@ blueprint unlocks**.
   The target is **about 1 blueprint per train** per player.
 - **[proposed] Personal loot.** When a carrier is knocked out, every player in the run
   gets the blueprint. Nobody fights over drops.
-- **[proposed] Bank them or lose them.** Blueprints you carry are **banked at the next
+- **[decided] Bank them or lose them.** Blueprints you carry are **banked at the next
   checkpoint**. If the squad wipes before then, carried blueprints are lost. That puts
   real weight on the **cash out or continue** choice at each checkpoint. (The original
   also banked blueprints at the hub train.)
@@ -168,16 +169,19 @@ offer buys every level up to the one shown.
   players try agents before saving up for them.
 
 ## Hub services
-- **[proposed] The medbay heals to full for free** at every checkpoint. The original
+- **[decided] The medbay heals to full for free** at every checkpoint. The original
   charged an unknown price, but checkpoints are only every ~8 minutes, and a paid heal in
   co-op would split squads into "can afford it" and "can't".
 
 ## Robux products
 ### Game Passes (one-time)
+**[decided]** The products are gem packs, the Launch Squad pass, the Starter Pack and the
+Coin Bonus pass. Prices are still proposed.
+
 | Pass | Robux | What it gives | Note |
 |---|---|---|---|
 | **Launch Squad** | 799 | Turbo, Nana, Mimi and Zorp | Clearly named as the **launch** agents, so it isn't misleading when new agents arrive. If you already own some of them, you get their gem price back |
-| **Coin Bonus** *(optional)* | 399 | Permanent ×1.5 coins from pickups | A common Roblox pass. Progress-only and personal. Decide whether it fits the original-style plan |
+| **Coin Bonus** | 399 | Permanent ×1.5 coins from pickups | Progress-only and personal. It stacks with the Coins booster (×1.5 × ×3 at most) |
 
 ### Developer Products (repeatable or limited)
 | Product | Robux | What it gives |
@@ -186,17 +190,15 @@ offer buys every level up to the one shown.
 | **Starter Pack** (one per account) | 199 | 150 gems, 10,000 coins, and an exclusive Dash skin |
 
 ### Other
-- **[proposed] First-purchase gift:** any first purchase also grants an **exclusive
-  cosmetic skin**. That's the original's "Bob for any purchase" idea, but cosmetic, so
-  it isn't paid power.
+- **[decided] No first-purchase gift.** The original's "Bob for any purchase" idea isn't
+  carried over.
 - **[proposed] Private servers are free.** Runs already use reserved servers. Free private
   servers make it easy for friends to play, and drive engagement.
 - **[proposed] Premium Payouts.** Roblox pays developers for time Premium subscribers
   spend in the experience. That favours long, friendly co-op sessions over aggressive
   sales.
-- **[proposed] Rewarded video ads** (Roblox's ad products), only where Roblox allows
-  them for that user: watch an ad for **one free revive per run**, matching the
-  original's "REVIVE FOR FREE". Check the current eligibility and age rules first.
+- **[decided] No ads.** No rewarded video ads, not even for a free revive. Revives come
+  from teammates or gems only.
 
 ## Earn-rate targets (for tuning)
 | Milestone | Target play time |
@@ -232,11 +234,8 @@ _Not started._
 
 ## Open questions
 - Is the Robux pricing right? Pack sizes, about 2.4 Robux per gem, and Launch Squad at 799.
-- Should there be a **Coin Bonus** Game Pass, or no permanent passes besides Launch Squad?
-- Is "lose carried blueprints on a wipe" too harsh for younger players? A gentler
-  option is losing half.
-- Should the medbay always be free?
-- Rewarded ads for a free revive, yes or no?
+- Does the Coin Bonus pass need the earn-time targets retuned? Payers would max gear
+  about a third faster.
 - Should rewards go to a free daily login streak? The original didn't have one.
 
 ## Implementation notes
