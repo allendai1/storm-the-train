@@ -19,7 +19,7 @@ Pre-production. The [[Game Design Document]] is drafted: core decisions are made
 ## Next up
 - Review the remaining **[proposed]** sections of the [[Game Design Document]] and resolve its open questions (score formula).
 - [[Launch Agents]]: the six concepts are accepted (names are placeholders). Still open: the Invisible Bow's charge formula.
-- Review the [[Gadgets and Mayhem]] draft: Mayhem fill rates, choosing a gadget, drones, mech suits and the Air Strike.
+- [[Gadgets and Mayhem]]: the key rules are decided (pick your gadget, one Air Strike per party, the Healer pauses bleed-out, mech upgrades add duration only). Fill rates and armour still need a playtest.
 - Review the [[Wild West Enemies]] roster draft and its open questions. Player HP, toughness and speed are now decided, and charge speeds were raised to match.
 - Name the agency, hub train and agents ([[Title Ideas]]).
 - Define the [[Art Direction]] and add reference images to `05 Assets/References/`.

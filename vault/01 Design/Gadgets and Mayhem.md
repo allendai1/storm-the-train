@@ -1,12 +1,13 @@
 ---
 tags: [design, feature, gadgets, mayhem, mechs, drones, balance]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Gadgets and Mayhem
 
-> **Status: proposed.** This is Claude's draft of the Mayhem meter, the 6 drones, the 3 mech
-> suits and the Air Strike, for review. The [[Game Design Document]] already says that
+> **Status: planned.** This is Claude's draft of the Mayhem meter, the 6 drones, the 3 mech
+> suits and the Air Strike. The developer settled its key rules on 2026-10-13. Those
+> lines are marked **[decided]**, and the rest are still proposals. The [[Game Design Document]] already says that
 > kills fill a per-player Mayhem meter and a full meter gives a free gadget. Everything
 > below adds detail to that. Durations come from the original's gadget table
 > ([[Original Game - Items and Economy]] §5). Damage, armour and fill numbers are new
@@ -56,7 +57,7 @@ gadgets you can pick.
   so you can save a full meter for the right moment, for example the next train's boss.
 
 ## Deploying a gadget
-- **[proposed] You choose which gadget.** When the meter is full, the active agent's 3
+- **[decided] You choose which gadget.** When the meter is full, the active agent's 3
   gadget slots light up:
   - **PC:** keys **1 / 2 / 3**. **F** repeats your last pick.
   - **Gamepad:** **D-pad** left / up / right.
@@ -71,7 +72,8 @@ gadgets you can pick.
   - while the theme is changing,
   - **one drone per player** at a time ("DRONE ALREADY ACTIVE"),
   - no new gadget while you're **in a mech suit**,
-  - one Air Strike per player at a time.
+  - **[decided] one Air Strike per party** at a time. While a teammate's strike is
+    incoming, your Air Strike slot shows "STRIKE INCOMING" and your meter stays full.
 - **[proposed] Swapping and gadgets.**
   - A **drone stays** when you swap agents. It belongs to the player, not the agent.
   - **You can't swap while in a mech suit.** The suit is that agent's.
@@ -152,7 +154,7 @@ and can't be damaged. **[proposed]** Their weapon numbers are below.
 ### Healer Drone
 - Heals **2 HP per second** to you and **every teammate within 10 studs**. That's about
   30 HP over its full duration at L1, and about 57 at L10.
-- **[proposed] It pauses the bleed-out timer** of a downed teammate in its range. It
+- **[decided] It pauses the bleed-out timer** of a downed teammate in its range. It
   can't revive them, but it buys time.
 
 ## Mech suits
@@ -177,8 +179,8 @@ Deploying a mech suit puts your agent inside it for its duration.
 | **Melee Suit** (Brick's Heavyweight) | 350 → 23 | 200 | **Spinning foam-finger arms** ("WE'RE #1"): 12 damage every 0.1 s at melee range, with strong knockback | **Body slam**: a ground pound that knocks lights off the train | Heavy gravity (3.5): falls fast and slams hard |
 | **Heal Suit** (Nana's Rocking Chair Mech) | 450 → 30 | 150 | **Knitting-needle beam**: 15 damage every 0.25 s to enemies | **Healing ring**: heals teammates in 12 studs for 15 HP | Heals nearby teammates 3 HP/s, and **revives downed teammates in 0.5 s** instead of 2 s |
 
-\*Armour is in raw damage points: a light punch takes 3. Armour doesn't change with the
-suit's level. Upgrades add duration only, as in the original.
+\*Armour is in raw damage points: a light punch takes 3. **[decided]** Armour doesn't change
+with the suit's level. Upgrades add **duration only**, as in the original.
 
 The original's Melee Suit used **twin rotating saw blades**. Those become foam fingers
 here, to fit "Silly, never mean".
@@ -186,6 +188,7 @@ here, to fit "Silly, never mean".
 ## Air Strike
 - **3-second countdown** with a target marker on the carriage, then planes or drones
   make a **bombing run along your carriage and half of each neighbouring one**.
+- **[decided] One per party at a time**, so stacked strikes can't nuke a boss.
 - **200 damage** to every enemy caught in it (the original's value). **[proposed]** Bosses
   take **100**. No friendly fire, and hostages are never hit.
 - One level and never upgraded, as in the original. Every agent who has it gets the same
@@ -222,13 +225,8 @@ See [[Art Direction]] (still empty).
   voice, and a bark for each agent entering their mech.
 
 ## Open questions
-- Is choosing your gadget (1/2/3) the right call, or should a full meter grant a
-  specific gadget, as the original seems to have done?
 - Are the Mayhem fill values and the 45–60 s target right? They need a playtest.
-- Should the Air Strike be limited to **one per party** at a time, so 4 strikes can't
-  stack on a boss?
-- Should the Healer Drone's pause on bleed-out stay, or does it make revives too easy?
-- Mech armour values (100 / 150 / 200): should armour also scale with the suit's level?
+- Mech armour values (100 / 150 / 200): playtest them. They don't scale with level.
 
 ## Implementation notes
 _Not built. Design only._

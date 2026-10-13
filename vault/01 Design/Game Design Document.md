@@ -192,7 +192,9 @@ numbers.
 - **Mayhem meter.** Kills fill it. When full, you get a free gadget: a drone (turret,
   melee, healer, freeze, defender, smasher), a mech suit, or an air strike. In co-op,
   each player has their own meter. The full design (fill rates, choosing a gadget,
-  drones, mech suits, Air Strike) is in [[Gadgets and Mayhem]] (proposed).
+  drones, mech suits, Air Strike) is in [[Gadgets and Mayhem]].
+  **[decided]** You pick 1 of your active agent's 3 gadgets. One Air Strike per party at a
+  time. Mech upgrades add duration only.
 - **Combo multiplier.** Chained kills multiply score.
 - **Visible armour damage.** Agents' outfits break apart in 3 stages as health drops,
   as cartoon costume damage.
@@ -307,7 +309,7 @@ party lobby.
   checkpoint is proposed).
 - Review the Wild West roster draft ([[Wild West Enemies]]).
 - Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
-- Review the gadget and Mayhem draft ([[Gadgets and Mayhem]]).
+- Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
 - Controls: Swap (Q/E) and Interact (E) share the E key on PC. One of them needs a new key.
 - How is score calculated? It decides the score leaderboard. The combo multiplier,
   kills, train-clear bonuses and no-damage bonuses are candidates.
