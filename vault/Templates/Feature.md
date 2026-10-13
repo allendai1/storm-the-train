@@ -18,6 +18,10 @@ _What the feature is and why it exists._
 ## Systems involved
 - [[ ]]
 
+## Studio build list
+_GUIs, models and map pieces to build in the place **before** scripting._
+- [ ] 
+
 ## Art & audio needs
 - _See [[Art Direction]]._
 

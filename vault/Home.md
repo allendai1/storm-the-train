@@ -17,6 +17,7 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].
 - [[0001-studio-first-with-studio-mcp]]
+- [[0002-build-in-place-script-behavior]]
 
 ## Devlog
 Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to put them there).
