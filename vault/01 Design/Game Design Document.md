@@ -144,7 +144,7 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 | Jump / **double jump = spin attack** | Space | A | Jump button |
 | Shoot (aim follows facing, light auto-aim) | Left mouse / J | RT | Shoot button |
 | Swap agent | Q / E | LB / RB | Swipe or swap button |
-| Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad (Y repeats the last pick) | 3 gadget buttons light up |
+| Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad (Y repeats the last pick) | Tap the glowing Mayhem ring, then 1 of 3 |
 | Interact (free hostage, grab keys, enter a carriage or hub pod) | W (or ↑) | X | Context button |
 
 **[decided]** Interact moved from E to **W / ↑**, so E stays "swap to next agent". In a

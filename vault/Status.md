@@ -35,8 +35,13 @@ session with the Studio MCP connected.
 - **M0 Bootstrap** in Studio: server/client bootstraps, Remotes, Constants and Types (see
   `CLAUDE.md` → architecture). This needs a local session; cloud sessions can't reach
   Studio.
-- Review the UI mockups in Figma (linked in [[Art Direction]] §10): PC HUD, mobile HUD
-  and run end.
+- Figma UI mockups (linked in [[Art Direction]] §10). These are done: PC HUD, mobile
+  HUD, run end, Party Lobby, Squad Select and Armory. The Figma Starter plan's
+  tool-call limit was hit, so these are still to do:
+  - swap both HUDs to the decided Mayhem ring (left edge, gadget fan; teammate rings
+    glow when ready),
+  - Boosters, Checkpoint (continue or cash out), Surplus Shop, Missions and daily
+    challenge, Store and Exchange, Downed and Squad Wiped, and Leaderboards screens.
 - Add reference images to `05 Assets/References/` (the list is in [[Art Direction]] §13)
   before modelling starts in M1.
 - Name the agency, hub train, agents and gang ([[Title Ideas]]).

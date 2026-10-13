@@ -61,7 +61,12 @@ gadgets you can pick.
   gadget slots light up:
   - **PC:** keys **1 / 2 / 3**. **F** repeats your last pick.
   - **Gamepad:** **D-pad** left / up / right.
-  - **Mobile:** three gadget buttons light up in an arc around the shoot button.
+  - **Mobile:** tap your **glowing Mayhem ring** on the left edge, and the 3 gadgets fan
+    out beside it.
+  - **[decided] Display:** your meter is a **ring on the left edge** that fills clockwise
+    and **glows when full**. On PC the 3 gadgets fan out from it with their 1/2/3 keys.
+    Teammates' meters are thin rings around their portraits that glow when ready, so a
+    squad can see who has a gadget up. See [[Art Direction]] §10.
 
   The original seems to have handed you a specific free gadget ("FULL MAYHEM GIVES YOU A
   FREE GADGET. GRAB IT NOW!"). Choosing is more interesting and suits a squad game.

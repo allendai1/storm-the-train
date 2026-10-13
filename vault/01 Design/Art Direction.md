@@ -182,21 +182,32 @@ Mimi's beret is a pink-leaning red so it doesn't read as gang red.
   PC.
 - HUD colours follow the colour language above. Player-colour frames show who's who.
 - **[proposed] Mockups:** [Train Runner — UI Mockups (Figma)](https://www.figma.com/design/dYELw7ZfOV3nZAh34vtCtL).
-  It has three screens: the PC in-run HUD, the mobile landscape HUD (844×390 pt) and
-  the run-end screen. They use a colour variable collection that mirrors this note, and
-  7 reusable components: AgentPortrait, HealthBar, GadgetSlot, TeammateCard,
-  TouchButton, Button and PlayerRow.
+  It has the PC in-run HUD, the mobile landscape HUD (844×390 pt), the run-end screen,
+  Party Lobby, Squad Select (Barracks) and Armory. They use a colour variable collection
+  that mirrors this note, plus reusable HUD and hub components (portrait, health bar,
+  gadget slot, teammate card, Mayhem ring, touch button, header, agent card, item row,
+  booster card, offer card, mission row, product card, party slot and others).
   - Nunito stands in for Builder Sans, which Figma doesn't have.
   - The characters are placeholder blocks.
   - The proposed HUD layout:
-    - **top-left:** player panel (portrait, HP, a 10-chip Mayhem meter, squad
-      strip) and teammate cards,
+    - **top-left:** player panel (portrait, HP, squad strip) and teammate cards,
+    - **[decided] left edge, centred vertically: your Mayhem ring.** This idea comes
+      from the original game's circular gauge. A gold arc fills clockwise from the top
+      as you get knockouts, and the whole ring **glows** when it's full. The 3 gadget
+      choices then **fan out from the ring**. This replaces a Mayhem bar and a
+      bottom-centre gadget row.
+    - **[decided] Teammates' Mayhem is a thin ring around their portrait** on their
+      teammate card, which **glows when their gadget is ready**. It isn't shown as a
+      bar.
     - **top-centre:** train progress (leg, train, next event),
     - **top-right:** score, combo badge and currencies,
-    - **bottom-centre:** the gadget picker, shown only when Mayhem is full.
   - On mobile, move is bottom-left. Shoot, jump and swap are bottom-right, plus a
-    context button (Revive, Keys, Hostage) that only appears when needed. The gadget row
-    sits low, so it never covers enemies.
+    context button (Revive, Keys, Hostage) that only appears when needed. The Mayhem ring
+    sits on the left edge above the move buttons. Tap it when it glows, and the 3
+    gadgets fan out beside it.
+  - **Mockup status:** the Figma file still shows the older Mayhem bar and gadget row on
+    the two HUD screens. The ring component exists, and the teammate cards already have
+    it. Swapping the HUDs over was cut short by the Figma Starter plan's tool-call limit.
   - These are the reference for building the ScreenGuis in `StarterGui`.
 
 ## 11. Technical budgets (starting targets; verify in Studio on a mid-range phone)
