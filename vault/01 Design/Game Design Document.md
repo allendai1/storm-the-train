@@ -120,12 +120,16 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
 
 | Action | Keyboard/mouse | Gamepad | Mobile |
 |---|---|---|---|
-| Move | A / D | Left stick | Left/right buttons |
+| Move | A / D (or ← / →) | Left stick | Left/right buttons |
 | Jump / **double jump = spin attack** | Space | A | Jump button |
 | Shoot (aim follows facing, light auto-aim) | Left mouse / J | RT | Shoot button |
 | Swap agent | Q / E | LB / RB | Swipe or swap button |
-| Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad | 3 gadget buttons light up |
-| Interact (free hostage, enter hub pod) | E (context) | X | Context button |
+| Use gadget (when Mayhem is full; pick 1 of the active agent's 3) | 1 / 2 / 3 (F repeats the last pick) | D-pad (Y repeats the last pick) | 3 gadget buttons light up |
+| Interact (free hostage, grab keys, enter a carriage or hub pod) | W (or ↑) | X | Context button |
+
+**[proposed]** Interact moved from E to **W / ↑**, so E stays "swap to next agent". In a
+side-scroller, up is the natural "go in / use" key, and W is otherwise unused because
+movement is on one axis. Nothing on PC shares a key now.
 
 **[proposed]** Aiming is along the facing direction, with optional slight up/down
 mouse aim on PC. Mobile buttons can be repositioned, as in the original.
@@ -195,7 +199,8 @@ numbers.
   drones, mech suits, Air Strike) is in [[Gadgets and Mayhem]].
   **[decided]** You pick 1 of your active agent's 3 gadgets. One Air Strike per party at a
   time. Mech upgrades add duration only.
-- **Combo multiplier.** Chained kills multiply score.
+- **Combo multiplier.** Chained kills multiply score, up to ×6. Score, combo and bonuses
+  are drafted in [[Score and Combo]] (proposed).
 - **Visible armour damage.** Agents' outfits break apart in 3 stages as health drops,
   as cartoon costume damage.
 
@@ -310,8 +315,7 @@ party lobby.
 - Review the Wild West roster draft ([[Wild West Enemies]]).
 - Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
-- Controls: Swap (Q/E) and Interact (E) share the E key on PC. One of them needs a new key.
-- How is score calculated? It decides the score leaderboard. The combo multiplier,
-  kills, train-clear bonuses and no-damage bonuses are candidates.
+- Review the score draft ([[Score and Combo]]), including whether score boosters and
+  gem revives should count on leaderboards.
 
 Related: [[Home]] · [[Status]] · [[Art Direction]] · [[Original Game]] · [[0003-2.5d-side-scroller]]
