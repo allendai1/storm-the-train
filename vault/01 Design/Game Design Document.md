@@ -238,7 +238,9 @@ numbers.
 ## Progression & economy
 **[decided]** **Original-style** economy and monetization.
 
-**[proposed]** The structure, adapted from [[Original Game - Items and Economy]]:
+**[proposed]** The structure is below, adapted from [[Original Game - Items and Economy]].
+The full draft (earn rates, prices, boosters, surplus shop, Robux products, earn-time
+targets) is in [[Economy and Monetization]].
 - **Coins** are the soft currency. You earn them in runs and missions, and spend them
   on weapon and gadget upgrades (L2–L10) and some boosters. As a baseline, the original
   costs ran from 1,000 to 14,000 per level, for 51,400 in total per item.
@@ -248,8 +250,9 @@ numbers.
 - **Blueprints** gate each upgrade level. Enemies "steal" them, and you recover them
   in runs and bank them at the hub. Unlocks are weighted towards gear you own and
   your lowest-level items.
-- **Boosters**: up to 3 per train, for score, Mayhem, coins, damage, health, gems and
-  magnet.
+- **Boosters**: up to 3 at a time, for score, Mayhem, coins, damage, health, gems and
+  magnet. Each lasts for the next **leg** (3 trains), because checkpoints come every 3
+  trains.
 - **Missions**: 3 active at once, rerollable or skippable. There are also daily
   challenge chains per agent.
 - **Surplus shop**: a rotating gem shop selling upgrade levels with "no blueprints
@@ -258,13 +261,15 @@ numbers.
 ## Monetization
 - **[decided]** In the **original's style**: premium currency buys agents and
   boosters, and coins buy upgrades.
-- **[proposed]** Gem packs (Developer Products), a starter pack, an "unlock all agents"
-  bundle (Game Pass), revive-for-gems, cosmetic skins and costume agents.
+- **[proposed]** Gem packs (Developer Products), a starter pack, a "Launch Squad"
+  Game Pass for the 4 paid launch agents, revive-for-gems, cosmetic skins, and a
+  cosmetic first-purchase gift. Details are in [[Economy and Monetization]].
 - **[proposed]** Guardrails, because this is co-op:
   - Paid power should never make a teammate's run worse.
   - Paid boosters affect only the buyer. A gems booster doesn't change your
     teammates' damage.
-  - Damage and health boosters have a party-wide cap.
+  - Damage and health boosters have a party-wide cap: in a party, at most +50% damage
+    and ×0.67 damage taken. The strongest tiers are solo only.
   - Free players can earn every agent through play, more slowly.
 - **[proposed]** **Roblox policy:** any paid random item, such as a random booster offer
   bought with Robux-bought gems, must disclose odds. Keep paid offers deterministic,
@@ -322,5 +327,7 @@ party lobby.
 - Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
 - Playtest the score values and the 2.5 s combo window ([[Score and Combo]]).
+- Review the economy draft ([[Economy and Monetization]]): Robux prices, blueprint loss
+  on a wipe, free medbay, rewarded ads.
 
 Related: [[Home]] · [[Status]] · [[Art Direction]] · [[Original Game]] · [[0003-2.5d-side-scroller]]
