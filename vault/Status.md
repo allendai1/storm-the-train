@@ -25,15 +25,16 @@ Three things are not settled yet:
   lighting, which waits for a mobile test. No reference images yet,
 - **number tuning**, which needs playtests. The original's numbers are loose reference only.
 
-**M0 Bootstrap and M1 Session 2 are built** in Studio (place `71855801375130`). You can
-walk, jump and spin along a greybox 7-car train with a side-on camera and scrolling desert.
-**Next step: Session 3** of [[First Playable (M1)]] (Dash agent rig, weapons, crates,
-combat), from a local Claude Code session with the Studio MCP connected.
+**M0 and M1 Sessions 2–3 are built** in Studio (place `71855801375130`). You play as a
+greybox Dash Daring on a 7-car train, with the Service Rifle (mouse to fire and aim), the
+Pocket Rocket from personal weapon crates, and the spin attack. Health is in attributes.
+**Next step: Session 4** of [[First Playable (M1)]] (enemy templates, EnemyService,
+SpawnService), from a local Claude Code session with the Studio MCP connected.
 
 ## In progress
-- [[First Playable (M1)]]: Sessions 1 and 2 are done. Systems: [[ModeService]], [[Guard]],
-  [[TrainService]], [[CharacterService]], [[InputController]], [[CameraController]] and
-  [[ParallaxController]].
+- [[First Playable (M1)]]: Sessions 1–3 are done. Systems: [[ModeService]], [[Guard]],
+  [[TrainService]], [[CharacterService]], [[InputController]], [[CameraController]],
+  [[ParallaxController]], [[CombatService]], [[PickupService]] and [[EffectsController]].
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
@@ -46,13 +47,13 @@ combat), from a local Claude Code session with the Studio MCP connected.
   - Studio settings (§5).
 - **Install Signal and Trove** into `ReplicatedStorage.Packages` and record them in
   [[Packages]]. This is the last Session 1 item; nothing needs them yet.
-- **Session 3**: the Dash Daring agent template (with `Hitbox`), weapons, PickupService,
-  CombatService and EffectsController. Its loose ends from Session 2:
-  - gap-fall damage,
-  - sending `RequestSpin` from InputController,
-  - reading `Speed` from the agent instead of `FALLBACK_AGENT_SPEED`.
-- **Review the greybox carriages and background layers** in Studio
-  (`ServerStorage.Assets.Carriages.WildWest`, `ReplicatedStorage.Assets.Backgrounds.WildWest`).
+- **Session 4:** enemy templates (Models tagged `Enemy`, with a `Health` attribute and a
+  `Hitbox` in `Hitboxes`, which is the contract CombatService already hits), EnemyService
+  (it ragdolls on `Health` = 0) and SpawnService. Also from Session 3: a weapon-crate drop
+  on Big Bart's knockout (`PickupService`).
+- **Review the greybox carriages, background layers, Dash, weapons and effects** in Studio
+  (`ServerStorage.Assets.Carriages.WildWest`, `ReplicatedStorage.Assets.Backgrounds.WildWest`,
+  `ReplicatedStorage.Assets.Agents`, `.Weapons`, `.Pickups` and `.Effects`).
   Adjust them by hand if you like; the scripts only read their tags and attributes.
 - Figma UI mockups (linked in [[Art Direction]] §10). These are done: PC HUD, mobile
   HUD, run end, Party Lobby, Squad Select and Armory. The Figma Starter plan's
@@ -75,13 +76,15 @@ combat), from a local Claude Code session with the Studio MCP connected.
 
 ## Known issues / open problems
 - The place template's default `Workspace.SpawnLocation` (under the caboose) and the
-  `Baseplate` are still there:
-  - players spawn on `StagingSpawn` through `RespawnLocation`,
-  - the Desert background layer covers the baseplate,
-  - deleting both is recommended, but it's your call.
+  `Baseplate` are still there. Neither does anything now: agents spawn by script, and the
+  Desert layer covers the baseplate. Deleting both is recommended, but it's your call.
+- Open tuning questions from Session 3:
+  - Does a direct rocket hit taking splash too (26 total) feel right?
+  - The Pocket Rocket's `Range` 60 is a guess.
+  - `AIM_MAX_ANGLE` 30° is a guess.
 - On the caboose, the roof overhangs the rear porch by 1 stud, so jump from the porch's
   outer edge to reach the roof. Check how this feels in the Session 6 playtest.
 
 ## Unsaved work in Studio
-- **2026-10-13: the M0 bootstrap and the Session 2 build need a save or publish**
+- **2026-10-13: the M0 bootstrap and the Session 2–3 builds need a save or publish**
   (File → Publish to Roblox), unless you've saved since.

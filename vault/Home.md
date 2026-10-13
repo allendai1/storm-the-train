@@ -29,6 +29,9 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 - [[InputController]] — keyboard movement, facing, jump, double-jump spin (implemented)
 - [[CameraController]] — side-on Scriptable camera (implemented)
 - [[ParallaxController]] — client-side scrolling background strips (implemented)
+- [[CombatService]] — server fire loop, hitscan + rockets, spin, damage, Effects (implemented)
+- [[PickupService]] — personal weapon crates, plus PickupController (implemented)
+- [[EffectsController]] — tracers, rockets, explosions, sparks, KO pops (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].

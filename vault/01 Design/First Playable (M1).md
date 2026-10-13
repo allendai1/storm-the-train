@@ -192,26 +192,26 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   and desert strips ([[Art Direction]] §2).
 
 ### Session 3 — Dash, weapons, crates, combat
-- [ ] **Agent template** `ReplicatedStorage.Assets.Agents.DashDaring`: an R15 rig with
+- [x] **Agent template** `ReplicatedStorage.Assets.Agents.DashDaring`: an R15 rig with
   Attributes `Speed = 28.3`, `Toughness = 0.52`, `SpinLevel = 4`,
   `PrimaryWeapon = "ServiceRifle"`, `SecondaryWeapon = "PocketRocket"`. It has an
   invisible `Hitbox` part.
-- [ ] **Weapon templates** in `ReplicatedStorage.Assets.Weapons`: `ServiceRifle`
+- [x] **Weapon templates** in `ReplicatedStorage.Assets.Weapons`: `ServiceRifle`
   and `PocketRocket`, each with a `Muzzle` attachment and Attributes `Damage`,
   `FireInterval`, `Range`, `ProjectileSpeed`, `SplashRadius`, `SplashDamage`.
-- [ ] **`CombatService`:**
+- [x] **`CombatService`:**
   - `SetInput` drives the server's fire loop at each weapon's interval.
   - Hitscan uses `workspace:Raycast` against `Hitboxes`.
   - Rockets are server-simulated, with splash.
   - Spin attack via `RequestSpin`.
   - Damage is scaled by toughness, and health lives in Attributes.
   - Visuals go out on the batched `Effects` event.
-- [ ] **`PickupService`:**
+- [x] **`PickupService`:** _(mid-knockout drop → Session 4, with Big Bart)_
   - Spawns `WeaponCrate` per player at `WeaponCrateSpot`s, from the template
     `ReplicatedStorage.Assets.Pickups.WeaponCrate`.
   - Toggles the active weapon on touch (checked by server proximity).
   - Respawns crates after 20 s, and drops one on a mid knockout.
-- [ ] **`EffectsController`:** tracers, the rocket visual, explosions, hit sparks
+- [x] **`EffectsController`:** tracers, the rocket visual, explosions, hit sparks
   and knockout number pops. Effect templates go in `ReplicatedStorage.Assets.Effects`.
   Particles and flashes are generated in code; that's allowed for effects
   (`CLAUDE.md`). Note it in the system's note.
@@ -308,5 +308,18 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   - the agent rig and the `Hitbox` part move to the Session 3 agent template, and so do
     gap-fall damage and sending `RequestSpin`,
   - touch input comes with `TouchControlsGui` (Session 5).
+- **Session 3, 2026-10-13: done, except the mid-knockout crate drop** (no mids exist until
+  Session 4).
+  - Built: the Dash Daring R15 agent template with a Hitbox, both weapon templates, the
+    WeaponCrate template, the effect templates and a query-only `Projectiles` collision
+    group.
+  - Systems: [[CombatService]], [[PickupService]] (+ PickupController and
+    `Shared.WeaponCrates`) and [[EffectsController]]. [[CharacterService]],
+    [[InputController]] and [[CameraController]] were extended.
+  - The crate rules are built as proposed (personal crates, a 20 s respawn, and each train
+    starting on the primary weapon).
+  - A playtest against a temporary dummy enemy checked the rocket and rifle damage and
+    cadence, release, the spin, gap-fall damage and a crate pickup, with no script
+    errors.
 
 Related: [[Game Design Document]] · [[Wild West Enemies]] · [[Launch Agents]] · [[Art Direction]] · [[0004-single-place-hub-and-run-modes]] · [[0005-side-on-movement-and-camera]] · [[0006-humanoid-enemies-and-combat]] · [[0007-networking-and-remotes]] · [[0009-static-trains-scrolling-world]] · [[Home]]

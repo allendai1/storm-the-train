@@ -18,7 +18,8 @@ ratio.
 - Nothing. Runtime-generated content: _none_
 
 ## Public API
-None.
+- `CameraController.shake(amount: number)`: a jitter of up to `amount` studs that decays at
+  `CAMERA_SHAKE_DECAY` (3 studs/s). Explosions use `EXPLOSION_SHAKE` (0.5).
 
 ## Remotes
 None.

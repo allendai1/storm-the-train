@@ -6,7 +6,7 @@ side: client
 # InputController
 
 ## Purpose
-Turns keyboard input into side-on movement ([[0005-side-on-movement-and-camera]]). Movement
+Turns keyboard and mouse input into side-on movement and the combat input state ([[0005-side-on-movement-and-camera]]). Movement
 modes are `Scriptable`, so nothing moves the character unless this controller does.
 
 ## Code
@@ -24,7 +24,8 @@ and jump presses.
 ## Remotes
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
-| `RequestSpin` | client → server | none | **Not sent yet.** Session 3 adds the `FireServer` call (marked in `jump()`) and CombatService's handler |
+| `SetInput` | client → server (unreliable) | `fire`, `aim` | See [[CombatService]] |
+| `RequestSpin` | client → server | none | See [[CombatService]] |
 
 ## Data / state
 - Bound to RenderStep `SideOnInput` at `RenderPriority.Input`.
@@ -35,7 +36,16 @@ and jump presses.
   - in the air: a **spin**, once per airborne stretch and no faster than
     `SPIN_COOLDOWN` (0.6 s). It sets the upward velocity for a `SPIN_LIFT` of 4 studs
     (the measured jump plus spin rise was 10.8).
-- It clears held keys when the window loses focus.
+- **Left mouse button held:** fire. **Aim** is the mouse's up/down angle from the root
+  on the Z = 0 plane, as −1..1 of `AIM_MAX_ANGLE` (30°), rounded to `AIM_STEP` (0.05).
+  It's 0 without a mouse.
+- **SetInput is sent:**
+  - on a trigger change,
+  - on an aim change, at most every `INPUT_SEND_INTERVAL` (0.05 s),
+  - and resent every `INPUT_RESEND_INTERVAL` (0.5 s), because the remote is unreliable
+    and a lost release must recover.
+- `RequestSpin` is sent with each spin.
+- It clears held keys and the trigger when the window loses focus.
 
 ## Depends on
 - `Shared.Constants`
@@ -43,4 +53,5 @@ and jump presses.
 ## Notes
 - No gamepad yet. Add `Thumbstick1`/`ButtonA` if console is in scope.
 - Verified 2026-10-13 in a playtest: holding D for 0.5 s moved about 16.5 studs facing
-  +X. The jump, the spin and the ignored third press all behaved as above.
+  +X. The jump, the spin and the ignored third press all behaved as above. In Session 3,
+  a mouse hold fired both weapons and a release stopped them.
