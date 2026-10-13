@@ -13,7 +13,8 @@ updated: 2026-10-13
 
 ## Summary
 M2 turns one train into the real **run loop**:
-1. Players gather on the **hub train** (Hub mode), form a party and teleport into a
+1. Players gather on the **hub train** (Hub mode), form a party on a **queue pad**
+   ([[Queue Pads]]) and teleport into a
    **reserved Run server** ([[0004-single-place-hub-and-run-modes]]).
 2. They fight through **legs of 3 trains**, **leaping** from engine to caboose
    between trains.
@@ -29,7 +30,7 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 ## Scope
 | In M2 | Still later |
 |---|---|
-| Hub mode: `Map.Hub` hub train, Barracks pod (squad select), Party pod (party lobby), PLAY SOLO | Armory, Surplus, Missions and Store pods (M4); they're built as closed pods ("COMING SOON") |
+| Hub mode: `Map.Hub` hub train, Barracks pod (squad select), **queue pads** (squad pads plus a solo pad, [[Queue Pads]]) | Armory, Surplus, Missions and Store pods (M4); they're built as closed pods ("COMING SOON") |
 | Teleport to a reserved Run server, then back to the hub. Party roster in MemoryStore | Cross-server quick-join (later) |
 | Endless runs: **legs of 3 trains**, leaps, a run-long difficulty ramp | Boss every 2nd leg, hostage, survival (M3) |
 | Leg layout: Normal, Normal, **Thief train** (placeholder for the event slot) | Real event rotation (M3) |
@@ -196,10 +197,12 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   the **gadget fan**, from the Figma components `HUD/MayhemRing` and `HUD/GadgetSlot`.
 
 ### Session 12 — Hub mode and teleport
-- [ ] **`Workspace.Map.Hub`:** the walkable hub train, with Barracks and Party pods and
-  the closed M4 pods.
-- [ ] **`PartyService`:** form, invite and leave a party, plus same-server quick-join
-  and PLAY SOLO. Remote `PartyAction`.
+- [ ] **`Workspace.Map.Hub`:** the walkable hub train, with the Barracks pod, the
+  **queue pads** (`QueuePads`, tagged `QueuePad`; see [[Queue Pads]] → Studio build list)
+  and the closed M4 pods.
+- [ ] **`QueuePadService`:** pad membership by server zone checks, the countdowns, LEAVE
+  (remote `RequestLeavePad`), and departure → teleport flow. It replaces the old
+  `PartyService` invite menu and PLAY SOLO (decided 2026-10-13).
 - [ ] **Teleport flow:**
   1. `ReserveServer` gives an access code and a private server ID.
   2. Write the MemoryStore record `{ mode="Run", partyUserIds }`.
@@ -208,8 +211,9 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 
   After the run, the party goes back to a reserved **Hub-mode** server, or solo
   players to a public hub.
-- [ ] **GUIs:** `PartyGui` (the Figma Party Lobby), a loading or teleport screen, and the
-  Hub HUD (coins, the PLAY button).
+- [ ] **GUIs:** `QueueGui` ("BOARDING… n" and LEAVE), each pad's hand-built sign, a
+  loading or teleport screen, and the Hub HUD (coins). The Figma Party Lobby screen is
+  dropped.
 
 ### Session 13 — Full-loop playtest
 - [ ] **Publish a test place.** Teleports and reserved servers don't work in Studio
@@ -223,11 +227,11 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 
 ## Systems involved (create notes in `02 Systems/` as each is built)
 - **Server, new:** PlayerDataService, ScoreService, CheckpointService, SquadService
-  (extended), MayhemService, GadgetService, PartyService, TeleportFlow (part of
+  (extended), MayhemService, GadgetService, QueuePadService, TeleportFlow (part of
   ModeService).
 - **Server, extended:** TrainService, SpawnService, PickupService.
 - **Client:** CheckpointController, SquadController, MayhemController (ring and fan),
-  PartyController, LoadingController, plus updates to HudController.
+  QueuePadController, LoadingController, plus updates to HudController.
 
 ## Playtest questions (what M2 must answer)
 1. Does a 2-leg run (about 15 min) keep its energy? Is the per-train ramp right?
@@ -241,9 +245,6 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
    rejoining and server shutdowns?
 
 ## Open questions
-- **Queue pads vs the Party pod menu** (raised 2026-10-13): should the hub form parties with
-  physical pads instead of, or alongside, `PartyGui`'s invite flow? The proposal is in
-  [[Queue Pads]] (recommended: pads replace the invite menu).
 - A **tie = continue** rule for the vote, and the **90 s AFK safeguard**: OK?
 - Should a player who **joins mid-run** be possible at all? Proposed: no. Run servers
   are locked to the party roster.

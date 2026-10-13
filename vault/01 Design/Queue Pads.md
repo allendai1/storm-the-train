@@ -1,15 +1,14 @@
 ---
 tags: [feature, hub, matchmaking, party, m2]
-status: proposed
+status: planned
 updated: 2026-10-13
 ---
 # Queue Pads — a physical party lobby in the hub
 
-> **Status: proposed.** The developer asked for this on 2026-10-13, as a roadmap item and
-> not urgent. It's the *physical* way to form a party in the hub. It overlaps the M2 plan's
-> **Party pod** (an invite and quick-join menu, `PartyService` + `PartyGui`) in
-> [[Loop (M2)]]. Decide whether pads **replace** that menu or **sit alongside** it before
-> M2's hub sessions start (see Open questions).
+> **Status: planned (M2).** The developer asked for this on 2026-10-13. **[decided]
+> 2026-10-13: pads replace the M2 Party pod's invite and quick-join menu** (`PartyGui`,
+> `PartyAction`) as the way to form a party in the hub. The solo pad replaces PLAY SOLO.
+> It's built in [[Loop (M2)]] Session 12. Numbers are first guesses.
 
 ## Summary
 Players form a squad by **standing on the same pad** in the hub. Each pad shows its
@@ -77,13 +76,9 @@ _Build these in the place before scripting (`CLAUDE.md`)._
 - A bell or whistle on departure, a click when stepping on, and a countdown tick.
 
 ## Open questions
-- **Replace or add?** Should pads **replace** the M2 Party pod's invite and quick-join
-  menu, or sit **alongside** it?
-  - *Recommendation:* pads become the main way to form a party (they're simpler to
-    build, more social, and easy on mobile).
-  - Friends who aren't in the same server can still use Roblox's own join and invite
-    features to get into your hub server first. That would cut `PartyGui`'s invite flow
-    from M2.
+- ~~Replace or add?~~ **[decided] Replace.** Pads are the only party-forming flow in the
+  hub. Friends in other servers use Roblox's own join and invite features to reach your
+  hub server first.
 - Should a pad be **lockable** (friends only, or a private pad for a group)? *Proposed:*
   not at first.
 - Should players who are AFK on a pad be removed? *Proposed:* yes, after 60 s with no

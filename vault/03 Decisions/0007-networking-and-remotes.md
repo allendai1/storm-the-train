@@ -59,6 +59,10 @@ carries only `fire: boolean`. The `aim` scalar is gone from the client and the s
 and the server fires along the character's facing. The rest of this decision is
 unchanged.
 
+**Amendment (2026-10-13):** parties now form on physical queue pads ([[Queue Pads]]), so
+the planned hub remote `PartyAction` is replaced by `RequestLeavePad` (no payload, 2/s).
+Joining a pad is a server-side zone check, so it needs no remote.
+
 ## Alternatives considered
 - **One remote per shot:** precise, but heavy and easy to spam. Input state plus
   server-side fire intervals removes both problems.

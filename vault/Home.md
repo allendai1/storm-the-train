@@ -11,6 +11,7 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 - [[Game Design Document]] — pitch, core loop, pillars, open questions
 - [[Art Direction]] — visual style, palettes, readability rules, budgets; consult before any modeling (planned)
 - [[Loop (M2)]] — M2 spec and Studio checklist, sessions 7–13 (planned)
+- [[Queue Pads]] — physical party lobby in the hub: step on a pad, countdown, the pad's squad teleports together; replaces the party menu (planned, M2)
 - [[Writing and Dialogue]] — voice rules, barks, announcements, tutorial, missions, challenge chains (proposed)
 - [[First Playable (M1)]] — M0+M1 spec and Studio build checklist, in session order (planned)
 - [[Wild West Enemies]] — the Rattler Gang roster for the first-playable theme (planned)
@@ -59,7 +60,6 @@ Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to
 ## Inbox
 Unsorted and proposed ideas go in `00 Inbox/` (`status: proposed`) until they're triaged.
 - [[Title Ideas]] — candidate titles and names for the new IP
-- [[Queue Pads]] — physical party lobby: step on a pad, countdown, the pad's squad teleports together (proposed, M2 roadmap)
 
 ## Assets & packages
 - [[Packages]] — third-party Luau libraries in `ReplicatedStorage.Packages`

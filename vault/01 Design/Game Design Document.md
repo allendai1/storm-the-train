@@ -200,7 +200,8 @@ buttons can be repositioned, as in the original.
     space first.
 - **[decided]** Solo play is the same game with a 1-player party. Enemy spawn budget
   and caps scale with party size.
-- **[decided]** Matchmaking: parties are formed on the hub, with quick-join for open
+- **[decided]** Matchmaking: parties are formed on the hub by standing on **queue pads**
+  ([[Queue Pads]], decided 2026-10-13; they replace a party menu), with quick-join for open
   slots. The run takes place in a reserved server, with Teleport from the lobby place.
   The hub and runs are **one place in two modes** ([[0004-single-place-hub-and-run-modes]]).
 

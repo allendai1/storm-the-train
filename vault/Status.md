@@ -81,8 +81,6 @@ the keyboard.
 - Add reference images to `05 Assets/References/` (the list is in [[Art Direction]] §13)
   before modelling starts in M1.
 - Name the agency, hub train, agents and gang ([[Title Ideas]]).
-- Decide on [[Queue Pads]] (proposed, M2 roadmap): physical boarding pads in the hub that
-  replace or sit alongside the M2 Party pod menu.
 - Design leftovers:
   - Mimi's Invisible Bow charge formula ([[Launch Agents]]).
   - The exact knock-out ragdoll limits (GDD → Tone).
@@ -99,9 +97,8 @@ the keyboard.
 - Open tuning questions from Session 3:
   - Does a direct rocket hit taking splash too (26 total) feel right?
   - The Pocket Rocket's `Range` 60 is a guess.
-  - Mouse aim was removed (2026-10-13), so shots go straight along the facing. Can you
-    still hit enemies on a lower or higher carriage? Only the rifle's 6° auto-aim helps
-    there.
+  - Mouse aim was removed and the rifle's 6° auto-aim is kept (decided 2026-10-13). Check
+    in the playtest that enemies on lower or higher carriages are still hittable.
 - Session 4 is not checked yet:
   - the Rodeo Kid leap by eye,
   - Dan's knockout blast hurting other enemies,
