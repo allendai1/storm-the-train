@@ -104,7 +104,7 @@ _Not started._
 - [ ] Run-end screen: squad score, per-player breakdown and callouts.
 
 ## Open questions
-- Are run-end coins tied to score at all? That's for the economy pass.
+- Run-end coins: proposed as 1 coin per 25 points of personal score in [[Economy and Monetization]].
 - Is the 2.5 s combo window too tight on mobile? Playtest it.
 
 ## Implementation notes
