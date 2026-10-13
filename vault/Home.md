@@ -24,6 +24,11 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 One note per code system in Studio (path, API, remotes). Create from [[Templates/System|System template]].
 - [[ModeService]] — Hub vs Run mode, plus the server/client bootstraps (implemented)
 - [[Guard]] — remote validation and rate limiting (implemented)
+- [[TrainService]] — builds the 7-car train from carriage templates (implemented)
+- [[CharacterService]] — side-on character setup, plane lock, gap falls, movement validation (implemented)
+- [[InputController]] — keyboard movement, facing, jump, double-jump spin (implemented)
+- [[CameraController]] — side-on Scriptable camera (implemented)
+- [[ParallaxController]] — client-side scrolling background strips (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].

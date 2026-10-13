@@ -167,7 +167,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   `Scriptable`. Default jump and controls are off.
 
 ### Session 2 — Train, movement, camera
-- [ ] **Carriage templates** in `ServerStorage.Assets.Carriages.WildWest`: Caboose,
+- [x] **Carriage templates** in `ServerStorage.Assets.Carriages.WildWest`: Caboose,
   Boxcar, Flatbed, CattleCar, WaterTanker, Engine. Greybox is fine.
   - Each is a Model, with its `PrimaryPart` at the rear coupling.
   - Attributes: `Length`, `CarriageType`, `Theme`.
@@ -175,20 +175,20 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   - Attachments tagged `EnemySpawn` (2–3 each) and `WeaponCrateSpot` (Boxcar and
     CattleCar).
   - The Engine's roof also has the tag `TrainGoal`.
-- [ ] **`Workspace.Map.Run`:** a staging platform behind the caboose spot, with a
+- [x] **`Workspace.Map.Run`:** a staging platform behind the caboose spot, with a
   SpawnLocation.
-- [ ] **`TrainService`:** assembles the 7-car train from the templates
+- [x] **`TrainService`:** assembles the 7-car train from the templates
   ([[0009-static-trains-scrolling-world]]), and rebuilds it on PLAY AGAIN.
-- [ ] **`CharacterService`:** puts each player in the agent rig and adds the Z = 0
+- [x] **`CharacterService`:** puts each player in the agent rig and adds the Z = 0
   plane lock. It sets WalkSpeed and JumpHeight from the agent's Attributes, adds the
   Hitbox part, and validates movement ([[0005-side-on-movement-and-camera]]).
-- [ ] **Client controllers:**
+- [x] **Client controllers:**
   - `InputController`: keyboard, mouse and touch → `Humanoid:Move`, facing, jump and
     double-jump.
   - `CameraController`: side-on, FOV about 40°, about 70 studs wide, leads in the
     facing direction.
   - `ParallaxController`: the Wild West background strips.
-- [ ] **Background:** `ReplicatedStorage.Assets.Backgrounds.WildWest`, with sky, mesa
+- [x] **Background:** `ReplicatedStorage.Assets.Backgrounds.WildWest`, with sky, mesa
   and desert strips ([[Art Direction]] §2).
 
 ### Session 3 — Dash, weapons, crates, combat
@@ -299,5 +299,14 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
   = false` and Scriptable movement were checked in the Server datamodel. Signal and Trove
   aren't installed yet (nothing uses them). `Shared.Types` has no `InputState`, since
   `SetInput` sends scalars (ADR 0007). Systems: [[ModeService]], [[Guard]].
+- **Session 2, 2026-10-13: done.** Greybox carriage templates, `Map.Run.Staging`
+  (platform, `StagingSpawn`, buffer stop) and the `TrainStart` marker, plus five greybox
+  Wild West background layers. Systems: [[TrainService]], [[CharacterService]],
+  [[InputController]], [[CameraController]] and [[ParallaxController]]. A playtest checked
+  the train build, speed, jump, spin, gap-fall recovery, teleport set-back, the Z lock, the
+  camera and scrolling, with no script errors. Deferred, because they need later sessions:
+  - the agent rig and the `Hitbox` part move to the Session 3 agent template, and so do
+    gap-fall damage and sending `RequestSpin`,
+  - touch input comes with `TouchControlsGui` (Session 5).
 
 Related: [[Game Design Document]] · [[Wild West Enemies]] · [[Launch Agents]] · [[Art Direction]] · [[0004-single-place-hub-and-run-modes]] · [[0005-side-on-movement-and-camera]] · [[0006-humanoid-enemies-and-combat]] · [[0007-networking-and-remotes]] · [[0009-static-trains-scrolling-world]] · [[Home]]
