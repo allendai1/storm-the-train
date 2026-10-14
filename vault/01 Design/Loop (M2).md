@@ -158,19 +158,19 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   (the Figma run-end mockup).
 
 ### Session 9 — Multi-train runs, leaps, checkpoints
-- [ ] **`TrainService`:** build the next train ahead with the leap gap, destroy the old
+- [x] **`TrainService`:** build the next train ahead with the leap gap, destroy the old
   train, and handle the leg structure and the Thief train.
-- [ ] **Spawn timeline continuity** across trains, with the per-train ramp.
-- [ ] **Checkpoint train template** `ServerStorage.Assets.Trains.HubCheckpoint`:
+- [x] **Spawn timeline continuity** across trains, with the per-train ramp.
+- [x] **Checkpoint train template** `ServerStorage.Assets.Trains.HubCheckpoint`:
   Medbay, Barracks pod, and closed pods for Armory, Surplus and Missions. Built by hand
   in the Agency's navy and gold ([[Art Direction]] §6).
-- [ ] **`CheckpointService`:** arrival, heal, commits, first-time Brick grant, majority
+- [x] **`CheckpointService`:** arrival, heal, commits, first-time Brick grant, majority
   vote (tie = continue), AFK safeguard, departure.
-- [ ] **GUIs:**
+- [x] **GUIs:**
   - `CheckpointGui`: vote buttons, each player's vote state, and the "waiting for…"
     list,
   - an update to `HudGui`'s train progress ("LEG 2 · TRAIN 2/3", next event).
-- [ ] **Remote:** `RequestCheckpointChoice` (`"Continue" | "CashOut"`), validated and
+- [x] **Remote:** `RequestCheckpointChoice` (`"Continue" | "CashOut"`), validated and
   rate-limited ([[0007-networking-and-remotes]]).
 
 ### Session 10 — Agent swap and Brick
@@ -264,5 +264,25 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
       target is per player,
     - run coins are the attribute `RunCoins`; saving comes in Session 7,
     - callouts are TOP SCORE, MOST KOs, MEDIC and COLLECTOR, at most one per player.
+- **Session 9, 2026-10-14: done.**
+  - Built: the `HubCheckpoint` train (Medbay and Barracks pods plus 3 closed pods, as a
+    backdrop behind the walkway), `CheckpointGui`, and the remote
+    `RequestCheckpointChoice`.
+  - Systems:
+    - [[TrainService]]: `buildNext`, `PreviousTrain` and `dropPrevious`,
+    - [[SpawnService]]: per-train timelines, the Plateau ramp and Thief trains,
+    - [[RunStateService]]: the leap, checkpoint and vote states. The planned
+      `CheckpointService` is folded in here,
+    - helpers `CharacterService.placeNear`, `SquadService.heal` and
+      `PickupService.resetCrates`,
+    - CheckpointController,
+    - the HUD title "LEG n · TRAIN k/3 · NEXT: …".
+  - Decisions made while building:
+    - later trains play a 60 s Plateau (the duration is a first guess),
+    - train 1 no longer has the M1 blueprint thief (thieves are the Thief train's event),
+    - every new train resets crates and the primary weapon,
+    - bled-out players stay out until the checkpoint heal.
+  - Verified with one player: all of Leg 1 → checkpoint (heal, vote UI) → CONTINUE →
+    Leg 2. Cash-out isn't verified yet. Details are in [[RunStateService]].
 
 Related: [[First Playable (M1)]] · [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Score and Combo]] · [[Economy and Monetization]] · [[Writing and Dialogue]] · [[0004-single-place-hub-and-run-modes]] · [[0008-player-data-profilestore]] · [[Home]]

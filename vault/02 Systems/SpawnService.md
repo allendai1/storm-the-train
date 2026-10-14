@@ -29,8 +29,16 @@ Plays the M1 **spawn timeline** ([[First Playable (M1)]] → Spawn timeline):
 - Remote `Announce`.
 
 ## Public API
-- `SpawnService.begin()`: plays the timeline, yielding until it ends or `stop()` is
-  called. Each call gets a new run id; an older timeline stops at its next step.
+- `SpawnService.begin(trainNumber, thief)`: plays **one train's** timeline, yielding until
+  it ends or `stop()` is called. Each call gets a new run id; an older timeline stops at its
+  next step.
+  - Train 1 plays `Phases` (the M1 table).
+  - Every later train plays `Plateau` (60 s, lights, Bart as `Extra` halfway through),
+    with its `Cap` × min(`CapRampMax` 2, 1 + `CapRampPerTrain` 0.1 × (n − 1)) and its
+    `Interval` × (1 − `IntervalRampPerTrain` 0.05 × (n − 1)), floored at `IntervalMin` 2 s.
+  - A Thief train spawns `ThiefTrainThieves` (2) blueprint thieves, spread evenly through
+    the timed phases, each with **BLUEPRINT THIEF!**. Non-thief trains have none (M2's
+    leg layout; the M1 60 s thief is gone).
 - `SpawnService.stop()`: ends the current timeline and sets `TimelineDone = false` (wipe,
   PLAY AGAIN).
 
@@ -60,7 +68,8 @@ Plays the M1 **spawn timeline** ([[First Playable (M1)]] → Spawn timeline):
   (`COOP_SCALE`, `ENEMY_SPAWN_MIN_DISTANCE`)
 
 ## Notes
-- [[RunStateService]] starts it at ALL ABOARD (Session 5). It no longer starts itself.
+- [[RunStateService]] starts it at each train (M2 Session 9). Combat time pauses during
+  leaps and checkpoints, because no timeline runs then.
 - Phase timing runs on the clock: if every player is down, waves spawn nothing but the
   phases still advance.
 - "Never on screen" isn't enforced. The camera is about 70 studs wide, so a spawn 20
