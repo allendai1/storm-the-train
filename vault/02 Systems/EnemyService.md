@@ -142,3 +142,7 @@ template and gravity, `P`, `A`, `N` and `X` (see [[CombatService]]).
   (an interpretation of the spec).
 - Ragdolls fade on the server: 4 transparency steps replicated. Move that to the clients if
   the Session 6 budget check flags it.
+- **Fixed 2026-10-14:** Big Bart's Humanoid had `AutomaticScalingEnabled` on with
+  BodyHeightScale 1.15 (left by `ScaleTo`). That re-scaled the already-scaled rig at spawn,
+  so his hitbox was about 2.8 × 7.5 in play. It's now off, and a spawned clone keeps
+  2.4 × 6.5.

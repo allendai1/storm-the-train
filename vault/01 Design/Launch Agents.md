@@ -234,6 +234,9 @@ These are not part of the launch 6, just for later:
 - Mimi's Invisible Bow needs a charge formula (charge time, minimum and maximum damage).
 
 ## Implementation notes
+- **M2 Session 10 (2026-10-14):** Dash and Brick are built as greybox templates with these
+  stats ([[AgentService]]). Brick's hitbox (2 × 6.3) and spin numbers (9 / 6 studs for level
+  6) are first guesses. The swap cooldown is 1.5 s, as proposed.
 _Not built. Design only._
 
 Related: [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Wild West Enemies]] · [[Title Ideas]] · [[Home]]

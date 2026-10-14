@@ -39,6 +39,7 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 - [[SquadService]] — downed, revive, bleed-out, wipe, player colour slots (implemented)
 - [[HudController]] — HUD, touch controls and run-end screen controllers (implemented)
 - [[ScoreService]] — score, combo multiplier, assists, flat bonuses (implemented)
+- [[AgentService]] — owned agents, squad, swap, Barracks squad select (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].

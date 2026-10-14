@@ -174,13 +174,13 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   rate-limited ([[0007-networking-and-remotes]]).
 
 ### Session 10 — Agent swap and Brick
-- [ ] **Agent template** `ReplicatedStorage.Assets.Agents.BrickBroadsley` and weapon
+- [x] **Agent template** `ReplicatedStorage.Assets.Agents.BrickBroadsley` and weapon
   templates `Scattergun` and `CrowdPleaser`.
-- [ ] **`SquadService`:** swap with cooldown, the per-agent active weapon, and stats
+- [x] **`SquadService`:** swap with cooldown, the per-agent active weapon, and stats
   re-applied on swap (WalkSpeed, toughness, hitbox).
-- [ ] **HUD squad strip** (3 portraits; the active one highlighted). **Remote:**
+- [x] **HUD squad strip** (3 portraits; the active one highlighted). **Remote:**
   `RequestSwap(direction)`.
-- [ ] Barracks pod **squad select** GUI, following the Figma mockup. It uses
+- [x] Barracks pod **squad select** GUI, following the Figma mockup. It uses
   `EquipSquad`, validated against `OwnedAgents`.
 
 ### Session 11 — Mayhem and gadgets
@@ -283,6 +283,23 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
     - every new train resets crates and the primary weapon,
     - bled-out players stay out until the checkpoint heal.
   - Verified with one player: all of Leg 1 → checkpoint (heal, vote UI) → CONTINUE →
-    Leg 2. Cash-out isn't verified yet. Details are in [[RunStateService]].
+    Leg 2. Details are in [[RunStateService]].
+- **Session 10, 2026-10-14: done.**
+  - Built: the `BrickBroadsley` agent and the `Scattergun` and `CrowdPleaser` weapons;
+    `SquadGui` (Barracks); the HUD `SquadStrip` and `TutorialHint`; the touch
+    `SwapButton`; and the remotes `RequestSwap` and `EquipSquad`.
+  - Systems:
+    - **[[AgentService]]** (the spec's "SquadService" — renamed, because that name is the
+      revive service) plus SquadController,
+    - `CharacterService.swapTo`,
+    - pellets, spin-up and per-agent spin in [[CombatService]].
+  - **Controls now match the GDD:** Space = jump, W/↑ = Interact, Q/E = swap.
+  - Verified with one player:
+    - Brick was granted at the first checkpoint and E swapped to him,
+    - the Barracks re-ordered the squad,
+    - **cash-out** → CASHED OUT! results (Session 9's open item),
+    - Scattergun 5 pellets / 0.45 s, Crowd Pleaser 0.6 s spin-up then 0.07 s.
+  - Fixed: Humanoid automatic scaling had been re-scaling the pre-scaled rigs (Brick, Bart)
+    and their hitboxes.
 
 Related: [[First Playable (M1)]] · [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Score and Combo]] · [[Economy and Monetization]] · [[Writing and Dialogue]] · [[0004-single-place-hub-and-run-modes]] · [[0008-player-data-profilestore]] · [[Home]]

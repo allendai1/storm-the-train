@@ -60,3 +60,8 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
     (0.3 s) for revives ([[SquadService]]).
   - While `Downed` or `BledOut`, movement and jumping stop.
   - The touch axis adds to the keys, and touch fire ORs with the mouse.
+- **M2 Session 10 (2026-10-14): the keys now match the GDD controls table.** Space jumps
+  (W/↑ no longer jump). **W / ↑ held = Interact** (revive, and opening the Barracks via
+  SquadController). **Q / E = swap** (`RequestSwap` −1/+1). New
+  `InputController.swap(direction)` for the touch SWAP button. The revive prompt now reads
+  "HOLD W".

@@ -80,3 +80,11 @@ None. `RequestSpin` is handled by [[CombatService]].
     1.4 s,
   - a 40-stud client teleport was set back within 0.4 s,
   - a 3-stud Z push returned to Z 0.
+- **M2 Session 10 (2026-10-14):**
+  - `spawn()` uses the first agent of the Player attribute `Squad` (Dash if none) and sets
+    Health to full. `onCharacter` no longer resets Health, so swaps keep it.
+  - New `CharacterService.swapTo(player, agent)`: it clones the agent where the old rig's
+    feet are, with the same facing, and destroys the old rig.
+  - Characters carry the `AgentId` attribute. `onCharacter` sets `ActiveAgent` and equips
+    the agent's remembered weapon (`Weapon_<AgentId>`) or its primary.
+  - New `CharacterService.placeNear(player, x)` (Session 9, carrying players across leaps).

@@ -95,3 +95,16 @@ the layout follows the written §10 description. Check the GUIs against Figma by
 - The active weapon is text, not an icon. Icons come with art.
 - **Still to come:** the Mayhem ring and gadget fan (M2), and score, combo and currencies
   (M2).
+- **M2 Sessions 8–10 (2026-10-14):**
+  - The **ScorePanel** shows the score, coins and combo badge; **BonusPop** shows flat
+    bonuses.
+  - The **TrainProgress** title reads "LEG n · TRAIN k/3 · NEXT: …", or "LEG n ·
+    CHECKPOINT".
+  - The **PlayerPanel** name and initial follow `ActiveAgent` (the template's
+    `DisplayName`).
+  - **SquadStrip**: one portrait per squad agent; the active one has the player colour.
+  - **TutorialHint** shows the Player attribute `TutorialHint`.
+  - The downed panel also shows during a Leap.
+  - **CheckpointController** (Session 9) drives `CheckpointGui`. **SquadController**
+    (Session 10) drives `SquadGui`; see [[AgentService]].
+  - **Touch:** a `SwapButton`, and the context button reads SQUAD at the Barracks.

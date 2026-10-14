@@ -117,3 +117,17 @@ Session 5). Both react to `Health` reaching 0.
 - No lag compensation (ADR 0006). The airborne check for the spin could reject a spin made
   right after take-off under lag. Watch for this in multi-client tests.
 - Downed players have Health 0, which already blocks firing and spinning ([[SquadService]]).
+- **M2 Session 10 (2026-10-14):**
+  - **Weapon template attributes** add `Pellets`, `Spread`, `CloseDamage`, `CloseRange` and
+    `SpinUp` (`Types.WeaponStats`).
+  - **Scattergun:** 5 straight pellets spread evenly over 10°, with no auto-aim. 12 damage
+    each, or 16 within 6 studs; range 14; every 0.45 s. Verified: 5 tracers per shot,
+    about 0.45 s apart.
+  - **Crowd Pleaser:** it only fires after the trigger has been held for `SpinUp` (0.6 s).
+    `heldSince` is set when `SetInput` goes from false to true. Then 6 damage every 0.07 s,
+    range 40, auto-aim 4°. Verified: first shot 0.68 s after the press, 0.070 s apart.
+  - **Spin** uses the character's `SpinDamage` and `SpinRadius` (Dash 6/5, Brick 9/6), with
+    `Constants` as the fallback.
+  - `setWeapon` also records `Weapon_<AgentId>`, so each agent remembers its weapon across
+    swaps.
+  - Firing is skipped while the Player attribute `InMech` is set (Session 11).
