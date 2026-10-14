@@ -25,21 +25,25 @@ Three things are not settled yet:
   lighting, which waits for a mobile test. No reference images yet,
 - **number tuning**, which needs playtests. The original's numbers are loose reference only.
 
-**M0 and M1 Sessions 2–5 are built** in Studio (place `71855801375130`). **The full M1 loop
-plays:**
-1. Ready up in the lobby → ALL ABOARD.
-2. As greybox Dash Daring (rifle, crate rocket, spin), fight the Rattler Gang's budget
-   timeline across a 7-car train.
-3. Get downed and revived.
-4. TRAIN CLEARED on the engine roof, or SQUAD WIPED.
-5. The results screen, then PLAY AGAIN.
+**M0, M1 (Sessions 1–5) and M2 Sessions 8–11 are built** in Studio (place `71855801375130`).
+A run now plays like this:
+- **Leg structure:** legs of 3 trains (the third is a Thief train), with leaps between
+  trains, gap coins and a checkpoint train. The checkpoint heals everyone and holds a
+  continue-or-cash-out vote.
+- **Score:** a score and combo multiplier, coins, and a run-end screen with the squad score
+  and callouts.
+- **Agents:** Dash, plus Brick granted at the first checkpoint. Swap with Q/E, and change
+  the squad at the Barracks.
+- **Mayhem:** the meter fills from knockouts and deploys drones, the Heavyweight mech or an
+  Air Strike.
 
-It has a hand-built HUD, touch controls and a run-end screen.
-
-**Next step: Session 6** of [[First Playable (M1)]]: a multi-client test (Studio → Test →
-Clients and Servers, 2–4 players), the performance budget and a tuning pass. Do it from a
-local Claude Code session with the Studio MCP connected; the multi-client test needs you at
-the keyboard.
+M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still open.
+**Next steps:**
+- **finish verifying Session 11** in a playtest: the Turret, Defender, Heavyweight, Air
+  Strike and lock messages,
+- then Session 7 (ProfileStore saving: it needs the package and Studio API access) or
+  Session 12 (the hub and queue pads),
+- the multi-client playtest from Session 6, whenever you're ready.
 
 ## In progress
 - [[First Playable (M1)]]: Sessions 1–4 are done. Systems: [[ModeService]], [[Guard]],
@@ -47,6 +51,9 @@ the keyboard.
   [[ParallaxController]], [[CombatService]], [[PickupService]], [[EffectsController]],
   [[EnemyService]], [[SpawnService]], [[RunStateService]], [[SquadService]] and
   [[HudController]]. Only Session 6 (measure, tune, playtest) is left.
+- [[Loop (M2)]]: Sessions 8–11 are built: [[ScoreService]], [[AgentService]] and
+  [[GadgetService]], plus multi-train runs in [[RunStateService]], [[TrainService]] and
+  [[SpawnService]]. Sessions 7, 12 and 13 are left.
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
@@ -104,6 +111,22 @@ the keyboard.
   - Dan's knockout blast hurting other enemies,
   - jumping over Six-Shooter bullets (needs a person playing),
   - picking up a dropped crate.
+- **M2 Sessions 8–11 are not checked yet:**
+  - **Session 11** (the playtest start hung): the Turret Drone, the Defender blocking
+    shots, the Heavyweight (stomp, armour, punches, slam, eject), the Air Strike, the lock
+    messages, and key 1 now that the Backpack is off.
+  - Multiplayer-only: assists, the revive bonus, checkpoint votes and ties, the AFK
+    safeguard, carrying downed players over a leap, and the teammate Mayhem rings.
+  - A real running leap: is the engine → caboose gap comfortable for Dash and for Brick
+    at 20 studs/s?
+- **Controls changed to match the GDD:** Space = jump only, W/↑ = Interact (revive, the
+  Barracks), Q/E = swap, 1/2/3 and F = gadgets.
+- M2 simplifications:
+  - the Mayhem ring fills from the centre (no arc yet),
+  - the mech has no heavy gravity,
+  - drones are server-moved,
+  - later trains use a 60 s plateau (first guess),
+  - coins and agents aren't saved until Session 7.
 - Session 5 is not checked yet. These need 2+ players or a touch device:
   - revives, and a revive interrupted by damage,
   - bleed-out → spectating,
@@ -115,9 +138,13 @@ the keyboard.
   of the camera. Tune this in Session 6.
 
 ## Unsaved work in Studio
-- **2026-10-13: Session 5 needs a save or publish** (File → Publish to Roblox). It added:
-  - the three GUIs,
-  - RunStateService and SquadService,
-  - three controllers,
-  - edits to Constants, Types, CombatService, SpawnService, EnemyService, PickupService,
-    InputController and CameraController.
+- **2026-10-14: M2 Sessions 8–11 need a save or publish** (File → Publish to Roblox).
+  New:
+  - **Services:** ScoreService, AgentService, MayhemService and GadgetService.
+  - **Controllers:** CheckpointController, SquadController and MayhemController.
+  - **Templates:** BrickBroadsley, Scattergun, CrowdPleaser, HubCheckpoint, the drones,
+    the Heavyweight, Coin and the strike effects.
+  - **GUIs:** CheckpointGui, SquadGui and the HUD additions.
+  - **Remotes:** RequestCheckpointChoice, RequestSwap, EquipSquad and RequestGadget.
+
+  Most other scripts were edited too.

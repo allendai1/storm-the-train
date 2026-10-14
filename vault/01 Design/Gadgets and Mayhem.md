@@ -202,7 +202,11 @@ here, to fit "Silly, never mean".
   overwhelmed. That's why the starter, the tank and the fragile fast agent carry it.
 
 ## Systems involved
-_None built yet._ When built, this needs a Mayhem/gadget service (meter, deploy
+**M2 Session 11 (2026-10-14):** the M2 subset is built as [[GadgetService]] (with
+MayhemService and MayhemController). The meter fill values, gadget numbers and lock rules
+are as proposed here; the tunables are template attributes.
+
+_Original plan:_ When built, this needs a Mayhem/gadget service (meter, deploy
 validation, durations), drone and mech controllers, and the shared revive and health
 logic from the GDD. The **server owns the meter and every deploy**: the client asks to
 deploy, the server checks the meter, the lock rules and a rate limit, and spawns the

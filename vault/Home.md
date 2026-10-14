@@ -40,6 +40,7 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 - [[HudController]] — HUD, touch controls and run-end screen controllers (implemented)
 - [[ScoreService]] — score, combo multiplier, assists, flat bonuses (implemented)
 - [[AgentService]] — owned agents, squad, swap, Barracks squad select (implemented)
+- [[GadgetService]] — Mayhem meter, drones, Heavyweight mech, Air Strike, ring and fan HUD (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].
@@ -57,6 +58,7 @@ Architecture decision records. Create from [[Templates/Decision|Decision templat
 ## Devlog
 Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to put them there).
 - [[2026-10-13]] — first design session: GDD, design notes, art direction, ADRs, M1/M2 specs
+- [[2026-10-14]] — M2 Sessions 8–11 built: score/coins, multi-train runs and checkpoints, Brick and swapping, Mayhem and gadgets
 - New entries use the [[Templates/Devlog|Devlog template]].
 
 ## Inbox

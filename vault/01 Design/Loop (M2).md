@@ -184,16 +184,16 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   `EquipSquad`, validated against `OwnedAgents`.
 
 ### Session 11 — Mayhem and gadgets
-- [ ] **`MayhemService`:** the meter and its fill sources, and the perk hook for Brick.
-- [ ] **`GadgetService`:** `RequestGadget(slot)` validation, the lock rules,
+- [x] **`MayhemService`:** the meter and its fill sources, and the perk hook for Brick.
+- [x] **`GadgetService`:** `RequestGadget(slot)` validation, the lock rules,
   durations, and despawning.
-- [ ] **Drone templates** in `ReplicatedStorage.Assets.Drones`: TurretDrone,
+- [x] **Drone templates** in `ReplicatedStorage.Assets.Drones`: TurretDrone,
   MeleeDrone, DefenderDrone. Each has Attributes per [[Gadgets and Mayhem]].
-- [ ] **Mech template** `ReplicatedStorage.Assets.Mechs.Heavyweight`. Armour,
+- [x] **Mech template** `ReplicatedStorage.Assets.Mechs.Heavyweight`. Armour,
   ejection, entry stomp, and no swapping while suited.
-- [ ] **Air Strike:** marker and planes in `Assets.Effects`, a server sweep along the
+- [x] **Air Strike:** marker and planes in `Assets.Effects`, a server sweep along the
   carriage, one per party.
-- [ ] **HUD:** the **Mayhem ring** (yours on the left edge, plus teammate rings) and
+- [x] **HUD:** the **Mayhem ring** (yours on the left edge, plus teammate rings) and
   the **gadget fan**, from the Figma components `HUD/MayhemRing` and `HUD/GadgetSlot`.
 
 ### Session 12 — Hub mode and teleport
@@ -301,5 +301,21 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
     - Scattergun 5 pellets / 0.45 s, Crowd Pleaser 0.6 s spin-up then 0.07 s.
   - Fixed: Humanoid automatic scaling had been re-scaling the pre-scaled rigs (Brick, Bart)
     and their hitboxes.
+- **Session 11, 2026-10-14: built, partly verified.**
+  - Built:
+    - the Turret, Melee and Defender drones, the Heavyweight mech, and the Air Strike
+      marker and plane,
+    - the HUD Mayhem ring, gadget fan, active-gadget readout and teammate rings,
+    - the remote `RequestGadget`,
+    - [[GadgetService]] + MayhemService + MayhemController,
+    - CombatService hooks: the damage filter (armour, invulnerability), projectile
+      blockers (Defender), `isFiring` and `SpinKnockback`.
+  - Verified: the ring and fan appear at full Mayhem, and key 2 deployed the Melee Drone,
+    which fought and refilled Mayhem.
+  - Found and fixed: the Backpack hotbar was swallowing key 1, so it's disabled.
+  - **Not verified yet** (Studio's playtest start hung): the Turret, Defender, Heavyweight,
+    Air Strike and lock messages. The list is in [[GadgetService]].
+  - Simplifications: the ring fills from the centre (no arc yet), and the mech has no heavy
+    gravity.
 
 Related: [[First Playable (M1)]] · [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Score and Combo]] · [[Economy and Monetization]] · [[Writing and Dialogue]] · [[0004-single-place-hub-and-run-modes]] · [[0008-player-data-profilestore]] · [[Home]]
