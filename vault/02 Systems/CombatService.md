@@ -49,6 +49,13 @@ Session 5). Both react to `Health` reaching 0.
   attribute `ActiveWeapon`.
 - `CombatService.toggleWeapon(player)`: flips between the character's `PrimaryWeapon` and
   `SecondaryWeapon` attributes.
+- `CombatService.onKnockout(fn(info))`: info is `{ enemy, by, source ("Weapon" | "Spin" |
+  "Gadget" | "Hazard"), damagers, at }`. Used by [[ScoreService]] and [[PickupService]]
+  (coins). Damagers are tracked per enemy and cleared on knockout or `Destroying`.
+- `CombatService.onPlayerDamaged(fn(player, raw))`: called for every hit on a living
+  player.
+- A knockout with a player behind it no longer sends the plain `K` record:
+  [[ScoreService]] sends `K` with the points instead.
 - `CombatService.effect(kind, ...)`: queues an effect record for the next batch. [[EnemyService]]
   uses it for its projectiles, alerts and knockback.
 - `CombatService.newProjectileId() -> number`: the shared id counter. Player rockets and enemy

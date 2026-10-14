@@ -108,6 +108,8 @@ _Not started._
 - Is the 2.5 s combo window too tight on mobile? Playtest it.
 
 ## Implementation notes
-_Not built. Design only._
+- **M2 Session 8 (2026-10-14):** built as [[ScoreService]]. Knockout points come from each
+  enemy template's `Points` attribute. The tiers, assists, bonuses and run-end callouts
+  are as designed here.
 
 Related: [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Wild West Enemies]] · [[Home]]

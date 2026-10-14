@@ -41,6 +41,16 @@ flips you to your agent's other weapon. It comes back for you after `WEAPON_CRAT
 - `PickupService.reset()`: PLAY AGAIN. Clears every `CrateReadyAt_*`, removes blueprints and
   sets `Blueprints = 0`.
 
+- `PickupService.spawnCoin(position, value)` and `PickupService.dropCoins(position, count)`:
+  coins in `workspace.Coins` (a runtime folder). A drop is split over at most
+  `COIN_DROP_MAX_PIECES` (5) coins, spread ±`COIN_SCATTER` (2) along X on the roof.
+  Every knockout rolls the enemy's `CoinChance` for `CoinMin`–`CoinMax` coins (lights 5%
+  for 1–3, Bart 100% for 10–20).
+- Coins are **personal loot**. Each player collects each coin once, by proximity
+  (`COIN_PICKUP_RADIUS` 3.5), into the Player attribute `RunCoins`. The coin gets
+  `Got_<UserId>`, and PickupController hides it for that player and spins the rest. A coin
+  goes when everyone has it, or after `COIN_LIFETIME` (30 s).
+
 ## Remotes
 None. The state is the **Player attribute `CrateReadyAt_<index>`**: the server time
 (`GetServerTimeNow`) when that spot's crate is back. Missing means ready.

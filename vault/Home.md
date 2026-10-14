@@ -38,6 +38,7 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 - [[RunStateService]] — the run loop: lobby/ready, start, cleared/wiped, results, PLAY AGAIN (implemented)
 - [[SquadService]] — downed, revive, bleed-out, wipe, player colour slots (implemented)
 - [[HudController]] — HUD, touch controls and run-end screen controllers (implemented)
+- [[ScoreService]] — score, combo multiplier, assists, flat bonuses (implemented)
 
 ## Decisions
 Architecture decision records. Create from [[Templates/Decision|Decision template]].

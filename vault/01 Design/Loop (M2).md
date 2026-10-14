@@ -149,11 +149,11 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   as a JSON string or a folder).
 
 ### Session 8 — Score, combo, coins
-- [ ] **`ScoreService`:** knockout points, combo timer (2.5 s), multiplier tiers,
+- [x] **`ScoreService`:** knockout points, combo timer (2.5 s), multiplier tiers,
   assists, flat bonuses. Player Attributes `Score`, `Combo`, `ComboMultiplier`.
-- [ ] **Coin pickups:** the template `ReplicatedStorage.Assets.Pickups.Coin` and the
+- [x] **Coin pickups:** the template `ReplicatedStorage.Assets.Pickups.Coin` and the
   gap-coin arc. Drops through `PickupService`, collected by server proximity.
-- [ ] Update the **HUD** with the score and combo badge and the coin counter, and the
+- [x] Update the **HUD** with the score and combo badge and the coin counter, and the
   **run-end screen** with the squad score, per-player rows with callouts, and coins
   (the Figma run-end mockup).
 
@@ -250,6 +250,19 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   are locked to the party roster.
 
 ## Implementation notes
-_Not built. Fill this in as sessions complete._
+- **Session 8, 2026-10-14: done, except gap coins** (they need leaps, Session 9).
+  - Built: the `Points`, `CoinChance`, `CoinMin` and `CoinMax` attributes on the enemy
+    templates; the `Pickups.Coin` model; the HUD `ScorePanel` (score, coins, combo badge
+    with a timer) and `BonusPop`; and the run-end squad score, Score/Coins columns and
+    callouts.
+  - Systems: [[ScoreService]], plus coins in [[PickupService]].
+    - [[CombatService]] got `onKnockout` (killer, damagers, source) and
+      `onPlayerDamaged` hooks. Sessions 9–11 reuse them.
+    - [[RunStateService]] got the run-end coin bonus, the squad score and callouts.
+  - Decisions made while building:
+    - coins are **personal loot**: each player collects each coin once, so the coin
+      target is per player,
+    - run coins are the attribute `RunCoins`; saving comes in Session 7,
+    - callouts are TOP SCORE, MOST KOs, MEDIC and COLLECTOR, at most one per player.
 
 Related: [[First Playable (M1)]] · [[Game Design Document]] · [[Gadgets and Mayhem]] · [[Score and Combo]] · [[Economy and Monetization]] · [[Writing and Dialogue]] · [[0004-single-place-hub-and-run-modes]] · [[0008-player-data-profilestore]] · [[Home]]
