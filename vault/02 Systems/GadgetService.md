@@ -121,10 +121,35 @@ Refusals set `GadgetMessage` and `GadgetMessageCount`.
   - key 2 deployed the Melee Drone and emptied the meter; the drone flew out and its
     knockouts refilled Mayhem (28 = 7 lights × 4).
 - **Found:** key 1 was swallowed by Roblox's Backpack hotbar, so the Backpack CoreGui is now
-  disabled. Re-verify key 1 next playtest.
-- **Not verified yet** (the Studio playtest start hung): the Turret Drone,
-  the Defender blocking shots, the Heavyweight (stomp, armour, punches, slam, eject), the
-  Air Strike, the lock messages, the teammate rings, and the touch fan.
+  disabled. Studio's virtual input still refuses to send key 1 ("bound to a CoreGUI core
+  action"), so **press 1 by hand** to confirm it. The fan's Slot1 button and key 2 both
+  work.
+- **Verified 2026-10-15:**
+  - **Turret Drone:** 4 knockouts in 6 s, and its kills refilled Mayhem.
+  - **Lock:** Slot2 with a drone up → "DRONE ALREADY ACTIVE", and the meter stays full.
+  - **Air Strike:**
+    - the countdown banner, marker and readout,
+    - 200 to a bandit inside the span (caboose + half the boxcar),
+    - the meter emptied and `AirStrikeAt` cleared.
+  - **Heavyweight:**
+    - the entry stomp knocked out 3,
+    - armour 200, WalkSpeed 23, hitbox 4.4 × 8.5, the agent hidden, the slam spin values
+      set,
+    - hits drained armour (3 per light punch) and **Health didn't drop**,
+    - **E was refused** while suited,
+    - it **ejected at 15 s** with everything restored (speed 20, hitbox 2 × 6.3, visible,
+      spin 9).
+- **Fixed 2026-10-15: knockback didn't carry.** The enemy AI's `Humanoid:Move` and the
+  Humanoid's own braking cancelled pushes (the peak was 11–17 studs/s against a 40 push).
+  Now `CombatService.knockback(enemy, velocity)` sets `StunnedUntil` (`KNOCKBACK_STUN`
+  0.6 s) and `PlatformStand`. EnemyService stops steering while stunned, then stands the
+  enemy back up. The mech punches, body slam and eject ring use it. **Re-verify** (the
+  playtest start hung again).
+- **Not verified yet:**
+  - the Defender blocking bullets and dynamite (it needs Six-Shooters or Dans in range),
+  - the knockback fix,
+  - the teammate rings (2+ players),
+  - the touch fan.
 - **Simplifications:**
   - the ring fills from the centre, not as a clockwise arc (art pass),
   - the mech has no heavy gravity (3.5), which would need client-side physics,

@@ -112,9 +112,14 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
   - jumping over Six-Shooter bullets (needs a person playing),
   - picking up a dropped crate.
 - **M2 Sessions 8–11 are not checked yet:**
-  - **Session 11** (the playtest start hung): the Turret Drone, the Defender blocking
-    shots, the Heavyweight (stomp, armour, punches, slam, eject), the Air Strike, the lock
-    messages, and key 1 now that the Backpack is off.
+  - **Session 11:** the Turret, the lock message, the Air Strike and the Heavyweight
+    (stomp, armour, swap lock, eject) are verified. **Still to do:**
+    - the knockback fix (PlatformStand stun),
+    - the Defender blocking shots,
+    - pressing key 1 by hand (Studio's virtual input can't send it).
+
+    Studio's playtest start hangs intermittently after script edits; Stop/Play by hand, or
+    a Studio restart, clears it.
   - Multiplayer-only: assists, the revive bonus, checkpoint votes and ties, the AFK
     safeguard, carrying downed players over a leap, and the teammate Mayhem rings.
   - A real running leap: is the engine → caboose gap comfortable for Dash and for Brick
