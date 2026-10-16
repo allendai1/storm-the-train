@@ -1,6 +1,6 @@
 ---
 tags: [decision, background, parallax, tooling]
-status: proposed
+status: accepted
 date: 2026-10-16
 ---
 # 0011 — Background Kit: standard slots, variant tiles and in-place editing
@@ -55,5 +55,16 @@ for a standard way to add each map's layers and tiles.
   it's versioned with Roblox's place history.
 - One more server service (tiny, init-only).
 - Triangle budgets still need checking in Blender; scripts can't read mesh triangle counts.
+
+## Addendum (2026-10-16, accepted)
+Accepted by the developer after the kit was installed and checked in Studio. Added in the
+same session, in the same spirit:
+- **Train editing in the same plugin:** a Train section opens the carriage templates
+  (`ServerStorage.Assets.Carriages.WildWest` and `Trains.HubCheckpoint`) in
+  `Workspace.TrainStudio` at `TrainStart`, in game order, and checks them on Done.
+  `BackgroundStudioService` restores them too if they're left open.
+- **The car order is data in the place:** the `Layout` attribute on the carriages folder
+  ([[TrainService]]), instead of a table in code.
+- Theme management in the plugin: a picker, Rename and Delete (undoable).
 
 Related: [[Background Kit]] · [[Background Kit Code]] · [[ParallaxController]] · [[0009-static-trains-scrolling-world]]

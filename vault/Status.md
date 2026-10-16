@@ -66,7 +66,7 @@ Many built systems change; the list is in the spec's §12.
 have) and **open questions for the developer**, notably the coal tender, the weapon weld,
 the downed pose, a melee wind-up, the enemy hats and shirt colours, and music and voices.
 Also the [[Background Kit]] (the standard for every theme's background layers, with a
-Studio plugin; ADR [[0011-background-kit]] proposed).
+Studio plugin; ADR [[0011-background-kit]] accepted).
 
 **Decided 2026-10-16** ([[Original Mechanics Match]] §11): **a squad is 2 agents**; Lasso
 Lucy's lasso is deferred; **enterable carriages** (after the slice); the **Jetpack and

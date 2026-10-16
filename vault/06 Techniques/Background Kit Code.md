@@ -23,7 +23,7 @@ updated: 2026-10-16
 >
 > Originally drafted in a cloud session on 2026-10-16. Reviewed the same day by a read-only code review; its fixes are applied
 > (below). It implements the [[Background Kit]] standard ([[0011-background-kit]],
-> proposed). The Luau compiles; Roblox's own Script Analysis hasn't seen it. Before
+> accepted). The Luau compiles; Roblox's own Script Analysis hasn't seen it. Before
 > replacing [[ParallaxController]], **read the current script in Studio** and keep anything
 > it does that this version doesn't.
 

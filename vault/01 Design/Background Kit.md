@@ -11,7 +11,7 @@ updated: 2026-10-16
 > **Studio plugin**) is in [[Background Kit Code]], installed and checked (the wide-phone
 > edge check is still open). The plugin also gained a theme picker, **Rename**, **Delete**
 > and a **Train** section for editing the carriage templates in place. The architecture
-> choice is [[0011-background-kit]] (proposed). How the scrolling works is explained in
+> choice is [[0011-background-kit]] (accepted). How the scrolling works is explained in
 > [[ParallaxController]] and [[0009-static-trains-scrolling-world]].
 
 ## The idea in one paragraph
@@ -172,7 +172,6 @@ and canyon set-pieces ([[Feel and Look Asset Specs]] §3.4) go there.
 ## Open questions
 1. Are the six slots and their Z bands right? (Mid is new; the rest match the greybox.)
 2. Should 21:9 be the widest screen we guarantee? It decides the minimum copies.
-3. Accept [[0011-background-kit]] (edit next to the train with a plugin, and the safety
-   net that moves a theme back at runtime)?
+3. ~~Accept [[0011-background-kit]]?~~ Accepted 2026-10-16.
 
 Related: [[ParallaxController]] · [[0009-static-trains-scrolling-world]] · [[Art Direction]] · [[Feel and Look (Slice)]] · [[Feel and Look Asset Specs]] · [[Background Kit Code]]
