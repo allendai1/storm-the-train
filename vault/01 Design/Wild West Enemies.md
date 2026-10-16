@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, enemies, theme, wild-west]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Wild West Enemies — the Rattler Gang
 
@@ -52,7 +52,7 @@ effectively the enemy AI scope.
 | **Summoner boss** | Calls in slot-9 minions during the fight | `SPAWN_BOSS` |
 | **Charger boss** | Leap attack plus a berserk charge with a stagger threshold | `BERSERKER_BOSS` |
 
-**[proposed]** We interpret the original's unclear `BERSERK_HEALTH` as a **stagger
+**[decided 2026-10-16]** We interpret the original's unclear `BERSERK_HEALTH` as a **stagger
 threshold**: deal that much damage during the wind-up and the charge is cancelled. This
 gives co-op squads a clear "focus fire!" moment.
 
@@ -132,19 +132,22 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
   - 0.75 s for light melee,
   - 1 s for mid melee,
   - 2.5–4 s between ranged shots for lights.
-- **[proposed] Wave composition.** The spawn budget and caps follow the original's
+- **[decided 2026-10-16] Wave composition.** The spawn budget and caps follow the original's
   `SPAWN_GROUP_NORMAL` curve. The order lights are introduced in, one every 30–45 s, is:
   Bandana Bandit, then Rodeo Kid, then Six-Shooter, then Dynamite Dan. After that each
   mid is introduced alone, in the order Big Bart, Saloon Door Sam, Lasso Lucy (simplest
   answer first).
-- **[proposed] Co-op scaling.** Multiply the spawn budget and alive-cap by 1.0 / 1.6 /
+- **[decided 2026-10-16] Co-op scaling.** Multiply the spawn budget and alive-cap by 1.0 / 1.6 /
   2.2 / 2.8 for 1 / 2 / 3 / 4 players. Multiply boss HP by 1.0 / 1.5 / 2.0 / 2.5. These
   are guesses to tune in playtesting.
-- **[proposed] Charge speeds.** Player speed is now decided at **18–33 studs/s** (see the
-  GDD), so every agent outruns McGraw's 16.7 studs/s charge and Big Bart's 10.7 studs/s
-  walk. Charges are meant to be **jumped, not outrun**, so raise them:
-  - Big Bart's charge: about **36 studs/s** (540 px/s).
-  - McGraw's berserk charge: about **40 studs/s** (600 px/s).
+- **[decided 2026-10-16] Charge speeds use the original's values.** McGraw charges at
+  **16.7 studs/s**. Big Bart charges at his recorded **10.7 studs/s** (no separate charge
+  speed was recovered from the original). Every agent (18–33 studs/s) can outrun them, so
+  a charge's threat is its knockback and the wind-up stagger, not its speed.
+  - This replaces an earlier proposal to raise them to 36 and 40 studs/s so they'd have to
+    be jumped. The GDD's "jump, not outrun" rule was dropped with it.
+  - **Studio to-do:** Big Bart is built with `ChargeSpeed` 36 ([[EnemyService]]). Lower it
+    to 10.7 in a local session.
   Walking speeds stay as listed. Rattler Runts (15 studs/s) are slower than every agent,
   which is fine because they're a swarm, not a chase.
 

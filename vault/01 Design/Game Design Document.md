@@ -139,9 +139,9 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
     past 33.
   - **[decided]** Falling into a gap between cars puts you back on the nearest roof after
     1 s, with 15 raw damage ([[0005-side-on-movement-and-camera]]).
-  - **[decided]** Enemy attacks meant to be dodged must be **jumped**, not outrun,
-    because players outrun nearly everything. Any charge or rush has to be faster than
-    33 studs/s or cover the whole carriage.
+  - **[decided 2026-10-16]** Charges and rushes use the original's speeds, so players can outrun
+    them ([[Wild West Enemies]]). This replaces the earlier rule that dodged attacks must
+    be jumped, not outrun. Bullets and similar attacks are still dodged by jumping.
 
 | Action | Keyboard/mouse | Gamepad | Mobile |
 |---|---|---|---|
@@ -213,7 +213,8 @@ numbers.
   through play, more slowly. More agents, including costume agents, come after launch.
   **[decided]** The six concepts in [[Launch Agents]] are accepted (names are
   placeholders). Brick Broadsley is the second free agent. Theme matchups are +40%
-  against one theme and −25% against another.
+  against one theme and −25% against another in co-op. **[decided 2026-10-16]** Solo
+  uses the original's −40%.
 - **Agents.** Each has 2 fixed weapons, 1–3 gadgets and traits: resilience, speed,
   spin-attack strength, and a bonus against one enemy faction. Swapping is instant
   with a short cooldown.

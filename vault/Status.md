@@ -60,6 +60,8 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 - Review the rest of [[Writing and Dialogue]] (the bark lines, missions and challenge
   chains). Its open questions were decided on 2026-10-16: text bubbles with a voiced
   grunt, a tutorial skippable from the start, and the Quartermaster kept.
+- **Studio change from the 2026-10-16 design pass:** lower Big Bart's `ChargeSpeed` from
+  36 to 10.7 (charges now use the original's speeds; [[Wild West Enemies]]).
 - **Manual [[Studio Setup Checklist]] items still to do in Studio:**
   - **Game Settings** (§3): devices, R15, free private servers, voice off.
   - **`Lighting.Technology` = ShadowMap** (§4). Scripts can't set it.

@@ -22,7 +22,7 @@ There are three currencies, and each has one job:
 | Currency | Earned by | Spent on | Robux? |
 |---|---|---|---|
 | **Coins** (soft) | Runs, missions | Weapon and gadget upgrades, cheap boosters | Indirectly, by exchanging gems |
-| **Gems** (premium) | Missions, daily challenges, day 7 of the login streak, rare run drops, Robux | Agents, strong boosters, revives, the surplus shop, skins | Yes, through gem packs |
+| **Gems** (premium) | Missions, daily challenges, day 7 of the login streak, rare run drops, Robux | Agents, strong boosters, revives, gadget deploys, the surplus shop, skins | Yes, through gem packs |
 | **Blueprints** (gate) | Recovered from enemies in runs, banked at checkpoints | Unlocking each upgrade level (L2–L10) | Never sold directly. The surplus shop skips them for gems |
 
 The loop: **runs earn coins and blueprints → the hub turns them into upgrades → upgrades
@@ -118,6 +118,7 @@ first revive (5 gems) about 12 Robux. The pack names are placeholders.
 | Nana Nitro, Mimi the Mime | 100 each | Original tier `char_med` |
 | Zorp | 150 | Original tier `char_high` |
 | Self-revive | 5, then doubling: 10, 20, 40… per run | GDD decision; the starting price is proposed here |
+| Gadget deploy (meter not full) | 5, then doubling: 10, 20, 40… per run; 1 per train | Decided 2026-10-16 ([[Gadgets and Mayhem]]) |
 | Mission skip | 5 | Proposed. Reroll is free once a day |
 | Boosters | 1–6 | Original (see below) |
 | Surplus shop offers | Varies | See below |

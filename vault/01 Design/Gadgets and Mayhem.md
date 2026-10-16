@@ -82,16 +82,25 @@ gadgets you can pick.
 - **[decided 2026-10-16] Swapping and gadgets.**
   - A **drone stays** when you swap agents. It belongs to the player, not the agent.
   - **You can't swap while in a mech suit.** The suit is that agent's.
-- **[proposed] No paid deploys.** The original's gadget manager had a deploy price, so it
-  may have sold extra uses. Here gadgets come only from Mayhem, so nobody pays to
-  out-gadget their teammates (see the monetization guardrails in the GDD). Mayhem
-  boosters, which make the meter fill faster, are the paid lever instead.
+- **[decided 2026-10-16] Gem deploys.** As in the original, whose gadget manager had a deploy price,
+  you can pay gems to deploy a gadget when your meter **isn't full**:
+  - **Price:** **5 gems, then doubling** for each paid deploy in the same run (10, 20,
+    40…), the same pattern as the self-revive. It resets when the run ends.
+  - **Limit:** at most **one paid deploy per player per train**, and never while one of
+    your own gadgets is active.
+  - The usual gadget locks still apply (between trains, during the leap, on the hub
+    train…).
+  - A paid deploy **doesn't touch the meter**. Whatever Mayhem you had stays.
+  - This doesn't break the guardrail that paid power never makes a teammate's run worse:
+    every gadget helps the whole squad. Mayhem boosters stay on sale as a second paid
+    lever.
+  - The original's deploy price wasn't recovered; 5 gems is ours.
 
 ## Upgrades
-- **[proposed]** Drones and mech suits have **10 levels**, as in the original. Level 1 is free,
+- **[decided 2026-10-16]** Drones and mech suits have **10 levels**, as in the original. Level 1 is free,
   and later levels cost coins and need blueprints, on the GDD's upgrade ladder. The
   Air Strike has **one level** and is never upgraded.
-- **[proposed]** Each level adds about **3–10% duration**. Drones with a weapon also get a
+- **[decided 2026-10-16]** Each level adds about **3–10% duration**. Drones with a weapon also get a
   **weapon tier** at levels 1/3/5/7/9 (5 tiers): each tier adds about 25% weapon
   damage, plus a visual upgrade, e.g. a second barrel.
 
@@ -151,7 +160,7 @@ and can't be damaged. **[decided 2026-10-16]** Their weapon numbers are below.
   10 damage, knockback, and it **knocks light enemies off the train**.
 - It also finishes off downed enemies: it shakes the keys loose from a dazed key
   holder, and stops an undead enemy getting back up.
-- **[proposed] Change from the original.** The original's "corpse smasher" only
+- **[decided 2026-10-16] Change from the original.** The original's "corpse smasher" only
   smashed corpses, which would do almost nothing in the Wild West, where knockouts are
   final and ragdolls fade out. Its short duration (10–19 s) makes it a burst
   crowd-clearer instead.
@@ -198,7 +207,7 @@ here, to fit "Silly, never mean".
   take **100**. No friendly fire, and hostages are never hit.
 - One level and never upgraded, as in the original. Every agent who has it gets the same
   strike. The voice line is shared: "3… 2… 1… INCOMING!" (the original's shared line).
-- **[proposed] It's the safety valve:** the gadget that saves a squad that's being
+- **[decided 2026-10-16] It's the safety valve:** the gadget that saves a squad that's being
   overwhelmed. That's why the starter, the tank and the fragile fast agent carry it.
 
 ## Systems involved

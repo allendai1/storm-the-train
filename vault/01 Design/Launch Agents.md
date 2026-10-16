@@ -163,7 +163,7 @@ is the best ride. He takes photos mid-fight.
 ## Rules & numbers
 - **[decided] Theme matchups.** Each theme has one specialist and one agent who struggles:
 
-  | Theme | +40% damage | −25% damage |
+  | Theme | +40% damage | −25% damage (−40% solo) |
   |---|---|---|
   | Wild West | Zorp | Mimi |
   | Ninjas | Mimi | Nana |
@@ -173,21 +173,22 @@ is the best ride. He takes photos mid-fight.
   **[decided]** The bonus keeps the original's +40%, but the penalty is **softened to
   −25%** for co-op. That way a player whose squad struggles with a theme still pulls
   their weight for the team. Swapping still matters: when the next train's theme is
-  announced, swap to your specialist. **[proposed]** Solo uses the same −25%, so there's
-  one rule to learn and balance.
-- **[proposed] Agent stats are fixed.** As in the original, agents don't level up. Their
+  announced, swap to your specialist. **[decided 2026-10-16] Solo uses the original's −40%**
+  (×0.60), so swapping matters more when you're alone. The −25% values below are the
+  co-op ones.
+- **[decided 2026-10-16] Agent stats are fixed.** As in the original, agents don't level up. Their
   speed, toughness, spin and perks never change. Progression comes from upgrading their
   weapons and gadgets (10 levels each, gated by coins and blueprints, per the GDD).
 - **[decided 2026-10-16] Swap cooldown: 1.5 s.** The original's value wasn't recovered. The swap
   keeps your HP, position and Mayhem. On swapping in, the agent says one line, and the
   original's shared "I'M BACK!" line is a good model for that.
-- **[proposed] Duplicates in a party are allowed.** Two players can both bring Dash. That
+- **[decided 2026-10-16] Duplicates in a party are allowed.** Two players can both bring Dash. That
   avoids lobby arguments, and the speed/toughness curve already pushes squads to
   diversify.
 - **[proposed] Gem prices:** 80 / 100 / 100 / 150, which is **430 gems** for the paid
   four. This follows the original's tiers (80, 100 and 150). The real prices wait for
   the gem economy.
-- **[proposed] Co-op gadget rules** (full gadget design in [[Gadgets and Mayhem]]): the Healer Drone and Heal Suit heal **every
+- **[decided 2026-10-16] Co-op gadget rules** (full gadget design in [[Gadgets and Mayhem]]): the Healer Drone and Heal Suit heal **every
   teammate in range**, not just the owner. The Defender Drone blocks projectiles for
   anyone behind it. This keeps "Better together" true for support agents.
 - **[proposed] DPS reference at weapon level 1.** These are nominal numbers (damage ÷
