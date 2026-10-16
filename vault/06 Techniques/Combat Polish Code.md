@@ -1,6 +1,6 @@
 ---
 tags: [technique, studio, luau, combat, game-feel, slice]
-status: planned
+status: implemented
 updated: 2026-10-16
 ---
 # Combat Polish Code
@@ -9,9 +9,24 @@ updated: 2026-10-16
 > matches the original's mechanics; where this note conflicts with
 > [[Original Mechanics Match]], that note wins. Affected here: the spin section (now the original's spin rules), melee jitter and anything tied to the stagger; reconcile with §12 of the match note before using it.
 
+> **Status: implemented in Studio on 2026-10-16.** The live scripts and the system notes
+> are the source of truth now; this page is the original draft. Adaptations made while
+> building:
+> - `EnemyFlinch` compares `StunnedUntil` with `os.clock()`, the clock
+>   `CombatService.knockback` writes it in.
+> - The mech's `SpinKnockback` body slam is kept inside the new until-landing spin.
+> - Splash, spin and dynamite pushes only hit enemies that survive the damage (knocked-out
+>   ones ragdoll).
+> - Dynamite: `Fuse` counts from landing (it used to count from the throw).
+>   `DYNAMITE_THROW_TIME`, `ENEMY_SPAWN_MIN_DISTANCE` and `CAMERA_LEAD` were removed.
+> - SpawnService picks a wave's names first, then places it with `spread`. A position over
+>   a gap ends the wave instead of snapping to a roof.
+> - `Types.WeaponStats` gained `ExplosionPush`.
+> - `FeelEffects` lives in `Client.Controllers` with no `init`/`start`.
+
 ## When to use
-Step F2 of the [[Feel and Look (Slice)]], implementing [[Combat Polish]]. This is **draft
-reference code, written in a cloud session without Studio, and it hasn't been run.** Most
+Step F2 of the [[Feel and Look (Slice)]], implementing [[Combat Polish]]. This was **draft
+reference code, written in a cloud session without Studio.** Most
 items change scripts that already exist in Studio, which this session can't read. So the
 draft is:
 - **new, self-contained helper modules** (§2–§6) that hold the rules, and

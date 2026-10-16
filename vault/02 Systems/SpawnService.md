@@ -77,3 +77,19 @@ Plays the M1 **spawn timeline** ([[First Playable (M1)]] → Spawn timeline):
   distance, or spawning only off screen).
 - Verified 2026-10-13: a full run from bandits to `TimelineDone`, with no errors; the
   Six-Shooter, Rodeo Kid and Bart joined in their phases.
+
+## Combat Polish (2026-10-16)
+- **Placement:** `Server.Util.SpawnPlacement.choose`.
+  - It picks the nearest point that's off-screen ahead of the squad's front. The edge is
+    35 + 17 + 3 = 55 studs, which allows for the camera lead.
+  - It picks one behind the squad on a 1-in-3 roll while the squad isn't advancing (4 studs
+    in 3 s, sampled every 0.25 s by a tracker made in each `begin()`).
+  - Candidates are the `EnemySpawn` points within **two** carriages of a player.
+  - `ENEMY_SPAWN_MIN_DISTANCE` was removed.
+- **Waves:** the names are picked first. Then one point is chosen, and
+  `SpawnPlacement.spread` spaces the wave 3–10 studs apart, away from the squad. A spread
+  position not over a `WalkSurface` ends the wave (`ponytail:` marked; snap to the nearest
+  roof if waves feel thin).
+- Player X positions include downed players (only `BledOut` ones are left out).
+- **Verified 2026-10-16:** with the player at X −16, waves appeared at X 48 (64 studs away,
+  off-screen) and walked in; a second enemy in a wave spawned at X 58.

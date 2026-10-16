@@ -1,6 +1,6 @@
 ---
 tags: [design, feature, combat, game-feel, polish, m2]
-status: planned
+status: implemented
 updated: 2026-10-16
 ---
 # Combat Polish — a refined first agent
@@ -9,7 +9,13 @@ updated: 2026-10-16
 > matches the original's mechanics; where this note conflicts with
 > [[Original Mechanics Match]], that note wins. Affected here: the spin (now fully the original's), our attack jitter on melee, and the stagger. The flinch, perception, telegraph, spawn placement, i-frames, camera lead and revive grace still apply, with the original's numbers.
 
-> **Status: planned.** The developer accepted these on 2026-10-16, from [[Hit Feedback]]
+> **Status: implemented in Studio on 2026-10-16** (code and per-item checks in the system
+> notes: [[CombatService]], [[EnemyService]], [[SpawnService]], [[SquadService]],
+> [[EffectsController]], [[CameraController]]). Still to check in play: the spin hitting
+> enemies, perception by eye, the Shooter's grace, lob accuracy, outrunning Bart, revive
+> grace (2 players) and the phone view. The checkboxes below are the original plan.
+>
+> The developer accepted these on 2026-10-16, from [[Hit Feedback]]
 > and [[From the Original - Proposals]]. **The priority is a playable, refined first agent
 > (Max Mayhem)** before the other agents' and enemies' special mechanics. Everything here
 > applies to what's already built (M1/M2). The numbers come from the decompiled original

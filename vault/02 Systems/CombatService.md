@@ -131,3 +131,38 @@ Session 5). Both react to `Health` reaching 0.
   - `setWeapon` also records `Weapon_<AgentId>`, so each agent remembers its weapon across
     swaps.
   - Firing is skipped while the Player attribute `InMech` is set (Session 11).
+
+## Combat Polish (2026-10-16)
+Built from [[Combat Polish Code]] §7 and adapted to the live script. It uses
+`Server.Util.CombatFeel`, `EnemyFlinch` and `EnemyPerception`.
+- **Perception:** `damageEnemy(enemy, n, player)` calls `EnemyPerception.noteHit`, so a hit
+  enemy turns towards whoever hurt it.
+- **Flinch:** gun hits (the rifle hitscan, and each Scattergun pellet) call
+  `EnemyFlinch.onGunHit` after the damage. Splash and spin damage don't.
+- **Muzzle flash:** a new effect record `M` (x, y, dirX, template), one per shot (not per
+  pellet). The template comes from the weapon's `MuzzleFlash` attribute.
+- **Rocket splash push:** enemies that survive the splash get
+  `knockback(CombatFeel.explosionVelocity(...))`. The push is the weapon's `ExplosionPush`
+  (Pocket Rocket 17), or `EXPLOSION_PUSH`. `Types.WeaponStats` gained `ExplosionPush`.
+- **i-frames:** `damagePlayer` returns early while `CombatFeel.isInvulnerable(player)`. After
+  damage it grants `PLAYER_IFRAMES` (0.3 s). The state is the player attribute
+  `InvulnerableUntil` (server time), which revive grace uses too.
+- **The spin lasts until landing:**
+  - a `RequestSpin` while already spinning is ignored (no strike),
+  - every Heartbeat, `stepSpins` hits each enemy within `SpinRadius` once (`spinHits`),
+  - the spin ends on landing, on death, or after `SPIN_MAX_TIME` (1.5 s, a hover cap),
+  - knockback is `CombatFeel.spinVelocity` by the character's `SpinLevel` (Max 4,
+    Brick 6), unless `SpinKnockback` (the mech's body slam) is set,
+  - the gun pauses while spinning, and `nextShot = max(nextShot, now)` on landing,
+  - the player attribute `Spinning` is set for the client (F3's pose).
+- `StunnedUntil` is in `os.clock()` time. `EnemyFlinch` compares it with `os.clock()` (the
+  draft compared it with server time, which would never match).
+- **Verified 2026-10-16:**
+  - two hits in one frame land once, and the next lands after 0.3 s,
+  - rifle hits flinch Bandits once each,
+  - muzzle flashes appear and are cleaned up,
+  - a grounded spin is refused, an airborne one ends on landing, and a mid-spin request
+    is ignored.
+
+  **Not checked:** the spin hitting and popping enemies, the rocket splash push, the
+  Scattergun flash.

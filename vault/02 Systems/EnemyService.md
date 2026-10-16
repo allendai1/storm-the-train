@@ -146,3 +146,42 @@ template and gravity, `P`, `A`, `N` and `X` (see [[CombatService]]).
   BodyHeightScale 1.15 (left by `ScaleTo`). That re-scaled the already-scaled rig at spawn,
   so his hitbox was about 2.8 × 7.5 in play. It's now off, and a spawned clone keeps
   2.4 × 6.5.
+
+## Combat Polish (2026-10-16)
+Built from [[Combat Polish Code]] §7 and adapted to the live script.
+- **`SpawnedAt`** (server time) is set at spawn. Shooters and Lobbers don't fire for
+  `ENEMY_FIRE_GRACE` (4 s).
+- **Flinch:** at the top of the AI tick, `EnemyFlinch.isFlinching` means no move and no
+  attack. Templates have `FlinchCooldown` (0.75; Big Bart 1.5).
+- **Perception replaces "nearest player":** `EnemyPerception.selectTarget` picks players in
+  front, or ones who hit it in the last 6 s. A player jumping over it is lost.
+  - With no target, it walks on for 0.6–1.2 s, then turns round. With no living players, it
+    stands still.
+  - Leaps, charges, the Shooter's `MinRange` back-off and the Lobber's `KeepDistance`
+    back-off refresh the aggro, so it doesn't lose its target while turned away.
+- **`Attacking` attribute:** true during the Shooter's tell and Bart's wind-up and charge.
+- **Melee:** the attack interval × (1 ± 0.3) jitter.
+- **Shooter:**
+  - the tell is `CombatFeel.tellTime()` (0.5–0.6 s), so the template's `TellTime` isn't
+    read any more,
+  - it backs away inside `MinRange` (6).
+- **Lobber (Dynamite Dan):**
+  - the throw is `CombatFeel.lobVelocity` to the target's feet (no throw if it returns nil),
+  - **the fuse starts on landing.** `Fuse` 1.5 s now counts from landing; it used to count
+    from the throw, which included about 0.9 s of flight. Tune it in the playtest,
+  - the landing `R` record carries `explodesAt`, for the client's fuse blink,
+  - thrown dynamite hurts enemies too (source Hazard, no credit to anyone) and pops
+    survivors up. Dan's knockout blast pops survivors too.
+- **Big Bart:** `ChargeSpeed` 26.7 (was 36), the 2.5× walk rule.
+- `DYNAMITE_THROW_TIME` was removed from Constants.
+- **Verified 2026-10-16:**
+  - flinches on rifle hits,
+  - Bart's `Attacking` during the wind-up,
+  - dynamite thrown, landing and blinking,
+  - Bart clones carry `ChargeSpeed` 26.7.
+
+  **Not checked by eye:**
+  - perception (jumping over an enemy, approaching from behind),
+  - the Shooter's 4 s grace and tell timing,
+  - lob accuracy onto higher and lower roofs,
+  - outrunning Bart's charge.

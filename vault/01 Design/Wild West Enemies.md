@@ -176,8 +176,8 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
   - This replaces the morning's "10.7, the recorded walk speed". That value was chosen
     before the decompile found the real 2.5× multiplier. The earlier proposal of 36 and 40
     studs/s (jump, not outrun) stays dropped.
-  - **Studio to-do:** Big Bart is built with `ChargeSpeed` 36 ([[EnemyService]]). Set it
-    to **26.7** in a local session. `ChargeDistance` 30 can stay; the original uses about 34.
+  - **Done in Studio 2026-10-16:** Big Bart's `ChargeSpeed` is **26.7** (was 36;
+    [[EnemyService]]). `ChargeDistance` 30 stays; the original uses about 34.
   Walking speeds stay as listed. Rattler Runts (15 studs/s) are slower than every agent,
   which is fine because they're a swarm, not a chase.
 

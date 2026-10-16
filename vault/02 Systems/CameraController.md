@@ -47,3 +47,12 @@ None.
 - Session 5 (2026-10-13): after bleeding out (`BledOut`) it follows the nearest teammate
   who's still up (the M1 spec's proposed answer), falling back to your own character. Not
   verified yet; it needs 2+ players.
+
+## Combat Polish (2026-10-16)
+- **The moving lead** (`Shared.CameraLead`) replaces the facing lead (`CAMERA_LEAD` 8, now
+  removed).
+  - While the root's X speed is ≥ 1 stud/s, it leads 17 studs (`CAMERA_LEAD_MOVING`) ahead.
+  - It slides at 7.3 studs/s (`CAMERA_LEAD_RATE`).
+  - When stopped, it recentres. The smoothing is unchanged.
+- **Verified 2026-10-16:** the lead built to about 17 while moving, slid across on a turn
+  and went back to 0 when stopped.

@@ -1,12 +1,27 @@
 ---
 tags: [technique, code, background, parallax, plugin, studio-tooling]
-status: planned
+status: implemented
 updated: 2026-10-16
 ---
 # Background Kit Code
 
-> **Status: planned. Drafted in a cloud session on 2026-10-16; none of this has run in
-> Studio.** Reviewed the same day by a read-only code review; its fixes are applied
+> **Status: implemented. Installed in Studio on 2026-10-16** (local session; the Studio
+> scripts are the source of truth from here on). Differences from the drafts below:
+> - `Shared.BackgroundKit` and ParallaxController use `WaitForChild` for `Shared` modules.
+> - **Plugin additions:**
+>   - a row of buttons listing the existing themes (click one to pick it),
+>   - **Rename** (renames the picked theme to the name in the box),
+>   - **Delete** (a second click confirms; re-parents to nil, so Ctrl+Z undoes it),
+>   - a **Train** section (Edit train, Check train, Train done) that opens
+>     `ServerStorage.Assets.Carriages.WildWest` and `Trains.HubCheckpoint` in
+>     `Workspace.TrainStudio` at `TrainStart`, in the carriages folder's `Layout` order,
+>     with ghosts for repeated templates. Add selection refuses parts of the open train.
+> - BackgroundStudioService also restores carriage templates left open in `TrainStudio`.
+> - Studio places a docked widget as a tab next to Explorer/Properties; look there if
+>   clicking the button seems to do nothing.
+> - The plugin only updates after **Save as Local Plugin** again.
+>
+> Originally drafted in a cloud session on 2026-10-16. Reviewed the same day by a read-only code review; its fixes are applied
 > (below). It implements the [[Background Kit]] standard ([[0011-background-kit]],
 > proposed). The Luau compiles; Roblox's own Script Analysis hasn't seen it. Before
 > replacing [[ParallaxController]], **read the current script in Studio** and keep anything

@@ -66,15 +66,25 @@ Many built systems change; the list is in the spec's §12.
 have) and **open questions for the developer**, notably the coal tender, the weapon weld,
 the downed pose, a melee wind-up, the enemy hats and shirt colours, and music and voices.
 Also the [[Background Kit]] (the standard for every theme's background layers, with a
-Studio plugin; code drafted, not run yet, ADR [[0011-background-kit]] proposed).
+Studio plugin; ADR [[0011-background-kit]] proposed).
 
 **Decided 2026-10-16** ([[Original Mechanics Match]] §11): **a squad is 2 agents**; Lasso
 Lucy's lasso is deferred; **enterable carriages** (after the slice); the **Jetpack and
 Rolling Ball** events are designed (M3); and **the slice includes McGraw's boss fight, the
 checkpoint and the leap**.
 
-**Before the slice, in Studio:** save the place. Finish verifying Session 11 (the
-knockback fix, the Defender, key 1) as part of F2 and F7.
+**Before the slice, in Studio:** see "Next in Studio" below.
+
+**Done in Studio (local session, 2026-10-16):**
+- **The [[Background Kit]] is installed:** the new ParallaxController, the safety-net
+  service and the plugin (with a theme picker, Rename, Delete and a **Train** section for
+  editing carriage templates in place). Wild West is migrated, and the car order is now the
+  `Layout` attribute on `Carriages.WildWest`.
+- **F2 [[Combat Polish]] is built,** including Big Bart's `ChargeSpeed` 26.7. The checks
+  still open are listed under Known issues.
+
+**Next in Studio:** save the place, then F3 (Max's feel). Finish verifying Session 11 (the
+knockback fix, the Defender, key 1) and the open F2 checks in F7.
 
 ## In progress
 - [[First Playable (M1)]]: Sessions 1–4 are done. Systems: [[ModeService]], [[Guard]],
@@ -91,18 +101,12 @@ knockback fix, the Defender, key 1) as part of F2 and F7.
 - Review the rest of [[Writing and Dialogue]] (the bark lines, missions and challenge
   chains). Its open questions were decided on 2026-10-16: text bubbles with a voiced
   grunt, a tutorial skippable from the start, and the Quartermaster kept.
-- **Studio change:** set Big Bart's `ChargeSpeed` from 36 to **26.7** (2.5× walk, the
-  original's rule; decided 2026-10-16, [[Wild West Enemies]]).
 - **Rename in Studio:** change the experience name to **Train Mayhem**, and replace any
   "Train Runner" or placeholder names in GUI text: Dash → **Max Mayhem** (SquadGui and the
   HUD portrait label). Renaming the internal IDs (`DashDaring`) is optional.
-- **[[Combat Polish]] (planned, reviewed 2026-10-16):** the next Studio work after saving.
-  It makes Max a refined first agent, from the decompiled original:
-  - enemy flinch with a cooldown, muzzle flashes, enemy attack jitter and telegraph rules,
-  - perception, off-screen spawning, Dan's lobbed dynamite,
-  - 0.3 s i-frames, the spin pop-up, revive grace, and the moving camera lead.
-
-  The light and mid special mechanics are deferred until the first agent feels right.
+- **[[Combat Polish]] (built 2026-10-16):** finish its checks in a hands-on playtest
+  (Known issues). The light and mid special mechanics are deferred until the first agent
+  feels right.
 - **Manual [[Studio Setup Checklist]] items still to do in Studio:**
   - **Game Settings** (§3): devices, R15, free private servers, voice off.
   - **`Lighting.Technology` = ShadowMap** (§4). Scripts can't set it.
@@ -167,11 +171,25 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   timeout to PLAY AGAIN?
 
 ## Known issues / open problems
-- **Background copy counts (found by the [[Background Kit]] maths, not seen in a test):**
-  with the built ParallaxController, the Scrub layer's 4 copies can leave a gap at the
-  screen edge on wide phones, and the Foreground's 2 can run out at the camera. The
-  Background Kit's controller ([[Background Kit Code]] §2) centres the copies, which fixes
-  both with the current counts.
+- **F2 [[Combat Polish]] checks still open** (verified so far: i-frames, rifle flinch,
+  muzzle flashes, spin start/landing/refusals, off-screen spawns, camera lead, the dynamite
+  fuse blink, Bart's 26.7):
+  - the spin hitting and popping enemies, the rocket splash push, the Scattergun flash,
+  - perception by eye (jumping over an enemy, approaching from behind),
+  - the Six-Shooter's 4 s grace and tell timing, lob accuracy onto higher/lower roofs,
+  - outrunning Bart's charge with Max (and not with Brick),
+  - revive grace and the shove (2 players).
+- **Dynamite fuse timing changed:** `Fuse` 1.5 s now counts from landing, not the throw,
+  so sticks sit about 1.5 s instead of about 0.6 s. Tune it in the playtest.
+- **Enemies crowding onto the player:** when melee enemies stand inside the player, rifle
+  shots start inside their hitboxes and miss. This was already the case before F2; seen
+  in the F2 test.
+- **The Background Kit's wide-phone check** (no pop-in at the screen edges in the device
+  emulator) isn't done yet. The new controller centres its copies, which the kit's maths
+  says fixes the old Scrub/Foreground shortfall.
+- **The Studio MCP's playtest start can get stuck** ("Start play hasn't finished yet"). A
+  playtest started by hand still works with the MCP tools; restarting Studio, or toggling
+  the MCP server, clears it.
 - The place template's default `Workspace.SpawnLocation` (under the caboose) and the
   `Baseplate` are still there. Neither does anything now: agents spawn by script, and the
   Desert layer covers the baseplate. Deleting both is recommended, but it's your call.
@@ -217,6 +235,17 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   of the camera. Tune this in Session 6.
 
 ## Unsaved work in Studio
+- **2026-10-16 (local session): save or publish.** New or changed:
+  - **Background Kit:** `Shared.BackgroundKit`, ParallaxController (replaced),
+    `Services.BackgroundStudioService`, `ServerStorage.Tools.BackgroundKitPlugin` (also
+    saved as a local plugin; re-save it after the last edits), the `Slot`/`Continuous`
+    attributes on Wild West, and `Carriages.WildWest.Layout`, read by TrainService.
+  - **F2:** Constants, Types, `Util.CombatFeel`, `EnemyPerception`, `EnemyFlinch`,
+    `SpawnPlacement`, `Shared.CameraLead`, `Controllers.FeelEffects`. Hooks in
+    CombatService, EnemyService, SpawnService, SquadService, EffectsController and
+    CameraController. Template attributes (`FlinchCooldown`, `MinRange`, `MuzzleFlash`,
+    `ExplosionPush`, Bart's `ChargeSpeed`), the three muzzle-flash templates and the
+    dynamite `FuseSpark`.
 - **2026-10-14: M2 Sessions 8–11 need a save or publish** (File → Publish to Roblox).
   New:
   - **Services:** ScoreService, AgentService, MayhemService and GadgetService.

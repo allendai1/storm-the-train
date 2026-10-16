@@ -70,3 +70,10 @@ It also gives each player a HUD colour slot.
 - A downed player in a gap is still recovered to a roof by [[CharacterService]] (which
   checks the Humanoid's own Health, never touched). The fall damage does nothing at
   0 HP. Check how this looks in co-op.
+
+## Combat Polish (2026-10-16)
+- **Revive grace:** when a revive completes, the target gets `REVIVE_GRACE` (3 s) of
+  invulnerability (`CombatFeel.grantInvulnerability`). Live enemies within
+  `REVIVE_PUSH_RADIUS` (10) are shoved sideways at 40 studs/s with no lift
+  (`CombatService.knockback`), so they stay on the train.
+- **Not verified:** it needs 2 players.

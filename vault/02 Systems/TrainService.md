@@ -59,8 +59,10 @@ client.
 None.
 
 ## Data / state
-- `LAYOUT` (in the module): Caboose → Boxcar → Flatbed → CattleCar → Boxcar → WaterTanker
-  → Engine. The gap is `Constants.CARRIAGE_GAP` (3). The train is 201 studs long.
+- **The car order is the `Layout` attribute on `ServerStorage.Assets.Carriages.WildWest`**
+  (comma-separated template names, editable in Properties; added 2026-10-16):
+  Caboose → Boxcar → Flatbed → CattleCar → Boxcar → WaterTanker → Engine. The module's
+  `DEFAULT_LAYOUT` is the fallback. The gap is `Constants.CARRIAGE_GAP` (3). The train is 201 studs long.
 - `workspace` Attribute `Theme` (`"WildWest"`) replicates to clients.
 
 ## Depends on
@@ -72,3 +74,9 @@ None.
 - 2026-10-13 (Session 4): the Caboose `Roof` was trimmed from 13 to 11 studs, flush with the
   cabin. Its 1-stud overhang blocked enemies (and players) jumping from the porches onto the
   roof.
+
+- 2026-10-16: the [[Background Kit]] plugin's **Train** section (Edit train, Check train,
+  Train done) opens these templates in `Workspace.TrainStudio` at `TrainStart` in `Layout`
+  order, the checkpoint car after a leap gap, so they can be edited in place. Verified: the
+  same X positions as a real run, the check is clean, Done puts them back at (0, 3, 0), and
+  a playtest with the train left open still builds all 7 cars.

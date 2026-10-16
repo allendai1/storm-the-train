@@ -72,3 +72,14 @@ explosions, hit sparks, spin rings and KO pops. Everything is client-only and co
   - a score number on the KO pop instead of "KO!" (M2, [[Score and Combo]]).
 - Verified 2026-10-13: a playtest screen capture showed a rocket in flight and explosion
   smoke on the target, and the console was clean.
+
+## Combat Polish (2026-10-16)
+- **`M` record** (x, y, dirX, template) calls `FeelEffects.muzzleFlash`. The flash templates
+  are `ReplicatedStorage.Assets.Effects.MuzzleFlashRifle`, `MuzzleFlashScattergun` and
+  `MuzzleFlashRocket` (greybox Neon blocks), and each lives for `MUZZLE_FLASH_TIME`.
+- **`R` record:** an optional 9th value `explodesAt` (server time) comes on landed dynamite
+  and calls `FeelEffects.fuseBlink`. Every `R` makes a new clone, so a repeated record
+  can't double-blink one.
+- `Client.Controllers.FeelEffects` is a new module with no `init`/`start`. It blinks the
+  `FuseSpark` (a Neon ball welded to the tip of the `Dynamite` effect template).
+- **Verified 2026-10-16:** 53 flashes in a burst, none left behind; dynamite fuses blinked.

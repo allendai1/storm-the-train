@@ -1,14 +1,16 @@
 ---
 tags: [design, background, parallax, map, pipeline, standard, slice]
-status: planned
+status: implemented
 updated: 2026-10-16
 ---
 # Background Kit — the standard for every theme's scenery
 
-> **Status: planned.** The developer asked on 2026-10-16 for a standard way to build each
-> map's background layers and tiles. This note is that standard. The code (a shared
-> module, a ParallaxController upgrade, a safety-net service and a **Studio plugin**) is
-> drafted in [[Background Kit Code]] and **hasn't run in Studio yet**. The architecture
+> **Status: implemented in Studio on 2026-10-16.** The developer asked on 2026-10-16 for a
+> standard way to build each map's background layers and tiles. This note is that standard.
+> The code (a shared module, a ParallaxController upgrade, a safety-net service and a
+> **Studio plugin**) is in [[Background Kit Code]], installed and checked (the wide-phone
+> edge check is still open). The plugin also gained a theme picker, **Rename**, **Delete**
+> and a **Train** section for editing the carriage templates in place. The architecture
 > choice is [[0011-background-kit]] (proposed). How the scrolling works is explained in
 > [[ParallaxController]] and [[0009-static-trains-scrolling-world]].
 
