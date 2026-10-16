@@ -52,6 +52,12 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
    drafted), then the Session 13 full-loop playtest.
 3. **Then** M3 content and M4 meta. The economy and event decisions are recorded and wait.
 
+**Slice prep done in the cloud (2026-10-16):** the reference board and style sheet
+([[References]]), the F2 code ([[Combat Polish Code]], reviewed) and the F3–F6 specs
+([[Feel and Look Asset Specs]]). The specs list a Studio pre-check (values the vault doesn't
+have) and **open questions for the developer**, notably the coal tender, the weapon weld,
+the downed pose, a melee wind-up, the enemy hats and shirt colours, and music and voices.
+
 **Before the slice, in Studio:** save the place. Finish verifying Session 11 (the
 knockback fix, the Defender, key 1) as part of F2 and F7.
 
@@ -108,8 +114,8 @@ knockback fix, the Defender, key 1) as part of F2 and F7.
     glow when ready),
   - Boosters, Checkpoint (continue or cash out), Surplus Shop, Missions and daily
     challenge, Store and Exchange, Downed and Squad Wiped, and Leaderboards screens.
-- Add reference images to `05 Assets/References/` (the list is in [[Art Direction]] §13)
-  before modelling starts in M1.
+- Pick images from the reference board in [[References]] and save them into
+  `05 Assets/References/` before modelling starts (the links aren't checked).
 - Name the agency, hub train, agents and gang ([[Title Ideas]]).
 - Tune in playtests:
   - enemy damage ([[Wild West Enemies]]),

@@ -84,7 +84,8 @@ updated: 2026-10-16
 ## Not adopted (2026-10-16)
 - **Turned down:** a white flash on every hit, per-weapon knockback ÷ weight on every hit,
   the weapon pop on knockout, camera-shake tiers, and Mayhem ×0.2 while a gadget is active.
-- **Movement kept as built:** the higher 14-stud jump, the original's double-jump
+- **Turned down, so movement stays as built** (the 8-stud jump and so on): the original's
+  higher 14-stud jump, the original's double-jump
   velocity rule, the scripted train leap, and emergent "wait for the mid" spawn pacing.
 - **Deferred:** the light and mid special mechanics (the Rodeo Kid spin, Saloon Door Sam's
   doors, Dan backing off, enemies fleeing on revive). They wait until the first agent is
