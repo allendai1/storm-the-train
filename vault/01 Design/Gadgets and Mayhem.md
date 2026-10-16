@@ -50,7 +50,7 @@ gadgets you can pick.
 
   The target is a full meter roughly every **45–60 s** of steady fighting, which is about 2–3
   gadgets per train. Check that in the first playtest.
-- **[proposed] Co-op balance.** Enemy counts scale up less than one-for-one with party
+- **[proposed, left open 2026-10-16] Co-op balance.** Enemy counts scale up less than one-for-one with party
   size (×2.8 enemies for 4 players), so each player gets fewer kills in a full party.
   Assists make up most of the difference.
 - **[decided 2026-10-16] The meter empties when you deploy** a gadget. It doesn't decay while full,

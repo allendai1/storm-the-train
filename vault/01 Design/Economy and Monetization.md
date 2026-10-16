@@ -30,17 +30,17 @@ let you go deeper → deeper runs earn more.** Gems speed up parts of that loop 
 boosters, skipping blueprints) but never replace it.
 
 ## Principles
-- **[proposed] Paid power never makes a teammate's run worse.** Boosters only affect
+- **[decided 2026-10-16] Paid power never makes a teammate's run worse.** Boosters only affect
   the buyer. Pickups are personal, so a paid magnet can't take a teammate's coins.
   Enemy HP never scales with anyone's purchases.
-- **[proposed] Every agent can be earned for free**, in about 8 hours of play for a
+- **[decided 2026-10-16] Every agent can be earned for free**, in about 8 hours of play for a
   100-gem agent (see the targets below).
 - **[decided] Leaderboards rank unboosted score, and gem-revived runs count.** See
   [[Score and Combo]].
-- **[proposed] No paid random items.** Every Robux and gem purchase is deterministic:
+- **[proposed, left open 2026-10-16] No paid random items.** Every Robux and gem purchase is deterministic:
   you see exactly what you get. Roblox requires odds disclosure for paid random items,
   and some regions restrict them, so we avoid the problem entirely.
-- **[proposed] Honest pricing**, because the game targets all ages and many Roblox players
+- **[proposed, left open 2026-10-16] Honest pricing**, because the game targets all ages and many Roblox players
   are young:
   - no fake countdowns on Robux offers,
   - no "you'll lose this forever" pressure,
@@ -56,7 +56,7 @@ boosters, skipping blueprints) but never replace it.
   the open question in [[Score and Combo]]: score feeds coins, so the score booster
   (which multiplies personal score) pays off in coins too, while leaderboards still
   rank unboosted score.
-- **[proposed] Missions** pay mostly coins (500–2,000 each).
+- **[decided 2026-10-16] Missions** pay mostly coins (500–2,000 each).
 - **[decided 2026-10-16] Cashing out.** Coins are always kept, whether you wipe or cash out. Only
   blueprints are at risk (see below).
 
@@ -73,16 +73,16 @@ Air Strike has only one level. Maxing everything is **1,079,400 coins** and **18
 blueprint unlocks**.
 
 ## Blueprints
-- **[proposed] Drops.** Blueprint carriers drop them (any light or mid can spawn with
+- **[decided 2026-10-16] Drops.** Blueprint carriers drop them (any light or mid can spawn with
   stolen blueprints; see [[Wild West Enemies]]), and so does the blueprint-thief event.
   The target is **about 1 blueprint per train** per player.
-- **[proposed] Personal loot.** When a carrier is knocked out, every player in the run
+- **[decided 2026-10-16] Personal loot.** When a carrier is knocked out, every player in the run
   gets the blueprint. Nobody fights over drops.
 - **[decided] Bank them or lose them.** Blueprints you carry are **banked at the next
   checkpoint**. If the squad wipes before then, carried blueprints are lost. That puts
   real weight on the **cash out or continue** choice at each checkpoint. (The original
   also banked blueprints at the hub train.)
-- **[proposed] Unlock selection** uses the original's weighted catch-up roll:
+- **[decided 2026-10-16] Unlock selection** uses the original's weighted catch-up roll:
   - It always unlocks your **lowest-level owned gear first**.
   - Then gear one or two levels above that.
   - Then, occasionally, gear belonging to agents you don't own yet, as a teaser.
@@ -91,13 +91,13 @@ blueprint unlocks**.
 
 ## Gems
 ### Earning for free
-- **[proposed] Sources:**
+- **[decided 2026-10-16] Sources:**
   - Missions: some pay 5–15 gems.
   - Daily challenges (below).
   - **Rare gem drops in runs**, about 1 per 10 minutes. The original's gem booster
     multiplies these.
   - First-time milestones: e.g. first boss, first leg 3, first hostage.
-- **[proposed] Target:** about **12 free gems per hour** of regular play.
+- **[decided 2026-10-16] Target:** about **12 free gems per hour** of regular play.
 
 ### Robux gem packs (Developer Products)
 | Pack | Gems | Robux | Bonus |
@@ -108,7 +108,7 @@ blueprint unlocks**.
 | Strongbox | 520 | 999 | +30% |
 | Vault | 1,400 | 2,499 | +40% |
 
-**[proposed]** At about 2.4 Robux per gem, a 100-gem agent is about 240 Robux and a
+**[decided 2026-10-16]** At about 2.4 Robux per gem, a 100-gem agent is about 240 Robux and a
 first revive (5 gems) about 12 Robux. The pack names are placeholders.
 
 ### Gem prices
@@ -119,21 +119,21 @@ first revive (5 gems) about 12 Robux. The pack names are placeholders.
 | Zorp | 150 | Original tier `char_high` |
 | Self-revive | 5, then doubling: 10, 20, 40… per run | GDD decision; the starting price is proposed here |
 | Gadget deploy (meter not full) | 5, then doubling: 10, 20, 40… per run; 1 per train | Decided 2026-10-16 ([[Gadgets and Mayhem]]) |
-| Mission skip | 5 | Proposed. Reroll is free once a day |
+| Mission skip | 5 | Decided 2026-10-16. Reroll is free once a day |
 | Boosters | 1–6 | Original (see below) |
 | Surplus shop offers | Varies | See below |
 | Cosmetic skins | 50–150 | Proposed |
 | Gems → coins exchange | 10 → 4,000 · 50 → 22,000 · 100 → 48,000 | Proposed; replaces the original's coin packs |
 
-**[proposed] No Robux coin packs.** Coins come from gems through the hub exchange, so
+**[decided 2026-10-16] No Robux coin packs.** Coins come from gems through the hub exchange, so
 there's one premium currency to understand.
 
 ## Boosters
 Up to **3 boosters** can be equipped at the start of a run and at each checkpoint.
-- **[proposed] Change from the original:** a booster lasts for the **next leg** (3 trains),
-  not one train. Our checkpoints only come every 3 trains, so a one-train booster
-  would only ever cover the first train of a leg.
-- **[proposed] All types are always on sale.** The original showed a random selection;
+- **[decided 2026-10-16] A booster lasts one train**, as in the original. Boosters are only
+  equipped at the run start and at checkpoints, so each one covers the **first train of
+  a leg**. (A proposal to make them last the whole leg was turned down.)
+- **[decided 2026-10-16] All types are always on sale.** The original showed a random selection;
   a fixed list is clearer and avoids anything that looks like a random paid offer.
 
 | Booster | Tiers (effect → price, original) | Co-op rule |
@@ -153,18 +153,18 @@ boosters that earn coins.
 A rotating hub shop with **3 offers**: one cheap, one mid and one premium. Each sells a
 gear upgrade level for gems with **"no blueprints required"**. As in the original, an
 offer buys every level up to the one shown.
-- **[proposed] Price** = the coin cost of the levels skipped ÷ **400**, × **1.5** for
+- **[decided 2026-10-16] Price** = the coin cost of the levels skipped ÷ **400**, × **1.5** for
   blueprint-locked levels (× 1.0 for levels you've already unlocked). For example, a locked L2 is
   about 4 gems, and a whole item from L1 to L10 is about 193 gems.
-- **[proposed] Refresh** every **8 hours**, shown as a real timer. Offers only include gear
+- **[decided 2026-10-16] Refresh** every **8 hours**, shown as a real timer. Offers only include gear
   for **agents you own**.
 - It's deterministic: you see the exact item and level before you pay.
 
 ## Missions and daily challenges
-- **[proposed] Missions:** 3 active at once, drawn from the original's mission types (kill
+- **[decided 2026-10-16] Missions:** 3 active at once, drawn from the original's mission types (kill
   counts, bosses, gadgets, trains without damage, combo tiers…). There's one free
   reroll a day, and a skip costs 5 gems. Missions pay coins, sometimes gems.
-- **[proposed] Daily challenge = agent trial.** Once a day you can play a short
+- **[decided 2026-10-16] Daily challenge = agent trial.** Once a day you can play a short
   **survival challenge with an agent you may not own**, keeping the original's "challenge
   chopper" idea. Each agent has a 5-day chain. Finishing it gives gems and a
   **one-time 25% discount** on that agent (the original gave a % discount). It's how free
@@ -203,9 +203,9 @@ Coin Bonus pass. Prices are still proposed.
 ### Other
 - **[decided] No first-purchase gift.** The original's "Bob for any purchase" idea isn't
   carried over.
-- **[proposed] Private servers are free.** Runs already use reserved servers. Free private
+- **[decided 2026-10-16] Private servers are free.** Runs already use reserved servers. Free private
   servers make it easy for friends to play, and drive engagement.
-- **[proposed] Premium Payouts.** Roblox pays developers for time Premium subscribers
+- **[proposed, left open 2026-10-16] Premium Payouts.** Roblox pays developers for time Premium subscribers
   spend in the experience. That favours long, friendly co-op sessions over aggressive
   sales.
 - **[decided] No ads.** No rewarded video ads, not even for a free revive. Revives come

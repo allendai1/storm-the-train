@@ -75,11 +75,11 @@ combo**, and the rest comes from clearing trains, events and helping teammates.
   scores**) ranks on the squad board, which is split by party size (solo, duo, 3–4) so
   bigger parties don't crowd out smaller ones. The **personal score** ranks on the
   **individual** board (see the GDD for brackets).
-  - **[proposed]** The individual board invites kill-stealing. Two rules work against it:
+  - **[decided 2026-10-16]** The individual board invites kill-stealing. Two rules work against it:
     assists keep your combo alive, and every boss helper gets 500.
 - **[decided] Boosters don't count on boards.** Score boosters (×2/×3) multiply your
   personal score for missions and your personal best. Every leaderboard ranks the
-  **unboosted** score. **[proposed]** If run-end coins end up tied to score, they use the
+  **unboosted** score. **[proposed, left open 2026-10-16]** If run-end coins end up tied to score, they use the
   boosted score, so the booster still pays off.
 - **[decided] Gem-revived runs count** on every board. The revive price doubles each use,
   which limits buying a deep run.

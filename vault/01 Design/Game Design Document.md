@@ -56,9 +56,9 @@ publishing (see [[Title Ideas]]).
   young.
 - **[decided]** **PC and mobile at launch. No console.** Console certification and
   console-specific UI are out of scope.
-  - **[proposed]** Controls are still designed to work well on touch, as the original
+  - **[decided 2026-10-16]** Controls are still designed to work well on touch, as the original
     was a touch game.
-  - **[proposed]** Gamepad bindings stay as a nice-to-have for PC players with a
+  - **[decided 2026-10-16]** Gamepad bindings stay as a nice-to-have for PC players with a
     controller, not a launch requirement.
 
 ## Tone
@@ -68,7 +68,7 @@ publishing (see [[Title Ideas]]).
   ragdolls onto the carriage roof or floor, lies there briefly, then fades out.
   - There's no gore, matching the "Silly, never mean" pillar and Roblox content rules.
   - Strong hits can still launch a ragdoll down the carriage.
-- **[proposed]** The details:
+- **[decided 2026-10-16]** The details:
   - Ragdolls fade after about **3 s**.
   - At most **about 12 ragdolls** exist at once; the oldest fade early. This protects
     performance with 4 players and crowds.

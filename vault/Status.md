@@ -91,13 +91,34 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 - Add reference images to `05 Assets/References/` (the list is in [[Art Direction]] §13)
   before modelling starts in M1.
 - Name the agency, hub train, agents and gang ([[Title Ideas]]).
-- Design leftovers:
-  - The exact knock-out ragdoll limits (GDD → Tone).
 - Tune in playtests:
   - enemy damage ([[Wild West Enemies]]),
   - Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]),
   - score values and the combo window ([[Score and Combo]]),
   - prices and earn rates ([[Economy and Monetization]]).
+
+## Open design decisions
+After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
+- **Naming:** the title, agency, hub train, agents, gang and the Quartermaster
+  ([[Title Ideas]]).
+- **Left open on purpose** (still `[proposed]`):
+  - no paid random items and honest pricing (GDD and [[Economy and Monetization]]),
+  - the Premium Payouts focus,
+  - Mayhem co-op balance ([[Gadgets and Mayhem]]),
+  - run-end coins using boosted score ([[Score and Combo]]).
+- **Review by hand:**
+  - the rest of [[Writing and Dialogue]] (bark lines, missions, challenge chains),
+  - the Figma mockups ([[Art Direction]] §10).
+- **Needs a test first:**
+  - ShadowMap vs Future,
+  - enemy damage and cooldowns,
+  - Mayhem fill and mech armour,
+  - the combo window and score values,
+  - the rocket's splash and range,
+  - spawn distance,
+  - Robux prices, the Coin Bonus pass and the login-streak amounts.
+- **Studio housekeeping:** delete the template's `SpawnLocation` and `Baseplate`? Add a
+  timeout to PLAY AGAIN?
 
 ## Known issues / open problems
 - The place template's default `Workspace.SpawnLocation` (under the caboose) and the

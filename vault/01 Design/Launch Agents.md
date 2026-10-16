@@ -185,9 +185,8 @@ is the best ride. He takes photos mid-fight.
 - **[decided 2026-10-16] Duplicates in a party are allowed.** Two players can both bring Dash. That
   avoids lobby arguments, and the speed/toughness curve already pushes squads to
   diversify.
-- **[proposed] Gem prices:** 80 / 100 / 100 / 150, which is **430 gems** for the paid
-  four. This follows the original's tiers (80, 100 and 150). The real prices wait for
-  the gem economy.
+- **[decided 2026-10-16] Gem prices:** 80 / 100 / 100 / 150, which is **430 gems** for the paid
+  four. This follows the original's tiers (80, 100 and 150).
 - **[decided 2026-10-16] Co-op gadget rules** (full gadget design in [[Gadgets and Mayhem]]): the Healer Drone and Heal Suit heal **every
   teammate in range**, not just the owner. The Defender Drone blocks projectiles for
   anyone behind it. This keeps "Better together" true for support agents.
