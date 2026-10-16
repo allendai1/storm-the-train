@@ -1,7 +1,7 @@
 ---
 tags: [design, art]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Art Direction
 
@@ -158,8 +158,12 @@ Mimi's beret is a pink-leaning red so it doesn't read as gang red.
 - One strong key light (the sun) from slightly in front of the gameplay plane, so faces
   toward the camera are lit. A warm key and cool ambient for the Wild West.
 - `Atmosphere` for distance fade. A little `Bloom`, and a gentle `ColorCorrection`
-  boost to saturation and contrast. No heavy depth of field, which would hurt
-  readability.
+  boost to saturation and contrast.
+- **A light depth of field on the background** (decided 2026-10-16, the developer): the
+  play plane stays sharp and the scenery softens with distance, like the original's
+  sharp characters on blurred backdrops. Keep it light: nothing heavy that hurts
+  readability, and nothing on the gameplay plane. It's polish, not load-bearing: Roblox
+  drops depth of field at low graphics quality, so the picture must read without it.
 
 ## 9. VFX
 - **No blood, ever** (pillar "Silly, never mean"). Hits make white flash sparks.

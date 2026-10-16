@@ -496,7 +496,8 @@ grime `#4A3A2E`.
 ### 3.3 Lighting: starting values (all first guesses; [[Art Direction]] §8 gives only the intent)
 §8: **one strong warm key (the sun) slightly in front of the gameplay plane**, so faces
 toward the camera are lit; a cool ambient; Atmosphere for distance fade; a little Bloom; a
-gentle saturation and contrast boost; **no heavy depth of field**.
+gentle saturation and contrast boost; **a light depth of field on the background only**
+(changed 2026-10-16; it was "none").
 
 | Instance | Property | Starting value |
 |---|---|---|
@@ -518,7 +519,7 @@ gentle saturation and contrast boost; **no heavy depth of field**.
 | | `TintColor` | `#FFF6EC` |
 | `BloomEffect` | `Intensity` / `Size` / `Threshold` | 0.35 / 20 / **1.4** (high enough that sand and white shirts don't bloom, but Neon tracers, muzzle flashes and coins do) |
 | `SunRaysEffect` | `Intensity` / `Spread` | 0.02 / 0.6 (optional) |
-| `DepthOfFieldEffect` | — | **None** (§8) |
+| `DepthOfFieldEffect` (`Lighting.DepthOfField`) | `Enabled` / `FocusDistance` / `InFocusRadius` / `FarIntensity` / `NearIntensity` | true / **55** / **25** / **0.25** / **0.2**. Set in Studio 2026-10-16. The camera sits 40–72 studs from the plane depending on aspect (48 at the Studio viewport), so focus 55 ± 25 keeps the train sharp on every screen while `4_Near` softens a little and `6_Far` more. Off at low graphics quality |
 
 **Test**: capture the same frame on PC and a phone under ShadowMap and Future, and record
 the frame rate with 4 agents, a 20-enemy crowd and 12 ragdolls (F7).
