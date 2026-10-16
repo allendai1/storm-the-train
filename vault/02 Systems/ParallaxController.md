@@ -26,11 +26,11 @@ the server never moves scenery.
 
   | Layer | Slot | TileLength | Tiles | Contents |
   |---|---|---|---|---|
-  | Desert | Ground | 200 | 8 | Ground slab (Z +60 … −640, `Continuous`) plus rocks and scrub |
-  | Track | Track | 30 | 5 | 10 ties and 2 rails (`Continuous`) under the train |
-  | Scrub | Near | 120 | 4 | Saguaros and bushes, Z −35 … −110 |
-  | Mesas | Far | 500 | 4 | Mesas and a butte, Z −380 … −520 |
-  | Foreground | Foreground | 140 | 2 | A telegraph pole at Z +22 |
+  | `3_Ground` (was Desert) | Ground | 200 | 8 | Ground slab (Z +60 … −640, `Continuous`) plus rocks and scrub |
+  | `2_Track` | Track | 30 | 5 | 10 ties and 2 rails (`Continuous`) under the train |
+  | `4_Near` (was Scrub) | Near | 120 | 4 | Saguaros and bushes, Z −35 … −110 |
+  | `6_Far` (was Mesas) | Far | 500 | 4 | Mesas and a butte, Z −380 … −520 |
+  | `1_Foreground` | Foreground | 140 | 2 | A telegraph pole at Z +22 |
 
   The kit's minimum copy counts are 7, 4, 4, 3 and 2, so every layer has enough.
 

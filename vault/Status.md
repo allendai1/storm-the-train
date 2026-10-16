@@ -186,13 +186,13 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   in the F2 test.
 - **The Background Kit's wide-phone check** (no pop-in at the screen edges in the device
   emulator) isn't done yet. The new controller centres its copies, which the kit's maths
-  says fixes the old Scrub/Foreground shortfall.
+  says fixes the old shortfall in `4_Near` (was Scrub) and `1_Foreground`.
 - **The Studio MCP's playtest start can get stuck** ("Start play hasn't finished yet"). A
   playtest started by hand still works with the MCP tools; restarting Studio, or toggling
   the MCP server, clears it.
 - The place template's default `Workspace.SpawnLocation` (under the caboose) and the
   `Baseplate` are still there. Neither does anything now: agents spawn by script, and the
-  Desert layer covers the baseplate. Deleting both is recommended, but it's your call.
+  `3_Ground` layer covers the baseplate. Deleting both is recommended, but it's your call.
 - Open tuning questions from Session 3:
   - Does a direct rocket hit taking splash too (26 total) feel right?
   - The Pocket Rocket's `Range` 60 is a guess.
@@ -240,6 +240,9 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
     `Services.BackgroundStudioService`, `ServerStorage.Tools.BackgroundKitPlugin` (also
     saved as a local plugin; re-save it after the last edits), the `Slot`/`Continuous`
     attributes on Wild West, and `Carriages.WildWest.Layout`, read by TrainService.
+  - **Layer names:** every theme's layers renamed to `<number>_<Slot>` (Wild West's
+    Desert/Scrub/Mesas → `3_Ground`/`4_Near`/`6_Far`; City numbered too); the plugin
+    numbers its slot buttons and new layers. Re-save the plugin as a local plugin.
   - **F2:** Constants, Types, `Util.CombatFeel`, `EnemyPerception`, `EnemyFlinch`,
     `SpawnPlacement`, `Shared.CameraLead`, `Controllers.FeelEffects`. Hooks in
     CombatService, EnemyService, SpawnService, SquadService, EffectsController and

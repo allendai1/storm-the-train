@@ -66,5 +66,9 @@ same session, in the same spirit:
 - **The car order is data in the place:** the `Layout` attribute on the carriages folder
   ([[TrainService]]), instead of a table in code.
 - Theme management in the plugin: a picker, Rename and Delete (undoable).
+- **Standard layer names:** the decision above left layer names free; the developer
+  asked for standard ones. Layers are named `<number>_<Slot>`, front to back
+  (`1_Foreground` … `6_Far`), and the plugin names new layers that way. Wild West's
+  Desert, Scrub and Mesas became `3_Ground`, `4_Near` and `6_Far`.
 
 Related: [[Background Kit]] · [[Background Kit Code]] · [[ParallaxController]] · [[0009-static-trains-scrolling-world]]

@@ -468,11 +468,11 @@ grime `#4A3A2E`.
 
 | Layer (built greybox) | Z range | Depth d | Apparent speed vs the train plane | Visible width | `TileLength` × `Tiles` | Final contents | Budget (of the 20k visible) |
 |---|---|---|---|---|---|---|---|
-| **Foreground** | +22 | −22 (in front) | **≈ 1.7×** (crosses the screen in about 0.8 s) | ≈ 41 | 140 × 2 | **Rare, dark, low-detail** silhouettes: telegraph poles (with wires sagging between tiles), a saguaro, a rock. `#4A3A2E`-dark, no texture. They never cover the gameplay plane for more than a moment (§1) | ≤ 1k |
-| **Track** | ≈ 0 (under the train) | 0 | 1.0 | 70 | 30 × 5 | **10 ties (3-stud spacing) and 2 rails** under the train; ballast. The moving ties sell the speed. Ties `#5A4632`, rails `#3B3B42`, ballast `#CDB48E` (first guesses) | ≤ 2k |
-| **Desert** | +60 → −640 (a ground slab) | 0 → 640 | 1.0 → 0.08 | — | 200 × 8 | Sand floor `#E8CBA2`, scattered rocks, scrub tufts `#A9B38A`, tyre-free dirt road (proposal), a faint dune undulation. Keep the near strip low-contrast so it doesn't compete with the train | ≤ 5k |
-| **Scrub** | −35 → −110 | 35–110 | ≈ 0.6 → 0.33 | ≈ 115–213 | 120 × 4 | Saguaros, bushes, fence lines, the occasional windmill or water tower. Muted sage `#A9B38A`; slightly lower saturation than the train | ≤ 6k |
-| **Mesas** | −380 → −520 | 380–520 | ≈ 0.12 → 0.09 | ≈ 560–745 | 500 × 4 | Mesas and buttes in **desaturated terracotta `#D9A27C`**, flat-shaded with 2–3 strata bands, fading with Atmosphere | ≤ 6k |
+| **1_Foreground** | +22 | −22 (in front) | **≈ 1.7×** (crosses the screen in about 0.8 s) | ≈ 41 | 140 × 2 | **Rare, dark, low-detail** silhouettes: telegraph poles (with wires sagging between tiles), a saguaro, a rock. `#4A3A2E`-dark, no texture. They never cover the gameplay plane for more than a moment (§1) | ≤ 1k |
+| **2_Track** | ≈ 0 (under the train) | 0 | 1.0 | 70 | 30 × 5 | **10 ties (3-stud spacing) and 2 rails** under the train; ballast. The moving ties sell the speed. Ties `#5A4632`, rails `#3B3B42`, ballast `#CDB48E` (first guesses) | ≤ 2k |
+| **3_Ground** (was Desert) | +60 → −640 (a ground slab) | 0 → 640 | 1.0 → 0.08 | — | 200 × 8 | Sand floor `#E8CBA2`, scattered rocks, scrub tufts `#A9B38A`, tyre-free dirt road (proposal), a faint dune undulation. Keep the near strip low-contrast so it doesn't compete with the train | ≤ 5k |
+| **4_Near** (was Scrub) | −35 → −110 | 35–110 | ≈ 0.6 → 0.33 | ≈ 115–213 | 120 × 4 | Saguaros, bushes, fence lines, the occasional windmill or water tower. Muted sage `#A9B38A`; slightly lower saturation than the train | ≤ 6k |
+| **6_Far** (was Mesas) | −380 → −520 | 380–520 | ≈ 0.12 → 0.09 | ≈ 560–745 | 500 × 4 | Mesas and buttes in **desaturated terracotta `#D9A27C`**, flat-shaded with 2–3 strata bands, fading with Atmosphere | ≤ 6k |
 
 - Check the **coverage**: `TileLength × Tiles` must exceed the visible width plus one tile
   (2000 vs about 745 for the mesas, 480 vs about 213 for scrub, 280 vs about 41 for the
@@ -530,10 +530,10 @@ small code change. **Now drafted** in the [[Background Kit]]: variant tiles
 
 | Set-piece | Layer | Slice | Contents | Notes |
 |---|---|---|---|---|
-| **Cactus field** | Scrub | **REQ** (easiest) | A dense stand of saguaros and prickly pear, one or two comic cactus "poses" (arms up as if held up by a bandit) | Fits the existing 120-stud scrub tile |
-| **Ghost town** | Scrub (or a new mid layer at about Z −150) | NTH | A false-front saloon, a bank, a water tower and tumbleweeds; desaturated wood `#B89A7A` (first guess) | A one-tile variant |
-| **Canyon** | Mesas + Desert | NTH | Canyon walls rising close behind the train (a new layer at about Z −60, first guess), in a slightly darker terracotta | Gives the strongest depth change |
-| **Bridge (trestle)** | Track + Desert | NTH (later) | The track tile becomes a timber trestle and the desert floor drops away into a gorge | The hardest: it swaps the ground under the train. Remember the gap-fall rule uses absolute Y |
+| **Cactus field** | 4_Near | **REQ** (easiest) | A dense stand of saguaros and prickly pear, one or two comic cactus "poses" (arms up as if held up by a bandit) | Fits the existing 120-stud scrub tile |
+| **Ghost town** | 4_Near (or a new 5_Mid layer at about Z −150) | NTH | A false-front saloon, a bank, a water tower and tumbleweeds; desaturated wood `#B89A7A` (first guess) | A one-tile variant |
+| **Canyon** | 6_Far + 3_Ground | NTH | Canyon walls rising close behind the train (a new layer at about Z −60, first guess), in a slightly darker terracotta | Gives the strongest depth change |
+| **Bridge (trestle)** | 2_Track + 3_Ground | NTH (later) | The track tile becomes a timber trestle and the desert floor drops away into a gorge | The hardest: it swaps the ground under the train. Remember the gap-fall rule uses absolute Y |
 
 ---
 
@@ -711,7 +711,7 @@ for the slice. **P3** = nice-to-have.
 8. **Max's toon model + faces**, then the remaining Max animations (downed, revive,
    celebrate, swap-in, leap).
 9. **The light-enemy base body**, then the per-slot hats and props, then **Big Bart**.
-10. **Final parallax layers** (Track → Scrub → Mesas → Desert → Foreground), the skybox and
+10. **Final parallax layers** (2_Track → 4_Near → 6_Far → 3_Ground → 1_Foreground), the skybox and
     the cactus-field set-piece.
 11. **VFX pass 2:** dust, `SpinTrail`, `ChargeDust`, `FuseSparkle`, `CoinSparkle`,
     `SmokeStack`, swap and revive bursts. Then the P2 sounds and barks.

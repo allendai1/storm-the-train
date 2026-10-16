@@ -50,7 +50,7 @@ Blender; the validator reports part counts as a guide.
 ```
 ReplicatedStorage.Assets.Backgrounds
 └── <Theme>                      Folder, PascalCase (WildWest, Ninjas…)
-    ├── <Layer>                  Model, any clear name (Scrub, Mesas…)
+    ├── 4_Near                   Model, named <number>_<Slot> (1_Foreground … 6_Far)
     │     Attributes: Slot ("Near"), TileLength (120), Tiles (5)
     │   ├── Tile                 Model: the default chunk. Pivot at its LEFT end, unrotated
     │   │   ├── Saguaro          props, grouped and named
@@ -62,7 +62,7 @@ ReplicatedStorage.Assets.Backgrounds
 ### Layer Model (the contract the code reads)
 | Attribute | Type | Meaning |
 |---|---|---|
-| `Slot` | string | `Foreground`, `Track`, `Ground`, `Near`, `Mid` or `Far`. The tooling checks the depth band from it. The layer's **name** is free (keep Wild West's `Scrub`, `Mesas`…) |
+| `Slot` | string | `Foreground`, `Track`, `Ground`, `Near`, `Mid` or `Far`. The tooling checks the depth band from it. **Name the layer `<number>_<Slot>`**, numbered front to back: `1_Foreground`, `2_Track`, `3_Ground`, `4_Near`, `5_Mid`, `6_Far`. The number belongs to the slot, so a theme without a Mid layer skips 5. Nothing reads the name (the `Slot` attribute counts), and the plugin names new layers this way |
 | `TileLength` | number | Length of one tile in studs. Every variant in the layer uses the same length |
 | `Tiles` | number | Copies kept in play. The validator says the minimum |
 
@@ -146,13 +146,13 @@ Forgot to press **Done** before Play? The safety-net service moves it back for t
 ## Wild West: moving to the standard
 The greybox already follows most of this. The changes ([[Background Kit Code]] §5):
 
-| Layer | `Slot` | Notes |
+| Layer (renamed 2026-10-16; was) | `Slot` | Notes |
 |---|---|---|
-| Foreground | Foreground | Fine at 2 |
-| Track | Track | Mark the rails `Continuous` |
-| Desert | Ground | Mark the ground slab `Continuous` |
-| Scrub | Near | Fine at 4, **with the new controller** (see below) |
-| Mesas | Far | Fine at 4 (content stops at Z −520) |
+| `1_Foreground` (Foreground) | Foreground | Fine at 2 |
+| `2_Track` (Track) | Track | Mark the rails `Continuous` |
+| `3_Ground` (Desert) | Ground | Mark the ground slab `Continuous` |
+| `4_Near` (Scrub) | Near | Fine at 4, **with the new controller** (see below) |
+| `6_Far` (Mesas) | Far | Fine at 4 (content stops at Z −520) |
 
 **Why the new controller matters here:** the built one keeps more of its copies on the −X
 side of the camera (where scenery scrolls off), leaving the +X edge short, so on wide phones (where the camera sits closer and far layers show more)
