@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, agents, roster, balance]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Launch Agents
 
@@ -130,8 +130,10 @@ acrobatic and precise, and she's funnier the more serious things get.
   - **Finger Guns** (Dual Pistols archetype): 14 damage every 0.2 s. Yes, she's pointing
     her fingers, and yes, they fire.
   - **Invisible Bow** (Rail Gun / charge archetype): hold to draw an invisible bow and
-    release a piercing shot. Its damage is a charge formula still to be decided (the
-    original's charge-weapon maths wasn't recovered). On mobile it's hold-to-charge on
+    release a piercing shot. **[decided 2026-10-16] No damage scaling:** the draw takes
+    **0.8 s**, and the shot does a fixed **70, piercing** every enemy in line. Releasing
+    before the draw finishes cancels the shot; once drawn, it fires on release. (The
+    original's charge-weapon maths wasn't recovered.) On mobile it's hold-to-charge on
     the shoot button.
 - **Gadgets:** Defender Drone ("Invisible Wall"), Freeze Drone, Melee Drone.
 - **Spin attack:** level 8, the strongest at launch. Her cartwheel kick is her main
@@ -198,7 +200,7 @@ is the best ride. He takes photos mid-fight.
   | Brick | Scattergun | 27 per pellet | Crowd Pleaser | 86 (after spin-up) |
   | Turbo | Twin Zippers | 53 | Spark Plug | 40 + chain |
   | Nana | Yarn Bombs | 72 + area | Blow-Dryer | 7 + burn |
-  | Mimi | Finger Guns | 70 | Invisible Bow | charge, TBD |
+  | Mimi | Finger Guns | 70 | Invisible Bow | 70 + pierce (0.8 s draw) |
   | Zorp | Ray Blaster | 26 + pierce | Goo Gun | 5 + DoT + slow |
 
 ## Systems involved
@@ -231,7 +233,8 @@ These are not part of the launch 6, just for later:
 
 ## Open questions
 - Final agent names (the current ones are placeholders).
-- Mimi's Invisible Bow needs a charge formula (charge time, minimum and maximum damage).
+- ~~Mimi's Invisible Bow needs a charge formula.~~ **[decided 2026-10-16]** A fixed 70 piercing
+  shot after a 0.8 s draw (above). Tune the numbers in playtests.
 
 ## Implementation notes
 - **M2 Session 10 (2026-10-14):** Dash and Brick are built as greybox templates with these

@@ -1,6 +1,6 @@
 ---
 tags: [status]
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Project Status
 
@@ -57,8 +57,9 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 
 ## Next up
 - Technical architecture is settled. ADRs 0004–0010 are all accepted.
-- Review [[Writing and Dialogue]] (barks, tutorial, missions, challenge chains) and the
-  open points in [[Loop (M2)]] (tie = continue, 90 s AFK safeguard).
+- Review the rest of [[Writing and Dialogue]] (the bark lines, missions and challenge
+  chains). Its open questions were decided on 2026-10-16: text bubbles with a voiced
+  grunt, a tutorial skippable from the start, and the Quartermaster kept.
 - **Manual [[Studio Setup Checklist]] items still to do in Studio:**
   - **Game Settings** (§3): devices, R15, free private servers, voice off.
   - **`Lighting.Technology` = ShadowMap** (§4). Scripts can't set it.
@@ -89,7 +90,6 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
   before modelling starts in M1.
 - Name the agency, hub train, agents and gang ([[Title Ideas]]).
 - Design leftovers:
-  - Mimi's Invisible Bow charge formula ([[Launch Agents]]).
   - The exact knock-out ragdoll limits (GDD → Tone).
 - Tune in playtests:
   - enemy damage ([[Wild West Enemies]]),

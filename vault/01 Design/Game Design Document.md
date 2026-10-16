@@ -1,7 +1,7 @@
 ---
 tags: [design, gdd]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Game Design Document — Train Runner
 
@@ -359,7 +359,6 @@ party lobby.
 ## Open questions
 - Final title (working title is Train Runner), and names for the agency, the hub
   train and the agents ([[Title Ideas]]).
-- Tune the launch agents ([[Launch Agents]]): the Invisible Bow's charge formula.
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
 - Playtest the score values and the 2.5 s combo window ([[Score and Combo]]).
 - Tune the economy ([[Economy and Monetization]]): Robux prices and earn rates.

@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, milestone, m1, spec, checklist]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # First Playable (M1) — spec and Studio build checklist
 
@@ -75,6 +75,8 @@ and co-op revives, on a side-on train.
   - Every **mid knockout** also drops a crate.
   - You always **start a train on your primary weapon**.
   - A crate pickup gets a pop and the agent says one line.
+  - **[decided 2026-10-16]** A crate **only** switches the weapon. It doesn't refill, heal or
+    reset any cooldown.
 
 | Weapon | Type | Damage | Interval | Other (first guesses) |
 |---|---|---|---|---|
@@ -294,8 +296,8 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
    [[0006-humanoid-enemies-and-combat]] applies.
 
 ## Open questions
-- Should a crate also refill or reset anything (e.g. the rocket's cooldown)? Proposed:
-  no, it only switches weapons.
+- ~~Should a crate also refill or reset anything (e.g. the rocket's cooldown)?~~
+  **[decided 2026-10-16] No**, it only switches weapons.
 - How should a downed player's camera spectate? Proposed: it follows the nearest
   living teammate. *(Built that way in Session 5; confirm it in the co-op playtest.)*
 

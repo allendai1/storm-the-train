@@ -59,6 +59,7 @@ Architecture decision records. Create from [[Templates/Decision|Decision templat
 Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to put them there).
 - [[2026-10-13]] — first design session: GDD, design notes, art direction, ADRs, M1/M2 specs
 - [[2026-10-14]] — M2 Sessions 8–11 built: score/coins, multi-train runs and checkpoints, Brick and swapping, Mayhem and gadgets
+- [[2026-10-16]] — Design open questions decided: vote and pad rules, crates, tutorial, barks, the Invisible Bow, run-end coins, the login streak
 - New entries use the [[Templates/Devlog|Devlog template]].
 
 ## Inbox

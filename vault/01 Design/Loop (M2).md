@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, milestone, m2, spec, checklist]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Loop (M2) — spec and Studio build checklist
 
@@ -77,10 +77,10 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 - **First checkpoint ever:** Brick is granted, and the swap tutorial plays
   ([[Writing and Dialogue]] §6).
 - **[decided] Continue or cash out is a majority vote** of the players in the run.
-  - **[proposed]** A **tie means continue**. The vote ends when **everyone has voted**.
+  - **[decided 2026-10-16]** A **tie means continue**. The vote ends when **everyone has voted**.
   - Cash out sends the whole party to the run-end screen, then back to the hub.
 - **[decided] There's no checkpoint timer.** The train waits for every vote.
-  - **[proposed] AFK safeguard:** a player with no input for **90 s** at a checkpoint
+  - **[decided 2026-10-16] AFK safeguard:** a player with no input for **90 s** at a checkpoint
     is counted as **"Continue"** and shown as "AWAY". Roblox's own idle kick still
     applies after 20 minutes.
 - While at the checkpoint, players can walk the checkpoint train. The **Barracks pod**
@@ -245,9 +245,11 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
    rejoining and server shutdowns?
 
 ## Open questions
-- A **tie = continue** rule for the vote, and the **90 s AFK safeguard**: OK?
-- Should a player who **joins mid-run** be possible at all? Proposed: no. Run servers
-  are locked to the party roster.
+- ~~A **tie = continue** rule for the vote, and the **90 s AFK safeguard**: OK?~~
+  **[decided 2026-10-16] Yes**, both as written above.
+- ~~Should a player who **joins mid-run** be possible at all?~~ **[decided 2026-10-16] No.**
+  Run servers are locked to the party roster. A player who leaves can't be replaced
+  mid-run.
 
 ## Implementation notes
 - **Session 8, 2026-10-14: done, except gap coins** (they need leaps, Session 9).

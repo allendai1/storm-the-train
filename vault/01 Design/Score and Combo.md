@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, score, combo, leaderboards]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Score and Combo
 
@@ -104,7 +104,8 @@ _Not started._
 - [ ] Run-end screen: squad score, per-player breakdown and callouts.
 
 ## Open questions
-- Run-end coins: proposed as 1 coin per 25 points of personal score in [[Economy and Monetization]].
+- ~~Run-end coins~~ **[decided 2026-10-16]:** 1 coin per 25 points of personal score
+  ([[Economy and Monetization]]). Tune the ratio in Session 13.
 - Is the 2.5 s combo window too tight on mobile? Playtest it.
 
 ## Implementation notes

@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, economy, monetization, progression, boosters]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Economy and Monetization
 
@@ -22,7 +22,7 @@ There are three currencies, and each has one job:
 | Currency | Earned by | Spent on | Robux? |
 |---|---|---|---|
 | **Coins** (soft) | Runs, missions | Weapon and gadget upgrades, cheap boosters | Indirectly, by exchanging gems |
-| **Gems** (premium) | Missions, daily challenges, rare run drops, Robux | Agents, strong boosters, revives, the surplus shop, skins | Yes, through gem packs |
+| **Gems** (premium) | Missions, daily challenges, day 7 of the login streak, rare run drops, Robux | Agents, strong boosters, revives, the surplus shop, skins | Yes, through gem packs |
 | **Blueprints** (gate) | Recovered from enemies in runs, banked at checkpoints | Unlocking each upgrade level (L2–L10) | Never sold directly. The surplus shop skips them for gems |
 
 The loop: **runs earn coins and blueprints → the hub turns them into upgrades → upgrades
@@ -51,7 +51,7 @@ boosters, skipping blueprints) but never replace it.
 - **[proposed] Pickups.** Loose coins sit between trains (the original's "coins in the
   gap"), and knocked-out enemies sometimes drop coins. Pickups are **personal**: each
   player sees and collects their own.
-- **[proposed] Run-end bonus.** At the end of a run you get **1 coin per 25 points of
+- **[decided 2026-10-16] Run-end bonus.** At the end of a run you get **1 coin per 25 points of
   personal score**. That's about 1,000 coins for an average 25,000-point run. This answers
   the open question in [[Score and Combo]]: score feeds coins, so the score booster
   (which multiplies personal score) pays off in coins too, while leaderboards still
@@ -169,6 +169,15 @@ offer buys every level up to the one shown.
   **one-time 25% discount** on that agent (the original gave a % discount). It's how free
   players try agents before saving up for them.
 
+- **[decided 2026-10-16] Daily login streak:** a free **7-day coin streak**. This one is
+  new: the original didn't have it.
+  - The rewards grow each day, and **day 7 gives gems** as well as coins. Then the cycle
+    starts again at day 1.
+  - **Missing a day resets the streak** to day 1. A "day" is the UTC date.
+  - It's claimed automatically on the first hub visit of the day, with a popup.
+  - The amounts are still to tune, next to the earn-rate targets (Session 13).
+  - Saved as `LoginStreak { Day, LastClaimDay }` ([[0008-player-data-profilestore]]).
+
 ## Hub services
 - **[decided] The medbay heals to full for free** at every checkpoint. The original
   charged an unknown price, but checkpoints are only every ~8 minutes, and a paid heal in
@@ -232,12 +241,14 @@ _Not started._
   their ScreenGuis in `StarterGui`.
 - [ ] Shop item, booster slot and mission row **templates** to clone, not build in code.
 - [ ] Currency HUD (coins, gems, carried blueprints).
+- [ ] Login streak popup (`LoginStreakGui`, 7 day slots cloned from a template).
 
 ## Open questions
 - Is the Robux pricing right? Pack sizes, about 2.4 Robux per gem, and Launch Squad at 799.
 - Does the Coin Bonus pass need the earn-time targets retuned? Payers would max gear
   about a third faster.
-- Should rewards go to a free daily login streak? The original didn't have one.
+- ~~Should rewards go to a free daily login streak?~~ **[decided 2026-10-16] Yes**, a 7-day coin
+  streak with gems on day 7 (see Missions and daily challenges).
 
 ## Implementation notes
 _Not built. Design only._

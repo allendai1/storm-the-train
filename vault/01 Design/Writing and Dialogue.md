@@ -1,7 +1,7 @@
 ---
 tags: [design, writing, dialogue, tutorial, missions, challenges]
 status: proposed
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Writing and Dialogue
 
@@ -21,6 +21,9 @@ updated: 2026-10-13
 - **Each agent sounds different.** Dash brags, Brick performs, Turbo rushes, Nana
   scolds sweetly, Mimi is silent (sound effects only), and Zorp is a delighted
   tourist.
+- **[decided 2026-10-16] Barks are text bubbles with a voiced grunt.** Lines show as speech
+  bubbles, and each agent and enemy type has a few short voiced grunts or exclamations.
+  Lines aren't voiced in full. Mimi stays silent (sound effects only).
 - **One bark per moment, at most.** There's a cooldown per agent of about 4 s, and
   important barks (downed, revived, Mayhem ready) skip the cooldown.
 - **Announcements** are the game's own voice: big, centred, 1–4 words. They never use
@@ -154,8 +157,8 @@ script as cues:
 ## 5. Hub voice
 The hub needs one friendly guide, replacing the original's Chubwick. **Placeholder:
 "the Quartermaster"**, the Agency's cheerful hub-train boss, who speaks through a
-little video drone (a nod to the original's drone). They can be named in the naming
-pass. Sample lines:
+little video drone (a nod to the original's drone). **[decided 2026-10-16] Keep the
+Quartermaster concept.** Their final name comes in the naming pass. Sample lines:
 - First visit: "WELCOME ABOARD, AGENT! LET'S GET YOU SORTED."
 - Barracks: "PICK YOUR SQUAD. THREE AGENTS, ONE HEALTH BAR. NO PRESSURE!"
 - Party: "BRING FRIENDS. BANDITS HATE THAT."
@@ -166,7 +169,8 @@ pass. Sample lines:
 ## 6. Tutorial and onboarding flow
 The goal is to be playing within 30 seconds, and to teach each system the first time
 it matters, not up front. Each prompt shows the right input glyph for PC or mobile.
-Experienced players can skip with **SKIP TUTORIAL**.
+**[decided 2026-10-16] It's skippable from the start:** **SKIP TUTORIAL** is there from the
+first frame, so experienced players and friends joining a party aren't held up.
 
 **First launch: the Training Train** (solo, 4 short carriages, about 3 minutes)
 1. "MOVE!" (A/D or ◀ ▶). Run to the first gap.
@@ -258,9 +262,11 @@ step 4, and ends hard on their best theme. It teaches the matchups by playing th
 Until the other themes ship in M3, every step uses the Wild West.
 
 ## Open questions
-- Is "the Quartermaster" the right hub guide concept, and what's their final name?
-- Should barks be voiced, or text-only bubbles with grunts? Voicing every line for 6
-  agents is a big audio budget. Text bubbles with a voiced grunt are much cheaper.
-- Should the tutorial be compulsory on first launch, or skippable from the start?
+- ~~Is "the Quartermaster" the right hub guide concept?~~ **[decided 2026-10-16] Yes.** The
+  final name is still open ([[Title Ideas]]).
+- ~~Should barks be voiced, or text-only bubbles with grunts?~~ **[decided 2026-10-16] Text
+  bubbles with a voiced grunt** (§1).
+- ~~Should the tutorial be compulsory on first launch?~~ **[decided 2026-10-16] No, it's
+  skippable from the start** (§6).
 
 Related: [[Game Design Document]] · [[Launch Agents]] · [[Wild West Enemies]] · [[Economy and Monetization]] · [[First Playable (M1)]] · [[Title Ideas]] · [[Home]]

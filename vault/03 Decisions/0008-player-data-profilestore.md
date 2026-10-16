@@ -30,6 +30,7 @@ Players move between hub and run servers ([[0004-single-place-hub-and-run-modes]
     starts
   - `Missions` `{ Active = { {id, progress} ×3 }, FreeRerollDay }`
   - `Challenges` `{ [agentId]: { Step, LastDay } }`
+  - `LoginStreak` `{ Day, LastClaimDay }` (added 2026-10-16, [[Economy and Monetization]])
   - `Discounts` `{ [agentId]: percent }`
   - `Bests` `{ SquadScore, IndividualScore, FurthestTrain }`, with stats counters
   - `StarterPackBought`, plus Game Pass flags (cached; ownership is checked

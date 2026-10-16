@@ -1,7 +1,7 @@
 ---
 tags: [feature, hub, matchmaking, party, m2]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Queue Pads — a physical party lobby in the hub
 
@@ -79,10 +79,11 @@ _Build these in the place before scripting (`CLAUDE.md`)._
 - ~~Replace or add?~~ **[decided] Replace.** Pads are the only party-forming flow in the
   hub. Friends in other servers use Roblox's own join and invite features to reach your
   hub server first.
-- Should a pad be **lockable** (friends only, or a private pad for a group)? *Proposed:*
-  not at first.
-- Should players who are AFK on a pad be removed? *Proposed:* yes, after 60 s with no
-  input.
+- ~~Should a pad be **lockable** (friends only, or a private pad for a group)?~~
+  **[decided 2026-10-16] No.** Every pad is open to anyone.
+- ~~Should players who are AFK on a pad be removed?~~ **[decided 2026-10-16] No.** The countdown
+  leaves with whoever is standing on the pad. Only Roblox's own 20-minute idle kick
+  applies.
 
 ## Implementation notes
 - _Not built. In M1, the Run-mode staging platform and READY button
