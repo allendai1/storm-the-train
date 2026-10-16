@@ -1,7 +1,7 @@
 ---
 tags: [design, feature, gadgets, mayhem, mechs, drones, balance]
 status: planned
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Gadgets and Mayhem
 
@@ -35,9 +35,9 @@ gadgets you can pick.
   everyone nearby, Defenders cover the people behind them, and assists fill your meter.
 
 ## Mayhem meter
-- **[proposed] It's a 0–100 meter per player.** It's kept when you swap agents and
+- **[decided 2026-10-16] It's a 0–100 meter per player.** It's kept when you swap agents and
   carried between trains in a run. It resets when the run ends.
-- **[proposed] Ways to fill it:**
+- **[decided 2026-10-16] Ways to fill it:**
 
   | Source | Mayhem |
   |---|---|
@@ -53,7 +53,7 @@ gadgets you can pick.
 - **[proposed] Co-op balance.** Enemy counts scale up less than one-for-one with party
   size (×2.8 enemies for 4 players), so each player gets fewer kills in a full party.
   Assists make up most of the difference.
-- **[proposed] The meter empties when you deploy** a gadget. It doesn't decay while full,
+- **[decided 2026-10-16] The meter empties when you deploy** a gadget. It doesn't decay while full,
   so you can save a full meter for the right moment, for example the next train's boss.
 
 ## Deploying a gadget
@@ -71,7 +71,7 @@ gadgets you can pick.
   The original seems to have handed you a specific free gadget ("FULL MAYHEM GIVES YOU A
   FREE GADGET. GRAB IT NOW!"). Choosing is more interesting and suits a squad game.
   (This replaces the single "Use gadget" row in the GDD's controls table.)
-- **[proposed] When gadgets are blocked** (adapted from the original's lock reasons; the
+- **[decided 2026-10-16] When gadgets are blocked** (adapted from the original's lock reasons; the
   button shows why):
   - between trains, during the leap and while on the hub train,
   - while the theme is changing,
@@ -79,7 +79,7 @@ gadgets you can pick.
   - no new gadget while you're **in a mech suit**,
   - **[decided] one Air Strike per party** at a time. While a teammate's strike is
     incoming, your Air Strike slot shows "STRIKE INCOMING" and your meter stays full.
-- **[proposed] Swapping and gadgets.**
+- **[decided 2026-10-16] Swapping and gadgets.**
   - A **drone stays** when you swap agents. It belongs to the player, not the agent.
   - **You can't swap while in a mech suit.** The suit is that agent's.
 - **[proposed] No paid deploys.** The original's gadget manager had a deploy price, so it
@@ -117,7 +117,7 @@ A later agent with the same mech type gets their own look.
 
 ## Drones
 All drones follow their owner, hover just above and behind them on the side-view plane,
-and can't be damaged. **[proposed]** Their weapon numbers are below.
+and can't be damaged. **[decided 2026-10-16]** Their weapon numbers are below.
 
 ### Turret Drone
 - Fires at the nearest enemy in **25 studs**: **8 damage every 0.25 s** at tier 1 (32
@@ -164,16 +164,16 @@ and can't be damaged. **[proposed]** Their weapon numbers are below.
 
 ## Mech suits
 Deploying a mech suit puts your agent inside it for its duration.
-- **[proposed] Entry stomp:** landing in the suit does **200 damage in a 6-stud radius**
+- **[decided 2026-10-16] Entry stomp:** landing in the suit does **200 damage in a 6-stud radius**
   (the original's `MECH_AOE` value). Bosses take half. That clears the lights around
   you and leaves a mid badly hurt.
-- **[proposed] Armour:** the suit has its **own armour bar**. Enemy hits drain the armour,
+- **[decided 2026-10-16] Armour:** the suit has its **own armour bar**. Enemy hits drain the armour,
   not your health pool. You're ejected when either the timer or the armour runs out. That
   protects your HP while you're in the suit and makes the suit's size a real
   trade-off.
-- **[proposed] Ejecting** gives you 1 s of invulnerability and a small knockback ring, so
+- **[decided 2026-10-16] Ejecting** gives you 1 s of invulnerability and a small knockback ring, so
   you aren't punished for popping out in a crowd.
-- **[proposed] You don't take damage from your toughness while suited.** Only the
+- **[decided 2026-10-16] You don't take damage from your toughness while suited.** Only the
   suit's armour matters. (Mechs in the original had their own resilience of 1.00.)
 - Their speeds and physics come from the original's mech table, converted at 15 px = 1
   stud.
@@ -194,7 +194,7 @@ here, to fit "Silly, never mean".
 - **3-second countdown** with a target marker on the carriage, then planes or drones
   make a **bombing run along your carriage and half of each neighbouring one**.
 - **[decided] One per party at a time**, so stacked strikes can't nuke a boss.
-- **200 damage** to every enemy caught in it (the original's value). **[proposed]** Bosses
+- **200 damage** to every enemy caught in it (the original's value). **[decided 2026-10-16]** Bosses
   take **100**. No friendly fire, and hostages are never hit.
 - One level and never upgraded, as in the original. Every agent who has it gets the same
   strike. The voice line is shared: "3… 2… 1… INCOMING!" (the original's shared line).

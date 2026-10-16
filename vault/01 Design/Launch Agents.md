@@ -178,7 +178,7 @@ is the best ride. He takes photos mid-fight.
 - **[proposed] Agent stats are fixed.** As in the original, agents don't level up. Their
   speed, toughness, spin and perks never change. Progression comes from upgrading their
   weapons and gadgets (10 levels each, gated by coins and blueprints, per the GDD).
-- **[proposed] Swap cooldown: 1.5 s.** The original's value wasn't recovered. The swap
+- **[decided 2026-10-16] Swap cooldown: 1.5 s.** The original's value wasn't recovered. The swap
   keeps your HP, position and Mayhem. On swapping in, the agent says one line, and the
   original's shared "I'M BACK!" line is a good model for that.
 - **[proposed] Duplicates in a party are allowed.** Two players can both bring Dash. That

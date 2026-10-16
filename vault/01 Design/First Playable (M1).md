@@ -68,7 +68,7 @@ and co-op revives, on a side-on train.
   walking into a **weapon crate** on the train, as in the original ("weapon crates",
   `GiveRandomWeapon`). A crate flips you to your agent's **other** weapon. There's no
   secondary fire button and no weapon-swap button.
-- **[proposed] Crate rules:**
+- **[decided 2026-10-16] Crate rules:**
   - Crates are **personal pickups**: each player sees and takes their own.
   - **Boxcars and cattle cars** each have one crate spot.
   - A crate you've taken **comes back for you after 20 s**.

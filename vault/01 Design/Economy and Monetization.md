@@ -48,7 +48,7 @@ boosters, skipping blueprints) but never replace it.
 
 ## Coins
 ### Earning
-- **[proposed] Pickups.** Loose coins sit between trains (the original's "coins in the
+- **[decided 2026-10-16] Pickups.** Loose coins sit between trains (the original's "coins in the
   gap"), and knocked-out enemies sometimes drop coins. Pickups are **personal**: each
   player sees and collects their own.
 - **[decided 2026-10-16] Run-end bonus.** At the end of a run you get **1 coin per 25 points of
@@ -57,7 +57,7 @@ boosters, skipping blueprints) but never replace it.
   (which multiplies personal score) pays off in coins too, while leaderboards still
   rank unboosted score.
 - **[proposed] Missions** pay mostly coins (500–2,000 each).
-- **[proposed] Cashing out.** Coins are always kept, whether you wipe or cash out. Only
+- **[decided 2026-10-16] Cashing out.** Coins are always kept, whether you wipe or cash out. Only
   blueprints are at risk (see below).
 
 ### Spending: the upgrade ladder (original values)
