@@ -18,7 +18,15 @@ updated: 2026-10-16
 | Hub guide (the Quartermaster) | **Quill** | Chubwick |
 | Gem shop | **Surplus Shop** | the original's surplus shop |
 | Wild West gang | **the Cowboys** | the placeholder "Rattler Gang" |
-| Agents | _still open_ | Dash Daring, Brick Broadsley, Turbo, Nana Nitro, Mimi the Mime, Zorp (placeholders) |
+| Starter agent | **Max Mayhem** | Dash Daring |
+| Alien agent | **Gleep** | Zorp |
+| Tank, speedster, granny, mime | _still open_ | Brick Broadsley, Turbo, Nana Nitro, Mimi the Mime (placeholders) |
+
+**Agent name shortlists (brainstorm, 2026-10-16), for the four still open:**
+- **Tank** (Brick Broadsley): Slam Sullivan, Mountain Mack, Bruno Boom, Tank Tornado.
+- **Speedster** (Turbo): Zip Voltage, Kit Kilowatt, Sparky Quick, Ricochet Rae.
+- **Granny** (Nana Nitro): Granny Grenade, Gran Purl, Nana Knuckles, Mabel Mayhem.
+- **Mime** (Mimi the Mime): Hush, Silent Simone, Mimique, Pantomina.
 
 **Check before publishing: "ROBLOX Assault Team".** Roblox's
 [Name and Logo Community Usage Guidelines](https://en.help.roblox.com/hc/articles/115001708126)

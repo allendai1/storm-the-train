@@ -18,8 +18,8 @@ updated: 2026-10-16
   no scary threats. Enemies are cartoon villains and agents are lovable show-offs.
 - **All ages.** Simple words and puns over references. Nothing that needs reading
   mid-fight.
-- **Each agent sounds different.** Dash brags, Brick performs, Turbo rushes, Nana
-  scolds sweetly, Mimi is silent (sound effects only), and Zorp is a delighted
+- **Each agent sounds different.** Max brags, Brick performs, Turbo rushes, Nana
+  scolds sweetly, Mimi is silent (sound effects only), and Gleep is a delighted
   tourist.
 - **[decided 2026-10-16] Barks are text bubbles with a voiced grunt.** Lines show as speech
   bubbles, and each agent and enemy type has a few short voiced grunts or exclamations.
@@ -56,7 +56,7 @@ Categories: **Start** (train begins) · **Swap** (swapped in) · **Crate** (weap
 teammate) · **Mayhem** (meter full / gadget) · **Mech** (entering their suit) · **Win**
 (train cleared).
 
-### Dash Daring: the brag
+### Max Mayhem: the brag
 | Category | Lines |
 |---|---|
 | Start | "DARING BY NAME!" · "LET'S DO THIS. STYLISHLY." |
@@ -124,7 +124,7 @@ script as cues:
 | Mayhem | Mimes a lightbulb over her head, *ding!* |
 | Win | Takes a bow to *invisible applause* |
 
-### Zorp: the delighted tourist
+### Gleep: the delighted tourist
 | Category | Lines |
 |---|---|
 | Start | "TAKE ME TO YOUR CONDUCTOR!" · "THE RIDE BEGINS!" |
@@ -250,12 +250,12 @@ by the player's mission tier (tiers 1–3).
 
 | Agent | Step 1 | Step 2 | Step 3 | Step 4 | Step 5 |
 |---|---|---|---|---|---|
-| Dash | Wild West, 5 waves | Ninjas, 5 | Robots, 6 | Undead, 6 | Wild West, 7 (hard) |
+| Max | Wild West, 5 waves | Ninjas, 5 | Robots, 6 | Undead, 6 | Wild West, 7 (hard) |
 | Brick | Undead, 5 | Wild West, 5 | Ninjas, 6 | Robots, 6 | Undead, 7 (hard) |
 | Turbo | Robots, 5 (her bonus) | Wild West, 5 | Ninjas, 6 | Undead, 6 (her weakness) | Robots, 7 (hard) |
 | Nana | Undead, 5 (her bonus) | Wild West, 5 | Robots, 6 | Ninjas, 6 (her weakness) | Undead, 7 (hard) |
 | Mimi | Ninjas, 5 (her bonus) | Robots, 5 | Undead, 6 | Wild West, 6 (her weakness) | Ninjas, 7 (hard) |
-| Zorp | Wild West, 5 (his bonus) | Ninjas, 5 | Undead, 6 | Robots, 6 (his weakness) | Wild West, 7 (hard) |
+| Gleep | Wild West, 5 (his bonus) | Ninjas, 5 | Undead, 6 | Robots, 6 (his weakness) | Wild West, 7 (hard) |
 
 Each chain opens on the agent's strong theme, puts them against their weak theme at
 step 4, and ends hard on their best theme. It teaches the matchups by playing them.

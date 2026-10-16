@@ -32,7 +32,7 @@ A run now plays like this:
   continue-or-cash-out vote.
 - **Score:** a score and combo multiplier, coins, and a run-end screen with the squad score
   and callouts.
-- **Agents:** Dash, plus Brick granted at the first checkpoint. Swap with Q/E, and change
+- **Agents:** Max Mayhem (built as Dash), plus Brick granted at the first checkpoint. Swap with Q/E, and change
   the squad at the Barracks.
 - **Mayhem:** the meter fills from knockouts and deploys drones, the Heavyweight mech or an
   Air Strike.
@@ -63,7 +63,8 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 - **Studio change from the 2026-10-16 design pass:** lower Big Bart's `ChargeSpeed` from
   36 to 10.7 (charges now use the original's speeds; [[Wild West Enemies]]).
 - **Rename in Studio:** change the experience name to **Train Mayhem**, and replace any
-  "Train Runner" or placeholder names in GUI text.
+  "Train Runner" or placeholder names in GUI text: Dash → **Max Mayhem** (SquadGui and the
+  HUD portrait label). Renaming the internal IDs (`DashDaring`) is optional.
 - **Manual [[Studio Setup Checklist]] items still to do in Studio:**
   - **Game Settings** (§3): devices, R15, free private servers, voice off.
   - **`Lighting.Technology` = ShadowMap** (§4). Scripts can't set it.
@@ -101,8 +102,9 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 
 ## Open design decisions
 After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
-- **Naming:** only the 6 agents are left. The rest was decided on 2026-10-16
-  ([[Title Ideas]]).
+- **Naming:** four agents are left (Brick, Turbo, Nana, Mimi), with shortlists in
+  [[Title Ideas]]. Max Mayhem (ex-Dash) and Gleep (ex-Zorp) were decided on
+  2026-10-16.
 - **Before publishing:** check the agency name "ROBLOX Assault Team" against Roblox's
   Name and Logo Community Usage Guidelines. Using Roblox's name may not be allowed. Also
   search Roblox for other "Train Mayhem" experiences.

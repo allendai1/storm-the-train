@@ -20,7 +20,7 @@ M2 turns one train into the real **run loop**:
    between trains.
 3. The **hub train pulls alongside** at each checkpoint: a free full heal, then a
    **majority vote** to continue or cash out.
-4. Players **swap** between Dash and Brick, fill their **Mayhem ring** and deploy
+4. Players **swap** between Max and Brick, fill their **Mayhem ring** and deploy
    **gadgets**.
 5. They earn **score and coins**, which are **saved** with ProfileStore.
 
@@ -35,7 +35,7 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 | Endless runs: **legs of 3 trains**, leaps, a run-long difficulty ramp | Boss every 2nd leg, hostage, survival (M3) |
 | Leg layout: Normal, Normal, **Thief train** (placeholder for the event slot) | Real event rotation (M3) |
 | **Checkpoint:** hub checkpoint train, free full heal, **majority vote**, Brick granted on the first one | Boosters at checkpoints (M4) |
-| **Agent swap:** Dash + Brick (free) | Turbo, Nana, Mimi, Zorp (M3) |
+| **Agent swap:** Max + Brick (free) | Turbo, Nana, Mimi, Gleep (M3) |
 | **Mayhem ring** plus gadget fan. Gadgets: Turret Drone, Melee Drone, Defender Drone, **Melee Suit (Brick's Heavyweight)**, Air Strike | Other drones and mechs (M3) |
 | **Score and combo** ([[Score and Combo]]), run-end screen with squad score | Leaderboards (M4) |
 | **Coins:** gap coins, drops, the run-end score bonus, committed at checkpoints | Spending coins (M4) |
@@ -112,11 +112,11 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 
   | Gadget | Agent | Duration (L1) | M2 numbers (first guess) |
   |---|---|---|---|
-  | Turret Drone | Dash | 30 s | 8 damage / 0.25 s, 25-stud range |
-  | Melee Drone | Dash | 30 s | 15 damage / 0.6 s |
+  | Turret Drone | Max | 30 s | 8 damage / 0.25 s, 25-stud range |
+  | Melee Drone | Max | 30 s | 15 damage / 0.6 s |
   | Defender Drone | Brick | 51 s | Blocks projectiles for you and teammates behind you |
   | Melee Suit ("the Heavyweight") | Brick | 15 s | 200 armour, 23 studs/s, foam-finger arms 12 / 0.1 s with knockback, body slam; 200-damage entry stomp in a 6-stud radius (half to bosses) |
-  | Air Strike | Dash, Brick | — | 3 s countdown, 200 damage along the carriage, **one per party** |
+  | Air Strike | Max, Brick | — | 3 s countdown, 200 damage along the carriage, **one per party** |
 
 - **Lock rules:** one drone per player, no gadget while in a mech, one Air Strike per
   party, and nothing between trains or at checkpoints.
@@ -238,7 +238,7 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 2. Do leaps feel good, and does Brick clear them?
 3. Is the checkpoint vote clear? Does "no timer + AFK safeguard" work, or does the
    squad wait too long?
-4. Does swapping Dash ↔ Brick feel meaningful?
+4. Does swapping Max ↔ Brick feel meaningful?
 5. Does Mayhem fill about every 45–60 s? Is the gadget fan quick to use on mobile?
 6. Is the Heavyweight a satisfying moment? Are its 200 armour and 15 s right?
 7. Are coin earnings near the target? Do saves and teleports survive leaving,

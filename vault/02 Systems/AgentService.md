@@ -5,6 +5,10 @@ side: server, client
 ---
 # AgentService (+ SquadController)
 
+> **Display names (decided 2026-10-16):** Dash Daring is now **Max Mayhem** ([[Launch Agents]]).
+> The Studio IDs (`DashDaring`, `Dash`) are unchanged until a local session renames
+> them, so this note keeps the old names where it describes what's built.
+
 ## Purpose
 Agents and squads ([[Launch Agents]], [[Loop (M2)]] Session 10): which agents a player owns,
 which 3 they bring, and swapping between them mid-run.

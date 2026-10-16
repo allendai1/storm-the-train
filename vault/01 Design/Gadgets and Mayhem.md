@@ -108,16 +108,16 @@ gadgets you can pick.
 
 | Gadget | Type | What it does | Duration L1 → L10 (s) | Used by (agent's name for it) |
 |---|---|---|---|---|
-| **Turret Drone** | Drone | Hovers by you and shoots the nearest enemy | 30 → 57 | Dash, Zorp |
-| **Melee Drone** | Drone | Chases enemies and punches them | 30 → 56 | Dash, Mimi |
-| **Freeze Drone** | Drone | Fires freeze shots that slow, then freeze, enemies | 36 → 63 | Nana, Mimi, Zorp |
+| **Turret Drone** | Drone | Hovers by you and shoots the nearest enemy | 30 → 57 | Max, Gleep |
+| **Melee Drone** | Drone | Chases enemies and punches them | 30 → 56 | Max, Mimi |
+| **Freeze Drone** | Drone | Fires freeze shots that slow, then freeze, enemies | 36 → 63 | Nana, Mimi, Gleep |
 | **Defender Drone** | Drone | Blocks enemy projectiles for you and anyone behind you | 51 → 87 | Brick, Mimi ("Invisible Wall") |
 | **Smasher Drone** | Drone | Slams down on enemy groups, knocking lights off the train | 10 → 19 | Turbo |
 | **Healer Drone** | Drone | Heals you and teammates nearby | 15 → 28.5 | Turbo, Nana |
-| **Damage Mech** | Mech suit | Fast gun mech | 15 → 26.7 | Zorp ("the Saucer") |
+| **Damage Mech** | Mech suit | Fast gun mech | 15 → 26.7 | Gleep ("the Saucer") |
 | **Melee Suit** | Mech suit | Slow, heavy brawler that knocks enemies off the train | 15 → 26.7 | Brick ("the Heavyweight") |
 | **Heal Suit** | Mech suit | Support mech: damage beam plus party heals and fast revives | 15 → 26.7 | Nana ("the Rocking Chair Mech") |
-| **Air Strike** | Strike | Countdown, then a bombing run along the carriage | — (one level) | Dash, Brick, Turbo |
+| **Air Strike** | Strike | Countdown, then a bombing run along the carriage | — (one level) | Max, Brick, Turbo |
 
 The durations are the original's values. Its two obvious typos are fixed: Melee L5 is 42,
 not 41, and Freeze L6 is 51, not 41. Every agent's 3 gadgets are listed in
@@ -189,7 +189,7 @@ Deploying a mech suit puts your agent inside it for its duration.
 
 | Suit | Speed | Armour* | Primary | Double jump (spin) | Special |
 |---|---|---|---|---|---|
-| **Damage Mech** (Zorp's Saucer) | 500 px/s → 33 studs/s | 100 | **Heavy cannon**: 25 damage every 0.2 s | **Spinning barrage**: bullets fired in a full circle | The fastest suit, with normal gravity |
+| **Damage Mech** (Gleep's Saucer) | 500 px/s → 33 studs/s | 100 | **Heavy cannon**: 25 damage every 0.2 s | **Spinning barrage**: bullets fired in a full circle | The fastest suit, with normal gravity |
 | **Melee Suit** (Brick's Heavyweight) | 350 → 23 | 200 | **Spinning foam-finger arms** ("WE'RE #1"): 12 damage every 0.1 s at melee range, with strong knockback | **Body slam**: a ground pound that knocks lights off the train | Heavy gravity (3.5): falls fast and slams hard |
 | **Heal Suit** (Nana's Rocking Chair Mech) | 450 → 30 | 150 | **Knitting-needle beam**: 15 damage every 0.25 s to enemies | **Healing ring**: heals teammates in 12 studs for 15 HP | Heals nearby teammates 3 HP/s, and **revives downed teammates in 0.5 s** instead of 2 s |
 

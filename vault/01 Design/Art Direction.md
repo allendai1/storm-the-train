@@ -86,18 +86,18 @@ skins. They don't clash with the gang red or the player colours.
 
 | Agent | Signature colours | Silhouette hook |
 |---|---|---|
-| Dash Daring | Navy tux `#1F2A44`, gold `#F2C14E` | Tux tails and a perfect hair swoop |
+| Max Mayhem | Navy tux `#1F2A44`, gold `#F2C14E` | Tux tails and a perfect hair swoop |
 | Brick Broadsley | Royal purple `#6B3FA0`, gold | A huge cape and a wrestling mask, with a tiny briefcase |
 | Turbo | Hot pink `#FF4FA3`, teal `#19C3B3` | Roller skates, a helmet, and a courier bag |
 | Nana Nitro | Lavender cardigan `#B79BE0`, yarn orange `#FF8A3D` | Tiny frame with a **giant** knitting bag |
 | Mimi the Mime | Black and white stripes, red-pink beret `#E8466B` | Beret and stripes, white gloves |
-| Zorp | Lime alien `#7DDB3A`, tourist-shirt orange `#FF9F1C` | A big domed head (head scale up to ~1.15), a camera round his neck |
+| Gleep | Lime alien `#7DDB3A`, tourist-shirt orange `#FF9F1C` | A big domed head (head scale up to ~1.15), a camera round his neck |
 
 Mimi's beret is a pink-leaning red so it doesn't read as gang red.
 
 ## 4. Characters
 - **Bodies:** standard R15 proportions (decided). A **head scale of up to about 1.15** is
-  allowed where the gag needs it (Zorp), and so are oversized hands and props.
+  allowed where the gag needs it (Gleep), and so are oversized hands and props.
 - **Faces:** big, simple, expressive. Large eyes, and eyebrows that sell emotion from
   the side. Use **face decals or textures swapped per state** (normal, hurt, downed,
   celebrating) rather than facial rigs.
@@ -105,7 +105,7 @@ Mimi's beret is a pink-leaning red so it doesn't read as gang red.
   1. Full costume.
   2. Torn and scuffed, with a missing hat or sleeve, smudges and patches.
   3. **Comedy long johns.** The costume is mostly gone, leaving full-coverage red
-     long johns (or an agent-appropriate equivalent: Zorp's "space pyjamas", Brick's
+     long johns (or an agent-appropriate equivalent: Gleep's "space pyjamas", Brick's
      singlet).
 
   This replaces the original's underwear stage with an all-ages, fully covered gag.
@@ -118,7 +118,7 @@ Mimi's beret is a pink-leaning red so it doesn't read as gang red.
 - Squash and stretch is suggested in the poses, because R15 parts don't deform.
 - **Knock-outs** are Humanoid ragdolls (GDD), started with an exaggerated impulse, a hat
   popping off and circling stars.
-- Agents have an idle with personality (Dash checks his hair, Nana knits) and a
+- Agents have an idle with personality (Max checks his hair, Nana knits) and a
   swap-in pose.
 
 ## 6. Environments & the train

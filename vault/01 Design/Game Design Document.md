@@ -27,7 +27,8 @@ the original's "Storm the Train". Search Roblox for clashes before publishing (s
   - the Wild West gang: **the Cowboys**,
   - the hub guide: **Quill**,
   - the shop: the **Surplus Shop**.
-  The agents' names are still open.
+  The agents: **Max Mayhem** (the starter) and **Gleep** (the alien). The other four
+  are still open.
 
 ## Relationship to the original
 - **[decided]** This is a **new IP inspired by** the 2016 mobile game *Storm the Train*

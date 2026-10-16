@@ -116,7 +116,7 @@ first revive (5 gems) about 12 Robux. The pack names are placeholders.
 |---|---|---|
 | Turbo | 80 | Original tier `char_low` |
 | Nana Nitro, Mimi the Mime | 100 each | Original tier `char_med` |
-| Zorp | 150 | Original tier `char_high` |
+| Gleep | 150 | Original tier `char_high` |
 | Self-revive | 5, then doubling: 10, 20, 40… per run | GDD decision; the starting price is proposed here |
 | Gadget deploy (meter not full) | 5, then doubling: 10, 20, 40… per run; 1 per train | Decided 2026-10-16 ([[Gadgets and Mayhem]]) |
 | Mission skip | 5 | Decided 2026-10-16. Reroll is free once a day |
@@ -191,14 +191,14 @@ Coin Bonus pass. Prices are still proposed.
 
 | Pass | Robux | What it gives | Note |
 |---|---|---|---|
-| **Launch Squad** | 799 | Turbo, Nana, Mimi and Zorp | Clearly named as the **launch** agents, so it isn't misleading when new agents arrive. If you already own some of them, you get their gem price back |
+| **Launch Squad** | 799 | Turbo, Nana, Mimi and Gleep | Clearly named as the **launch** agents, so it isn't misleading when new agents arrive. If you already own some of them, you get their gem price back |
 | **Coin Bonus** | 399 | Permanent ×1.5 coins from pickups | Progress-only and personal. It stacks with the Coins booster (×1.5 × ×3 at most) |
 
 ### Developer Products (repeatable or limited)
 | Product | Robux | What it gives |
 |---|---|---|
 | Gem packs | 99–2,499 | See above |
-| **Starter Pack** (one per account) | 199 | 150 gems, 10,000 coins, and an exclusive Dash skin |
+| **Starter Pack** (one per account) | 199 | 150 gems, 10,000 coins, and an exclusive Max skin |
 
 ### Other
 - **[decided] No first-purchase gift.** The original's "Bob for any purchase" idea isn't

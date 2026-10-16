@@ -13,7 +13,7 @@ updated: 2026-10-16
 > **Nothing here is built yet.** Tick items off only once they're verified in Studio.
 
 ## Summary
-One Wild West hostile train, side-on, for 1–4 players. Each player is **Dash Daring**
+One Wild West hostile train, side-on, for 1–4 players. Each player is **Max Mayhem**
 with his two weapons, switched by walking into **weapon crates**. The squad fights from
 the caboose to the engine against the first four Cowboys lights and **Big Bart**,
 spawned by a budget timeline. Downed players can be revived by teammates. When the
@@ -28,7 +28,7 @@ and co-op revives, on a side-on train.
 |---|---|
 | Run mode only, entered with `ForceMode = "Run"` and a Ready countdown | Hub, party lobby, teleport (M2) |
 | One 7-carriage Wild West train built from templates | Leaps, checkpoints, legs (M2) |
-| Dash: Service Rifle + Pocket Rocket, **weapon crates**, jump, double-jump spin | Agent swap, other agents (M2/M3) |
+| Max: Service Rifle + Pocket Rocket, **weapon crates**, jump, double-jump spin | Agent swap, other agents (M2/M3) |
 | Bandana Bandit, Rodeo Kid, Six-Shooter, Dynamite Dan, **Big Bart** | Lasso Lucy, Saloon Door Sam, bosses, hostage (M3) |
 | Budget spawning with co-op scaling; Bart's solo intro | Survival, boss events (M3) |
 | 100 HP, toughness, downed → teammate revive, gap falls | Gem revives, Mayhem, gadgets (M2/M4) |
@@ -52,7 +52,7 @@ and co-op revives, on a side-on train.
    counter, with **PLAY AGAIN**, which rebuilds the train.
 
 ## Rules & numbers
-### Player (agent: Dash Daring)
+### Player (agent: Max Mayhem)
 | Value | M1 | Source |
 |---|---|---|
 | Health pool | 100 HP | Decided (GDD) |
@@ -193,7 +193,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
 - [x] **Background:** `ReplicatedStorage.Assets.Backgrounds.WildWest`, with sky, mesa
   and desert strips ([[Art Direction]] §2).
 
-### Session 3 — Dash, weapons, crates, combat
+### Session 3 — Max, weapons, crates, combat
 - [x] **Agent template** `ReplicatedStorage.Assets.Agents.DashDaring`: an R15 rig with
   Attributes `Speed = 28.3`, `Toughness = 0.52`, `SpinLevel = 4`,
   `PrimaryWeapon = "ServiceRifle"`, `SecondaryWeapon = "PocketRocket"`. It has an
@@ -290,7 +290,7 @@ _Do the [[Studio Setup Checklist]] first. The setup script and module sources ar
 3. Do weapon crates create a good rhythm, or are they annoying? Should crates respawn
    faster or slower?
 4. Is the damage scale right? The roster predicts about 48 s for one bandit to down
-   Dash alone.
+   Max alone.
 5. Is reviving fun and readable in 2–4 player co-op?
 6. Does the Humanoid enemy budget hold? If not, the fallback in
    [[0006-humanoid-enemies-and-combat]] applies.

@@ -8,8 +8,10 @@ updated: 2026-10-16
 > **Status: planned.** The developer decided the roster size (6 agents, 2 free) in the
 > [[Game Design Document]] and **accepted these six concepts** on 2026-10-13. Lines marked
 > **[decided]** are settled. Loadouts and numbers not marked **[decided]** are still
-> proposals to tune. Names are **placeholders** and may change in the naming pass in
-> [[Title Ideas]]. Before keeping any
+> proposals to tune. **[decided 2026-10-16] Names:** agent 1 is **Max Mayhem** (formerly Dash
+> Daring) and agent 6 is **Gleep** (formerly Zorp). Brick Broadsley, Turbo, Nana Nitro and
+> Mimi the Mime are still **placeholders** ([[Title Ideas]] has the shortlists). In Studio,
+> the agents keep their old IDs (`DashDaring`…). Before keeping any
 > name, search Roblox and run a basic trademark check. The numbers come from the
 > original's agent and weapon tables
 > ([[Original Game - Items and Economy]], [[Original Game - APK Balance Audit]]). They're a
@@ -33,12 +35,12 @@ strategic layer, and swapping mid-run is the skill layer.
 
 | # | Agent | One-line gag | Role | Unlock | Speed (px/s → studs/s) | Toughness | Effective HP* |
 |---|---|---|---|---|---|---|---|
-| 1 | **Dash Daring** | Square-jawed agent in a tux who narrates his own heroics | All-rounder | Free (starter) | 425 → 28.3 | 0.52 ★★★ | 192 |
+| 1 | **Max Mayhem** | Square-jawed agent in a tux who narrates his own heroics | All-rounder | Free (starter) | 425 → 28.3 | 0.52 ★★★ | 192 |
 | 2 | **Brick Broadsley** | Retired pro wrestler in a mask and cape, carrying a tiny briefcase | Tank | Free (first checkpoint) | 300 → 20 | 0.20 ★★★★★ | 500 |
 | 3 | **Turbo** | Roller-skating courier who's always late, and always fast | Skirmisher / reviver | 80 gems | 500 → 33.3 | 0.76 ★ | 132 |
 | 4 | **Nana Nitro** | Sweet little granny with a knitting bag full of explosives | Crowd control / support | 100 gems | 350 → 23.3 | 0.28 ★★★★ | 357 |
 | 5 | **Mimi the Mime** | A silent mime whose invisible props really work | Acrobat / precision | 100 gems | 450 → 30 | 0.64 ★★ | 156 |
-| 6 | **Zorp** | An alien "exchange agent" in a tourist shirt who thinks Earth is a theme park | Heavy hitter | 150 gems | 375 → 25 | 0.40 ★★★ | 250 |
+| 6 | **Gleep** | An alien "exchange agent" in a tourist shirt who thinks Earth is a theme park | Heavy hitter | 150 gems | 375 → 25 | 0.40 ★★★ | 250 |
 
 \*Effective HP = 100 ÷ toughness, i.e. how much raw enemy damage it takes to down that
 agent. It's shown here for balance only; the UI shows stars.
@@ -50,7 +52,7 @@ beret and stripes, big-headed alien.
 
 ## Agents
 
-### 1. Dash Daring — "AGENT NUMBER ONE (HE SAYS)"
+### 1. Max Mayhem — "AGENT NUMBER ONE (HE SAYS)"
 The starter, and the face of the game. He's competent and confident, with a terrible
 sense of self-awareness. His hair never moves, even in an explosion.
 - **Weapons:**
@@ -144,7 +146,7 @@ acrobatic and precise, and she's funnier the more serious things get.
 - **Barks:** none, by design. She does silent reactions and props instead. Her "voice
   lines" are sound effects: a slide whistle, a kazoo, an exaggerated sigh.
 
-### 6. Zorp — "TAKE ME TO YOUR CONDUCTOR"
+### 6. Gleep — "TAKE ME TO YOUR CONDUCTOR"
 An alien on an exchange programme who's convinced Earth is a theme park and the train
 is the best ride. He takes photos mid-fight.
 - **Weapons:**
@@ -165,10 +167,10 @@ is the best ride. He takes photos mid-fight.
 
   | Theme | +40% damage | −25% damage (−40% solo) |
   |---|---|---|
-  | Wild West | Zorp | Mimi |
+  | Wild West | Gleep | Mimi |
   | Ninjas | Mimi | Nana |
   | Undead | Nana | Turbo |
-  | Robots | Turbo | Zorp |
+  | Robots | Turbo | Gleep |
 
   **[decided]** The bonus keeps the original's +40%, but the penalty is **softened to
   −25%** for co-op. That way a player whose squad struggles with a theme still pulls
@@ -182,7 +184,7 @@ is the best ride. He takes photos mid-fight.
 - **[decided 2026-10-16] Swap cooldown: 1.5 s.** The original's value wasn't recovered. The swap
   keeps your HP, position and Mayhem. On swapping in, the agent says one line, and the
   original's shared "I'M BACK!" line is a good model for that.
-- **[decided 2026-10-16] Duplicates in a party are allowed.** Two players can both bring Dash. That
+- **[decided 2026-10-16] Duplicates in a party are allowed.** Two players can both bring Max. That
   avoids lobby arguments, and the speed/toughness curve already pushes squads to
   diversify.
 - **[decided 2026-10-16] Gem prices:** 80 / 100 / 100 / 150, which is **430 gems** for the paid
@@ -196,12 +198,12 @@ is the best ride. He takes photos mid-fight.
 
   | Agent | Primary | Nominal | Secondary | Nominal |
   |---|---|---|---|---|
-  | Dash | Service Rifle | 69 | Pocket Rocket | 26 + splash |
+  | Max | Service Rifle | 69 | Pocket Rocket | 26 + splash |
   | Brick | Scattergun | 27 per pellet | Crowd Pleaser | 86 (after spin-up) |
   | Turbo | Twin Zippers | 53 | Spark Plug | 40 + chain |
   | Nana | Yarn Bombs | 72 + area | Blow-Dryer | 7 + burn |
   | Mimi | Finger Guns | 70 | Invisible Bow | 70 + pierce (0.8 s draw) |
-  | Zorp | Ray Blaster | 26 + pierce | Goo Gun | 5 + DoT + slow |
+  | Gleep | Ray Blaster | 26 + pierce | Goo Gun | 5 + DoT + slow |
 
 ## Systems involved
 _None built yet._ When built, this will need an agent/squad service (loadout, swap and
@@ -232,7 +234,7 @@ These are not part of the launch 6, just for later:
 - A cowboy sheriff, who would be the obvious Wild West specialist.
 
 ## Open questions
-- Final agent names (the current ones are placeholders).
+- Final names for Brick, Turbo, Nana and Mimi. Max Mayhem and Gleep are decided 2026-10-16.
 - ~~Mimi's Invisible Bow needs a charge formula.~~ **[decided 2026-10-16]** A fixed 70 piercing
   shot after a 0.8 s draw (above). Tune the numbers in playtests.
 
