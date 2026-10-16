@@ -15,6 +15,7 @@ Lua 5.1, so the numbers below are the real shipped values.
 > Games Faction; the fonts are Blambot-licensed. Use them for reference and never ship them.
 
 ## Detail notes
+- [[Differences from the Original]]: how Train Mayhem's loop and mechanics differ from the original, area by area, with what's built, planned or turned down (2026-10-16).
 - [[Original Game - APK Balance Audit]]: verified weapon damage and firing intervals from both native architectures, complete balance inventory, source evidence, exported data, and unresolved formulas.
 - [[Original Game - Items and Economy]]: agents and their abilities, weapons, gadgets
   (drones, mech suits), boosters, blueprints, upgrade costs, currencies, Chubwick's

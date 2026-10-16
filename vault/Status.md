@@ -143,7 +143,8 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   - the Figma mockups ([[Art Direction]] §10).
 - **Needs a test first:**
   - ShadowMap vs Future,
-  - enemy damage and cooldowns,
+  - enemy damage and cooldowns (the original's damage values were made for a 10 HP pool and
+    ours is 100, so hits land about 10× softer; [[Differences from the Original]]),
   - Mayhem fill and mech armour,
   - the combo window and score values,
   - the rocket's splash and range,

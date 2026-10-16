@@ -189,7 +189,9 @@ Shared needs:
 - comedic voice barks and taunts.
 
 ## Open questions
-- Is damage high enough? Against the starter agent, a single light grunt needs about 48 s
+- Is damage high enough? (The original's raw values were made for a **10 HP** pool, and ours
+  is 100 HP, so each hit costs about a tenth as much; see [[Differences from the Original]].)
+  Against the starter agent, a single light grunt needs about 48 s
   to down a player alone. Threat comes from crowds and mids. Check this in the first
   playtest.
 
