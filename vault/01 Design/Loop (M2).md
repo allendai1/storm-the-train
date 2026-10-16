@@ -141,6 +141,8 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
 
 ## Studio build list (continues from M1's sessions 1–6)
 ### Session 7 — Saving
+Draft code, install and verify steps: [[Session 7 PlayerDataService Code]] (written
+2026-10-16 in a cloud session and not run yet).
 - [ ] Install **ProfileStore** into `ServerStorage.Packages`. Record its version in
   [[Packages]].
 - [ ] **`PlayerDataService`:** load on join, release on leave and on `BindToClose`,
