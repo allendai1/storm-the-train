@@ -55,6 +55,10 @@ effectively the enemy AI scope.
 **[decided 2026-10-16]** We interpret the original's unclear `BERSERK_HEALTH` as a **stagger
 threshold**: deal that much damage during the wind-up and the charge is cancelled. This
 gives co-op squads a clear "focus fire!" moment.
+- **Confirmed as a deliberate departure (2026-10-16).** The decompile showed the original
+  uses `BERSERK_HEALTH` the other way round: every ~30 damage *triggers* a charge, and
+  nothing staggers it ([[Original Game - Enemy AI (Native Code)]]). The developer chose to
+  keep our proximity-triggered charge with the wind-up stagger, which is built and verified.
 
 ## Roster
 
@@ -140,16 +144,18 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
 - **[decided 2026-10-16] Co-op scaling.** Multiply the spawn budget and alive-cap by 1.0 / 1.6 /
   2.2 / 2.8 for 1 / 2 / 3 / 4 players. Multiply boss HP by 1.0 / 1.5 / 2.0 / 2.5. These
   are guesses to tune in playtesting.
-- **[decided 2026-10-16] Charge speeds use the original's values.** McGraw charges at
-  **16.7 studs/s**. Big Bart charges at his recorded **10.7 studs/s** (no separate charge
-  speed was recovered from the original). Every agent (18–33 studs/s) can outrun them, so
-  a charge's threat is its knockback and the wind-up stagger, not its speed.
-  - This replaces an earlier proposal to raise them to 36 and 40 studs/s so they'd have to
-    be jumped. The GDD's "jump, not outrun" rule was dropped with it.
-  - **Studio to-do (on hold):** Big Bart is built with `ChargeSpeed` 36 ([[EnemyService]]).
-    The decompile later showed the original's charge runs at **2.5× walk speed** (about 26.7
-    studs/s, [[Original Game - Enemy AI (Native Code)]]), so this decision is being re-asked
-    ([[From the Original - Proposals]]).
+- **[decided 2026-10-16, revised the same day] Charges run at 2.5× the enemy's walk speed,
+  as in the original** ([[Original Game - Enemy AI (Native Code)]], `BerserkerEnemy::BerserkAttack`).
+  - **Big Bart: about 26.7 studs/s** (2.5 × 10.7), and the original's charge covers about
+    34 studs.
+  - **McGraw: about 41.7 studs/s** (2.5 × 16.7).
+  - So fast agents (Max 28.3, Turbo 33) can outrun Bart's charge, and slow ones (Brick 20)
+    have to jump it or take the hit.
+  - This replaces the morning's "10.7, the recorded walk speed". That value was chosen
+    before the decompile found the real 2.5× multiplier. The earlier proposal of 36 and 40
+    studs/s (jump, not outrun) stays dropped.
+  - **Studio to-do:** Big Bart is built with `ChargeSpeed` 36 ([[EnemyService]]). Set it
+    to **26.7** in a local session. `ChargeDistance` 30 can stay; the original uses about 34.
   Walking speeds stay as listed. Rattler Runts (15 studs/s) are slower than every agent,
   which is fine because they're a swarm, not a chase.
 

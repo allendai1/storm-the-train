@@ -130,9 +130,12 @@ there's one premium currency to understand.
 
 ## Boosters
 Up to **3 boosters** can be equipped at the start of a run and at each checkpoint.
-- **[decided 2026-10-16] A booster lasts one train**, as in the original. Boosters are only
-  equipped at the run start and at checkpoints, so each one covers the **first train of
-  a leg**. (A proposal to make them last the whole leg was turned down.)
+- **[decided 2026-10-16, revised the same day] A booster lasts until the next checkpoint,
+  so a whole leg (3 trains).**
+  - That's the original's real rule: it clears boosters at every checkpoint, and it has a
+    checkpoint after every train ([[Original Game - Run Structure and Meta (Native Code)]]).
+  - This replaces the morning's "one train", which was chosen on the assumption that the
+    original's boosters lasted one train in their own right.
 - **[decided 2026-10-16] All types are always on sale.** The original showed a random selection;
   a fixed list is clearer and avoids anything that looks like a random paid offer.
 

@@ -147,9 +147,10 @@ leg 2, and a strong squad meets its first boss at roughly the 15-minute mark.
     past 33.
   - **[decided]** Falling into a gap between cars puts you back on the nearest roof after
     1 s, with 15 raw damage ([[0005-side-on-movement-and-camera]]).
-  - **[decided 2026-10-16]** Charges and rushes use the original's speeds, so players can outrun
-    them ([[Wild West Enemies]]). This replaces the earlier rule that dodged attacks must
-    be jumped, not outrun. Bullets and similar attacks are still dodged by jumping.
+  - **[decided 2026-10-16]** Charges run at **2.5× the enemy's walk speed**, as in the
+    original ([[Wild West Enemies]]). Fast agents can outrun them; slow agents have to jump
+    them or take the hit. This replaces the earlier rule that dodged attacks must always be
+    jumped, not outrun. Bullets and similar attacks are still dodged by jumping.
 
 | Action | Keyboard/mouse | Gamepad | Mobile |
 |---|---|---|---|

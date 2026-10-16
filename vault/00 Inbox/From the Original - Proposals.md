@@ -14,7 +14,14 @@ updated: 2026-10-16
 > - [[Original Game - Player and Camera (Native Code)]]
 > - [[Original Game - Run Structure and Meta (Native Code)]]
 
-## Decisions to revisit
+## Decisions to revisit — **resolved 2026-10-16**
+- **Charge speed → 2.5× walk** (Bart about 26.7 studs/s).
+- **`BERSERK_HEALTH` → keep our wind-up stagger** (a deliberate departure).
+- **Boosters → until the next checkpoint** (a whole leg).
+
+They're recorded in [[Wild West Enemies]], the GDD and [[Economy and Monetization]]. What
+was asked:
+
 Three of today's decisions were made before the code showed what the original really does:
 1. **Charge speed.** We decided "original speeds", which set Big Bart's charge to 10.7 studs/s
    because no charge speed had been recovered. **The original charges at 2.5× walk speed:
