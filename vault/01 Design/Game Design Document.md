@@ -362,11 +362,15 @@ party lobby. **[decided 2026-10-16]** You walk it **side-on, like the runs**, wi
    spawning, and 1–4 player co-op with a shared run.
 3. **M2, Loop.** Spec and Studio checklist: [[Loop (M2)]]. Hub train, next-train leap, checkpoint, agent swap, Mayhem and
    gadgets, coins and saving (DataStore service).
+   - **[decided 2026-10-16] The Feel and Look slice comes next,** ahead of the rest of M2
+     (saving, the hub, the full-loop playtest). It brings one Wild West train, Max and the
+     built enemies to roughly launch quality in look, animation, sound and feel:
+     [[Feel and Look (Slice)]]. The art pass therefore starts here, not in M5.
 4. **M3, Content.** Bosses, hostages, survival, the remaining themes, more agents and
    weapons.
 5. **M4, Meta and monetization.** Blueprints, upgrades, missions, boosters, the surplus
    shop, gems and Developer Products.
-6. **M5, Polish and launch.** Final title, art pass, onboarding and tutorial, analytics.
+6. **M5, Polish and launch.** Final title, the art pass for the remaining themes and agents (the first theme's is done in the slice), onboarding and tutorial, analytics.
 
 ## Open questions
 - Final agent names ([[Launch Agents]], [[Title Ideas]]).

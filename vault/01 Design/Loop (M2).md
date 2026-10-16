@@ -140,6 +140,9 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   migrations in M4.
 
 ## Studio build list (continues from M1's sessions 1–6)
+> **[decided 2026-10-16] Paused after Session 11.** The [[Feel and Look (Slice)]] comes next.
+> Sessions 7, 12 and 13 resume after it. Their code is already drafted.
+
 ### Session 7 — Saving
 Draft code, install and verify steps: [[Session 7 PlayerDataService Code]] (written
 2026-10-16 in a cloud session and not run yet).

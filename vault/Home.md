@@ -13,6 +13,7 @@ The repo is still named `storm-the-train` after the
 - [[Art Direction]] — visual style, palettes, readability rules, budgets; consult before any modeling (planned)
 - [[Loop (M2)]] — M2 spec and Studio checklist, sessions 7–13 (planned)
 - [[Queue Pads]] — physical party lobby in the hub: step on a pad, countdown, the pad's squad teleports together; replaces the party menu (planned, M2)
+- [[Feel and Look (Slice)]] — **the next milestone**: one train, Max and the built enemies at launch quality (planned)
 - [[Combat Polish]] — the accepted feel and AI polish for a refined first agent (planned, next Studio session)
 - [[Writing and Dialogue]] — voice rules, barks, announcements, tutorial, missions, challenge chains (proposed)
 - [[First Playable (M1)]] — M0+M1 spec and Studio build checklist, in session order (planned)

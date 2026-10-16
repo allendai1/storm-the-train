@@ -38,13 +38,22 @@ A run now plays like this:
   Air Strike.
 
 M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still open.
-**Next steps:**
-- **finish verifying Session 11** in a playtest: the Turret, Defender, Heavyweight, Air
-  Strike and lock messages,
-- then Session 7 (ProfileStore saving). The code is drafted in [[Session 7 PlayerDataService Code]]:
-  install ProfileStore, paste, integrate, verify. Then Session 12 (the hub and queue
-  pads), drafted in [[Session 12 Hub Code]],
-- the multi-client playtest from Session 6, whenever you're ready.
+**Next steps ([decided 2026-10-16] roadmap):**
+1. **[[Feel and Look (Slice)]]**, the next milestone. One Wild West train, Max and the 5
+   built enemies at roughly launch quality:
+   - F1 the look target,
+   - F2 [[Combat Polish]],
+   - F3 Max's feel,
+   - F4 the map,
+   - F5 the characters and enemies,
+   - F6 sound,
+   - F7 a phone test and a 2–4 player playtest.
+2. **After the slice,** M2 resumes: Session 7 saving and Session 12 hub (both already
+   drafted), then the Session 13 full-loop playtest.
+3. **Then** M3 content and M4 meta. The economy and event decisions are recorded and wait.
+
+**Before the slice, in Studio:** save the place. Finish verifying Session 11 (the
+knockback fix, the Defender, key 1) as part of F2 and F7.
 
 ## In progress
 - [[First Playable (M1)]]: Sessions 1–4 are done. Systems: [[ModeService]], [[Guard]],
