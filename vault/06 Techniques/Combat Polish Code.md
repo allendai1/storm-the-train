@@ -61,7 +61,9 @@ end
 local bart = enemies:FindFirstChild("BigBart")
 if bart then
 	default(bart, "FlinchCooldown", 1.5)
-	if bart:GetAttribute("ChargeSpeed") == 36 then -- decided 2026-10-16: 2.5x walk (10.7)
+	-- The one deliberate overwrite: only the old built value 36 is changed (decided 2026-10-16:
+	-- 2.5x walk = 26.7). A hand-tuned value is left alone.
+	if bart:GetAttribute("ChargeSpeed") == 36 then
 		bart:SetAttribute("ChargeSpeed", 26.7)
 		changed += 1
 		print("BigBart.ChargeSpeed 36 -> 26.7")
@@ -99,7 +101,7 @@ local function flashTemplate(name: string, size: Vector3, color: Color3)
 	end
 	local part = Instance.new("Part")
 	part.Name = name
-	part.Shape = Enum.PartType.Ball
+	part.Shape = Enum.PartType.Block -- not Ball: balls force a uniform size
 	part.Size = size
 	part.Color = color
 	part.Material = Enum.Material.Neon
@@ -113,9 +115,10 @@ local function flashTemplate(name: string, size: Vector3, color: Color3)
 	print("Created", part:GetFullName())
 end
 local WARM = Color3.fromHex("#FFF2B3") -- player-projectile colour (Art Direction)
-flashTemplate("MuzzleFlashRifle", Vector3.new(1.2, 0.8, 0.8), WARM)
-flashTemplate("MuzzleFlashScattergun", Vector3.new(2.2, 1.4, 1.4), WARM)
-flashTemplate("MuzzleFlashRocket", Vector3.new(1.8, 1.8, 1.8), Color3.fromHex("#FFC24A"))
+-- Long axis on Z: after CFrame.lookAt the shot runs along the part's -Z (LookVector).
+flashTemplate("MuzzleFlashRifle", Vector3.new(0.6, 0.6, 1.4), WARM)
+flashTemplate("MuzzleFlashScattergun", Vector3.new(1.3, 1.3, 2.4), WARM)
+flashTemplate("MuzzleFlashRocket", Vector3.new(1.6, 1.6, 1.8), Color3.fromHex("#FFC24A"))
 
 -- The dynamite fuse spark that FeelEffects blinks.
 local dynamite = effects:FindFirstChild("Dynamite")
@@ -132,7 +135,11 @@ if dynamite and not dynamite:FindFirstChild("FuseSpark", true) then
 	spark.Massless = true
 	local anchor = if dynamite:IsA("BasePart") then dynamite else dynamite:FindFirstChildWhichIsA("BasePart", true)
 	if anchor then
-		spark.CFrame = anchor.CFrame * CFrame.new(0, anchor.Size.Y / 2 + 0.2, 0)
+		-- Tip of the stick: a Roblox Cylinder's axis is X, a Block's long axis is usually Y.
+		local tip = if anchor:IsA("Part") and anchor.Shape == Enum.PartType.Cylinder
+			then CFrame.new(anchor.Size.X / 2 + 0.2, 0, 0)
+			else CFrame.new(0, anchor.Size.Y / 2 + 0.2, 0)
+		spark.CFrame = anchor.CFrame * tip
 		local weld = Instance.new("WeldConstraint")
 		weld.Part0 = anchor
 		weld.Part1 = spark
@@ -166,13 +173,15 @@ tip. Move it by hand if not.
 	SPAWN_EDGE_MARGIN = 3, -- studs past the camera half-width
 	SPAWN_BEHIND_CHANCE = 1 / 3,
 	SPAWN_ADVANCE_WINDOW = 3, -- s
+	SPAWN_ADVANCE_SAMPLE = 0.25, -- s between advance-tracker samples (its own fixed tick)
 	SPAWN_ADVANCE_MIN = 4, -- studs the squad's front must move forward in that window
 	SPAWN_SPREAD_MIN = 3, -- studs between enemies in one wave
 	SPAWN_SPREAD_MAX = 10,
 	PLAYER_IFRAMES = 0.3,
 	REVIVE_GRACE = 3,
 	REVIVE_PUSH_RADIUS = 10,
-	REVIVE_PUSH_SPEED = 100,
+	REVIVE_PUSH_SPEED = 40, -- sideways only (no lift), so enemies aren't flung off the train
+	SPIN_MAX_TIME = 1.5, -- s: server cap on one spin, so a hovering client can't keep a damage aura
 	SPIN_POP_PER_LEVEL = 6.7, -- studs/s of sideways and upward push per spin level
 	EXPLOSION_PUSH = 17, -- studs/s when the weapon has no ExplosionPush
 	EXPLOSION_UP_SCALE = 1.3,
@@ -240,6 +249,12 @@ function CombatFeel.explosionVelocity(center: Vector3, target: Vector3, speed: n
 	return Vector3.new(direction.X * speed, lift * speed * Constants.EXPLOSION_UP_SCALE, 0)
 end
 
+-- A sideways-only push away from `center` (the revive shove): no lift, so nobody leaves the train.
+function CombatFeel.radialVelocity(center: Vector3, target: Vector3, speed: number): Vector3
+	local side = if target.X >= center.X then 1 else -1
+	return Vector3.new(side * speed, 0, 0)
+end
+
 -- Spin knockback: equal sideways (away from the spinner) and upward push, F = per-level x level.
 function CombatFeel.spinVelocity(spinner: Vector3, target: Vector3, spinLevel: number): Vector3
 	local force = Constants.SPIN_POP_PER_LEVEL * spinLevel
@@ -247,9 +262,10 @@ function CombatFeel.spinVelocity(spinner: Vector3, target: Vector3, spinLevel: n
 	return Vector3.new(side * force, force, 0)
 end
 
--- Lobbed throw: the launch velocity that lands on `to` from `from` under `gravity` (studs/s^2),
--- on the lowest workable arc starting at DYNAMITE_LAUNCH_ANGLE, plus a share of the thrower's
--- own X velocity (so a moving thrower throws further, as in the original). nil = unreachable.
+-- Lobbed throw: the launch velocity that would land on `to` from `from` under `gravity` (studs/s^2),
+-- on the lowest workable arc starting at DYNAMITE_LAUNCH_ANGLE, PLUS a share of the thrower's own X
+-- velocity added afterwards. So a moving thrower overshoots by about that share x flight time, as
+-- in the original. nil = unreachable.
 function CombatFeel.lobVelocity(from: Vector3, to: Vector3, gravity: number, throwerVelocity: Vector3): Vector3?
 	local dx = to.X - from.X
 	local dy = to.Y - from.Y
@@ -355,7 +371,7 @@ local Constants = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild(
 
 local EnemyFlinch = {}
 local rng = Random.new()
-local tracks: { [Model]: AnimationTrack } = setmetatable({}, { __mode = "k" }) :: any
+local tracks: { [Model]: AnimationTrack } = {} -- strong; cleared on Destroying (weak keys on Instances aren't reliable)
 
 local function playHitReact(enemy: Model)
 	local track = tracks[enemy]
@@ -367,9 +383,17 @@ local function playHitReact(enemy: Model)
 		if animator == nil or hitReact == nil or not hitReact:IsA("Animation") then
 			return -- no animation yet (F5 adds it); the movement pause still reads
 		end
-		track = animator:LoadAnimation(hitReact)
-		track.Priority = Enum.AnimationPriority.Action
-		tracks[enemy] = track
+		local loaded = animator:LoadAnimation(hitReact)
+		loaded.Priority = Enum.AnimationPriority.Action
+		tracks[enemy] = loaded
+		track = loaded
+		enemy.Destroying:Once(function()
+			local cached = tracks[enemy]
+			tracks[enemy] = nil
+			if cached then
+				cached:Destroy()
+			end
+		end)
 	end
 	if track then
 		track:Play(0.05)
@@ -421,7 +445,8 @@ local Constants = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild(
 
 local SpawnPlacement = {}
 
--- points: candidate EnemySpawn positions; playerXs: living players' X. Returns a position or nil.
+-- points: candidate EnemySpawn positions; playerXs: the X of every player who isn't BledOut
+-- (downed players still see their area). Returns a position or nil.
 function SpawnPlacement.choose(points: { Vector3 }, playerXs: { number }, advancing: boolean, rng: Random): Vector3?
 	if #points == 0 or #playerXs == 0 then
 		return nil
@@ -431,7 +456,8 @@ function SpawnPlacement.choose(points: { Vector3 }, playerXs: { number }, advanc
 		front = math.max(front, x)
 		back = math.min(back, x)
 	end
-	local edge = Constants.CAMERA_WIDTH_STUDS / 2 + Constants.SPAWN_EDGE_MARGIN
+	-- The camera can be centred CAMERA_LEAD_MOVING ahead of a running player, so clear that too.
+	local edge = Constants.CAMERA_WIDTH_STUDS / 2 + Constants.CAMERA_LEAD_MOVING + Constants.SPAWN_EDGE_MARGIN
 	local ahead: { Vector3 } = {}
 	local behind: { Vector3 } = {}
 	for _, point in points do
@@ -462,13 +488,20 @@ function SpawnPlacement.choose(points: { Vector3 }, playerXs: { number }, advanc
 	return pool[1] -- the nearest off-screen point, so enemies walk into view rather than appear far off
 end
 
--- The k-th extra enemy of a wave, spread away from the squad (3-10 studs apart).
-function SpawnPlacement.spread(position: Vector3, index: number, awayX: number, rng: Random): Vector3
-	local step = rng:NextNumber(Constants.SPAWN_SPREAD_MIN, Constants.SPAWN_SPREAD_MAX)
-	return position + Vector3.new(awayX * step * index, 0, 0)
+-- Positions for a whole wave, spread away from the squad with a running 3-10 stud offset.
+function SpawnPlacement.spread(position: Vector3, count: number, awayX: number, rng: Random): { Vector3 }
+	local out = { position }
+	local offset = 0
+	for _ = 2, count do
+		offset += rng:NextNumber(Constants.SPAWN_SPREAD_MIN, Constants.SPAWN_SPREAD_MAX)
+		table.insert(out, position + Vector3.new(awayX * offset, 0, 0))
+	end
+	return out
 end
 
--- Tracks whether the squad's front is moving forward. Call update() every spawn tick.
+-- Tracks whether the squad's front is moving forward. Sample it on its own fixed
+-- SPAWN_ADVANCE_SAMPLE tick (not the wave tick, which is 2 s or more), and make a new
+-- tracker in every SpawnService.begin().
 export type AdvanceTracker = { samples: { { t: number, x: number } } }
 
 function SpawnPlacement.newTracker(): AdvanceTracker
@@ -477,15 +510,16 @@ end
 
 function SpawnPlacement.update(tracker: AdvanceTracker, frontX: number, t: number)
 	table.insert(tracker.samples, { t = t, x = frontX })
-	while #tracker.samples > 1 and t - tracker.samples[1].t > Constants.SPAWN_ADVANCE_WINDOW do
+	-- Keep the oldest sample that still spans the whole window.
+	while #tracker.samples > 2 and t - tracker.samples[2].t >= Constants.SPAWN_ADVANCE_WINDOW do
 		table.remove(tracker.samples, 1)
 	end
 end
 
 function SpawnPlacement.isAdvancing(tracker: AdvanceTracker): boolean
 	local samples = tracker.samples
-	if #samples < 2 then
-		return true
+	if #samples < 2 or samples[#samples].t - samples[1].t < Constants.SPAWN_ADVANCE_WINDOW then
+		return true -- not enough history yet
 	end
 	return samples[#samples].x - samples[1].x >= Constants.SPAWN_ADVANCE_MIN
 end
@@ -595,17 +629,28 @@ return FeelEffects
     is applied.
   - This covers every source, gap falls included.
 - **The spin, "until landing"** (it replaces the one-shot spin hit):
-  - when a `RequestSpin` is accepted: `state.spinning = true`, `state.spinHits = {}`, and
-    the Player attribute `Spinning = true`,
+  - **reject `RequestSpin` while `state.spinning`**, so a request can't reset the hit list,
+  - when a `RequestSpin` is accepted: `state.spinning = true`, `state.spinHits = {}`,
+    `state.spinStarted = now`, and the Player attribute `Spinning = true`,
   - every Heartbeat, for each spinning player:
-    - if grounded (the same probe as the spin validation) → `spinning = false`,
-      `Spinning = false`,
-    - otherwise, for each enemy hitbox within `SPIN_RADIUS` that isn't in `spinHits`:
-      `damageEnemy(enemy, SPIN_DAMAGE, player)` (source "Spin"), then
-      `knockback(enemy, CombatFeel.spinVelocity(root.Position, enemyRoot.Position, spinLevel))`
-      with the agent's `SpinLevel`, and mark it hit,
+    - **end the spin** (`spinning = false`, `Spinning = false`) if any of these is true:
+      - it's grounded (the same probe as the spin validation),
+      - the root is nil or Health ≤ 0,
+      - `now − spinStarted > SPIN_MAX_TIME` (1.5 s). The client owns its physics, so
+        this cap stops a hover exploit turning the spin into a permanent damage aura,
+    - otherwise, for each enemy hitbox within the character's `SpinRadius` that isn't in
+      `spinHits`:
+      - `damageEnemy(enemy, SpinDamage, player)` (source "Spin"),
+      - `knockback(enemy, CombatFeel.spinVelocity(root.Position, enemyRoot.Position, SpinLevel))`,
+      - mark it hit.
+
+      Read `SpinDamage`, `SpinRadius` and `SpinLevel` from the character's attributes
+      ([[AgentService]]: Max 6 / 5 / 4, Brick 9 / 6 / 6). Fall back to the `SPIN_*`
+      constants.
   - **the gun pauses:** the fire loop skips shots while `state.spinning`. `state.fire` is
-    untouched, so holding fire resumes on landing.
+    untouched, so holding fire resumes on landing. **On landing, set
+    `nextShot = math.max(nextShot, now)`** so the cadence doesn't fire a backlog of
+    skipped shots at once.
   - Keep sending the `S` record at the spin start (the ring visual).
 
 **[[EnemyService]]:**
@@ -617,9 +662,17 @@ return FeelEffects
   - With no target, keep walking in the facing direction for
     `EnemyPerception.lostWalkTime(rng)`, then turn round (patrol). Turn at carriage ends
     and gaps, as the probes already do.
+  - **Keep the target while turned away on purpose:** whenever an enemy starts a back-off
+    (Lobber `KeepDistance`, Shooter `MinRange`), a leap or a charge at its target, call
+    `EnemyPerception.noteHit(enemy, target)` to refresh its aggro. `Humanoid:Move` turns
+    it to face where it walks, so otherwise it would lose the target and oscillate.
 - **`Attacking`:** set `enemy:SetAttribute("Attacking", true)` during every wind-up (the
   Shooter's tell, Bart's wind-up and charge, the melee swing) and back to `false` after.
-- **Walker melee:** `nextAttack = now + CombatFeel.jitter(AttackInterval)`.
+- **Attack-cadence jitter:**
+  - the Shooter's and Lobber's random 2.5–4 s intervals already give the spread the spec
+    asks for; keep them,
+  - **our addition:** melee `nextAttack = now + CombatFeel.jitter(AttackInterval)`, so
+    crowds don't swing in sync either. Drop it if it feels mushy.
 - **Shooter:**
   - fire only if `CombatFeel.canFireYet(enemy)`,
   - use `CombatFeel.tellTime()` instead of the fixed `TellTime`,
@@ -630,7 +683,8 @@ return FeelEffects
   - the throw velocity becomes
     `CombatFeel.lobVelocity(handPos, targetFeet, DYNAMITE_GRAVITY, enemyRoot.AssemblyLinearVelocity)`,
     replacing the fixed 0.9 s arc. Skip the throw if it returns nil,
-  - add `explodesAt` (server time) to the dynamite's `R` record,
+  - add `explodesAt` (server time) to the dynamite's **landing** `R` correction (the fuse
+    starts on landing, so the time isn't known at the throw),
   - **when thrown dynamite explodes, damage enemies in the radius too**
     (`CombatService.damageEnemy(enemy, Damage, nil)`, source "Hazard", so no player gets
     the credit), plus the pop-up knockback above.
@@ -638,26 +692,35 @@ return FeelEffects
   true through the wind-up and the charge.
 
 **[[SpawnService]]:**
-- Keep one `SpawnPlacement.newTracker()`. Every spawn tick, call
-  `SpawnPlacement.update(tracker, frontX, now)`, where frontX is the largest X of the
-  living players.
-- Choose spawn positions with
-  `SpawnPlacement.choose(enemySpawnPositions, playerXs, SpawnPlacement.isAdvancing(tracker), rng)`.
-  This replaces the 20-stud minimum rule.
-- Extra enemies in the same wave use `SpawnPlacement.spread(position, k, awayX, rng)`.
-  Check that the spread position is still on a `WalkSurface` (drop to the nearest roof if
-  not).
+- **The tracker:**
+  - make a new `SpawnPlacement.newTracker()` in every `begin()`,
+  - sample it on its **own fixed `SPAWN_ADVANCE_SAMPLE` (0.25 s) tick**:
+    `SpawnPlacement.update(tracker, frontX, now)`, where frontX is the largest X of the
+    players who aren't `BledOut`.
+- **Choosing a point:**
+  - call `SpawnPlacement.choose(enemySpawnPositions, playerXs, SpawnPlacement.isAdvancing(tracker), rng)`,
+    with playerXs from every player who isn't `BledOut`. This replaces the 20-stud minimum
+    rule,
+  - the off-screen edge is now about 55 studs (35 half-view + 17 lead + 3), so **widen
+    the candidate filter** from "within one carriage of a player" to **two carriages**, or
+    `choose` may find no point and return nil (spawn nothing that tick).
+- **A whole wave:** `SpawnPlacement.spread(position, count, awayX, rng)` returns all the
+  positions, with a running 3–10 stud offset. Check that each is still on a
+  `WalkSurface` (drop to the nearest roof if not).
 
 **[[SquadService]]:**
 - When a revive completes:
   - `CombatFeel.grantInvulnerability(target, Constants.REVIVE_GRACE)`,
   - for every enemy within `REVIVE_PUSH_RADIUS` of the target:
-    `CombatService.knockback(enemy, CombatFeel.explosionVelocity(targetRoot.Position, enemyRoot.Position, Constants.REVIVE_PUSH_SPEED))`.
+    `CombatService.knockback(enemy, CombatFeel.radialVelocity(targetRoot.Position, enemyRoot.Position, Constants.REVIVE_PUSH_SPEED))`.
+    That's sideways only, 40 studs/s, so pushed enemies stay on the train. A fall takes the
+    "removed, no ragdoll" path, which would skip drops such as the thief's bag.
 
 **[[EffectsController]]:**
 - **`M` records:** `FeelEffects.muzzleFlash(template, Vector3.new(x, y, 0), dirX)`.
-- **Dynamite `R` records with `explodesAt`:** after cloning, call
-  `FeelEffects.fuseBlink(clone, explodesAt)`.
+- **Dynamite `R` records with `explodesAt`:** call `FeelEffects.fuseBlink(clone, explodesAt)`
+  **once per clone**. Mark the clone (e.g. its `Blinking` attribute) so a repeated record
+  doesn't start a second loop.
 
 **[[CameraController]]:** keep a `lead` number (starting at 0). Every frame:
 `lead = CameraLead.step(lead, root.AssemblyLinearVelocity.X, dt)`, then use `root.X + lead`
@@ -665,6 +728,18 @@ instead of `root.X + CAMERA_LEAD × facing`. The existing smoothing stays.
 
 **[[InputController]]:** no change to the spin input. While the Player attribute
 `Spinning` is true, the client can show the spin pose and hide the gun (F3).
+
+**Reviewed 2026-10-16** by a read-only code review. Fixed:
+- off-screen spawns ignoring the camera lead,
+- the advance tracker never seeing the squad stop,
+- an uncapped spin (a hover exploit) and re-spin resets,
+- the per-agent spin values,
+- a fire backlog on landing,
+- perception oscillating while backing off,
+- the revive shove flinging enemies off the train,
+- the hit-react track cache,
+- the flash shapes, the fuse-spark position, the wave spread, and the dynamite fuse
+  timing and double blink.
 
 ## §8 Verify (one item at a time)
 1. **Flinch:**
@@ -684,7 +759,8 @@ instead of `root.X + CAMERA_LEAD × facing`. The existing smoothing stays.
 5. **Spawning:**
    - enemies appear just past the screen edge ahead, never on screen (check at 16:9 and
      on a phone),
-   - standing still for 3 s+ sometimes spawns one behind.
+   - standing still for 3 s+ sometimes spawns one behind,
+   - running flat out, nothing pops in at the leading screen edge (the lead is included).
 6. **Dynamite:**
    - it lands at your feet on a low arc whether you're near or far, on a higher roof or a
      lower one,
@@ -694,11 +770,14 @@ instead of `root.X + CAMERA_LEAD × facing`. The existing smoothing stays.
    once.
 8. **Spin:**
    - the spin hits each enemy once while you're airborne, popping them up and away (about
-     27 studs/s for Max),
-   - the gun stops until you land, then resumes if fire is held,
+     27 studs/s for Max, 40 for Brick, using their own SpinDamage and SpinRadius),
+   - the gun stops until you land, then resumes at its normal cadence, with no burst of
+     stored shots,
+   - a second `RequestSpin` mid-spin is refused,
+   - a spin never lasts longer than 1.5 s,
    - the spin validation still rejects grounded spins.
-9. **Revive grace:** a revived player can't be hurt for 3 s, and nearby enemies are pushed
-   away.
+9. **Revive grace:** a revived player can't be hurt for 3 s. Nearby enemies are shoved
+   sideways and stay on the train.
 10. **Camera:**
     - running, the view leads about 17 studs ahead,
     - turning, it slides across in about 2 s,
