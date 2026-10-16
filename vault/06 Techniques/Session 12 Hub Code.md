@@ -187,13 +187,18 @@ for i, spec in padSpecs do
 		pad.PrimaryPart = base
 		CollectionService:AddTag(pad, "QueuePad")
 	end
-	if pad:GetAttribute("Capacity") == nil then
-		pad:SetAttribute("Capacity", spec.capacity)
-		pad:SetAttribute("Countdown", spec.countdown)
-		pad:SetAttribute("FullCountdown", spec.full)
-		pad:SetAttribute("Mode", "Run")
-		pad:SetAttribute("ActiveColor", GOLD) -- light colour when YOU are on it
-		pad:SetAttribute("BusyColor", Color3.fromHex("#FF9F1C")) -- someone else is on it
+	local defaults: { [string]: any } = {
+		Capacity = spec.capacity,
+		Countdown = spec.countdown,
+		FullCountdown = spec.full,
+		Mode = "Run",
+		ActiveColor = GOLD, -- light colour when YOU are on it
+		BusyColor = Color3.fromHex("#FF9F1C"), -- someone else is on it
+	}
+	for attribute, value in defaults do
+		if pad:GetAttribute(attribute) == nil then
+			pad:SetAttribute(attribute, value)
+		end
 	end
 end
 
@@ -275,7 +280,7 @@ Add to `ReplicatedStorage.Shared.Constants`:
 	TELEPORT_RETRY_DELAY = 2, -- seconds, doubled on each retry
 	QUEUE_CHECK_INTERVAL = 0.1, -- pad membership checks (10 Hz)
 	QUEUE_LEAVE_BLOCK = 1.5, -- seconds after LEAVE before you can rejoin a pad
-	QUEUE_DEPART_HOLD = 30, -- seconds a departing pad stays frozen waiting for teleports
+	TELEPORT_FLIGHT_TIMEOUT = 30, -- seconds; a teleport still unfinished after this counts as failed
 	RETURN_TO_HUB_TIMEOUT = 30,
 	RETURN_RETRY_INTERVAL = 10,
 	RUN_ROSTER_TIMEOUT = 45, -- Run lobby: start with whoever arrived after this long
@@ -412,8 +417,9 @@ local Guard = require(script.Parent.Parent:WaitForChild("Util"):WaitForChild("Gu
 
 local TravelService = {}
 
-type InFlight = { attempts: number, onFailed: ((Player) -> ())? }
+type InFlight = { attempts: number, startedAt: number, onFailed: ((Player) -> ())? }
 local inFlight: { [Player]: InFlight } = {}
+local groupCallActive: { [Player]: true } = {} -- a group TeleportAsync is still being retried
 local returning = false
 
 local function retry(label: string, attempts: number, fn: () -> any): (boolean, any)
@@ -486,32 +492,40 @@ local function teleport(players: { Player }, options: TeleportOptions?, onFailed
 		return true
 	end
 	for _, player in players do
-		inFlight[player] = { attempts = 1, onFailed = onFailed }
+		inFlight[player] = { attempts = 1, startedAt = os.clock(), onFailed = onFailed }
+		groupCallActive[player] = true
 		player:SetAttribute("Teleporting", true)
 	end
 	local ok = retry("TeleportAsync", Constants.TELEPORT_ATTEMPTS, function()
 		return TeleportService:TeleportAsync(game.PlaceId, players, options)
 	end)
-	if not ok then
-		for _, player in players do
+	for _, player in players do
+		groupCallActive[player] = nil
+		if not ok then
 			clearFlight(player)
 		end
 	end
 	return ok
 end
 
+-- A teleport that failed for good: clear it and tell the caller.
+local function failFlight(player: Player)
+	local entry = inFlight[player]
+	local onFailed = entry and entry.onFailed
+	clearFlight(player)
+	if onFailed then
+		onFailed(player)
+	end
+end
+
 local function onTeleportInitFailed(player: Player, result: Enum.TeleportResult, message: string, _placeId: number, retryOptions: TeleportOptions)
 	local entry = inFlight[player]
-	if entry == nil then
-		return
+	if entry == nil or groupCallActive[player] then
+		return -- not ours, or the group call's own retry loop is still handling it
 	end
 	warn(`[TravelService] teleport failed for {player.UserId}: {result.Name} {message}`)
 	if entry.attempts >= Constants.TELEPORT_ATTEMPTS or result == Enum.TeleportResult.Unauthorized then
-		local onFailed = entry.onFailed
-		clearFlight(player)
-		if onFailed then
-			onFailed(player)
-		end
+		failFlight(player)
 		return
 	end
 	entry.attempts += 1
@@ -545,7 +559,8 @@ end
 
 -- → Hub. A group of 2+ goes to one reserved Hub-mode server; one player goes to a public hub.
 -- If reserving fails, the group falls back to a public hub (they get home, maybe not together).
-function TravelService.sendToHub(players: { Player }): boolean
+-- onFailed(player) runs for anyone whose teleport later fails for good.
+function TravelService.sendToHub(players: { Player }, onFailed: ((Player) -> ())?): boolean
 	players = present(players)
 	if #players == 0 then
 		return true
@@ -562,7 +577,7 @@ function TravelService.sendToHub(players: { Player }): boolean
 			options = reserved
 		end
 	end
-	return teleport(players, options, nil)
+	return teleport(players, options, onFailed)
 end
 
 -- Run mode, entering Results. Everyone returns together once all have pressed BACK TO HUB or
@@ -612,19 +627,24 @@ function TravelService.cancelReturn()
 	end
 end
 
+local function sendAwayOrKick(player: Player, reason: string)
+	local function kick(target: Player)
+		target:Kick(reason)
+	end
+	if not TravelService.sendToHub({ player }, kick) then
+		kick(player)
+	end
+end
+
 local function onPlayerAdded(player: Player)
 	if ModeService.get() == "Run" then
 		local roster = ModeService.roster()
 		if roster ~= nil and table.find(roster, player.UserId) == nil then
 			warn(`[TravelService] {player.UserId} isn't on this run's roster`)
-			if not TravelService.sendToHub({ player }) then
-				player:Kick("This run is private.")
-			end
+			sendAwayOrKick(player, "This run is private.")
 		end
 	elseif workspace:GetAttribute("Orphaned") == true then
-		if not TravelService.sendToHub({ player }) then
-			player:Kick("This server isn't available. Please rejoin.")
-		end
+		sendAwayOrKick(player, "This server isn't available. Please rejoin.")
 	end
 end
 
@@ -632,6 +652,20 @@ function TravelService.start()
 	TeleportService.TeleportInitFailed:Connect(onTeleportInitFailed)
 	Players.PlayerRemoving:Connect(function(player)
 		inFlight[player] = nil
+		groupCallActive[player] = nil
+	end)
+	-- Watchdog: a teleport that never completes and never reports failure counts as failed,
+	-- so nobody stays frozen behind the ALL ABOARD screen.
+	task.spawn(function()
+		while true do
+			task.wait(1)
+			for player, entry in inFlight do
+				if not groupCallActive[player] and os.clock() - entry.startedAt > Constants.TELEPORT_FLIGHT_TIMEOUT then
+					warn(`[TravelService] teleport for {player.UserId} timed out`)
+					failFlight(player)
+				end
+			end
+		end
 	end)
 	Players.PlayerAdded:Connect(onPlayerAdded)
 	for _, player in Players:GetPlayers() do
@@ -674,8 +708,8 @@ type Pad = {
 	fullCountdown: number,
 	members: { Player },
 	departsAt: number, -- server time; 0 = idle
-	departing: boolean,
-	departStartedAt: number,
+	departing: boolean, -- frozen: no joins or leaves
+	launched: boolean, -- the teleport has started (the server is reserved)
 }
 
 local QueuePadService = {}
@@ -749,23 +783,31 @@ end
 
 local function finishDeparture(pad: Pad)
 	pad.departing = false
+	pad.launched = false
 	pad.departsAt = if #pad.members > 0 then now() + pad.countdown else 0
 	publish(pad)
 end
 
 local function depart(pad: Pad)
-	local party = table.clone(pad.members)
-	local started = TravelService.sendToRun(party, function(_player: Player)
+	local party = {}
+	for _, member in pad.members do
+		if member:GetAttribute("Teleporting") ~= true then
+			table.insert(party, member)
+		end
+	end
+	-- Yields while the server is reserved. The pad stays frozen (departing) the whole time.
+	local started = #party > 0 and TravelService.sendToRun(party, function(_player: Player)
 		-- Their teleport failed for good. They're still on the pad; finishDeparture restarts it.
 	end)
-	if not started then
+	if started then
+		pad.launched = true -- tick() now waits for the members to leave or fail
+	else
 		pad.model:SetAttribute("Status", "COULDN'T DEPART")
 		task.delay(3, function()
 			pad.model:SetAttribute("Status", nil)
 		end)
 		finishDeparture(pad)
 	end
-	-- Started: the pad stays frozen until its members have left or their teleports failed.
 end
 
 local function tick()
@@ -794,12 +836,12 @@ local function tick()
 	end
 	for _, pad in pads do
 		if pad.departing then
-			if not anyTeleporting(pad) or t - pad.departStartedAt > Constants.QUEUE_DEPART_HOLD then
+			-- TravelService's watchdog clears Teleporting within TELEPORT_FLIGHT_TIMEOUT.
+			if pad.launched and not anyTeleporting(pad) then
 				finishDeparture(pad)
 			end
 		elseif pad.departsAt > 0 and t >= pad.departsAt and #pad.members > 0 then
 			pad.departing = true
-			pad.departStartedAt = t
 			publish(pad)
 			task.spawn(depart, pad)
 		end
@@ -842,7 +884,7 @@ function QueuePadService.init()
 			members = {},
 			departsAt = 0,
 			departing = false,
-			departStartedAt = 0,
+			launched = false,
 		}
 		table.insert(pads, pad)
 		publish(pad)
@@ -981,10 +1023,25 @@ local TeleportController = {}
 function TeleportController.start()
 	local gui = player:WaitForChild("PlayerGui"):WaitForChild("TeleportGui") :: ScreenGui
 	local title = gui:WaitForChild("Backdrop"):WaitForChild("Title") :: TextLabel
-	-- Must be set on the client before the server calls TeleportAsync. Carried to the destination.
-	TeleportService:SetTeleportGui(gui)
+	-- SetTeleportGui must be called on the client before each teleport, and it doesn't persist
+	-- across teleports. Hand it an enabled copy so the carried screen is visible.
+	local function armTeleportGui()
+		local carried = gui:Clone()
+		carried.Enabled = true
+		local carriedTitle = carried:FindFirstChild("Title", true)
+		if carriedTitle and carriedTitle:IsA("TextLabel") then
+			carriedTitle.Text = "ALL ABOARD!"
+		end
+		TeleportService:SetTeleportGui(carried)
+	end
+	armTeleportGui()
+	local wasTeleporting = false
 	local function refresh()
 		local teleporting = player:GetAttribute("Teleporting") == true
+		if wasTeleporting and not teleporting then
+			armTeleportGui() -- a teleport failed: re-arm for the retry
+		end
+		wasTeleporting = teleporting
 		gui.Enabled = teleporting or player:GetAttribute("DataLoaded") ~= true
 		title.Text = if teleporting then "ALL ABOARD!" else "LOADING…"
 	end
@@ -1010,7 +1067,7 @@ HubHudController.Modes = { "Hub" } :: { Types.Mode }
 
 function HubHudController.start()
 	local playerGui = player:WaitForChild("PlayerGui")
-	local runHud = playerGui:FindFirstChild("HudGui")
+	local runHud = playerGui:WaitForChild("HudGui", 5)
 	if runHud and runHud:IsA("ScreenGui") then
 		runHud.Enabled = false
 	end
@@ -1118,6 +1175,22 @@ live code.
   "mid-run join: no" requires.
 - **A reserved server with no MemoryStore record becomes an "orphaned" hub** that sends
   everyone to a public hub. That's ADR 0004's "teleport back to the hub".
+- **A player whose teleport fails for good goes back onto the pad.** The next departure
+  reserves a new server, so they can end up split from a party that already left.
+  Retrying with the party's access code would keep them together; that's a later
+  improvement.
+- **Reviewed 2026-10-16** by a read-only code review against the Roblox API docs. Fixed:
+  - a pad unfreezing while its server was still being reserved, which could depart twice,
+  - players stuck as `Teleporting` forever, with a 30 s flight watchdog,
+  - an off-roster player staying when their redirect failed (now kicked),
+  - overlapping group and single retries,
+  - the teleport screen not carrying over (`SetTeleportGui` now gets an enabled copy,
+    re-armed after a failure),
+  - HudGui staying on in the hub,
+  - setup re-runs overwriting hand-tuned pad attributes.
+
+  The pads are read once at start. That's fine because `StreamingEnabled` is off (M0); turning
+  streaming on would need `GetInstanceAddedSignal("QueuePad")`.
 - **Pad lights use the pad's `ActiveColor`.** The spec says "your player colour". If the
   place already has a per-player colour attribute, swap it in.
 
