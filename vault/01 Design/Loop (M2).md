@@ -199,6 +199,14 @@ Draft code, install and verify steps: [[Session 7 PlayerDataService Code]] (writ
   the **gadget fan**, from the Figma components `HUD/MayhemRing` and `HUD/GadgetSlot`.
 
 ### Session 12 — Hub mode and teleport
+Draft code, setup script and verify steps: [[Session 12 Hub Code]] (written 2026-10-16 in
+a cloud session and not run yet).
+- **[decided 2026-10-16] The hub is side-on, like the runs:** the same agent rig, controls and camera.
+  The Falcon-8 is a long train you walk along, with the pods and queue pads in a row.
+- **[decided 2026-10-16] After a run, the results screen offers BACK TO HUB, and PLAY AGAIN is
+  removed.** The server waits until everyone has pressed it, or for 30 s. Then the party
+  returns together to one reserved Hub server (a solo player goes to a public hub). In
+  Studio, where teleports can't work, it falls back to the old PLAY AGAIN reset.
 - [ ] **`Workspace.Map.Hub`:** the walkable hub train, with the Barracks pod, the
   **queue pads** (`QueuePads`, tagged `QueuePad`; see [[Queue Pads]] → Studio build list)
   and the closed M4 pods.

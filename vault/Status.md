@@ -42,8 +42,8 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 - **finish verifying Session 11** in a playtest: the Turret, Defender, Heavyweight, Air
   Strike and lock messages,
 - then Session 7 (ProfileStore saving). The code is drafted in [[Session 7 PlayerDataService Code]]:
-  install ProfileStore, paste, integrate, verify. Or
-  Session 12 (the hub and queue pads),
+  install ProfileStore, paste, integrate, verify. Then Session 12 (the hub and queue
+  pads), drafted in [[Session 12 Hub Code]],
 - the multi-client playtest from Session 6, whenever you're ready.
 
 ## In progress

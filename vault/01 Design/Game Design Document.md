@@ -349,7 +349,8 @@ It has walk-up pods for:
 - **Exchange** (gems to coins; see [[Economy and Monetization]]).
 
 It's a hand-built Workspace area that players walk around in, and it doubles as the
-party lobby.
+party lobby. **[decided 2026-10-16]** You walk it **side-on, like the runs**, with the pods and
+[[Queue Pads]] in a row along the train.
 
 ## Milestones
 **[decided]**
