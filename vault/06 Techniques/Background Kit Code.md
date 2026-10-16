@@ -6,7 +6,8 @@ updated: 2026-10-16
 # Background Kit Code
 
 > **Status: planned. Drafted in a cloud session on 2026-10-16; none of this has run in
-> Studio.** It implements the [[Background Kit]] standard ([[0011-background-kit]],
+> Studio.** Reviewed the same day by a read-only code review; its fixes are applied
+> (below). It implements the [[Background Kit]] standard ([[0011-background-kit]],
 > proposed). The Luau compiles; Roblox's own Script Analysis hasn't seen it. Before
 > replacing [[ParallaxController]], **read the current script in Studio** and keep anything
 > it does that this version doesn't.
@@ -26,7 +27,8 @@ whenever a theme's background layers are built or changed.
    `ServerStorage.Tools` folder keeps it versioned with the place without running it),
    paste §4, then right-click it → **Save as Local Plugin**. A **Train Mayhem → Background
    Kit** button appears in the Plugins tab.
-6. Run the Wild West migration (§5) with `execute_luau` in the Edit datamodel.
+6. Run the Wild West migration (§5) with `execute_luau` in the Edit datamodel. It only
+   sets the `Slot` attributes; the existing copy counts are enough with the new controller.
 7. Open the panel, type `WildWest`, press **Edit**, then **Validate**. Fix what it reports,
    set `Continuous = true` on the rails and the ground slab, press **Done**, save.
 8. Verify (§6).
@@ -90,7 +92,8 @@ BackgroundKit.SLOTS = {
 BackgroundKit.SLOT_ORDER = { "Foreground", "Track", "Ground", "Near", "Mid", "Far" }
 
 -- The widest screen we plan for (21:9). Wider screens put the camera closer, so far
--- layers show more and need more copies.
+-- layers show more and need more copies. Super-wide monitors (32:9) aren't covered; clamp
+-- the camera's aspect in CameraController if they matter.
 BackgroundKit.MAX_ASPECT = 2.4
 
 function BackgroundKit.cameraDistance(aspect: number): number
@@ -104,11 +107,12 @@ function BackgroundKit.halfVisibleWidth(depth: number, aspect: number?): number
 end
 
 -- The fewest copies that always cover the screen, for content down to `deepest`
--- studs behind the plane (negative for Foreground content in front of it). ParallaxController guarantees (Tiles / 2 − 1) tile lengths
--- of cover on the leading side, so that has to reach the screen edge.
+-- studs behind the plane (negative for Foreground content in front of it).
+-- ParallaxController centres its copies on the camera, which guarantees
+-- (Tiles / 2 − 0.5) tile lengths of cover on each side; that has to reach the screen edge.
 function BackgroundKit.minTiles(tileLength: number, deepest: number): number
 	local half = BackgroundKit.halfVisibleWidth(deepest)
-	return math.max(2, math.ceil(2 * (half / tileLength + 1)))
+	return math.max(2, math.ceil(2 * half / tileLength + 1))
 end
 
 local function nameSeed(name: string): number
@@ -156,10 +160,12 @@ function BackgroundKit.readLayer(layer: Model): LayerInfo?
 		warn(`[BackgroundKit] {layer:GetFullName()} needs a Tile`)
 		return nil
 	end
-	-- Sorted so every client makes the same picks.
-	table.sort(random, function(a, b)
+	-- Sorted so a given tile index always gets the same pick, whatever the child order.
+	local byName = function(a: Variant, b: Variant): boolean
 		return a.name < b.name
-	end)
+	end
+	table.sort(random, byName)
+	table.sort(scheduled, byName)
 	local slot = layer:GetAttribute("Slot")
 	return {
 		model = layer,
@@ -174,7 +180,8 @@ function BackgroundKit.readLayer(layer: Model): LayerInfo?
 end
 
 -- Which variant tile index `j` shows. It depends only on j, so a stretch of scenery
--- looks the same if the camera comes back to it.
+-- looks the same if the camera comes back to it. If two set-pieces land on the same j,
+-- the first by name wins.
 function BackgroundKit.pickVariant(info: LayerInfo, j: number): Variant
 	for _, variant in info.scheduled do
 		if (j - variant.offset) % (variant.every :: number) == 0 then
@@ -202,7 +209,12 @@ Changes from the built version, as the vault describes it:
 - reads `Tile_<Name>` variants (`Weight`, `Every`, `Offset`) through `BackgroundKit`,
 - keeps a **scroll distance that never wraps**, so tile index j always shows the same
   variant (the built one wraps the scroll by the tile length),
+- **centres its copies on the camera** (the built one keeps more on the −X side, which
+  can leave the +X screen edge short on wide phones),
 - pools copies by variant, and parks unused ones with `Parent = nil`,
+- moves every part in **one `BulkMoveTo` per frame** (offsets cached per copy), instead of
+  a `PivotTo` per tile,
+- ignores a theme load that a newer `Theme` change has overtaken,
 - keeps each template's pivot Y, Z and rotation, and only sets X.
 ```lua
 --!strict
@@ -216,20 +228,25 @@ local Workspace = game:GetService("Workspace")
 local Constants = require(ReplicatedStorage.Shared.Constants)
 local BackgroundKit = require(ReplicatedStorage.Shared.BackgroundKit)
 
-type Active = { model: Model, variant: BackgroundKit.Variant }
+-- A clone with its parts and their offsets from the template's pivot, cached once so
+-- every frame is a single BulkMoveTo.
+type Copy = { model: Model, variant: BackgroundKit.Variant, parts: { BasePart }, offsets: { CFrame } }
 type LayerState = {
 	info: BackgroundKit.LayerInfo,
-	active: { [number]: Active },
-	pools: { [Model]: { Model } },
+	active: { [number]: Copy },
+	pools: { [Model]: { Copy } },
 }
 
 local ParallaxController = { Modes = { "Run" } }
 
 local container: Folder? = nil
 local layers: { LayerState } = {}
+local loadId = 0
 -- Total distance the world has scrolled. It never wraps, so tile index j always means
 -- the same stretch of scenery and variant picks stay put.
 local travel = 0
+local moveParts: { BasePart } = {}
+local moveCFrames: { CFrame } = {}
 
 local function clear()
 	if container then
@@ -240,12 +257,16 @@ local function clear()
 end
 
 local function load(themeName: string?)
+	loadId += 1
+	local myLoad = loadId
 	clear()
 	if not themeName then
 		return
 	end
-	local assets = ReplicatedStorage:WaitForChild("Assets")
-	local backgrounds = assets:WaitForChild("Backgrounds")
+	local backgrounds = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Backgrounds")
+	if myLoad ~= loadId then
+		return -- the theme changed again while we waited
+	end
 	local theme = backgrounds:FindFirstChild(themeName)
 	if not theme then
 		warn(`[ParallaxController] no background set for theme {themeName}`)
@@ -265,26 +286,34 @@ local function load(themeName: string?)
 	end
 end
 
-local function acquire(state: LayerState, variant: BackgroundKit.Variant): Model
+local function acquire(state: LayerState, variant: BackgroundKit.Variant): Copy
 	local pool = state.pools[variant.template]
 	if pool and #pool > 0 then
-		local model = table.remove(pool) :: Model
-		model.Parent = container
-		return model
+		local copy = table.remove(pool) :: Copy
+		copy.model.Parent = container
+		return copy
 	end
-	local clone = variant.template:Clone()
-	clone.Parent = container
-	return clone
+	local model = variant.template:Clone()
+	local parts: { BasePart } = {}
+	local offsets: { CFrame } = {}
+	for _, d in model:GetDescendants() do
+		if d:IsA("BasePart") then
+			table.insert(parts, d)
+			table.insert(offsets, variant.rest:ToObjectSpace(d.CFrame))
+		end
+	end
+	model.Parent = container
+	return { model = model, variant = variant, parts = parts, offsets = offsets }
 end
 
-local function release(state: LayerState, entry: Active)
-	entry.model.Parent = nil -- pooled copies don't render
-	local pool = state.pools[entry.variant.template]
+local function release(state: LayerState, copy: Copy)
+	copy.model.Parent = nil -- pooled copies don't render
+	local pool = state.pools[copy.variant.template]
 	if not pool then
 		pool = {}
-		state.pools[entry.variant.template] = pool
+		state.pools[copy.variant.template] = pool
 	end
-	table.insert(pool, entry.model)
+	table.insert(pool, copy)
 end
 
 local function step(dt: number)
@@ -294,39 +323,48 @@ local function step(dt: number)
 		return
 	end
 	local camX = camera.CFrame.Position.X
+	table.clear(moveParts)
+	table.clear(moveCFrames)
 	for _, state in layers do
 		local length, count = state.info.tileLength, state.info.tiles
-		local first = math.floor((camX + travel) / length - count / 2)
+		-- Centred on the camera: (count / 2 − 0.5) tiles of cover each side (BackgroundKit.minTiles).
+		local first = math.floor((camX + travel) / length - count / 2 + 0.5)
 		local last = first + count - 1
-		for j, entry in state.active do
+		for j, copy in state.active do
 			if j < first or j > last then
-				release(state, entry)
+				release(state, copy)
 				state.active[j] = nil
 			end
 		end
 		for j = first, last do
-			local entry = state.active[j]
-			if not entry then
-				local variant = BackgroundKit.pickVariant(state.info, j)
-				entry = { model = acquire(state, variant), variant = variant }
-				state.active[j] = entry
+			local copy = state.active[j]
+			if not copy then
+				copy = acquire(state, BackgroundKit.pickVariant(state.info, j))
+				state.active[j] = copy
 			end
-			local rest = entry.variant.rest
-			entry.model:PivotTo(CFrame.new(j * length - travel, rest.Y, rest.Z) * rest.Rotation)
+			local rest = copy.variant.rest
+			local pivot = CFrame.new(j * length - travel, rest.Y, rest.Z) * rest.Rotation
+			for i, part in copy.parts do
+				table.insert(moveParts, part)
+				table.insert(moveCFrames, pivot * copy.offsets[i])
+			end
 		end
+	end
+	if #moveParts > 0 then
+		Workspace:BulkMoveTo(moveParts, moveCFrames, Enum.BulkMoveMode.FireCFrameChanged)
 	end
 end
 
 function ParallaxController.init() end
 
 function ParallaxController.start()
-	Workspace:GetAttributeChangedSignal("Theme"):Connect(function()
+	local function reload()
 		local theme = Workspace:GetAttribute("Theme")
 		load(if type(theme) == "string" then theme else nil)
-	end)
-	local theme = Workspace:GetAttribute("Theme")
-	load(if type(theme) == "string" then theme else nil)
+	end
+	Workspace:GetAttributeChangedSignal("Theme"):Connect(reload)
 	RunService:BindToRenderStep("Parallax", Enum.RenderPriority.Camera.Value + 1, step)
+	reload()
 end
 
 return ParallaxController
@@ -360,7 +398,8 @@ function BackgroundStudioService.init()
 		return
 	end
 	for _, theme in studio:GetChildren() do
-		if theme:IsA("Folder") then
+		-- Only folders the plugin opened (it marks them), never other things kept there.
+		if theme:IsA("Folder") and theme:GetAttribute("BackgroundKitTheme") == true then
 			local existing = backgrounds:FindFirstChild(theme.Name)
 			if existing then
 				warn(`[BackgroundStudioService] two copies of theme {theme.Name}; using the one in BackgroundStudio`)
@@ -385,7 +424,10 @@ The panel:
 - **Add selection to layer:** one button per slot.
 - **Check:** **Validate**, **Fix part settings**, **Clear log**, and the log itself.
 
-Every change is one undo step (Ctrl+Z). It refuses to run during a playtest. Guides
+Every change is one undo step (Ctrl+Z); the plugin never calls `Destroy()`, so undo can
+always put things back. It doesn't load in playtests. **Add selection** only takes whole
+props from the Workspace: never templates, the map, tiles themselves, or a piece inside
+another prop, and it logs anything it skips or moves. Guides
 (ghosts, band plates, seam posts, variant labels) live in
 `Workspace.BackgroundStudio.EditorGuides`, are locked, and are deleted by **Done**.
 ```lua
@@ -402,7 +444,12 @@ local RunService = game:GetService("RunService")
 local Selection = game:GetService("Selection")
 local Workspace = game:GetService("Workspace")
 
+if RunService:IsRunning() then
+	return -- edit-time tool only; don't load in playtest DataModels
+end
+
 local STUDIO = "BackgroundStudio"
+local OPEN_MARK = "BackgroundKitTheme" -- attribute on the theme folder while it's open here
 local GUIDES = "EditorGuides"
 local GHOST_SPAN = 260 -- studs of ghost copies right of the tile (the train is about 201)
 local TOL = 0.05
@@ -475,7 +522,7 @@ local function openTheme(): Folder?
 		return nil
 	end
 	for _, child in studio:GetChildren() do
-		if child:IsA("Folder") and child.Name ~= GUIDES then
+		if child:IsA("Folder") and child:GetAttribute(OPEN_MARK) == true then
 			return child
 		end
 	end
@@ -579,6 +626,37 @@ local function partsIn(inst: Instance): { BasePart }
 	return list
 end
 
+-- The props in a tile: its parts and models, looking through any Folders.
+local function propsIn(container: Instance): { PVInstance }
+	local list: { PVInstance } = {}
+	for _, child in container:GetChildren() do
+		if child:IsA("PVInstance") then
+			table.insert(list, child)
+		elseif child:IsA("Folder") then
+			for _, p in propsIn(child) do
+				table.insert(list, p)
+			end
+		end
+	end
+	return list
+end
+
+local function isTileModel(inst: Instance): boolean
+	return inst:IsA("Model") and (inst.Name == "Tile" or string.sub(inst.Name, 1, 5) == "Tile_")
+end
+
+-- The tile a prop sits in directly (through Folders), if any.
+local function tileOf(inst: Instance): Instance?
+	local parent = inst.Parent
+	while parent and parent:IsA("Folder") and parent:GetAttribute(OPEN_MARK) ~= true do
+		parent = parent.Parent
+	end
+	if parent and isTileModel(parent) then
+		return parent
+	end
+	return nil
+end
+
 -- The background rules: anchored, never collides or blocks raycasts, no shadows.
 local function applyRules(inst: Instance): number
 	local changed = 0
@@ -597,11 +675,13 @@ local function withUndo(name: string, fn: () -> ())
 		return
 	end
 	local id = ChangeHistoryService:TryBeginRecording(name)
-	local ok, err = pcall(fn)
-	if id then
-		ChangeHistoryService:FinishRecording(id,
-			if ok then Enum.FinishRecordingOperation.Commit else Enum.FinishRecordingOperation.Cancel)
+	if not id then
+		log("ERROR", "Studio is busy recording another change. Try again in a moment.")
+		return
 	end
+	local ok, err = pcall(fn)
+	ChangeHistoryService:FinishRecording(id,
+		if ok then Enum.FinishRecordingOperation.Commit else Enum.FinishRecordingOperation.Cancel)
 	if not ok then
 		log("ERROR", tostring(err))
 	end
@@ -649,9 +729,14 @@ end
 local function ghostOf(tile: Model, offsetX: number, parent: Instance)
 	local ghost = tile:Clone()
 	ghost.Name = `Ghost_{tile.Name}`
+	for _, d in ghost:GetDescendants() do
+		if d:IsA("LuaSourceContainer") then
+			d.Parent = nil -- never let a copied script run
+		end
+	end
 	for _, p in partsIn(ghost) do
 		p.Transparency = 0.55 + 0.45 * p.Transparency
-		p.Locked, p.CanCollide, p.CanQuery, p.CanTouch, p.CastShadow = true, false, false, false, false
+		p.Anchored, p.Locked, p.CanCollide, p.CanQuery, p.CanTouch, p.CastShadow = true, true, false, false, false, false
 	end
 	ghost:PivotTo(tile:GetPivot() + Vector3.new(offsetX, 0, 0))
 	ghost.Parent = parent
@@ -666,7 +751,7 @@ local function refreshGuides()
 	end
 	local old = studio:FindFirstChild(GUIDES)
 	if old then
-		old:Destroy()
+		old.Parent = nil -- not Destroy(): Destroy can't be undone
 	end
 	local guides = Instance.new("Folder")
 	guides.Name = GUIDES
@@ -751,11 +836,12 @@ local function closeTheme()
 	local studio = studioFolder(false)
 	local guides = studio and studio:FindFirstChild(GUIDES)
 	if guides then
-		guides:Destroy()
+		guides.Parent = nil -- not Destroy(): Destroy can't be undone
 	end
+	theme:SetAttribute(OPEN_MARK, nil)
 	theme.Parent = bg
 	if studio and #studio:GetChildren() == 0 then
-		studio:Destroy()
+		studio.Parent = nil
 	end
 	log("OK", `Put {theme.Name} back in ReplicatedStorage.Assets.Backgrounds. Save the place to keep it.`)
 end
@@ -773,14 +859,15 @@ local function editTheme(name: string)
 		log("INFO", `{name} is already open.`)
 		return
 	end
-	if current then
-		closeTheme()
-	end
 	local theme = bg:FindFirstChild(name)
 	if not theme or not theme:IsA("Folder") then
 		log("ERROR", `No theme called "{name}". Type an existing one, or use New theme.`)
 		return
 	end
+	if current then
+		closeTheme()
+	end
+	theme:SetAttribute(OPEN_MARK, true)
 	theme.Parent = studioFolder(true)
 	placeTiles(theme, kit)
 	refreshGuides()
@@ -794,10 +881,11 @@ local function makeLayer(theme: Instance, slot: string, kit: any): Model
 	layer.Name = slot
 	layer:SetAttribute("Slot", slot)
 	layer:SetAttribute("TileLength", spec.tileLength)
-	layer:SetAttribute("Tiles", kit.minTiles(spec.tileLength, planeZ() - spec.zFar))
+	layer:SetAttribute("Tiles", kit.minTiles(spec.tileLength, -spec.zFar)) -- bands are relative to the plane
+	local origin = trainOrigin()
 	local tile = Instance.new("Model")
 	tile.Name = "Tile"
-	tile.WorldPivot = CFrame.new(trainOrigin().X, 0, planeZ())
+	tile.WorldPivot = CFrame.new(origin.X, origin.Y - 3, planeZ()) -- left end, on the ground
 	tile.Parent = layer
 	layer.Parent = theme
 	return layer
@@ -843,39 +931,75 @@ local function addSelection(slot: string)
 		log("ERROR", `{layer.Name} needs a Tile model and a TileLength attribute.`)
 		return
 	end
+	local tileModel = tile :: Model
 	local studio = studioFolder(false)
 	local guides = studio and studio:FindFirstChild(GUIDES)
-	local pz = planeZ()
-	local tileX = tile:GetPivot().X
-	local moved: { Instance } = {}
-	for _, item in Selection:Get() do
-		local skip = not item:IsA("PVInstance") or item == tile or item:IsAncestorOf(tile)
-			or (guides ~= nil and item:IsDescendantOf(guides)) or item == theme or item.Parent == theme
-		if not skip then
-			local pv = item :: PVInstance
-			local pivot = pv:GetPivot()
-			local x = tileX + (pivot.X - tileX) % length -- dropped over a ghost? it wraps into the tile
-			local z = math.clamp(pivot.Z, pz + spec.zFar, pz + spec.zNear)
-			pv:PivotTo(CFrame.new(x, pivot.Y, z) * pivot.Rotation)
-			pv.Parent = tile
-			applyRules(pv)
-			table.insert(moved, pv)
-			local lo, hi = boxOf(pv)
-			if lo and hi and (lo.X < tileX - TOL or hi.X > tileX + length + TOL) then
-				log("WARN", `{pv.Name} crosses the tile's end, so it will be cut off or doubled at the seam. Move it, or split it.`)
-			end
-			if math.abs(z - pivot.Z) > TOL then
-				log("INFO", `{pv.Name} moved into the {slot} band (Z {spec.zFar} to {spec.zNear}).`)
+	local map = Workspace:FindFirstChild("Map")
+	local selected = Selection:Get()
+	-- Only whole props being built in the workspace; never templates, the map, tiles or
+	-- pieces inside another prop.
+	local chosen: { PVInstance } = {}
+	for _, item in selected do
+		local why: string? = nil
+		if not item:IsA("PVInstance") then
+			why = "isn't a part or model"
+		elseif not item:IsDescendantOf(Workspace) then
+			why = "isn't in Workspace (templates and other themes are left alone)"
+		elseif map and item:IsDescendantOf(map) then
+			why = "is part of the game map"
+		elseif guides and item:IsDescendantOf(guides) then
+			why = "is an editor guide"
+		elseif isTileModel(item) or item.Parent == theme then
+			why = "is a tile or a layer itself"
+		elseif item:IsDescendantOf(theme) then
+			local owner = tileOf(item)
+			if not owner then
+				why = "is inside a prop; select the whole prop"
+			elseif owner.Parent == layer and owner ~= tileModel then
+				why = `is in the variant {owner.Name}; move it there by hand`
 			end
 		end
+		if not why then
+			for _, other in selected do
+				if other ~= item and item:IsDescendantOf(other) then
+					why = "is inside another selected item"
+					break
+				end
+			end
+		end
+		if why then
+			log("INFO", `Skipped {item.Name}: it {why}.`)
+		else
+			table.insert(chosen, item :: PVInstance)
+		end
 	end
-	if #moved == 0 then
+	if #chosen == 0 then
 		log("INFO", "Select the props you've built, then pick a layer.")
 		return
 	end
-	Selection:Set(moved)
+	local pz = planeZ()
+	local tileX = tileModel:GetPivot().X
+	for _, pv in chosen do
+		local pivot = pv:GetPivot()
+		local x = tileX + (pivot.X - tileX) % length -- dropped over a ghost? it wraps into the tile
+		local z = math.clamp(pivot.Z, pz + spec.zFar, pz + spec.zNear)
+		pv:PivotTo(CFrame.new(x, pivot.Y, z) * pivot.Rotation)
+		pv.Parent = tileModel
+		applyRules(pv)
+		if math.abs(x - pivot.X) > TOL then
+			log("INFO", `{pv.Name} moved {string.format("%.0f", x - pivot.X)} studs along X into the real tile.`)
+		end
+		if math.abs(z - pivot.Z) > TOL then
+			log("INFO", `{pv.Name} moved into the {slot} band (Z {spec.zFar} to {spec.zNear}).`)
+		end
+		local lo, hi = boxOf(pv)
+		if lo and hi and (lo.X < tileX - TOL or hi.X > tileX + length + TOL) then
+			log("WARN", `{pv.Name} crosses the tile's end, so it will be cut off or doubled at the seam. Move it, or split it.`)
+		end
+	end
+	Selection:Set(chosen)
 	refreshGuides()
-	log("OK", `Added {#moved} item(s) to {layer.Name}.`)
+	log("OK", `Added {#chosen} item(s) to {layer.Name}.`)
 end
 
 local function fixParts()
@@ -980,7 +1104,7 @@ validate = function(theme: Instance): (number, number)
 			if bad > 0 then
 				report("WARN", `{tag}/{tile.Name}: {bad} part(s) not anchored or still colliding, blocking shots or casting shadows. Use Fix part settings.`)
 			end
-			for _, child in tile:GetChildren() do
+			for _, child in propsIn(tile) do
 				local lo, hi = boxOf(child)
 				if lo and hi then
 					deepest = math.max(deepest, pz - lo.Z)
@@ -1230,13 +1354,16 @@ out.Text = ""
 out.Parent = root
 outputLabel = out
 
+ChangeHistoryService.OnUndo:Connect(refreshStatus)
+ChangeHistoryService.OnRedo:Connect(refreshStatus)
 refreshStatus()
 ```
 
 ## §5 Wild West migration (`execute_luau`, Edit datamodel)
 ```lua
--- Background Kit: bring the Wild West greybox layers onto the standard (Edit datamodel).
--- Idempotent: it only sets what's missing or too low, and prints every change.
+-- Background Kit: give the Wild West greybox layers their standard slots (Edit datamodel).
+-- Idempotent: it only sets what's missing, and prints every change. Run it after the new
+-- ParallaxController is in: with its centred copies, the existing Tiles counts are enough.
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local assets = ReplicatedStorage:FindFirstChild("Assets")
@@ -1245,7 +1372,6 @@ local theme = backgrounds and backgrounds:FindFirstChild("WildWest")
 assert(theme, "ReplicatedStorage.Assets.Backgrounds.WildWest not found")
 
 local SLOT = { Foreground = "Foreground", Track = "Track", Desert = "Ground", Scrub = "Near", Mesas = "Far" }
-local MIN_TILES = { Foreground = 3, Scrub = 5 } -- from BackgroundKit.minTiles at 21:9
 
 for name, slot in SLOT do
 	local layer = theme:FindFirstChild(name)
@@ -1256,12 +1382,6 @@ for name, slot in SLOT do
 	if layer:GetAttribute("Slot") ~= slot then
 		layer:SetAttribute("Slot", slot)
 		print(`{name}: Slot = {slot}`)
-	end
-	local want = MIN_TILES[name]
-	local tiles = layer:GetAttribute("Tiles")
-	if want and (type(tiles) ~= "number" or tiles < want) then
-		layer:SetAttribute("Tiles", want)
-		print(`{name}: Tiles {tiles} -> {want}`)
 	end
 end
 print("Done. Now mark the rails and the ground slab Continuous = true, then run Validate in the Background Kit panel.")
@@ -1276,7 +1396,8 @@ print("Done. Now mark the rails and the ground slab Continuous = true, then run 
    one placed at the wrong depth snaps into the band; one crossing a tile end gets a
    warning. Ctrl+Z undoes it.
 4. **Playtest:** the background scrolls as before, with no console errors; `Workspace.Background`
-   holds about the same number of tiles (one more for Scrub and Foreground).
+   holds the same number of tiles as before. Check the screen edges at a wide phone size
+   in the device emulator: nothing pops in.
 5. **Variants:** duplicate the Scrub `Tile` as `Tile_Test`, change it visibly, give it
    `Weight` 1. In a playtest both appear, and the same stretch shows the same tile if the
    camera goes back. Then try `Every = 4` and check it appears on every 4th tile. Delete it.
@@ -1284,6 +1405,25 @@ print("Done. Now mark the rails and the ground slab Continuous = true, then run 
    works, and the server prints that it moved the theme back. After stopping, the theme is
    still open in the edit place, as left.
 7. **Phone:** in the device emulator at a wide phone size, no gaps at the screen edges.
+
+## Review (2026-10-16)
+A read-only code review found, and these drafts now fix:
+- **Undo could detach a whole theme** after Done or Edit, because `Destroy()` can't be
+  undone; the plugin now only re-parents.
+- **Add selection could rearrange things silently**: whole tiles, parts inside a selected
+  model, templates in `ReplicatedStorage` and map pieces. It now filters to whole props in
+  the Workspace and logs what it skips and every X wrap.
+- Running when Studio couldn't start an undo recording; Validate missing props inside
+  Folders; overlapping theme loads; any Folder being treated as the open theme (the open
+  theme is now marked with a `BackgroundKitTheme` attribute, and the server only moves
+  marked folders); Edit closing the current theme for a name that doesn't exist; ghosts
+  copying scripts; the status line after undo; the plugin loading in playtests.
+- **Performance:** one `BulkMoveTo` per frame instead of a `PivotTo` per tile.
+- **Fewer copies:** centring the copies on the camera covers both edges with one fewer
+  copy per layer.
+
+Left as known limits: screens wider than 21:9 (clamp the camera's aspect if they matter),
+and two set-pieces on the same tile (the first by name wins).
 
 ## Roblox export notes
 - Plugins cache `require`, so **reload the plugin** (or restart Studio) after editing

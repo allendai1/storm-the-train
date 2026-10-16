@@ -154,9 +154,10 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
 
 ## Known issues / open problems
 - **Background copy counts (found by the [[Background Kit]] maths, not seen in a test):**
-  the Scrub layer's 4 copies can leave a gap at the screen edge on wide phones (it needs
-  5), and the Foreground's 2 copies can run out at the camera (it needs 3). Fix with the
-  migration in [[Background Kit Code]] §5.
+  with the built ParallaxController, the Scrub layer's 4 copies can leave a gap at the
+  screen edge on wide phones, and the Foreground's 2 can run out at the camera. The
+  Background Kit's controller ([[Background Kit Code]] §2) centres the copies, which fixes
+  both with the current counts.
 - The place template's default `Workspace.SpawnLocation` (under the caboose) and the
   `Baseplate` are still there. Neither does anything now: agents spawn by script, and the
   Desert layer covers the baseplate. Deleting both is recommended, but it's your call.

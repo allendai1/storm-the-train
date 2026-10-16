@@ -26,12 +26,12 @@ bands, so the parallax looks the same from map to map and the tooling can check 
 
 | Slot | Z band | Default tile | Min copies* | On-screen speed (16:9) | What goes here |
 |---|---|---|---|---|---|
-| **Foreground** | +12 → +24 (in front) | 140 | 3 | 1.8× → 1.3× the track | Rare, dark, simple shapes: poles, rocks, posts. Never covers the action for long |
-| **Track** | −4 → +4, **max 3 high** | 30 | 5 | 1× (the "real" speed) | Ties, rails, ballast. Anything taller shows above the couplers between cars |
-| **Ground** | +60 → −640 | 200 | 8 | 1× near you → 0.08× far | The floor slab (it must reach in front of the camera) plus low scatter |
-| **Near** | −20 → −120 | 120 | 5 | 0.7× → 0.3× | Readable props: cacti, fences, bushes, signs, crates |
-| **Mid** | −140 → −320 | 240 | 5 | 0.28× → 0.14× | Big landmarks and set-pieces: towns, water towers, canyon walls |
-| **Far** | −350 → −600 | 500 | 5 | 0.13× → 0.08× | The skyline: mesas, mountains, city silhouettes |
+| **Foreground** | +12 → +24 (in front) | 140 | 2 | 1.8× → 1.3× the track | Rare, dark, simple shapes: poles, rocks, posts. Never covers the action for long |
+| **Track** | −4 → +4, **max 3 high** | 30 | 4 | 1× (the "real" speed) | Ties, rails, ballast. Anything taller shows above the couplers between cars |
+| **Ground** | +60 → −640 | 200 | 7 | 1× near you → 0.08× far | The floor slab (it must reach in front of the camera) plus low scatter |
+| **Near** | −20 → −120 | 120 | 4 | 0.7× → 0.3× | Readable props: cacti, fences, bushes, signs, crates |
+| **Mid** | −140 → −320 | 240 | 4 | 0.28× → 0.14× | Big landmarks and set-pieces: towns, water towers, canyon walls |
+| **Far** | −350 → −600 | 500 | 4 | 0.13× → 0.08× | The skyline: mesas, mountains, city silhouettes |
 
 \*For content reaching the band's far edge on the widest screens we plan for (21:9). The
 validator works out the real minimum from what you actually built, so a layer whose
@@ -146,11 +146,17 @@ The greybox already follows most of this. The changes ([[Background Kit Code]] �
 
 | Layer | `Slot` | Notes |
 |---|---|---|
-| Foreground | Foreground | **`Tiles` 2 → 3.** With 2 copies, the leading copy can run out right at the camera; only a lone pole in the middle of the tile hides it |
+| Foreground | Foreground | Fine at 2 |
 | Track | Track | Mark the rails `Continuous` |
 | Desert | Ground | Mark the ground slab `Continuous` |
-| Scrub | Near | **`Tiles` 4 → 5.** On wide phones the camera is closer, so the far edge of the scrub band needs about 131 studs of cover and 4 copies guarantee only 120 |
+| Scrub | Near | Fine at 4, **with the new controller** (see below) |
 | Mesas | Far | Fine at 4 (content stops at Z −520) |
+
+**Why the new controller matters here:** the built one keeps more of its copies on the −X
+side of the camera (where scenery scrolls off), leaving the +X edge short, so on wide phones (where the camera sits closer and far layers show more)
+Scrub's 4 copies and Foreground's 2 can run out at the screen edge. The new one centres
+the copies on the camera, and then the existing counts are enough. (Found by the maths,
+not seen in a test.)
 
 Then **Validate**, and fix what it finds. The Mid slot is empty for now; the ghost town
 and canyon set-pieces ([[Feel and Look Asset Specs]] §3.4) go there.

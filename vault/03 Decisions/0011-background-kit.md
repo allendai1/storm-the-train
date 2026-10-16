@@ -10,9 +10,9 @@ date: 2026-10-16
 layers, each built from one hand-made `Tile`. That works for Wild West, but every new theme
 would invent its own layers, depths and tile sizes, and nothing checks them. The templates
 live in `ReplicatedStorage`, where you can't see them next to the train while building.
-Each layer also repeats one tile exactly, and the copy counts were picked by eye (Scrub's 4
-copies turn out to be too few on wide phones). The developer asked for a standard way to
-add each map's layers and tiles.
+Each layer also repeats one tile exactly, and the copy counts were picked by eye (with
+the built controller, Scrub's 4 copies are too few on wide phones). The developer asked
+for a standard way to add each map's layers and tiles.
 
 ## Decision
 - **Six standard slots** (Foreground, Track, Ground, Near, Mid, Far) with fixed Z bands
@@ -22,6 +22,8 @@ add each map's layers and tiles.
 - **Variant tiles:** a layer may hold `Tile_<Name>` models with `Weight` (random) or
   `Every`/`Offset` (scheduled set-pieces). ParallaxController picks by tile index, from a
   scroll distance that never wraps, so a stretch of scenery is stable.
+- **Copies are centred on the camera** (the built controller keeps more of them on the −X side, where scenery scrolls off, leaving the +X edge short),
+  so the fewest copies cover both screen edges.
 - **Copy counts come from maths**, not guesses: `BackgroundKit.minTiles` from the content's
   depth and the widest screen we support (21:9).
 - **Edit in place with a Studio plugin:** the Background Kit plugin moves one theme into
