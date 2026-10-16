@@ -28,8 +28,12 @@ updated: 2026-10-16
 
 ## Firing
 - **Hitscan shots have no angular spread [code].** `Weapon::FireRay` casts one ray along
-  the given angle with no random offset. The angle comes from targeting
-  (`WeaponManager::FindTargetAngle`, auto-aim).
+  the given angle with no random offset.
+- **Agent guns have no auto-aim [code].** They fire along the facing, which is always
+  the move direction. `WeaponManager::FindTargetAngle`/`FindClosestTargetAngle` are only
+  called by the spin attack's start angle, the turret, freeze and melee drones, and the
+  Teleport boss. *(Corrected 2026-10-16. An earlier version of this note said the shot
+  angle came from auto-aim.)*
 - **Fire-rate jitter [code].** After each shot, `Weapon::Fire` resets the fire timer to
   a random value in ±30% of the interval, but only for weapons slower than 0.2 s. So:
   - the pistol (0.35 s), shotgun (0.45 s), rockets (0.5 s) and sticky bombs fire with an
