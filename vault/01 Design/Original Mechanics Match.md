@@ -55,9 +55,13 @@ updated: 2026-10-16
 ### 1.3 The event deck [orig]
 - A **shuffled deck** of events, dealt without repeats until empty, then reshuffled.
   Missions can push their event to the front (`PushEventFirst`).
-- The original's deck is **Hostage, Jetpack, CDW (rolling ball) and Survival**. Ours
-  starts with **Hostage and Survival**; **Jetpack and CDW join when they're built** (they
-  aren't designed yet; their original numbers are in §8).
+- The deck is the original's: **Hostage, Jetpack, Rolling Ball (CDW) and Survival**
+  ([decided 2026-10-16]; the vehicle events are designed in §8.3–8.4). Until the vehicles
+  are built, the deck holds Hostage and Survival.
+- **Events unlock through missions** [orig]: an event only enters the deck once the
+  mission that introduces it is done (kill a boss, rescue a hostage, ride the ball, kill 100
+  with the jetpack, survival). That's the original's way of teaching events one at a time.
+  [co-op] The deck uses the **host's** unlocks (the party leader on the queue pad).
 - **The Thief train goes.** Blueprint thieves come from a play-time timer instead (§9.4).
 - **Event tier = floor(score ÷ 40,000).** It sets boss count, adds, survival waves and
   vehicle targets. [co-op] Use the **average score per player** (squad score ÷ players),
@@ -165,15 +169,33 @@ After the train's engine, and again from the hub train to the next train:
 - **No invulnerability**, but for **0.2 s after the spin starts and 0.2 s after it ends**,
   damage taken is halved.
 - [ours] The hit area isn't in the vault: use the character's `SpinRadius` (Max 5, Brick 6).
-- Interiors: the original's "any jump inside a carriage spins" needs enterable carriages,
-  which we don't have yet (open, §11).
+- **Inside a carriage, every jump is a low hop that spins at once** (§3.7).
 
 ### 3.4 Swapping [orig]
 - **Instant, no cooldown, no invulnerability.** Works mid-air and mid-spin, keeping
   position, velocity, jump and spin state, held fire, and the health. Each agent keeps its
   own crate weapon. Speed becomes the new agent's.
-- Blocked when dead or downed, in a mech, or while a gadget is being placed.
-- [keep] Q/E or the swipe, cycling the squad (see §11 about 2 or 3 agents).
+- Blocked when dead or downed, in a mech or vehicle, or while a gadget is being placed.
+- **A squad is 2 agents** [orig, decided 2026-10-16]: a swap **toggles between them**. Q, E,
+  the swap button and a swipe either way all toggle. You need 2 agents equipped to swap.
+
+### 3.7 Carriage interiors [orig, decided 2026-10-16]
+- **Closed coaches can be entered.** Press **Interact** (W/↑, or the ENTER button on
+  touch, as in the original) at a door to go between the roof and the inside.
+- **Inside:** the floor is the deck; a jump is a **low hop (30 studs/s, about 3.4 studs)
+  and the spin starts immediately**. Shots and melee don't cross between the inside and the
+  roof (the roof blocks them).
+- **Enemies match your level:** when one moves to the next carriage it picks that
+  carriage's roof or interior floor to match the player it's chasing. Spin-jumpers jump
+  lower inside (27–33 studs/s up).
+- **Seeing inside** [ours]: when your character is inside, the camera-side wall of that
+  coach fades on your screen only; teammates on the roof see a dimmed silhouette of you.
+- **Templates** [ours]: a `ClosedCoach` (33 studs) with an interior floor tagged
+  `WalkSurface` and attribute `Level = "Interior"`, `CarriageDoor` parts at both ends,
+  interior `EnemySpawn` attachments, and room for coins (coin shape class 0, "two-height
+  coach") and the weapons coach's crates. The original also has coaches with crates on
+  the roof and a weapons coach.
+- **Missions** can use it ("die inside a carriage" and so on).
 
 ### 3.5 Death and revive
 - [co-op] **Downed** at 0 HP, bleed out over 15 s, **teammate revive** (hold 2 s, back at
@@ -357,7 +379,7 @@ Damage to players is ×10.
 | 1 | Rodeo Kid | ninja_2 (agile) | 30 / 10.7 | **Spin-jump** every 1.4–4.2 s: 2.5× speed, 7.4–8.6 studs high, about 18.7 long, **no damage**; melee from behind. 1-in-7 per 0.1 s to escape a flinch |
 | 2 | Six-Shooter | ranged light (LIGHT_FIREBALL) | 35 / 8.7 | Bullet **40**, 18 studs/s, fired 0.6 s into the draw, every 4 s ± 30% |
 | 3 | Dynamite Dan | ninja_4 (coward) | 30 / 10 | **Backs away while reloading**; throws when you're 8–23 studs away (0.6 s into the throw, every 4 s ± 30%); the dynamite **explodes on first contact**, **40** in 2.7 studs, and hurts bandits; explodes when knocked out |
-| 4 | Lasso Lucy | ninja_5 (agile mid) | 160 / 11.3, weight 1.6 | Agile mid: spin-jumps, mid melee **60** (the lasso is §11) |
+| 4 | Lasso Lucy | ninja_5 (agile mid) | 160 / 11.3, weight 1.6 | Agile mid: spin-jumps, mid melee **60**. **Her lasso is deferred** until the first agent is built (decided 2026-10-16) |
 | 5 | Big Bart | ninja_6 (berserker) | 160 / 10.7, weight 2 | **Charges after every ~30 damage taken** (27–33): aims, then **34 studs at 26.7 studs/s**, hits once for **60** with a 33 studs/s push. **Can't be staggered, flinched or burned** while charging; no recovery. The jug swig is the wind-up animation |
 | 6 | Saloon Door Sam | ninja_7 (shield) | 160 / 12, weight 2 | The doors are a **90 HP physical shield** on his hand; they **drop while he flinches**; he takes **0.2–0.5 s to turn**; when they break, **speed ×1.6** |
 | 7 | "Mad Dog" McGraw | BerserkerBoss (ninja_8) | 600 / 16.7, weight 2.5 | Charges every 4.8–7.2 s (half the time 9.6–14.4) and every 90–110 damage; leaps every 4–6 s beyond 20 studs (lands for **80**); cross-cooldowns; **below 15% the charge comes at least every 2.5 s**. Boss melee **70**, charge **80**. **No stagger** |
@@ -382,12 +404,47 @@ Damage to players is ×10.
   it's a wipe.
 - Reward f = waves × 0.125.
 
-### 8.3 Jetpack and CDW (when built)
-- **CDW** (rolling ball): target min(1,200, 50 per 20k score + 400) m (1 m = 3.33 studs),
-  speed 46.7 → 56.7 studs/s, score ×0.05, f = min(1, m ÷ 2,000).
-- **Jetpack:** target min(800, 50 per 20k + 300) m, jetpack HP 100 or 200 (×10), score ×0.5,
-  coins f = min(1, m ÷ 1,200).
-- Both need design (mines, missiles, patterns) before they join the deck.
+### 8.3 Vehicle events: what they share [orig, co-op adapted]
+- **Planned for M3** (after the slice). Their obstacle **patterns** are the original's
+  15-lane grids (`assets/Patterns/*.tga`, 50 files: CDW obstacle and missile levels 0–2,
+  jetpack obstacle levels 1–4 and missile levels 1–5). The files are in the extracted APK
+  outside this repo; decode them with `tools/tga.py` ([[Original Game - Text, Engine and Assets]]
+  §4.3) into Roblox level chunks. Cell colours: yellow coin, blue mine, azure ground mine,
+  red missile row, green/magenta/cyan gems or crates [inferred legend].
+- [ours] **Grid scale:** one cell ≈ 3.4 studs (the original's 768-pixel screen ÷ 15 lanes).
+- **One tap does everything:** "TAP ANYWHERE TO JUMP" (ball) or "TO BOOST" (jetpack). Fire
+  is automatic in the jetpack.
+- **Missiles** come in on a lane after a **warning bar**, at 20 studs/s; a Defender can
+  block them (each block costs it 3 s).
+- **Enemies** spawn ahead to keep a target alive cost (the original's `EventSpawner`):
+  only types already met this run, no second mid while one is alive, spacing 66.7 studs
+  shrinking toward 26.7 (ball) or 46.7 (jetpack) over 300 studs.
+- **Gadgets and swapping are locked** while riding ("JETPACK ACTIVE", "BALL ACTIVE").
+- **Camera:** always leads forward, follows rigidly, and follows height.
+- **Finish line** at the target distance, then you hop off onto the next span with 0.5 s
+  of invulnerability.
+- **Targets grow with score**: +50 m (167 studs) per 20,000 points (1 m = 3.33 studs).
+- [co-op] **Everyone rides their own vehicle** side by side on the same lane grid (vehicles
+  pass through each other). Each player's coins, mines and missiles are their own.
+- [co-op] **A destroyed vehicle downs you**; your bleed-out pauses until the finish line,
+  where anyone who finished revives you automatically at 40%. If every vehicle is
+  destroyed, it's a squad wipe (with the 10 s gem-revive window).
+
+### 8.4 The two vehicles
+| | Rolling Ball (the original's CDW, "Cylindrical Death Weapon") | Jetpack |
+|---|---|---|
+| What you do | Roll along the train roofs at speed, **tap to jump** mines and missiles; the ball **rolls over enemies** | **Fly** above the train, **tap to boost** up against gravity, guns fire automatically |
+| Target | min(1,200, 400 + 50 per 20k score) m = 1,333 → 4,000 studs | min(800, 300 + 50 per 20k) m = 1,000 → 2,667 studs |
+| Speed | 46.7 studs/s, rising to 50 / 51.7 / 53.3 / 55 / 56.7 after 150 / 350 / 700 / 1,000 / 1,500 m | [ours] the same table |
+| Vehicle health | [ours] 100, or 200 with its upgrade (the original's isn't in the vault; the jetpack's is) | **100, or 200 with its upgrade** (×10); a hit over 75 gives 1 s of invulnerability |
+| Hurting enemies | Rolling into them; [ours] 20 damage, knocks lights aside | Your agent's primary weapon, auto-firing |
+| Score | ×0.05 while riding | ×0.5 while riding |
+| Reward f | min(1, m ÷ 2,000) for coins and score | coins min(1, m ÷ 1,200); score min(1, m ÷ 2,000) |
+| Unlocks with | the mission "ride the ball 400 m" | the mission "kill 100 with the jetpack" |
+| Wild West look | (proposal) a runaway **whiskey barrel** | (proposal) a **steam-powered rocket pack** |
+
+- The coins and gems placed by the patterns count toward the gem counter (§9.1).
+- Mine damage isn't in the vault: [ours] 50.
 
 ## 9. Economy [orig]
 ### 9.1 Coins and gems
@@ -468,18 +525,22 @@ Damage to players is ×10.
 - The static train with the scrolling world, 2.5D, PC and mobile, server authority.
 - Theme content: the Cowboys, the agents and their names, the art direction, the tone.
 
-## 11. Open questions
-1. **Squad size: 2 or 3 agents?** The original's code toggles between 2, its mission text
-   says three. We have 3; keep it unless you'd rather match the code.
-2. **Lasso Lucy's lasso** is our invention (the original's slot 4 is a plain agile mid).
-   Keep the lasso, or make her a pure agile mid?
-3. **Enterable carriages** (the original's interiors, where every jump spins). Add them?
-   They'd need new carriage templates.
-4. **Jetpack and CDW** need designing before they join the deck.
-5. **The slice:** the slice's one train now ends with a boss and a checkpoint, so
-   **McGraw and the leap become slice work** (they were M3 and planned). Confirm.
+## 11. Decisions and open questions
+**Decided 2026-10-16:**
+1. **A squad is 2 agents** (§3.4), as in the original's code.
+2. **Lasso Lucy's lasso is deferred** until the first agent is built.
+3. **Enterable carriages: yes** (§3.7). Planned after the slice, with the closed-coach
+   template.
+4. **Jetpack and Rolling Ball: yes**, designed in §8.3–8.4, planned for M3.
+5. **The slice includes McGraw, the boss arena, the checkpoint and the TrainJump leap**
+   ([[Feel and Look (Slice)]]).
+
+**Still open:** the [ours] values throughout (tune in playtests), and the Wild West looks
+for the two vehicles (proposals in §8.4).
 
 ## 12. Studio change list (for the local session)
+0. **Squad of 2:** [[AgentService]] (squad slots, swap toggle), the Barracks squad select
+   and the HUD squad strip ([[HudController]]).
 Ordered roughly by how much it changes the feel. Each item names the system note to update
 once it's built.
 1. **Health scale:** enemy damage ×10 (all enemy weapons, explosions on players); the 0.3 s
@@ -508,6 +569,8 @@ once it's built.
     Strike volley ([[GadgetService]]).
 13. **The paid heal pod; boosters, missions, Surplus, challenges** (M4 systems; update the
     Session 7 and 12 drafts).
+14. **After the slice:** closed coaches with interiors (§3.7), then the vehicle events
+    (§8.3–8.4) with the decoded patterns.
 - [[Combat Polish Code]] overlaps items 1, 3, 5, 7, 8 and 9: use its helpers where they
   match this note (flinch, perception, spawn placement, lob, i-frames, camera lead) and
   drop the parts this note replaces (the stagger, our spin variant, jitter on melee).

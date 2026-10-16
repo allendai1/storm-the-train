@@ -5,6 +5,8 @@ side: server, client
 ---
 # AgentService (+ SquadController)
 
+> **Planned change (2026-10-16):** a squad is **2 agents**, and a swap toggles between them with no cooldown ([[Original Mechanics Match]] §3.4). The built version uses 3 and a 1.5 s cooldown.
+
 > **Display names (decided 2026-10-16):** Dash Daring is now **Max Mayhem** ([[Launch Agents]]).
 > The Studio IDs (`DashDaring`, `Dash`) are unchanged until a local session renames
 > them, so this note keeps the old names where it describes what's built.

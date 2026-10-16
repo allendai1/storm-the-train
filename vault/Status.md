@@ -68,9 +68,10 @@ the downed pose, a melee wind-up, the enemy hats and shirt colours, and music an
 Also the [[Background Kit]] (the standard for every theme's background layers, with a
 Studio plugin; code drafted, not run yet, ADR [[0011-background-kit]] proposed).
 
-**Open from the match spec** ([[Original Mechanics Match]] §11): squad of 2 or 3, Lasso
-Lucy's lasso, enterable carriages, Jetpack and CDW design, and **whether McGraw and the
-leap move into the slice** (the slice train now ends with a boss and a checkpoint).
+**Decided 2026-10-16** ([[Original Mechanics Match]] §11): **a squad is 2 agents**; Lasso
+Lucy's lasso is deferred; **enterable carriages** (after the slice); the **Jetpack and
+Rolling Ball** events are designed (M3); and **the slice includes McGraw's boss fight, the
+checkpoint and the leap**.
 
 **Before the slice, in Studio:** save the place. Finish verifying Session 11 (the
 knockback fix, the Defender, key 1) as part of F2 and F7.

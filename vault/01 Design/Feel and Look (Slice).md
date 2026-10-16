@@ -14,8 +14,8 @@ updated: 2026-10-16
 > stay in their notes, untouched.
 
 ## Goal
-**One Wild West train, Max Mayhem and the 5 built enemies (4 lights and Big Bart), at
-roughly launch quality,** in look, animation, sound and feel. It should play well on a
+**One Wild West train, Max Mayhem and the 5 built enemies (4 lights and Big Bart), ending
+in McGraw's boss fight, the checkpoint and the leap, at roughly launch quality,** in look, animation, sound and feel. It should play well on a
 phone and in 2–4 player co-op. Brick stays playable but isn't polished in this slice.
 
 **Done means:**
@@ -45,8 +45,12 @@ what scripts depend on) are in [[Feel and Look Asset Specs]].
 **[changed 2026-10-16]** F2 is now [[Original Mechanics Match]] (§12's change list): the
 original's movement, spin, swap, aim, score, Mayhem, enemies and health scale. The
 [[Combat Polish Code]] helpers are used where they still fit. The run-structure parts (a
-boss every train, the checkpoint, the leap) put McGraw and the TrainJump in the slice if
-that's confirmed (§11).
+boss every train, the checkpoint, the leap) are **in the slice** [decided 2026-10-16]:
+- [ ] **"Mad Dog" McGraw** as the original's berserker boss, with the boss arena at the end
+  of the train (§1.4, §7.3).
+- [ ] **The checkpoint** after the train (the hub train alongside, the paid HEALTH pod, the
+  vote) (§1.5).
+- [ ] **The TrainJump leap** to the hub train and on to the next train (§2).
 - [ ] The parts of [[Combat Polish]] that still apply, with the original's numbers:
   - the flinch with a cooldown, muzzle flashes, enemy attack jitter and telegraph rules,
   - perception, off-screen spawning, Dan's lobbed dynamite,
@@ -80,6 +84,8 @@ that's confirmed (§11).
 - [ ] **Max's toon model** (R15, the hitbox kept), with face decals per state.
 - [ ] **The 4 lights and Big Bart:** toon models with readable side-on silhouettes, a hat
   per slot, and the bandana colour.
+- [ ] **McGraw** (boss, about 10k triangles): model, charge, leap and taunt animations, and
+  the arena barriers. Not yet in [[Feel and Look Asset Specs]]; add him there.
 - [ ] **Knockouts:** the ragdoll impulse, a **hat popping off** and **circling stars**.
 - [ ] **A VFX pass:** dust on landing and running, smoke, sparks, explosions, the charge dust,
   the fuse sparkle, the spin trail, the coin sparkle (Art Direction §9).
