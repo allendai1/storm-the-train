@@ -278,6 +278,49 @@ Theme FX:
 - Key holders must be **smashed** after death to release the key ("DEAD KEY HOLDER — SMASH HIS BODY").
 - There are spin-attack corpse-smash missions.
 
+### 2.6b Combat feedback (from the Lua scripts) **[data]**
+Checked on 2026-10-16 against the raw scripts in `scripts/` (`Enemies/*.lua`, `DB/db.lua`).
+The **firing logic is in the C++ engine**, so spread, recoil, muzzle flash and screen shake
+are **not** in these files. What the data does define:
+- **Hit reactions:** every humanoid enemy has a gun-hit flinch (`DAMAGE_GUN`) and a
+  separate beam flinch (`DAMAGE_BEAM`).
+  - The gun flinch is drawn per weapon: ninjas have one per blade (`n_damage_sai_1`,
+    `n_damage_katana_1`, `n_damage_bigkatana_1`…), robots use `r_damage_1`, and hovering
+    robots `r_damage_hover_1`.
+  - The beam flinch is shared: ninjas use `n_damage_beam_1`, robots `r_damage_beam_1`.
+- **Hit and death effects** (`EffectData`):
+  - each enemy names an on-hit effect (`EE_DEFAULT_HIT`), a death or gib effect
+    (`EE_DEFAULT_GIB`), and an effect for being run over by the ball (`EE_BALL_GIB`),
+  - bosses add looping effects while burning, poisoned or frozen (`EE_FIRE_DOT`,
+    `EE_POISON_DOT`, `EE_FROZEN_DOT`),
+  - robots: hit sparks, and an explosion on death; mid and boss robots get a splat
+    (`EFFECT_ROBOT_BLOOD_SPLAT`) instead of sparks,
+  - skeletons: a bone hit for both hits and deaths,
+  - zombies: green blood,
+  - ninjas: no `EffectData`, so the engine default (red blood) applies.
+- **Deaths:**
+  - `DEATH_A`/`DEATH_B` animations, then gibs. 5 kinds of generic chunks are spread in
+    random directions (e.g. 2 flesh × 3, 1 heart, 3 bones).
+  - **Unique gibs** each have a launch height (`offset` in px) and a `force`. A light
+    ninja's skull flies at force 2, and **its own weapons fly off** (2 × sai).
+  - Each enemy also has a death sound and a gib sound (`SOUND_LIVING_DEATH`,
+    `SOUND_FLESH_GIB`).
+- **`ENEMY_WEIGHT`:**
+  - the values are 1 for lights, 1.4–1.6 for tough lights, 2 for mids, and 2.5–2.8 for
+    bosses (raised from 2.5 in v1.2),
+  - probably knockback or launch resistance, since the engine uses Box2D bodies. That's
+    inferred.
+- **Agent guns:**
+  - each weapon is a mesh in the agent's right hand (`fireLocator = "xform_r_hand"`), with a
+    per-agent muzzle point (`fireOffset`, e.g. a rifle at {77, 11} px),
+  - the rocket launcher is held in the left hand,
+  - `animID` picks a per-weapon firing animation set (`RIFLE`, `SHOTGUN`, `MINIGUN`…),
+  - dual weapons are single meshes (e.g. `mesh_wpn_dualRifles_r`),
+  - Mason and Carrera also list both hands as fire points (`weaponFireLocators`), which
+    hints at alternating left and right shots. That field looks legacy.
+- **The player's damage state:** each agent body-part texture has 3 armour states (see
+  [[Original Game - Text, Engine and Assets]] §4.1). That's set by code, not these files.
+
 ### 2.7 NPC / hostage and other actors
 
 - **`npc_1`, the hostage**: `HOSTAGE_NEUTRAL`, 25 HP, speed 200, cost 0.1, model `hostage_1.cm`. Anims are idle/run/jump only. Speech: "HELP!!!" and, when freed, "YAY! I'M FREE".

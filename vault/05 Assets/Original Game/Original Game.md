@@ -22,6 +22,10 @@ Lua 5.1, so the numbers below are the real shipped values.
 - [[Original Game - Enemies and Spawning]]: the three themes, the carriage kit, every
   enemy's stats and behaviour, the spawn budget system, the difficulty curve, bosses,
   hostages, and survival mode.
+- `scripts/`: the original's **raw Lua data scripts** (uploaded 2026-10-16). It holds the
+  item DB `DB/db.lua`, `DB/loader.lua`, every enemy definition in `Enemies/*.lua`, the
+  spawn groups, `environments.lua` and the theme files. It's reference only, like
+  everything here. Gameplay logic (firing, AI) is in the C++ engine and isn't included.
 - [[Original Game - Text, Engine and Assets]]: premise, tutorial and controls, missions,
   UI flow, the engine ("Cabal", C++ with Lua, Box2D and GLES2), SDKs, asset formats and how
   far each one can be extracted, and the art style.
