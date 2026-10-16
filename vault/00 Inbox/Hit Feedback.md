@@ -8,7 +8,8 @@ updated: 2026-10-16
 > **Status: proposed, not approved.** These are Claude's suggestions, based on how the
 > original handles combat feel ([[Original Game - Combat Feel (Native Code)]]). Each one
 > needs the developer's OK before it goes into a design note or into Studio. The numbers
-> are converted at 15 px ≈ 1 stud and are first guesses.
+> are converted at 15 px ≈ 1 stud and are first guesses. More proposals from the full
+> decompile are in [[From the Original - Proposals]].
 
 ## Biggest gap: enemies react to hits
 Our enemies get a white spark and keep coming. The original makes every hit read.
@@ -32,16 +33,18 @@ Our enemies get a white spark and keep coming. The original makes every hit read
 ## Firing
 4. **Muzzle flashes**, one template per weapon type in `Assets.Effects`: a rifle flash, a
    Scattergun cone and a twin flash for dual weapons. Spawn it at the `Muzzle` attachment.
-5. **±30% fire-rate jitter for slow weapons only** (interval > 0.2 s: the Pocket Rocket,
-   Scattergun, Crowd Pleaser…). Fast guns stay steady. That's one line in CombatService's
-   timer reset.
+5. **±30% attack-cadence jitter for enemies** (the original jitters only enemy weapons:
+   ranged enemies every 4 s ± 30%). It stops a crowd of Six-Shooters firing in sync. Player
+   guns stay steady. *(Corrected 2026-10-16: an earlier version applied it to slow player
+   guns.)*
 6. **Rethink the Scattergun as a "shot plus close blast"** instead of 5 pellets? The
    original's shotgun is one long ray plus a short (about 12 studs) piercing blast with a
    big push. It reads more clearly side-on than a 10° fan. *(This changes a built weapon,
    so the developer must decide.)*
 7. **Lobbed throws** (Dynamite Dan, future sticky weapons) should aim at the target's
-   distance: speed about 1.6 × max(7, distance × 0.45) studs/s, a 42° arc, plus 20% of
-   the thrower's velocity.
+   distance: speed about 1.6 × max(7, distance × 0.45) studs/s, a low arc (24–31° in the
+   original), plus 20% of the thrower's velocity. Add a fuse blink, and let the blast hurt
+   other bandits ([[Original Game - Weapons and Gadgets (Native Code)]]).
 8. **Camera shake tiers:**
    - light about 0.75 studs for 0.3–0.6 s (rocket impacts),
    - heavy about 2 studs for 0.4–0.8 s (mech stomp, Air Strike, boss slams),

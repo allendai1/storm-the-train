@@ -7,6 +7,12 @@ updated: 2026-10-16
 
 > **Reference only, never canon.** This describes *Storm the Train* (2016), not our
 > game. Our proposals based on it are in [[Hit Feedback]].
+>
+> **Deep dives** (the full decompile, 2026-10-16):
+> - [[Original Game - Enemy AI (Native Code)]]
+> - [[Original Game - Weapons and Gadgets (Native Code)]]
+> - [[Original Game - Player and Camera (Native Code)]]
+> - [[Original Game - Run Structure and Meta (Native Code)]]
 
 ## Sources and method
 - **`lib/x86/libMainApp.so`** (the game's compiled C++). It was decompiled on 2026-10-16
@@ -34,11 +40,13 @@ updated: 2026-10-16
   called by the spin attack's start angle, the turret, freeze and melee drones, and the
   Teleport boss. *(Corrected 2026-10-16. An earlier version of this note said the shot
   angle came from auto-aim.)*
-- **Fire-rate jitter [code].** After each shot, `Weapon::Fire` resets the fire timer to
-  a random value in ±30% of the interval, but only for weapons slower than 0.2 s. So:
-  - the pistol (0.35 s), shotgun (0.45 s), rockets (0.5 s) and sticky bombs fire with an
-    uneven, organic rhythm,
-  - the rifle (0.175 s), uzi, dual weapons and minigun fire perfectly steadily.
+- **Fire-rate jitter is for enemies only [code].** After each shot, `Weapon::Fire`
+  resets the fire timer to a random value in ±30% of the interval. That only happens for
+  weapons slower than 0.2 s whose byte +0x2c is 0, which means **enemy weapons**:
+  - ranged enemies fire every 4 s ± 30%, and the boss stake every 0.5 s ± 30%,
+  - **every player gun (byte +0x2c = 1) fires on a steady interval.**
+
+  *(Corrected 2026-10-16. An earlier version said slow player guns jittered.)*
 - **The shotgun isn't a pellet spread [code].** `SHOTGUN_n` is one long-range ray (12 →
   14 damage). Its record also points at a second weapon fired with it, `SHOTGUN_CLOSE_n`:
   - 16 → 21 damage, range 180 px (12 studs), and a **push force of 800**,
@@ -53,8 +61,13 @@ updated: 2026-10-16
 - **Lobbed projectiles** (sticky bombs, thrown weapons; `Weapon::FireBallistic`)
   **[code]**:
   - horizontal speed = facing × 1.6 × max(100, distance to target × 0.45),
-  - vertical speed = |horizontal| × 0.9, about a 42° launch,
+  - vertical speed = |horizontal| × 0.9,
+  - the horizontal part is then scaled by the projectile's gravity scale, giving a
+    launch of about **31° for the ninja grenade and 24° for the sticky bomb**,
   - plus 20% of the thrower's own velocity.
+
+  *(Corrected 2026-10-16 from "about 42°", per
+  [[Original Game - Weapons and Gadgets (Native Code)]].)*
 
   So throws land near the target, and moving throwers throw further.
 - **Recoil [code].** `Weapon::PreFire` pushes the shooter by the weapon's recoil force.
@@ -190,7 +203,8 @@ New 124-byte record offsets **[code]**:
 |---|---|
 | +0x20 | flags (bit 2 = beam, bit 8 = rail, bit 4 = instant kill, bit 0x10 = fire) |
 | +0x24, +0x28 | muzzle offset |
-| +0x2c | gives Mayhem (byte) |
+| +0x1c | explosion radius px (rockets 60, Air Strike 180, `MECH_AOE` 800) |
+| +0x2c | **player-weapon flag** (byte): hold-to-fire, gives Mayhem, and no fire jitter |
 | +0x30 | **push force** |
 | +0x34 | **recoil** |
 | +0x38 | Mayhem multiplier |

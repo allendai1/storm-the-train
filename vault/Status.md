@@ -61,8 +61,9 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 - Review the rest of [[Writing and Dialogue]] (the bark lines, missions and challenge
   chains). Its open questions were decided on 2026-10-16: text bubbles with a voiced
   grunt, a tutorial skippable from the start, and the Quartermaster kept.
-- **Studio change from the 2026-10-16 design pass:** lower Big Bart's `ChargeSpeed` from
-  36 to 10.7 (charges now use the original's speeds; [[Wild West Enemies]]).
+- **On hold: Big Bart's `ChargeSpeed`** (36 → 10.7 was planned). The decompile shows the
+  original charges at 2.5× walk speed (about 26.7 studs/s), so the decision is being
+  re-asked ([[From the Original - Proposals]]). Don't change it in Studio yet.
 - **Rename in Studio:** change the experience name to **Train Mayhem**, and replace any
   "Train Runner" or placeholder names in GUI text: Dash → **Max Mayhem** (SquadGui and the
   HUD portrait label). Renaming the internal IDs (`DashDaring`) is optional.

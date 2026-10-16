@@ -66,6 +66,7 @@ Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to
 ## Inbox
 Unsorted and proposed ideas go in `00 Inbox/` (`status: proposed`) until they're triaged.
 - [[Title Ideas]] — candidate titles and names for the new IP
+- [[From the Original - Proposals]] — proposals from the full decompile, plus 3 decisions to revisit
 - [[Hit Feedback]] — proposed hit reactions, knockback, muzzle flashes and shakes, based on the original's code
 
 ## Assets & packages

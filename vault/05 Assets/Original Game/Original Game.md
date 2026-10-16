@@ -27,6 +27,17 @@ Lua 5.1, so the numbers below are the real shipped values.
   close blast, knockback ÷ weight, flinch rules, muzzle flashes, camera-shake tiers,
   per-damage score and Mayhem, the combo window, i-frames, gibs and the backend config
   keys.
+- The full native-code deep dives (2026-10-16):
+  - [[Original Game - Enemy AI (Native Code)]]: the AI state machine, each archetype,
+    telegraphs, boss patterns and the boss arena,
+  - [[Original Game - Weapons and Gadgets (Native Code)]]: every projectile, area damage,
+    burn/poison/freeze, beams, the railgun, drones, mechs, the Air Strike and enemy
+    projectiles,
+  - [[Original Game - Player and Camera (Native Code)]]: movement and jump physics, the
+    spin, the shared HP pool, heals, revive, swapping, the camera and the train leap,
+  - [[Original Game - Run Structure and Meta (Native Code)]]: the ramp, spawner, train
+    and event generation, events, pickups, the magnet, boosters, missions, achievements
+    and economy constants.
 - `lib/`, `res/`, `classes.dex`, `resources.arsc`: the raw binaries from the APK
   (uploaded 2026-10-16). Reference only.
 - `scripts/`: the original's **raw Lua data scripts** (uploaded 2026-10-16). It holds the

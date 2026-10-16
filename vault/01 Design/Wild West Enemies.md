@@ -146,8 +146,10 @@ by enemy fire, so protect him. He shouts "HELP!" until freed, then "MUCH OBLIGED
   a charge's threat is its knockback and the wind-up stagger, not its speed.
   - This replaces an earlier proposal to raise them to 36 and 40 studs/s so they'd have to
     be jumped. The GDD's "jump, not outrun" rule was dropped with it.
-  - **Studio to-do:** Big Bart is built with `ChargeSpeed` 36 ([[EnemyService]]). Lower it
-    to 10.7 in a local session.
+  - **Studio to-do (on hold):** Big Bart is built with `ChargeSpeed` 36 ([[EnemyService]]).
+    The decompile later showed the original's charge runs at **2.5× walk speed** (about 26.7
+    studs/s, [[Original Game - Enemy AI (Native Code)]]), so this decision is being re-asked
+    ([[From the Original - Proposals]]).
   Walking speeds stay as listed. Rattler Runts (15 studs/s) are slower than every agent,
   which is fine because they're a swarm, not a chase.
 
