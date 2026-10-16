@@ -10,7 +10,7 @@ updated: 2026-10-16
 > (Max Mayhem)** before the other agents' and enemies' special mechanics. Everything here
 > applies to what's already built (M1/M2). The numbers come from the decompiled original
 > (converted at 15 px ≈ 1 stud) and are first guesses to tune. Nothing here is built yet;
-> each item names the system note it changes.
+> each item names the system note it changes. **The code is drafted in [[Combat Polish Code]].**
 
 ## Enemy hit reactions
 - [ ] **A flinch with a cooldown** ([[EnemyService]], [[CombatService]]). From the original's
