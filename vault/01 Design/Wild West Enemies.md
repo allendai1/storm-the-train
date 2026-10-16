@@ -95,6 +95,24 @@ Each boss train picks one of the two bosses at random. Bosses have a freeze scal
 a hitbox of about 2.5–3.3 × 9.5 studs, a cost of 40, and notice the player at 400 px
 (about 27 studs).
 
+**[decided 2026-10-16] Boss rules from the original** ([[Original Game - Enemy AI (Native Code)]]):
+- **The boss arena:**
+  - a boss fight locks a **barrier-walled arena of about 67 studs** on the boss car,
+  - lights already on the train **flee**,
+  - the boss plays a **2 s intro taunt** and can't be hurt during it.
+- **Bosses never flinch** ([[Combat Polish]]). The wind-up stagger below still applies.
+- **McGraw's pattern:**
+  - a berserk charge on a timer every **4.8–7.2 s**,
+  - a **leap attack every 4–6 s when the target is more than 20 studs away**,
+  - **2–3 s between any two attacks**,
+  - **enrage below 15% HP:** he charges at least every 2.5 s,
+  - his charge runs at 2.5× walk (about 41.7 studs/s).
+- **Ma Rattler's summons:**
+  - at **66% and 33% HP** she calls a **burst of 6–8 Runts** and is **invulnerable until
+    they're all down**,
+  - she keeps her regular "Get 'em, boys!" calls (2–3 Runts every ~10 s). The original's
+    other summoner throws 3–4 minions every 3–7 s; that's a tuning reference.
+
 | Slot | Name | Archetype | HP | Speed | Attacks |
 |---|---|---|---|---|---|
 | 7 | **"Mad Dog" McGraw**, the gang's top gun | Charger boss | 600 | 250 (16.7) when charging, 180 (12) when walking | **Fan the hammer**: a 6-shot spread you dodge by jumping over or moving between shots. **Leap attack**: jumps to a player's position and lands with a shockwave. **Berserk charge**: stomps and snorts as a wind-up, then charges. Deal 100 damage during the wind-up to stagger him, and he's open to extra damage for 2 s. |

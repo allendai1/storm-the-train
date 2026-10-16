@@ -147,7 +147,7 @@ Up to **3 boosters** can be equipped at the start of a run and at each checkpoin
 | Gems | ×2 → 800 coins · ×3 → 1,600 coins | Your gem drops only |
 | Damage | +25% → 400 coins · +50% → 2 gems · +100% → 4 gems | **In a party of 2+, capped at +50%.** +100% is solo only |
 | Health (damage taken) | ×0.67 → 2 gems · ×0.5 → 4 gems | **In a party of 2+, capped at ×0.67.** ×0.5 is solo only |
-| Magnet | Coins and gems fly to you → 4 gems | Your pickups only |
+| Magnet | Coins and gems fly to you → 4 gems. **[decided 2026-10-16]** Radius **24 studs**; each coin's pull ramps 0 → 60 studs/s over 1.2 s; it keeps working for 5 s after the booster ends | Your pickups only |
 
 The original's cross-feed stays: coins buy the boosters that earn gems, and gems buy the
 boosters that earn coins.
@@ -172,7 +172,8 @@ offer buys every level up to the one shown.
   chopper" idea. Each agent has a 5-day chain. Finishing it gives gems and a
   **one-time 25% discount** on that agent (the original gave a % discount). It's how free
   players try agents before saving up for them.
-
+  **[decided 2026-10-16] Chain rewards: 300 / 600 / 1,200 / 2,400 coins on days 1–4, then 20 gems
+  and the 25% discount on day 5** (the original's chain values).
 - **[decided 2026-10-16] Daily login streak:** a free **7-day coin streak**. This one is
   new: the original didn't have it.
   - The rewards grow each day, and **day 7 gives gems** as well as coins. Then the cycle
@@ -181,6 +182,13 @@ offer buys every level up to the one shown.
   - It's claimed automatically on the first hub visit of the day, with a popup.
   - The amounts are still to tune, next to the earn-rate targets (Session 13).
   - Saved as `LoginStreak { Day, LastClaimDay }` ([[0008-player-data-profilestore]]).
+
+### Events (M3)
+- **[decided 2026-10-16] Event payouts scale by tier:** each event (boss, hostage, survival…) pays
+  **125–500 coins and 5,000–20,000 score**, rising with its tier. That's the original's
+  500 × f coins and 20,000 × f score ([[Original Game - Run Structure and Meta (Native Code)]]).
+- **[decided 2026-10-16] Missions can introduce events:** a mission can push its event to the front of
+  the next train's event deck. That's how a new event is taught the first time.
 
 ## Hub services
 - **[decided] The medbay heals to full for free** at every checkpoint. The original

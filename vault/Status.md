@@ -66,9 +66,13 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 - **Rename in Studio:** change the experience name to **Train Mayhem**, and replace any
   "Train Runner" or placeholder names in GUI text: Dash → **Max Mayhem** (SquadGui and the
   HUD portrait label). Renaming the internal IDs (`DashDaring`) is optional.
-- **Review [[Hit Feedback]]** (proposed): enemy flinches and per-weapon knockback, muzzle
-  flashes and shake tiers, from the decompiled original
-  ([[Original Game - Combat Feel (Native Code)]]).
+- **[[Combat Polish]] (planned, reviewed 2026-10-16):** the next Studio work after saving.
+  It makes Max a refined first agent, from the decompiled original:
+  - enemy flinch with a cooldown, muzzle flashes, enemy attack jitter and telegraph rules,
+  - perception, off-screen spawning, Dan's lobbed dynamite,
+  - 0.3 s i-frames, the spin pop-up, revive grace, and the moving camera lead.
+
+  The light and mid special mechanics are deferred until the first agent feels right.
 - **Manual [[Studio Setup Checklist]] items still to do in Studio:**
   - **Game Settings** (§3): devices, R15, free private servers, voice off.
   - **`Lighting.Technology` = ShadowMap** (§4). Scripts can't set it.

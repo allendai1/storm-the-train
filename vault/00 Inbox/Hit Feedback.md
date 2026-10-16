@@ -5,7 +5,14 @@ updated: 2026-10-16
 ---
 # Hit Feedback — proposals from the original's code
 
-> **Status: proposed, not approved.** These are Claude's suggestions, based on how the
+> **Reviewed 2026-10-16.**
+> - **Accepted** (now in [[Combat Polish]]): #1 the flinch with a cooldown, #4 muzzle
+>   flashes, #5 enemy attack jitter, #7 lobbed throws, #9 0.3 s i-frames.
+> - **Kept as built:** #6, the Scattergun stays at 5 pellets.
+> - **Turned down:** the white flash, knockback ÷ weight on every hit, #3 the weapon pop,
+>   #8 shake tiers, #10 Mayhem ×0.2.
+>
+> **Original status: proposed, not approved.** These are Claude's suggestions, based on how the
 > original handles combat feel ([[Original Game - Combat Feel (Native Code)]]). Each one
 > needs the developer's OK before it goes into a design note or into Studio. The numbers
 > are converted at 15 px ≈ 1 stud and are first guesses. More proposals from the full

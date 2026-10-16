@@ -154,6 +154,10 @@ and can't be damaged. **[decided 2026-10-16]** Their weapon numbers are below.
   behind the Defender.
 - It has the longest duration of any gadget (51–87 s), so it's a "set up for the next
   fight" gadget.
+- **[decided 2026-10-16] Blocking costs duration.** It physically moves into the path of the nearest
+  enemy projectile (up to about 17 studs), and **each projectile it blocks costs it
+  duration**. First guesses: 1 s per bullet and 3 s per dynamite or rolling pin. The
+  original charges 3 s per missile.
 
 ### Smasher Drone
 - A heavy drone that rises and **slams down on the biggest enemy group** every 1.5 s:
@@ -203,6 +207,11 @@ here, to fit "Silly, never mean".
 - **3-second countdown** with a target marker on the carriage, then planes or drones
   make a **bombing run along your carriage and half of each neighbouring one**.
 - **[decided] One per party at a time**, so stacked strikes can't nuke a boss.
+- **[decided 2026-10-16] The run is a curtain:** **14 shells** fired together on one diagonal (about 135°,
+  down and forward). Because of where they start, they land **in sequence along the
+  carriage**, as a sweep. After it lands, the Air Strike stays locked for 2 s (the original's
+  values, [[Original Game - Weapons and Gadgets (Native Code)]]). Its explosions use the
+  pop-up knockback ([[Combat Polish]]).
 - **200 damage** to every enemy caught in it (the original's value). **[decided 2026-10-16]** Bosses
   take **100**. No friendly fire, and hostages are never hit.
 - One level and never upgraded, as in the original. Every agent who has it gets the same

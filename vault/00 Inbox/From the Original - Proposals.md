@@ -36,6 +36,20 @@ Three of today's decisions were made before the code showed what the original re
    clears boosters **at every checkpoint**, and it has a checkpoint after every train. In
    our 3-train legs, the faithful rule ("until the next checkpoint") is **a whole leg**.
 
+## Review outcome (2026-10-16)
+- **Accepted:**
+  - perception, ranged telegraph and off-screen spawning, Defender blocking costs
+    duration, the Air Strike curtain, explosion pop-up, the spin pop-up, a bigger camera
+    lead while moving, and revive grace → [[Combat Polish]],
+  - McGraw's pattern, Ma Rattler's summon bursts and the boss arena → [[Wild West Enemies]],
+  - the magnet, daily-challenge rewards, missions introducing events and event payouts →
+    [[Economy and Monetization]].
+- **Deferred** until the first agent is refined: the light and mid mechanics (the Rodeo
+  Kid spin, Sam's doors, Dan backing off, enemies fleeing on revive).
+- **Turned down:** emergent mid pacing, event strength by score, freeze as a scaled hard
+  stop, the higher jump, the double-jump rule, the scripted train leap, and the mech timer
+  drain (the armour bar stays).
+
 ## Enemies ([[Wild West Enemies]])
 - **Perception:** enemies notice you only in front of them or after being hit, lose you
   while you jump over them, and back off inside their minimum range.
