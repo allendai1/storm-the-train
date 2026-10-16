@@ -31,9 +31,13 @@ Facts from that source that shape this code:
   ("Roblox API services unavailable - data will not be saved").
 - **`Reconcile()`** deep-fills missing string keys from the template. It never touches
   array entries.
-- **`StartSessionAsync` returns `nil`** on failure: it gives up after 120 s, or when
-  `Cancel` returns true. When another server holds the profile, it takes the session over
-  after about 40 s.
+- **`StartSessionAsync` returns `nil`** on failure. Its own 120 s timeout is **turned
+  off when you pass `Cancel`**, so the `Cancel` here also checks a 120 s `LOAD_TIMEOUT`.
+  When another server holds the profile, it takes the session over after about 40 s.
+- **The mock store ignores `params`** (and so `Cancel`). It never fails anyway.
+- **On shutdown, ProfileStore ends sessions before `PlayerRemoving` runs.** So run coins
+  are banked in `OnLastSave`, which fires just before every final save while the profile
+  is still active.
 - **Its strict type for `params`** only lists `Steal`, so passing `Cancel` needs a cast.
 
 ## Steps
@@ -137,6 +141,7 @@ type RunRecord = Types.RunRecord
 -- resolve through WaitForChild requires).
 type Profile = {
 	Data: PlayerData,
+	OnLastSave: any, -- ProfileStore signal (reason): fires just before the final save, still active
 	OnSessionEnd: any, -- ProfileStore signal: :Connect(fn)
 	IsActive: (self: Profile) -> boolean,
 	Reconcile: (self: Profile) -> (),
@@ -148,6 +153,7 @@ type Profile = {
 local STORE_NAME = "PlayerData"
 local KEY_PREFIX = "Player_"
 local SCHEMA_VERSION = 1
+local LOAD_TIMEOUT = 120 -- seconds. Passing Cancel turns off ProfileStore's own timeout, so we keep one
 
 local TEMPLATE: PlayerData = {
 	SchemaVersion = SCHEMA_VERSION,
@@ -178,6 +184,7 @@ local PlayerDataService = {}
 local store: any = nil
 local profiles: { [Player]: Profile } = {}
 local loading: { [Player]: true } = {} -- guards against loading the same player twice
+local removed: { [Player]: true } = {} -- left while their profile was still loading
 
 local function useMockStore(): boolean
 	if not RunService:IsStudio() then
@@ -187,7 +194,18 @@ local function useMockStore(): boolean
 	return not (server ~= nil and server:GetAttribute("UseRealDataInStudio") == true)
 end
 
--- Upgrades the saved data to SCHEMA_VERSION. Returns false for data saved by a newer
+local function deepCopy<T>(value: T): T
+	if type(value) ~= "table" then
+		return value
+	end
+	local copy = {}
+	for k, v in value :: any do
+		copy[k] = deepCopy(v)
+	end
+	return copy :: any
+end
+
+-- Upgrades the saved data to SCHEMA_VERSION, in place. Run it on a copy. Returns false for data saved by a newer
 -- server build, which this server must not touch.
 local function migrate(data: any): boolean
 	local version = if type(data.SchemaVersion) == "number" then data.SchemaVersion else 1
@@ -239,43 +257,66 @@ local function isWholeNonNegative(n: number): boolean
 	return n == n and n >= 0 and n < math.huge and math.floor(n) == n
 end
 
+-- NaN or inf in Data would make every save fail (JSON can't hold them), so stats are sanitised.
+local function whole(n: number): number
+	return if type(n) == "number" and isWholeNonNegative(n) then n else 0
+end
+
 local function onPlayerAdded(player: Player)
 	if loading[player] or profiles[player] ~= nil then
 		return -- joined while start() was connecting; already being loaded
 	end
 	loading[player] = true
+	local startedAt = os.clock()
+	local function gone(): boolean
+		return removed[player] == true or player.Parent ~= Players
+	end
+	-- Note: the mock store ignores Cancel (it never fails anyway).
 	local profile: Profile? = store:StartSessionAsync(KEY_PREFIX .. player.UserId, {
 		Cancel = function(): boolean
-			return player.Parent ~= Players
+			return gone() or os.clock() - startedAt > LOAD_TIMEOUT
 		end,
 	} :: any)
 	loading[player] = nil
 
 	if profile == nil then
 		-- Never let them play on a blank profile: its next save would overwrite their real data.
-		if player.Parent == Players then
+		if not gone() then
 			player:Kick("Your data couldn't load. Please rejoin in a moment.")
 		end
+		removed[player] = nil
 		return
 	end
-	if player.Parent ~= Players then
+	if gone() then
+		removed[player] = nil
 		profile:EndSession() -- they left while it was loading
 		return
 	end
 
 	profile:AddUserId(player.UserId) -- GDPR erasure requests find profiles by UserId
-	local ok, current = pcall(migrate, profile.Data)
+	-- Migrate a copy: a step that errors halfway must not leave half-upgraded data to be saved.
+	local upgraded = deepCopy(profile.Data)
+	local ok, current = pcall(migrate, upgraded)
 	if not ok or not current then
 		warn(`[PlayerDataService] {player.UserId}: can't use saved data ({if ok then "newer schema" else current})`)
-		profile:EndSession()
+		profile:EndSession() -- saves the untouched original
 		player:Kick("This server is out of date. Please rejoin.")
 		return
 	end
+	profile.Data = upgraded
 	profile:Reconcile()
 
+	-- Fires before every final save: leaving, shutdown (ProfileStore's BindToClose ends sessions
+	-- before PlayerRemoving runs) or another server taking over. Bank the leg's run coins first.
+	profile.OnLastSave:Connect(function()
+		local banked, err = pcall(PlayerDataService.commitRunCoins, player)
+		if not banked then
+			warn(`[PlayerDataService] {player.UserId}: run coins not banked: {err}`)
+		end
+	end)
 	profile.OnSessionEnd:Connect(function()
 		profiles[player] = nil
-		if player.Parent == Players then
+		if player.Parent == Players and not ProfileStore.IsClosing then
 			player:Kick("Your data was opened on another server. Please rejoin.")
 		end
 	end)
@@ -288,11 +329,12 @@ end
 local function onPlayerRemoving(player: Player)
 	local profile = profiles[player]
 	if profile == nil then
+		if loading[player] then
+			removed[player] = true -- onPlayerAdded ends the session when the load returns
+		end
 		return
 	end
-	PlayerDataService.commitRunCoins(player) -- coins are always kept, even when leaving mid-leg
-	profiles[player] = nil
-	profile:EndSession() -- saves and releases the session lock
+	profile:EndSession() -- OnLastSave banks run coins, then it saves and releases the lock
 end
 
 function PlayerDataService.init()
@@ -356,6 +398,10 @@ function PlayerDataService.commitRunCoins(player: Player): number
 	local committed = player:GetAttribute("RunCoinsCommitted")
 	local total = if typeof(runCoins) == "number" then math.floor(runCoins) else 0
 	local banked = if typeof(committed) == "number" then committed else 0
+	if not isWholeNonNegative(total) or not isWholeNonNegative(banked) then
+		warn(`[PlayerDataService] {player.UserId}: bad RunCoins {runCoins} / {committed}`)
+		return 0
+	end
 	local pending = math.max(0, total - banked)
 	if pending > 0 and not PlayerDataService.addCoins(player, pending) then
 		return 0
@@ -421,12 +467,12 @@ function PlayerDataService.recordRunEnd(player: Player, record: RunRecord)
 		return
 	end
 	local bests = data.Bests
-	bests.IndividualScore = math.max(bests.IndividualScore, record.score)
-	bests.SquadScore = math.max(bests.SquadScore, record.squadScore)
-	bests.FurthestTrain = math.max(bests.FurthestTrain, record.trains)
+	bests.IndividualScore = math.max(bests.IndividualScore, whole(record.score))
+	bests.SquadScore = math.max(bests.SquadScore, whole(record.squadScore))
+	bests.FurthestTrain = math.max(bests.FurthestTrain, whole(record.trains))
 	data.Stats.Runs += 1
-	data.Stats.Knockouts += record.knockouts
-	data.Stats.Revives += record.revives
+	data.Stats.Knockouts += whole(record.knockouts)
+	data.Stats.Revives += whole(record.revives)
 end
 
 return PlayerDataService
@@ -487,8 +533,10 @@ not the live code.
      `BindToClose` (with API access, Stop takes a moment),
    - afterwards, set `UseRealDataInStudio` back to `false`. This only touches your own
      profile key.
-4. **The failure path:** temporarily make `StartSessionAsync` return `nil` (e.g. a Cancel
-   that's always true). The player is kicked with "couldn't load", and nothing is saved.
+4. **The failure path:** temporarily add `profile = nil` right after the
+   `StartSessionAsync` call. The mock store ignores `Cancel`, so a Cancel that's always
+   true won't fail it. The player is kicked with "couldn't load", and nothing is saved.
+   Remove the line afterwards.
 5. **A newer schema:** temporarily set the saved `SchemaVersion` to 2 (via §3's `get` in
    the Server datamodel). The next session kicks with "out of date" and doesn't overwrite
    it. Put it back afterwards.
@@ -496,9 +544,17 @@ not the live code.
    needs the published test place (Session 13).
 
 ## Choices made in this draft (review them)
-- **Run coins are committed when a player leaves mid-leg**, not only at checkpoints and
-  run end. That follows "coins are always kept" ([[Economy and Monetization]]). Only a
-  server crash loses the current leg's coins, as ADR 0008 accepts.
+- **Run coins are banked at every final save**, not only at checkpoints and run end.
+  That covers leaving mid-leg, a server shutdown or update, and a session takeover. It
+  follows "coins are always kept" ([[Economy and Monetization]]). Only a real crash loses
+  the current leg's coins, as ADR 0008 accepts.
+- **Reviewed 2026-10-16** by a read-only code review against the ProfileStore source.
+  Fixed:
+  - shutdown losing run coins,
+  - a failed migration saving half-upgraded data,
+  - `Cancel` turning off the load timeout,
+  - NaN/inf stats breaking saves,
+  - a join/leave race leaving a lock on a player who had gone.
 - **`FirstCheckpointDone` is a new top-level field.** ADR 0008's schema lists a `Stats`
   table under `Bests`; here it's its own `Stats` table with `Runs`, `Knockouts`, `Revives`
   and `CoinsEarned`.
