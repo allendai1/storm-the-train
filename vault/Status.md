@@ -57,6 +57,8 @@ M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still 
 ([[Feel and Look Asset Specs]]). The specs list a Studio pre-check (values the vault doesn't
 have) and **open questions for the developer**, notably the coal tender, the weapon weld,
 the downed pose, a melee wind-up, the enemy hats and shirt colours, and music and voices.
+Also the [[Background Kit]] (the standard for every theme's background layers, with a
+Studio plugin; code drafted, not run yet, ADR [[0011-background-kit]] proposed).
 
 **Before the slice, in Studio:** save the place. Finish verifying Session 11 (the
 knockback fix, the Defender, key 1) as part of F2 and F7.
@@ -151,6 +153,10 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   timeout to PLAY AGAIN?
 
 ## Known issues / open problems
+- **Background copy counts (found by the [[Background Kit]] maths, not seen in a test):**
+  the Scrub layer's 4 copies can leave a gap at the screen edge on wide phones (it needs
+  5), and the Foreground's 2 copies can run out at the camera (it needs 3). Fix with the
+  migration in [[Background Kit Code]] §5.
 - The place template's default `Workspace.SpawnLocation` (under the caboose) and the
   `Baseplate` are still there. Neither does anything now: agents spawn by script, and the
   Desert layer covers the baseplate. Deleting both is recommended, but it's your call.

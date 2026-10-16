@@ -65,7 +65,9 @@ The code is drafted in [[Combat Polish Code]].
   flatcar, caboose and the gap pieces. The tags, attributes and sizes the scripts read are
   kept ([[TrainService]]).
 - [ ] **Desert parallax layers** at final quality ([[ParallaxController]]), plus the sky and
-  set-pieces (canyon, bridge, ghost town, cactus field).
+  set-pieces (canyon, bridge, ghost town, cactus field). Build them with the
+  [[Background Kit]] (the standard slots, the plugin and its validator); set the Wild West
+  layers' `Slot` attributes and copy counts first.
 - [ ] **Lighting:** the decided technology, Atmosphere, ColorCorrection and Bloom (the
   [[Studio Setup Checklist]] §4 items).
 

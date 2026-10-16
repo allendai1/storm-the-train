@@ -54,6 +54,12 @@ None.
 - `Shared.Constants`, [[TrainService]] (for `Theme`)
 
 ## Notes
+- **Planned: the [[Background Kit]]** ([[0011-background-kit]], proposed). Six standard
+  slots with a `Slot` attribute, `Tile_<Name>` variants (`Weight`, or `Every` for
+  set-pieces), and a scroll distance that never wraps, so tile index j always shows the
+  same variant. Drafted as a replacement for this controller in [[Background Kit Code]] §2
+  (not run yet). The kit's maths also shows **Scrub needs `Tiles` 5 and Foreground 3** on
+  wide phones; see [[Background Kit]].
 - The sky is `Lighting.Sky` plus Atmosphere, not a strip. The Wild West gradient
   (`#8EC3E6` → `#F6DDB4`) still needs setting by hand ([[Studio Setup Checklist]] §4).
 - Not yet done: wheel and rod animation, smoke and camera sway (ADR 0009). It uses one

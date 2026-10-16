@@ -452,6 +452,10 @@ grime `#4A3A2E`.
 ## 3. Environment spec
 
 ### 3.1 How the parallax works (it constrains every layer)
+> **Update 2026-10-16:** the [[Background Kit]] now standardises this: six slots with fixed
+> Z bands (Foreground, Track, Ground, Near, Mid, Far), variant tiles, set-pieces and a
+> Studio plugin. Where it differs from this section, the Background Kit wins.
+
 - Every layer is a Model in **`ReplicatedStorage.Assets.Backgrounds.WildWest`**, with
   Attributes **`TileLength`** and **`Tiles`**. Each has **one `Tile` Model** whose pivot is
   at its **left end**, with its parts spanning **X 0 → `TileLength`**. Every part is
@@ -521,9 +525,8 @@ the frame rate with 4 agents, a 20-enemy crowd and 12 ragdolls (F7).
 
 ### 3.4 Set-pieces (§6: canyon, bridge, ghost town, cactus field)
 **Today's ParallaxController recycles exactly one `Tile` per layer**, so set-pieces need a
-small code change. The proposal: variant tiles (`Tile_GhostTown`…) with a `Chance` or
-`Every` attribute, which the controller picks between when it recycles a tile (first
-guess, Q14).
+small code change. **Now drafted** in the [[Background Kit]]: variant tiles
+(`Tile_GhostTown`…) with a `Weight` (random) or `Every` (every Nth tile) attribute (Q14).
 
 | Set-piece | Layer | Slice | Contents | Notes |
 |---|---|---|---|---|
