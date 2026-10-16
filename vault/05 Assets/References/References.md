@@ -198,6 +198,11 @@ Images saved into this folder (`05 Assets/References/`), with the licence checke
 
 | Image | Subject | What to take from it | Source and licence |
 |-------|---------|----------------------|--------------------|
-|       |         |                      |                    |
+| ![[Original - Hub train.jpg]] | *Storm the Train* hub train (Missions, Barracks, Vault cars) | The hub as a row of flat cars, one booth per car, with a floating label and a "Buy an agent" arrow over the Barracks. Score, gems and coins in one HUD strip. | Promotional screenshot, Eclipse Games / Chillingo. Copyrighted, reference only. |
+| ![[Original - Gadget shop.jpg]] | Gadget shop for the agent Graham | Three gadget slots (Turret, Melee, Air Strike) as big bordered cards, prices as gem pills, a dimmed run behind the dialog, three ability icons under the agent's name. | Promotional screenshot, Eclipse Games / Chillingo. Copyrighted, reference only. |
+| ![[Original - Combo popup and coach interior.jpg]] | Zombie theme: score and "3X COMBO!" popup, open coach interior with coin rows | The combo callout is big, tilted and coloured; coins sit in rows inside the open coach; muzzle flashes are white star bursts; the roof is a thin plank line. | Promotional screenshot, Eclipse Games / Chillingo. Copyrighted, reference only. |
+| ![[Original - Robot horde and Get In prompt.jpg]] | City theme: robot horde, the "GET IN" vehicle prompt | Enemy density of a late wave, debris and sparks on hits, the "GET IN" arrow prompt over a vehicle event, white outlines on everything. | Promotional screenshot, Eclipse Games / Chillingo. Copyrighted, reference only. |
+| ![[Original - Helicopter event.jpg]] | City theme: helicopter event with a coin arch | The helicopter hovers above the roofline and drops troops; coins form arches over the car; explosions are orange blobs with white cores. | Promotional screenshot, Eclipse Games / Chillingo. Copyrighted, reference only. |
+| ![[Original - Zombie run HUD.png]] | Zombie theme run, HUD at rest | The whole HUD: settings cog, heart with health %, score centre, coins right; pause tab and jump/fire buttons on the sides. Flat car with crates, moonlit purple graveyard parallax. | Promotional screenshot, Eclipse Games / Chillingo. Copyrighted, reference only. |
 
 Related: [[Art Direction]] · [[Feel and Look (Slice)]] · [[Feel and Look Asset Specs]] · [[Home]]
