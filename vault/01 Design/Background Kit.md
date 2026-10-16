@@ -150,7 +150,7 @@ The greybox already follows most of this. The changes ([[Background Kit Code]] �
 |---|---|---|
 | `1_Foreground` (Foreground) | Foreground | Fine at 2 |
 | `2_Track` (Track) | Track | Mark the rails `Continuous` |
-| `3_Ground` (Desert) | Ground | Mark the ground slab `Continuous` |
+| `3_Ground` (Desert) | Ground | Mark the ground slab `Continuous`. Widened to 500 × 4 (from 200 × 8) to match Far |
 | `4_Near` (Scrub) | Near | Fine at 4, **with the new controller** (see below) |
 | `6_Far` (Mesas) | Far | Fine at 4 (content stops at Z −520) |
 

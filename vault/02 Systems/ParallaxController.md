@@ -26,13 +26,14 @@ the server never moves scenery.
 
   | Layer | Slot | TileLength | Tiles | Contents |
   |---|---|---|---|---|
-  | `3_Ground` (was Desert) | Ground | 200 | 8 | Ground slab (Z +60 … −640, `Continuous`) plus rocks and scrub |
+  | `3_Ground` (was Desert) | Ground | **500** | **4** | Ground slab (Z +60 … −640, `Continuous`) plus 23 rocks and scrub tufts. Widened from 200 × 8 on 2026-10-16 to match Far, so the real floor sits under every mesa in the editor |
   | `2_Track` | Track | 30 | 5 | 10 ties and 2 rails (`Continuous`) under the train |
   | `4_Near` (was Scrub) | Near | 120 | 4 | Saguaros and bushes, Z −35 … −110 |
   | `6_Far` (was Mesas) | Far | 500 | 4 | Mesas and a butte, Z −380 … −520 |
   | `1_Foreground` | Foreground | 140 | 2 | A telegraph pole at Z +22 |
 
-  The kit's minimum copy counts are 7, 4, 4, 3 and 2, so every layer has enough.
+  The kit's minimum copy counts are 4, 4, 4, 3 and 2, so every layer has enough. 19 copies
+  in all (verified in a playtest 2026-10-16).
 
 - The `workspace` Attribute `Theme`, set by [[TrainService]].
 - Runtime-generated content: `Workspace.Background` (a client-only Folder of tile clones).

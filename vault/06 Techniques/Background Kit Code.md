@@ -17,6 +17,15 @@ updated: 2026-10-16
 >     `Workspace.TrainStudio` at `TrainStart`, in the carriages folder's `Layout` order,
 >     with ghosts for repeated templates. Add selection refuses parts of the open train.
 > - BackgroundStudioService also restores carriage templates left open in `TrainStudio`.
+> - **Ghosts cover the same width for every layer,** sized by the longest tile (Far's 500):
+>   from one longest tile left of the train to two right. Otherwise Far's ghost mesas showed
+>   past the end of the floor's ghosts. Variant tiles park left of that.
+> - **Build zones:** each layer (except Ground, whose real tile is the solid slab) gets a
+>   brighter plate in its depth strip over exactly its real tile, labelled
+>   `<LAYER> · BUILD HERE · X 0 to <TileLength>`. The floor's ghosts are only 15% faded,
+>   so the desert reads as continuous under long layers like Far.
+> - Slot names are numbered (`4_Near`); the naming rule lives in the plugin, not in
+>   `Shared.BackgroundKit`, because a plugin keeps its first `require` of that module.
 > - Studio places a docked widget as a tab next to Explorer/Properties; look there if
 >   clicking the button seems to do nothing.
 > - The plugin only updates after **Save as Local Plugin** again.
