@@ -5,6 +5,9 @@ updated: 2026-10-16
 ---
 # Hit Feedback — proposals from the original's code
 
+> **Superseded 2026-10-16:** the game now matches the original ([[Original Mechanics Match]]),
+> including knockback on every hit, the Scattergun's ray and blast, and Mayhem ×0.2.
+>
 > **Reviewed 2026-10-16.**
 > - **Accepted** (now in [[Combat Polish]]): #1 the flinch with a cooldown, #4 muzzle
 >   flashes, #5 enemy attack jitter, #7 lobbed throws, #9 0.3 s i-frames.

@@ -41,13 +41,18 @@ what scripts depend on) are in [[Feel and Look Asset Specs]].
 - [ ] **Lighting test plan:** ShadowMap vs Future on PC and a phone (the open item in Art
   Direction §8), plus the Atmosphere, ColorCorrection and Bloom starting values.
 
-### F2 — Combat Polish
-The code is drafted in [[Combat Polish Code]].
-- [ ] Every item in [[Combat Polish]]:
+### F2 — The original's mechanics
+**[changed 2026-10-16]** F2 is now [[Original Mechanics Match]] (§12's change list): the
+original's movement, spin, swap, aim, score, Mayhem, enemies and health scale. The
+[[Combat Polish Code]] helpers are used where they still fit. The run-structure parts (a
+boss every train, the checkpoint, the leap) put McGraw and the TrainJump in the slice if
+that's confirmed (§11).
+- [ ] The parts of [[Combat Polish]] that still apply, with the original's numbers:
   - the flinch with a cooldown, muzzle flashes, enemy attack jitter and telegraph rules,
   - perception, off-screen spawning, Dan's lobbed dynamite,
   - 0.3 s i-frames, the spin pop-up, revive grace, the camera lead, explosion pop-up.
-- [ ] **Big Bart's `ChargeSpeed` 36 → 26.7** ([[Wild West Enemies]]).
+- [ ] **Big Bart as the original's berserker:** charges after every ~30 damage at 26.7
+  studs/s for 34 studs, no stagger ([[Original Mechanics Match]] §7.3).
 
 ### F3 — Max's feel
 - [ ] **A real animation set for Max** ([[Feel and Look Asset Specs]]): idle with

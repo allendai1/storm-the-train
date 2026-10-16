@@ -5,6 +5,8 @@ updated: 2026-10-16
 ---
 # Session 12 Hub Code
 
+> **Needs updates after [[0012-match-the-original]] (2026-10-16):** the hub now also serves as the per-train checkpoint (paid HEALTH pod, booster menu every train), and the run starts on the hub train before leaping to train 1. See [[Original Mechanics Match]].
+
 ## When to use
 [[Loop (M2)]] Session 12: Hub mode and teleport. This is **draft reference code, written
 in a cloud session without Studio, and it hasn't been run.** A local session builds the

@@ -14,6 +14,10 @@ updated: 2026-10-16
 > - [[Original Game - Player and Camera (Native Code)]]
 > - [[Original Game - Run Structure and Meta (Native Code)]]
 
+> **Later on 2026-10-16** the developer decided to match the original's mechanics
+> ([[0012-match-the-original]]), so most items listed below as turned down or deferred are
+> now adopted: see [[Original Mechanics Match]].
+
 ## Decisions to revisit — **resolved 2026-10-16**
 - **Charge speed → 2.5× walk** (Bart about 26.7 studs/s).
 - **`BERSERK_HEALTH` → keep our wind-up stagger** (a deliberate departure).

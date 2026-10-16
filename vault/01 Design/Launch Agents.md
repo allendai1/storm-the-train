@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Launch Agents
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: weapon behaviours (each weapon takes its original archetype's stats: the Scattergun's ray and blast, the bow's charge curve, Spark Plug as a straight line), the free second agent, and the swap cooldown.
+
 > **Status: planned.** The developer decided the roster size (6 agents, 2 free) in the
 > [[Game Design Document]] and **accepted these six concepts** on 2026-10-13. Lines marked
 > **[decided]** are settled. Loadouts and numbers not marked **[decided]** are still

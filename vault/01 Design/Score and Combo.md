@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Score and Combo
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: almost all of it: score is now per point of damage with a 1 s combo up to level 25, and the flat bonuses are gone.
+
 > **Status: planned.** This is Claude's draft of how score is earned in a run. The
 > developer settled the leaderboard rules on 2026-10-13 (marked **[decided]**). The point
 > values are still proposals.

@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Gadgets and Mayhem
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: Mayhem fill (now per damage, ×0.2 while active), paid deploys, drone limits and behaviours, the mech armour bar and stomp, and the Air Strike countdown and party limit.
+
 > **Status: planned.** This is Claude's draft of the Mayhem meter, the 6 drones, the 3 mech
 > suits and the Air Strike. The developer settled its key rules on 2026-10-13. Those
 > lines are marked **[decided]**, and the rest are still proposals. The [[Game Design Document]] already says that

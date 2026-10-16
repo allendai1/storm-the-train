@@ -5,6 +5,8 @@ updated: 2026-10-16
 ---
 # Session 7 PlayerDataService Code
 
+> **Needs updates after [[0012-match-the-original]] (2026-10-16):** the schema needs updating: drop `LoginStreak` (the login streak goes), and add per-run heal/revive counts only if they must survive a server move. Missions become a fixed ordered list (store the list index and tier), and boosters are cleared at every checkpoint. See [[Original Mechanics Match]].
+
 ## When to use
 [[Loop (M2)]] Session 7 (saving). This is **draft reference code, written in a cloud
 session without Studio, and it hasn't been run.** A local session installs ProfileStore,

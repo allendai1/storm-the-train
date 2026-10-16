@@ -5,6 +5,10 @@ date: 2026-10-13
 ---
 # 0006 — Humanoid enemies with physics, server-side hit detection
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: knocking a living enemy off the train no longer counts as a knockout; fallen enemies climb back (see the match note §7.1).
+
 ## Context
 Up to 4 players fight crowds of 15–30 enemies ([[Wild West Enemies]]). Knock-outs are
 ragdolls that stay on the train, and knockback can push living enemies off the train

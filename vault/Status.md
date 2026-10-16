@@ -38,11 +38,19 @@ A run now plays like this:
   Air Strike.
 
 M1 Session 6 (multi-client test and tuning) and M2 Session 7 (saving) are still open.
+**[decided 2026-10-16] The game now matches the original's mechanics, keeping co-op**
+([[0012-match-the-original]], spec [[Original Mechanics Match]]): a boss and checkpoint
+after every train, events per train, the scripted leap, no auto-aim, per-damage score and
+the 1 s combo, the original's enemies, spin, movement, swap, Mayhem, gadgets, weapons,
+health scale (enemy damage ×10), paid heals and economy. Final knockouts and no ads stay.
+Many built systems change; the list is in the spec's §12.
+
 **Next steps ([decided 2026-10-16] roadmap):**
 1. **[[Feel and Look (Slice)]]**, the next milestone. One Wild West train, Max and the 5
    built enemies at roughly launch quality:
    - F1 the look target,
-   - F2 [[Combat Polish]],
+   - F2 **the original's mechanics** ([[Original Mechanics Match]] §12, using the
+     [[Combat Polish]] helpers where they still fit),
    - F3 Max's feel,
    - F4 the map,
    - F5 the characters and enemies,
@@ -59,6 +67,10 @@ have) and **open questions for the developer**, notably the coal tender, the wea
 the downed pose, a melee wind-up, the enemy hats and shirt colours, and music and voices.
 Also the [[Background Kit]] (the standard for every theme's background layers, with a
 Studio plugin; code drafted, not run yet, ADR [[0011-background-kit]] proposed).
+
+**Open from the match spec** ([[Original Mechanics Match]] §11): squad of 2 or 3, Lasso
+Lucy's lasso, enterable carriages, Jetpack and CDW design, and **whether McGraw and the
+leap move into the slice** (the slice train now ends with a boss and a checkpoint).
 
 **Before the slice, in Studio:** save the place. Finish verifying Session 11 (the
 knockback fix, the Defender, key 1) as part of F2 and F7.

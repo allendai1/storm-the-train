@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Combat Polish Code
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: the spin section (now the original's spin rules), melee jitter and anything tied to the stagger; reconcile with §12 of the match note before using it.
+
 ## When to use
 Step F2 of the [[Feel and Look (Slice)]], implementing [[Combat Polish]]. This is **draft
 reference code, written in a cloud session without Studio, and it hasn't been run.** Most

@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Economy and Monetization
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: the free heal (now paid), booster duration, offers and caps, missions, daily challenges, Surplus, coin and gem sources, agent pricing, the Exchange and the login streak.
+
 > **Status: planned.** This is Claude's draft of currencies, earn rates, prices, boosters,
 > the surplus shop and Robux products. The developer settled its key choices on
 > 2026-10-13 (marked **[decided]**). Prices and earn rates are still proposals to tune. The [[Game Design Document]] has already

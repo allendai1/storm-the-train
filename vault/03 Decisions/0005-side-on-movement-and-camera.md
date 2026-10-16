@@ -5,6 +5,10 @@ date: 2026-10-13
 ---
 # 0005 — Side-on movement lock and camera
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: the jump height, gravity, the double-jump rule and the camera lead (see the match note §3).
+
 ## Context
 [[0003-2.5d-side-scroller]] locks gameplay to one axis along the train plus jumping,
 and leaves the implementation open. Agents are R15 Humanoids ([[Art Direction]]).

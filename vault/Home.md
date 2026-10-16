@@ -14,6 +14,7 @@ The repo is still named `storm-the-train` after the
 - [[Loop (M2)]] — M2 spec and Studio checklist, sessions 7–13 (planned)
 - [[Queue Pads]] — physical party lobby in the hub: step on a pad, countdown, the pad's squad teleports together; replaces the party menu (planned, M2)
 - [[Feel and Look (Slice)]] — **the next milestone**: one train, Max and the built enemies at launch quality (planned)
+- [[Original Mechanics Match]] — **the game plays like the original, keeping co-op**: the converted values, co-op adaptations and the Studio change list (planned, decided 2026-10-16)
 - [[Background Kit]] — the standard six background slots, tile rules and the plugin workflow for every theme's scenery (planned)
 - [[Feel and Look Asset Specs]] — the slice's animations, models, environment, lighting, VFX and sound specs, with 16 open questions (planned)
 - [[Combat Polish]] — the accepted feel and AI polish for a refined first agent (planned, next Studio session)
@@ -59,6 +60,7 @@ Architecture decision records. Create from [[Templates/Decision|Decision templat
 - [[0008-player-data-profilestore]] — ProfileStore, schema v1, receipts, leaderboards (accepted)
 - [[0009-static-trains-scrolling-world]] — anchored trains, client parallax, carriage templates (accepted)
 - [[0010-third-party-packages]] — ProfileStore, Signal, Trove, Promise; no framework (accepted)
+- [[0012-match-the-original]] — match the original's mechanics; keep co-op, final knockouts, no ads (accepted)
 - [[0011-background-kit]] — standard background slots, variant tiles, in-place editing with a plugin (proposed)
 
 ## Devlog

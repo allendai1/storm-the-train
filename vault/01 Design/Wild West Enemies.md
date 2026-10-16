@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Wild West Enemies — the Cowboys
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: enemy damage (×10), Big Bart's stagger and proximity charge, Dan's fuse, the knock-off-counts-as-knockout rule, the Runt calls and the archetype numbers (see its §7.3 roster table).
+
 > **Status: planned.** This is the roster for the first-playable theme, which the
 > developer chose in the [[Game Design Document]]. The developer accepted it on
 > 2026-10-13. Names are placeholders until the naming pass. The numbers are **first

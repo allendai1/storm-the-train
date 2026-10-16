@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Game Design Document — Train Mayhem
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: the core loop (legs → a boss and checkpoint every train, events per train, the scripted leap), aim (no auto-aim), the spin, swapping, scoring and combo, Mayhem and gadgets, health and damage scale, and the economy (paid heals, boosters, missions, Surplus, coins and gems).
+
 > **How to read this.** Lines marked **[decided]** were chosen by the developer.
 > Lines marked **[proposed]** are Claude's suggestions, drafted from the
 > [[Original Game]] reference notes, and are not canon until accepted. When a

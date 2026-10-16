@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Loop (M2) — spec and Studio build checklist
 
+> **Overridden in part (2026-10-16) by [[0012-match-the-original]].** The game now
+> matches the original's mechanics; where this note conflicts with
+> [[Original Mechanics Match]], that note wins. Affected here: legs of 3 trains, the gap-coin leap, the free checkpoint heal, the Thief train and the per-train spawn ramp. The checkpoint now comes after every train with the scripted TrainJump leap.
+
 > **Status: planned.** This turns milestone **M2 (Loop)** from the [[Game Design Document]] into a checklist that continues from [[First Playable (M1)]] (sessions
 > 7–13). M2 is: **hub train, next-train leap, checkpoint, agent swap, Mayhem and
 > gadgets, coins and saving.** It assumes M1 is built and its playtest questions are

@@ -5,6 +5,10 @@ updated: 2026-10-16
 ---
 # Differences from the Original
 
+> **Since 2026-10-16 the developer decided to match the original** ([[0012-match-the-original]]),
+> so most "ours" columns below describe the **old** design. The new design is
+> [[Original Mechanics Match]].
+>
 > **Status: reference.** A side-by-side of how Train Mayhem differs from *Storm the Train*
 > (2016), compiled on 2026-10-16 from the vault: our design notes and the decompile notes
 > ([[Original Game]]). It records differences; it doesn't decide anything. Where ours is
