@@ -22,6 +22,13 @@ Lua 5.1, so the numbers below are the real shipped values.
 - [[Original Game - Enemies and Spawning]]: the three themes, the carriage kit, every
   enemy's stats and behaviour, the spawn budget system, the difficulty curve, bosses,
   hostages, and survival mode.
+- [[Original Game - Combat Feel (Native Code)]]: decompiled from `lib/x86/libMainApp.so`
+  (Ghidra) and `classes.dex` (jadx). It covers spread (none), fire jitter, the shotgun
+  close blast, knockback ÷ weight, flinch rules, muzzle flashes, camera-shake tiers,
+  per-damage score and Mayhem, the combo window, i-frames, gibs and the backend config
+  keys.
+- `lib/`, `res/`, `classes.dex`, `resources.arsc`: the raw binaries from the APK
+  (uploaded 2026-10-16). Reference only.
 - `scripts/`: the original's **raw Lua data scripts** (uploaded 2026-10-16). It holds the
   item DB `DB/db.lua`, `DB/loader.lua`, every enemy definition in `Enemies/*.lua`, the
   spawn groups, `environments.lua` and the theme files. It's reference only, like

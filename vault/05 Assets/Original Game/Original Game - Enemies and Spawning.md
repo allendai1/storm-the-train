@@ -136,7 +136,7 @@ This is the per-run event flow. Event keys come from the locale **[locale]**; th
 | `ENEMY_SPAWN_COST` | **Budget cost used by the spawner** (section 3). |
 | `ENEMY_FREEZE_SCALAR` | Multiplier on freeze effects: 1 = light, 0.6 = mid, 0.3 = boss. |
 | `ENEMY_FLEE_ON_FIRE` | Lights run around in panic when set on fire (`ON_FIRE` anim `n_run_fire`). |
-| `ENEMY_DAMAGE_TIMER` | Probably attack cooldown / hit interval in seconds **[inferred]**. Values: 0.05 (exploding minion), 0.3, 0.5, 0.75, 1. |
+| `ENEMY_DAMAGE_TIMER` | **Flinch cooldown [code]:** after a gun-hit flinch (`DAMAGE_GUN`), no new flinch for 0.8–1.2 × this many seconds. See [[Original Game - Combat Feel (Native Code)]]. Values: 0.05 (exploding minion), 0.3, 0.5, 0.75, 1. |
 | `AGILE_SPINJUMPTIME` | For `AGILE_ENEMY`: interval between spin-jump attacks in seconds **[inferred]** (1.5-3). |
 | `UNDEAD_REVIVE_PROBABILITY` / `UNDEAD_DEAD_TIME` | % chance a "dead" undead gets back up, and seconds it lies down first. The player must gib/smash the corpse to stop it (mission: "SMASH %s CORPSES USING SPIN ATTACKS OR A CORPSE SMASHER DRONE"). |
 | `BERSERK_HEALTH`, `BERSERK_DIST`, `BERSERK_OFFSET_X/Y`, `BERSERK_SIZE_W/H`, `BERSERK_EFFECT` | Berserkers. `BERSERK_DIST=512` px is probably the trigger range for the charge. `BERSERK_HEALTH` (30 mid / 100 boss) plus an offset/size box looks like a **separate berserk meter or weak-point box drawn above the head** **[unclear]**. Effect `EFFECT_FRENZY_1`. |
@@ -305,7 +305,7 @@ are **not** in these files. What the data does define:
     ninja's skull flies at force 2, and **its own weapons fly off** (2 × sai).
   - Each enemy also has a death sound and a gib sound (`SOUND_LIVING_DEATH`,
     `SOUND_FLESH_GIB`).
-- **`ENEMY_WEIGHT`:**
+- **`ENEMY_WEIGHT`:** **[code]** knockback is divided by it (see [[Original Game - Combat Feel (Native Code)]]).
   - the values are 1 for lights, 1.4–1.6 for tough lights, 2 for mids, and 2.5–2.8 for
     bosses (raised from 2.5 in v1.2),
   - probably knockback or launch resistance, since the engine uses Box2D bodies. That's
