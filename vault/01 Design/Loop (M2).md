@@ -91,8 +91,9 @@ Bosses, hostages, survival, more enemies and agents (M3) and the shops and bluep
   lets them change squad order. The other pods are closed until M4.
 
 ### Agent swap
-- **Swap** with Q/E, LB/RB, or a swipe or swap button. The **1.5 s cooldown** keeps
-  your HP, position, Mayhem and combo ([[Launch Agents]]). There's no swapping while
+- **Swap** with Q/E, LB/RB, or a swipe or swap button. It's **instant, with no cooldown**
+  (2026-10-16, [[Original Mechanics Match]] §3.4), and keeps your HP, position, velocity,
+  Mayhem and combo ([[Launch Agents]]). There's no swapping while
   in a mech suit.
 - Each agent **remembers its active weapon**. Weapon crates switch the current
   agent's weapon only.

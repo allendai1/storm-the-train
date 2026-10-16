@@ -5,6 +5,15 @@ side: server
 ---
 # EnemyService
 
+> **Damage scale (2026-10-16, [[Original Mechanics Match]] §0):** template `Damage` and
+> `ShotDamage` are the **original's numbers**. `EnemyService` multiplies them by
+> `ENEMY_DAMAGE_SCALE` (10) when they hit a player (melee, charge, bullets, explosions);
+> an explosion hurting other enemies uses them unscaled. Dynamite Dan's `Damage` is 4
+> (40 to players, 4 to bandits) with `ExplosionRadius` 2.7; the Six-Shooter's
+> `ShotDamage` is 4. Every template has a `Weight` (Bart 2, the rest 1) that divides
+> knockback. Enemies keep `ENEMY_JUMP_HEIGHT` 8 (players jump 14.1 now) under the new
+> `workspace.Gravity` 130.7.
+
 ## Purpose
 Spawns, runs and knocks out the Cowboys ([[Wild West Enemies]],
 [[0006-humanoid-enemies-and-combat]]). It owns:
@@ -36,7 +45,7 @@ damage to enemies.
     `AttackInterval`, `HitboxWidth`, `HitboxHeight` and `FreezeScalar`. Spawning resizes
     the `Hitbox` from the two hitbox attributes.
   - **Leaper** (Rodeo Kid): `LeapInterval` 2.8, `LeapTrigger` 8, `LeapTime` 1.1.
-  - **Shooter** (Six-Shooter): `ShotDamage` 5, `ShotSpeed` 40, `ShotRange` 35, `TellTime`
+  - **Shooter** (Six-Shooter): `ShotDamage` 4 (×10 on players), `ShotSpeed` 40, `ShotRange` 35, `TellTime`
     0.5, `ShotIntervalMin` 2.5, `ShotIntervalMax` 4.
   - **Lobber** (Dynamite Dan): `Damage` 10 is the dynamite, `ExplosionRadius` 4, `Fuse`
     1.5, `ThrowIntervalMin` 2.5, `ThrowIntervalMax` 4, `KeepDistance` 15, `ThrowRange` 25.

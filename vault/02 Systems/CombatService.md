@@ -67,7 +67,7 @@ Session 5). Both react to `Health` reaching 0.
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
 | `SetInput` | client → server (unreliable) | `fire: boolean` | `Guard.boolean`. 30/s, burst 10. A bad payload is a strike |
-| `RequestSpin` | client → server | none | 4/s, burst 2. Cooldown is ≥ 0.8 × `SPIN_COOLDOWN` (a strike otherwise). The player must be alive and airborne: no map geometry within hip height + 0.5 below the root |
+| `RequestSpin` | client → server | none | 4/s, burst 2. **Once per airtime** (`spunInAir`, cleared when the player next stands on the map; a repeat is ignored, no strike). No cooldown. The player must be alive and airborne: no map geometry within hip height + 0.5 below the root |
 | `Effects` | server → all clients (unreliable) | an array of up to `EFFECTS_BATCH_SIZE` (10) records per send, flushed every Heartbeat | — |
 
 **Effect records** (`{ kind, ... }`):
@@ -85,7 +85,7 @@ Session 5). Both react to `Health` reaching 0.
   - `N` knockback: userId, vx, vy
 
 ## Data / state
-- **Per player:** `{ fire, nextShot, lastSpin }`.
+- **Per player:** `{ fire, heldSince, nextShot, spinning, spunInAir, spinStarted, spinEndedAt, spinHits }`.
 - **Firing:** the cadence stays steady while the trigger is held (`nextShot +=
   FireInterval`), and the first shot after a pause fires immediately. A player with
   Health ≤ 0 can't fire.
@@ -150,9 +150,15 @@ Built from [[Combat Polish Code]] §7 and adapted to the live script. It uses
 - **The spin lasts until landing:**
   - a `RequestSpin` while already spinning is ignored (no strike),
   - every Heartbeat, `stepSpins` hits each enemy within `SpinRadius` once (`spinHits`),
-  - the spin ends on landing, on death, or after `SPIN_MAX_TIME` (1.5 s, a hover cap),
+  - the spin ends on landing, on death, or after `SPIN_MAX_TIME` (2.5 s, a hover cap),
+  - **once per airtime, no cooldown** (2026-10-16, [[Original Mechanics Match]] §3.3):
+    `spunInAir` blocks a second spin until the player stands on the map again,
+  - **half damage** for `SPIN_GUARD_WINDOW` (0.2 s) after a spin starts and after it ends
+    (`damagePlayer`, after the damage filter; no i-frames from spinning),
   - knockback is `CombatFeel.spinVelocity` by the character's `SpinLevel` (Max 4,
-    Brick 6), unless `SpinKnockback` (the mech's body slam) is set,
+    Brick 6), unless `SpinKnockback` (the mech's body slam) is set. **Every
+    `CombatService.knockback` push is divided by the enemy template's `Weight`**
+    (2026-10-16; lights 1, Bart 2; `Weight` is an attribute on every Wild West template),
   - the gun pauses while spinning, and `nextShot = max(nextShot, now)` on landing,
   - the player attribute `Spinning` is set for the client (F3's pose).
 - `StunnedUntil` is in `os.clock()` time. `EnemyFlinch` compares it with `os.clock()` (the

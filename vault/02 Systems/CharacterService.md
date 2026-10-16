@@ -47,7 +47,9 @@ None. `RequestSpin` is handled by [[CombatService]].
 
 ## Data / state
 - **On spawn:**
-  - it sets `UseJumpPower = false`, `JumpHeight = Constants.JUMP_HEIGHT` (8),
+  - it sets `UseJumpPower = false`, `JumpHeight = Constants.JUMP_HEIGHT` (**14.1** since
+    2026-10-16, with `workspace.Gravity` **130.7**, so the take-off is 60.7 studs/s;
+    [[Original Mechanics Match]] §3.2),
     `WalkSpeed` = the rig's `Speed`, and `AutoRotate = false`,
   - it moves every `Default`-group character part into `Players`, leaving the `Hitbox` in
     `Hitboxes`,
@@ -84,7 +86,8 @@ None. `RequestSpin` is handled by [[CombatService]].
   - `spawn()` uses the first agent of the Player attribute `Squad` (Dash if none) and sets
     Health to full. `onCharacter` no longer resets Health, so swaps keep it.
   - New `CharacterService.swapTo(player, agent)`: it clones the agent where the old rig's
-    feet are, with the same facing, and destroys the old rig.
+    feet are, with the same facing **and the same velocity** (2026-10-16: a swap works
+    mid-air and mid-spin), and destroys the old rig.
   - Characters carry the `AgentId` attribute. `onCharacter` sets `ActiveAgent` and equips
     the agent's remembered weapon (`Weapon_<AgentId>`) or its primary.
   - New `CharacterService.placeNear(player, x)` (Session 9, carrying players across leaps).

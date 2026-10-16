@@ -88,9 +88,11 @@ are at **30 fps**.
   - Take-off speed is about 56 studs/s, the apex comes about 0.29 s in (9 f), and a flat
     jump lasts about 0.57 s (17 f).
   - A running jump covers about 16 studs, which matches [[Loop (M2)]].
-- **Spin:** a 4-stud `SPIN_LIFT` ([[InputController]]). The measured rise for a jump plus a
-  spin is 10.8, so a spin is airborne for about 0.45–0.55 s (14–16 f).
-- **Combat Polish:** the spin **lasts until landing**, capped at 1.5 s (`SPIN_MAX_TIME`,
+- **Changed 2026-10-16** ([[Original Mechanics Match]] §3.2–3.3, built): gravity is 130.7,
+  the jump is 14.1 studs (take-off 60.7 studs/s, apex at about 0.46 s, a flat jump about
+  0.93 s), and the double jump adds 20 studs/s while rising (up to about 24.5 studs) or a
+  26.7 studs/s hop once falling. Re-measure the frame counts above against that.
+- **Combat Polish:** the spin **lasts until landing**, capped at 2.5 s (`SPIN_MAX_TIME`,
   [[Combat Polish Code]]), so `Max_Spin` loops and never needs more than about 45 f.
 
 ### 1.2 Max Mayhem (template `ReplicatedStorage.Assets.Agents.DashDaring`)

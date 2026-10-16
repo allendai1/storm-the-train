@@ -34,10 +34,16 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
 - **A/D or ←/→:** `Humanoid:Move(Vector3.new(x, 0, 0))` every frame. The character faces
   ±X from the last move direction, by setting the root CFrame when it's misaligned.
 - **Space, W or ↑:**
-  - on the ground: a normal jump (JumpHeight 8, measured rise 8.1),
-  - in the air: a **spin**, once per airborne stretch and no faster than
-    `SPIN_COOLDOWN` (0.6 s). It sets the upward velocity for a `SPIN_LIFT` of 4 studs
-    (the measured jump plus spin rise was 10.8).
+  - on the ground: a normal jump (`JUMP_HEIGHT` 14.1 at gravity 130.7; measured rise
+    14.7 with an early double jump, 2026-10-16),
+  - in the air after **walking off an edge** (no jump yet): a full jump from mid-air
+    (`jumpedThisAir`),
+  - in the air otherwise: the **double jump = spin**, once per airtime, no cooldown
+    ([[Original Mechanics Match]] §3.2–3.3). Still rising: `DOUBLE_JUMP_BOOST` (20) is
+    added, capped at `MAX_VERTICAL_SPEED` (80). At the apex or falling: the upward speed
+    becomes `DOUBLE_JUMP_HOP` (26.7). It sends `RequestSpin` either way.
+  - Falling speed is clamped to `MAX_VERTICAL_SPEED` every frame. The "landed" reset
+    skips the frame between a jump press and its physics step (`Humanoid.Jump` pending).
 - **Left mouse button held:** fire. There's no aiming (the mouse position is ignored);
   shots go along the facing (2026-10-13).
 - **SetInput is sent:**

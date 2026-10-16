@@ -5,7 +5,7 @@ side: server, client
 ---
 # AgentService (+ SquadController)
 
-> **Planned change (2026-10-16):** a squad is **2 agents**, and a swap toggles between them with no cooldown ([[Original Mechanics Match]] §3.4). The built version uses 3 and a 1.5 s cooldown.
+> **Built 2026-10-16 (local session):** a squad is **2 agents** (`SQUAD_SIZE` 2), and a swap **toggles between them instantly**, with no cooldown, mid-air and mid-spin included ([[Original Mechanics Match]] §3.4, §12 items 0 and 4). `SWAP_COOLDOWN` and the `SwapReadyAt` attribute are gone. The HUD squad strip and the Barracks cards are template-built, so they follow `SQUAD_SIZE` with no GUI change.
 
 > **Display names (decided 2026-10-16):** Dash Daring is now **Max Mayhem** ([[Launch Agents]]).
 > The Studio IDs (`DashDaring`, `Dash`) are unchanged until a local session renames
@@ -55,14 +55,14 @@ downed/revive service ([[SquadService]]), so it's **AgentService**.
 ## Remotes
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
-| `RequestSwap` | client → server | `direction: 1 \| -1` | `Guard.number(-1, 1, integer)`, not 0, 2/s with burst 2. Refused during the `SWAP_COOLDOWN` (1.5 s), while `Downed`/`BledOut`, while `InMech`, or with a squad of 1 |
-| `EquipSquad` | client → server | `{ agentId }`, 1–3 entries | Only in `Lobby` or `Checkpoint`. A table of at most `SQUAD_SIZE`, each id a string ≤ 40 characters, owned and unique. A bad payload is a strike |
+| `RequestSwap` | client → server | `direction: 1 \| -1` | `Guard.number(-1, 1, integer)`, not 0, 2/s with burst 2. Refused while `Downed`/`BledOut`, while `InMech`, or with a squad of 1. No cooldown |
+| `EquipSquad` | client → server | `{ agentId }`, 1–2 entries | Only in `Lobby` or `Checkpoint`. A table of at most `SQUAD_SIZE`, each id a string ≤ 40 characters, owned and unique. A bad payload is a strike |
 
 ## Data / state
 - **Player attributes:**
   - `OwnedAgents` and `Squad` (comma-separated ids, first = spawn agent),
   - `ActiveAgent` (set by [[CharacterService]]),
-  - `SwapReadyAt` (server time), `FirstCheckpointDone`, `TutorialHint`,
+  - `FirstCheckpointDone`, `TutorialHint`,
   - `Weapon_<AgentId>`: each agent's remembered weapon, set by `CombatService.setWeapon`
     and cleared at every train start.
 - **On join:** `OwnedAgents` = `Squad` = `STARTER_AGENT` (Dash). With the Studio-only dev flag

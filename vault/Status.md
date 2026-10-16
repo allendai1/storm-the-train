@@ -82,8 +82,15 @@ checkpoint and the leap**.
   `Layout` attribute on `Carriages.WildWest`.
 - **F2 [[Combat Polish]] is built,** including Big Bart's `ChargeSpeed` 26.7. The checks
   still open are listed under Known issues.
+- **[[Original Mechanics Match]] §12 items 0–4 are built** (second local session): a squad
+  of 2 with an instant toggle swap (mid-air too, velocity kept), enemy damage ×10 through
+  `ENEMY_DAMAGE_SCALE`, gravity 130.7 with the 14.1 jump, the walk-off jump and the
+  original's double jump, the spin once per airtime with no cooldown and half-damage
+  windows, knockback ÷ `Weight`. Verified in play: jump height, spin, mid-air swap both
+  ways, no script errors.
 
-**Next in Studio:** save the place, then F3 (Max's feel). Finish verifying Session 11 (the
+**Next in Studio:** save the place, then §12 items 5–9 (aim and weapon stats, score,
+Mayhem per damage, enemy roster changes, the spawn timeline), then F3 (Max's feel). Finish verifying Session 11 (the
 knockback fix, the Defender, key 1) and the open F2 checks in F7.
 
 ## In progress
@@ -179,6 +186,10 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   - the Six-Shooter's 4 s grace and tell timing, lob accuracy onto higher/lower roofs,
   - outrunning Bart's charge with Max (and not with Brick),
   - revive grace and the shove (2 players).
+- **§12 items 0–4 not play-checked:** the 0.2 s half-damage spin windows, Bart's
+  `Weight` 2 halving pushes, Dan's dynamite at 40/2.7 studs, and how the lower gravity
+  changes the Rodeo Kid's leap and ragdolls. **The lobby auto-starts after 20 s** and a
+  bandit now does 30 (×toughness) per swing, so an idle tester gets downed quickly.
 - **Dynamite fuse timing changed:** `Fuse` 1.5 s now counts from landing, not the throw,
   so sticks sit about 1.5 s instead of about 0.6 s. Tune it in the playtest.
 - **Enemies crowding onto the player:** when melee enemies stand inside the player, rifle

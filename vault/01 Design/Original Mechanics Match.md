@@ -539,6 +539,11 @@ Damage to players is ×10.
 for the two vehicles (proposals in §8.4).
 
 ## 12. Studio change list (for the local session)
+> **Progress (2026-10-16, local session):** items **0, 1, 3 and 4 are built**, and item 2
+> except "no acceleration" and the player knockback decay (the Humanoid is near-instant
+> already). Knockback ÷ `Weight` from item 5 is in too (in `CombatService.knockback`). See
+> [[AgentService]], [[CharacterService]], [[CombatService]], [[InputController]],
+> [[EnemyService]]. Not play-checked yet: the half-damage spin windows, Weight on Bart.
 0. **Squad of 2:** [[AgentService]] (squad slots, swap toggle), the Barracks squad select
    and the HUD squad strip ([[HudController]]).
 Ordered roughly by how much it changes the feel. Each item names the system note to update
