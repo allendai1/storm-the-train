@@ -15,7 +15,7 @@ updated: 2026-10-16
 ## Summary
 One Wild West hostile train, side-on, for 1–4 players. Each player is **Dash Daring**
 with his two weapons, switched by walking into **weapon crates**. The squad fights from
-the caboose to the engine against the first four Rattler Gang lights and **Big Bart**,
+the caboose to the engine against the first four Cowboys lights and **Big Bart**,
 spawned by a budget timeline. Downed players can be revived by teammates. When the
 timeline ends and the squad reaches the engine, the train is **cleared**. A wipe ends
 the run. One **blueprint thief** drops a blueprint pickup that's counted but not saved.

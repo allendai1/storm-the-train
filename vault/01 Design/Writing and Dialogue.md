@@ -137,7 +137,7 @@ script as cues:
 | Mayhem / Mech | "SAUCER TIME!" · "FIVE STARS!" |
 | Win | "FIVE STARS, WOULD RIDE AGAIN!" |
 
-## 4. Enemy lines (Rattler Gang, Wild West)
+## 4. Enemy lines (the Cowboys, Wild West)
 | Who | When | Lines |
 |---|---|---|
 | Any bandit | Spots a player | "YEEHAW!" · "GET 'EM!" · "THAT'S THE ONE!" |
@@ -155,10 +155,10 @@ script as cues:
 | Conductor Earl (hostage) | Tied up / freed | "HELP! HELP!" / "MUCH OBLIGED!" |
 
 ## 5. Hub voice
-The hub needs one friendly guide, replacing the original's Chubwick. **Placeholder:
-"the Quartermaster"**, the Agency's cheerful hub-train boss, who speaks through a
-little video drone (a nod to the original's drone). **[decided 2026-10-16] Keep the
-Quartermaster concept.** Their final name comes in the naming pass. Sample lines:
+The hub needs one friendly guide, replacing the original's Chubwick: **Quill**
+(**[decided 2026-10-16]**), the Quartermaster. They're the cheerful boss of the Falcon-8 for the
+Agency (ROBLOX Assault Team), and speak through a little video drone (a nod to the
+original's drone). In the notes, "the Quartermaster" means Quill. Sample lines:
 - First visit: "WELCOME ABOARD, AGENT! LET'S GET YOU SORTED."
 - Barracks: "PICK YOUR SQUAD. THREE AGENTS, ONE HEALTH BAR. NO PRESSURE!"
 - Party: "BRING FRIENDS. BANDITS HATE THAT."

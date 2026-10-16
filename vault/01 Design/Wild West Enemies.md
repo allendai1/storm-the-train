@@ -3,7 +3,7 @@ tags: [design, feature, enemies, theme, wild-west]
 status: planned
 updated: 2026-10-16
 ---
-# Wild West Enemies — the Rattler Gang
+# Wild West Enemies — the Cowboys
 
 > **Status: planned.** This is the roster for the first-playable theme, which the
 > developer chose in the [[Game Design Document]]. The developer accepted it on
@@ -13,8 +13,8 @@ updated: 2026-10-16
 > reference only. Tune them fresh in playtests.
 
 ## Summary
-The **Rattler Gang** (**[decided]** a placeholder name, chosen for real in the naming
-pass with the agents and hub train; see [[Title Ideas]]) are cartoon outlaws who have hijacked a freight train. They fill
+**The Cowboys** (**[decided 2026-10-16]** named in the naming pass, replacing the placeholder
+"Rattler Gang"; see [[Title Ideas]]) are cartoon outlaws who have hijacked a freight train. They fill
 the 10 standard enemy slots that every theme uses (see the GDD):
 - slots 0–3 are light grunts,
 - slots 4–6 are mids, who also hold keys and carry blueprints,

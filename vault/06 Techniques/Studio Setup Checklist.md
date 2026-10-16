@@ -34,7 +34,7 @@ path below has changed, follow the current Studio UI and update this note.
 ### 3. Game Settings (Home → Game Settings)
 | Section | Setting | Value | Why |
 |---|---|---|---|
-| Basic Info | Name, description | Working title **Train Runner** | Rename after the naming pass ([[Title Ideas]]) |
+| Basic Info | Name, description | **Train Mayhem** (decided 2026-10-16; the place may still say Train Runner) | [[Title Ideas]] |
 | Basic Info | Devices | **Computer, Phone, Tablet**. No console | Decided: PC and mobile only (GDD) |
 | Permissions | Playability | **Private** during development | |
 | Security | **Enable Studio Access to API Services** | On, once saving starts (M2) | DataStores and MemoryStore in Studio. M1 can leave it off; ProfileStore uses its mock in Studio anyway |

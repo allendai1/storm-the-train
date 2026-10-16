@@ -1,10 +1,11 @@
 ---
 tags: [moc]
 ---
-# Train Runner — Home
+# Train Mayhem — Home
 
 Map of content for the project. Start here, then read [[Status]].
-The working title is **Train Runner**; the repo is still named `storm-the-train` after the
+The title is **Train Mayhem** (decided 2026-10-16; the working title was Train Runner).
+The repo is still named `storm-the-train` after the
 2016 game it's inspired by (see [[Original Game]]).
 
 ## Design
@@ -14,7 +15,7 @@ The working title is **Train Runner**; the repo is still named `storm-the-train`
 - [[Queue Pads]] — physical party lobby in the hub: step on a pad, countdown, the pad's squad teleports together; replaces the party menu (planned, M2)
 - [[Writing and Dialogue]] — voice rules, barks, announcements, tutorial, missions, challenge chains (proposed)
 - [[First Playable (M1)]] — M0+M1 spec and Studio build checklist, in session order (planned)
-- [[Wild West Enemies]] — the Rattler Gang roster for the first-playable theme (planned)
+- [[Wild West Enemies]] — the Cowboys roster for the first-playable theme (planned)
 - [[Gadgets and Mayhem]] — Mayhem meter, 6 drones, 3 mech suits, Air Strike (planned)
 - [[Score and Combo]] — knockout points, combo multiplier, bonuses, squad and individual boards (planned)
 - [[Economy and Monetization]] — currencies, earn rates, prices, boosters, Robux products (planned)

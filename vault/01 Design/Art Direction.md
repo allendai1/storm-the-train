@@ -69,7 +69,7 @@ These turn "Chaos you can read" into rules every asset has to pass.
 | Scrub and cacti | `#A9B38A` | Muted sage |
 | Freight cars | `#B04A33` red / `#7C5A3A` wood | The gameplay plane's main surfaces, a little brighter than the world |
 | Iron and trim | `#3B3B42` | Wheels, couplings, roof edges |
-| **Rattler Gang crew colour** | Bandana red `#D7322F` + snakeskin tan `#C9A15A` | Every bandit wears the red bandana, so "enemy" reads instantly |
+| **Cowboys crew colour** | Bandana red `#D7322F` + snakeskin tan `#C9A15A` | Every bandit wears the red bandana, so "enemy" reads instantly |
 
 **Later themes** (first-pass mood only, to define properly in M3):
 - **Ninjas:** misty bamboo greens and ink-wash greys, with a crew colour of deep indigo
@@ -139,7 +139,7 @@ Mimi's beret is a pink-leaning red so it doesn't read as gang red.
   (parallax), with wheel and rod animation, smoke and a slight sway. The background
   repeats in long seamless strips with occasional set-pieces such as a canyon, a bridge,
   a ghost town or a cactus field.
-- **The hub train** (name to be chosen) has the Agency's look: navy and gold with
+- **The hub train**, the **Falcon-8**, has the Agency's look: navy and gold with
   polished brass, clearly "our side" next to the hostile trains.
 
 ## 7. Materials & textures

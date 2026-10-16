@@ -1,14 +1,34 @@
 ---
 tags: [inbox, naming]
 status: proposed
-updated: 2026-10-13
+updated: 2026-10-16
 ---
 # Title Ideas
 
-> **Working title chosen (2026-10-13): Train Runner.** The ideas below are kept as
-> alternatives in case it changes before launch. Before publishing under any name,
-> search Roblox for existing experiences with that name, and run a basic trademark
-> search.
+> **[decided 2026-10-16] Title: Train Mayhem.** It replaces the working title Train
+> Runner. A web search found no Roblox experience with that name. Before publishing,
+> search Roblox itself and run a basic trademark search.
+
+## Decided names (2026-10-16)
+| What | Name | Replaces |
+|---|---|---|
+| Game | **Train Mayhem** | Train Runner (working title), "Storm the Train" |
+| Agency | **ROBLOX Assault Team** | the original's unnamed agency |
+| Hub train | **Falcon-8** | the Eagle-7 |
+| Hub guide (the Quartermaster) | **Quill** | Chubwick |
+| Gem shop | **Surplus Shop** | the original's surplus shop |
+| Wild West gang | **the Cowboys** | the placeholder "Rattler Gang" |
+| Agents | _still open_ | Dash Daring, Brick Broadsley, Turbo, Nana Nitro, Mimi the Mime, Zorp (placeholders) |
+
+**Check before publishing: "ROBLOX Assault Team".** Roblox's
+[Name and Logo Community Usage Guidelines](https://en.help.roblox.com/hc/articles/115001708126)
+restrict using its name and marks. A community wiki says "Roblox" isn't allowed in
+experience titles published since June 2022, but that wasn't confirmed on Roblox's own
+pages. An in-game name could also read as official affiliation. The developer chose to
+keep it, knowing the risk. Re-check before launch, and fall back to "Rail Assault Team"
+if needed.
+
+The brainstorm below is kept for reference.
 
 The game is moving away from the original's "Storm the Train" (see
 [[Game Design Document]]). Brainstormed options:

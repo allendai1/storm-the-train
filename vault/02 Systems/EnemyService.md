@@ -6,7 +6,7 @@ side: server
 # EnemyService
 
 ## Purpose
-Spawns, runs and knocks out the Rattler Gang ([[Wild West Enemies]],
+Spawns, runs and knocks out the Cowboys ([[Wild West Enemies]],
 [[0006-humanoid-enemies-and-combat]]). It owns:
 - the enemy AI: one decision loop for every enemy, with no per-enemy scripts,
 - enemy bullets and dynamite (data-only projectiles),

@@ -3,7 +3,7 @@ tags: [design, gdd]
 status: planned
 updated: 2026-10-16
 ---
-# Game Design Document — Train Runner
+# Game Design Document — Train Mayhem
 
 > **How to read this.** Lines marked **[decided]** were chosen by the developer.
 > Lines marked **[proposed]** are Claude's suggestions, drafted from the
@@ -18,9 +18,16 @@ enemy crews, swap between agents mid-fight, rescue hostages, take down bosses an
 leap from train to train. Between runs they head back to their own armoured hub
 train to upgrade.
 
-**Working title:** **Train Runner**. **[decided]** It replaces "Storm the Train", which
-belongs to the original. It's a working title for now: confirm the final name before
-publishing (see [[Title Ideas]]).
+**Title:** **Train Mayhem**. **[decided 2026-10-16]** It replaces the working title Train Runner and
+the original's "Storm the Train". Search Roblox for clashes before publishing (see
+[[Title Ideas]]).
+- **[decided 2026-10-16] Names:**
+  - the agency: **ROBLOX Assault Team**,
+  - the hub train: **Falcon-8**,
+  - the Wild West gang: **the Cowboys**,
+  - the hub guide: **Quill**,
+  - the shop: the **Surplus Shop**.
+  The agents' names are still open.
 
 ## Relationship to the original
 - **[decided]** This is a **new IP inspired by** the 2016 mobile game *Storm the Train*
@@ -330,7 +337,8 @@ targets) is in [[Economy and Monetization]].
   - They ship with the meta systems in M4.
 
 ## Hub train
-**[decided]** This is our version of the original's Eagle-7, with a new name to pick.
+**[decided]** This is our version of the original's Eagle-7. **[decided 2026-10-16]** It's called the
+**Falcon-8**.
 It has walk-up pods for:
 - **Medbay**: heal,
 - **Barracks**: agents and squad,
@@ -358,8 +366,7 @@ party lobby.
 6. **M5, Polish and launch.** Final title, art pass, onboarding and tutorial, analytics.
 
 ## Open questions
-- Final title (working title is Train Runner), and names for the agency, the hub
-  train and the agents ([[Title Ideas]]).
+- Final agent names ([[Launch Agents]], [[Title Ideas]]).
 - Playtest the Mayhem fill rates and mech armour ([[Gadgets and Mayhem]]).
 - Playtest the score values and the 2.5 s combo window ([[Score and Combo]]).
 - Tune the economy ([[Economy and Monetization]]): Robux prices and earn rates.
