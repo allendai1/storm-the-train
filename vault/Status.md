@@ -22,7 +22,7 @@ feature notes are `planned`:
 Three things are not settled yet:
 - **naming**: the title, agency, hub train, agents and gang,
 - **[[Art Direction]]**: now `planned`. The only open item is ShadowMap vs Future
-  lighting, which waits for a mobile test. No reference images yet,
+  lighting, which waits for a mobile test. Six screenshots of the original are saved in [[References]],
 - **number tuning**, which needs playtests. The original's numbers are loose reference only.
 
 **M0, M1 (Sessions 1–5) and M2 Sessions 8–11 are built** in Studio (place `71855801375130`).
