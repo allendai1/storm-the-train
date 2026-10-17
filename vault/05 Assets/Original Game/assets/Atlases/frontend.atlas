@@ -1,0 +1,21 @@
+return {
+{
+	textureName="./assets/Atlases/frontend0.pvr", w=1024, h=1024,
+	{name="frontend_storm_logo.png", w=640, h=265, x=0, y=0},
+	{name="ad_backing.png", w=365, h=163, x=640, y=0},
+	{name="helicopter_top_blades_2.png", w=359, h=22, x=640, y=163},
+	{name="helicopter_top_blades_1.png", w=262, h=16, x=640, y=185},
+	{name="helicopter_gun.png", w=91, h=49, x=640, y=201},
+	{name="helicopter_blade_highlight.png", w=39, h=3, x=640, y=250},
+	{name="helicopter_rear_rotor_2.png", w=65, h=62, x=731, y=201},
+	{name="helicopter_gun_runner.png", w=52, h=41, x=796, y=201},
+	{name="helicopter_rear_rotor.png", w=80, h=80, x=902, y=185},
+	{name="ad_car.png", w=420, h=335, x=0, y=265},
+	{name="helicopter_challenges.png", w=323, h=182, x=0, y=600},
+	{name="popup_blueprint.png", w=67, h=67, x=323, y=600},
+	{name="helicopter_main.png", w=323, h=182, x=0, y=782},
+	{name="ui_chad_chubwick.png", w=182, h=269, x=420, y=265},
+	{name="sun.png", w=267, h=267, x=602, y=265},
+	{name="popup_TED.png", w=217, h=170, x=420, y=534},
+},
+}

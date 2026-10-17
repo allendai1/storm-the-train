@@ -1,0 +1,14 @@
+return {
+{
+	textureName="./assets/Atlases/env_horror_hres0.pvr", w=1024, h=1024, filter="BILINEAR",
+	{name="horror_b1_fence_1.png", w=1024, h=99, x=0, y=0},
+	{name="horror_h_tracks.png", w=1024, h=82, x=0, y=99},
+	{name="horror_f1_graves_1.png", w=1024, h=215, x=0, y=181},
+	{name="horror_b4_hills_2.png", w=512, h=161, x=0, y=396},
+	{name="horror_b4_hills_1.png", w=512, h=143, x=0, y=557},
+	{name="horror_b3_hills_2.png", w=512, h=181, x=0, y=700},
+	{name="horror_f2_graves_2.png", w=512, h=88, x=0, y=881},
+	{name="horror_b3_hills_1.png", w=512, h=190, x=512, y=396},
+	{name="horror_f2_graves_1.png", w=512, h=88, x=512, y=586},
+},
+}

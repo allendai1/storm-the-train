@@ -1,0 +1,6 @@
+return {
+{
+	textureName="./assets/Atlases/logo0.pvr", w=1024, h=512,
+	{name="gf_splash.png", w=700, h=427, x=0, y=0},
+},
+}
