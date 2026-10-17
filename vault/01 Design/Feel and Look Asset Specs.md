@@ -68,6 +68,11 @@ are at **30 fps**.
 
 ### 1.1 Conventions
 
+> **Reference (2026-10-17):** the original's own animations are decoded, with every clip's
+> length and a viewer page that plays them with the original art ([[Original Game - Animations]]).
+> The original's core clips are longer than several lengths below (for example a 0.87 s
+> run cycle and a 0.33 s fire); compare before animating.
+
 | Topic | Spec |
 |---|---|
 | Frame rate | Author at **30 fps**. Lengths are given as frames (f) and seconds |

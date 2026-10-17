@@ -339,6 +339,10 @@ them). Damage is level 1 → 10.
 - **Ranged telegraph:** the shot leaves **0.5–0.6 s into the attack animation**, every
   **4 s ± 30%** (2.8–5.2 s), and never in the first **4 s** after spawning. Shots are aimed,
   not homing.
+- **Animation timings** [orig, decoded 2026-10-17, [[Original Game - Animations]]], at
+  15 fps: idle, run and jump loops 0.87 s; a light's melee swing **0.73 s** (3 variations),
+  McGraw's 0.6 s; the flinch **0.33 s**; the berserker wind-up **0.87 s**; the lobber's
+  throw 1.0 s (release at 0.6 s); a boss taunt 2.1 s.
 - **Melee lands on the first frame** and re-swings when the animation ends (the player's
   0.3 s i-frames limit it).
 - **Flinch:** on a gun hit, not mid-attack, then a cooldown of 0.8–1.2 ×
@@ -380,7 +384,7 @@ Damage to players is ×10.
 | 2 | Six-Shooter | ranged light (LIGHT_FIREBALL) | 35 / 8.7 | Bullet **40**, 18 studs/s, fired 0.6 s into the draw, every 4 s ± 30% |
 | 3 | Dynamite Dan | ninja_4 (coward) | 30 / 10 | **Backs away while reloading**; throws when you're 8–23 studs away (0.6 s into the throw, every 4 s ± 30%); the dynamite **explodes on first contact**, **40** in 2.7 studs, and hurts bandits; explodes when knocked out |
 | 4 | Lasso Lucy | ninja_5 (agile mid) | 160 / 11.3, weight 1.6 | Agile mid: spin-jumps, mid melee **60**. **Her lasso is deferred** until the first agent is built (decided 2026-10-16) |
-| 5 | Big Bart | ninja_6 (berserker) | 160 / 10.7, weight 2 | **Charges after every ~30 damage taken** (27–33): aims, then **34 studs at 26.7 studs/s**, hits once for **60** with a 33 studs/s push. **Can't be staggered, flinched or burned** while charging; no recovery. The jug swig is the wind-up animation |
+| 5 | Big Bart | ninja_6 (berserker) | 160 / 10.7, weight 2 | **Charges after every ~30 damage taken** (27–33): aims, then **34 studs at 26.7 studs/s**, hits once for **60** with a 33 studs/s push. **Can't be staggered, flinched or burned** while charging; no recovery. The jug swig is the wind-up animation (**0.87 s**, the original's `BEHAVIOUR` clip) |
 | 6 | Saloon Door Sam | ninja_7 (shield) | 160 / 12, weight 2 | The doors are a **90 HP physical shield** on his hand; they **drop while he flinches**; he takes **0.2–0.5 s to turn**; when they break, **speed ×1.6** |
 | 7 | "Mad Dog" McGraw | BerserkerBoss (ninja_8) | 600 / 16.7, weight 2.5 | Charges every 4.8–7.2 s (half the time 9.6–14.4) and every 90–110 damage; leaps every 4–6 s beyond 20 studs (lands for **80**); cross-cooldowns; **below 15% the charge comes at least every 2.5 s**. Boss melee **70**, charge **80**. **No stagger** |
 | 8 | Ma Rattler | SpawnBoss (horror_9) | 600 / 16.7 | At **66% and 33%**: bursts into **6–8 Runts**, vanishes until they're all knocked out, then reforms. Leaps every 4–6 s beyond 20 studs |
