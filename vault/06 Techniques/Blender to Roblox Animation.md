@@ -44,6 +44,15 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
    then `screen_capture` from +X (the template faces −Z, so +X is the side view). Delete
    the clone afterwards. Welded cosmetics (tails, gun) don't follow joints.
 
+8. **Upper-body clips and the gun** (`Max_Rifle.blend`, Hold and Shoot): build the rig from
+   the **real** joint positions (read `AnimationConstraint` attachments off the template; the
+   R15 upper arm sits 0.53 studs outboard of the shoulder joint, so FK/IK with a straight
+   "down" offset is wrong) and parent a rifle stand-in to the RightHand bone at the grip
+   convention. Pose the right arm by FK and solve the left arm with a two-bone IK onto the
+   rifle (Blender's IK needs limb-aligned bones, which this rig doesn't have). Export only
+   the upper-body bones; the builder gives the structural parents Weight 0. Mind that the
+   rig faces +Y in Blender, so `look`'s "front" view is its back.
+
 ## Roblox export notes
 - The scripts build **`KeyframeSequence`s**, not published assets. To publish: select the
   KeyframeSequence, open the Animation Editor, load it, Publish to Roblox under the place's
@@ -56,6 +65,9 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
   0–17 for an 18 f loop); Roblox wraps to time 0 after the last keyframe.
 
 ## Example
+- `Max_Rifle.blend`: `Max_Hold` (30 f, two hands, barrel ~12° down with a 3° bob) and
+  `Max_Shoot` (5 f: aim level, 1 f kick with the muzzle up 6° and the shoulders back, 3 f
+  recover). Actions export as separate FBX takes.
 - `Max_Spin`: 18 f at 30 fps, two front flips (one per 9 f, 0.3 s) in a tight somersault tuck
   (hips 145°, knees −150°, torso −45°, head −45°, arms 85° forward with the elbows bent
   −95° to hug the shins; about 2.7 studs across). Verified in a playtest on 2026-10-17 (the rig's joints are

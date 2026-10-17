@@ -7,8 +7,14 @@ side: client
 
 ## Purpose
 Plays the agents' state animations (F3, Max's feel) from the rig's `Animations` folder.
-Today that is only the **spin**: the track plays and the gun is hidden while the player
-attribute `Spinning` (set by [[CombatService]]) is true, and both revert when it goes false, for every player's
+Three clips so far, all for every player's character (teammates see them too):
+- **Hold** (always on, `Idle` priority, loop): the two-handed rifle hold, barrel about 12°
+  down, with a slow breathing bob.
+- **Shoot** (`Action`, loop while the player attribute `Firing` is true): arms up, barrel
+  level, a 5-frame recoil kick. The track speed is `5/30 ÷ FireInterval` of the held
+  weapon, so one kick lands per shot (0.95× for the rifle).
+- **Spin** (`Action2`): the somersault. The track plays and the gun is hidden while the player
+  attribute `Spinning` (set by [[CombatService]]) is true, and both revert when it goes false, for every player's
 character, so teammates' spins show too. Cosmetic only; the spin's hits are server-side.
 
 ## Code
@@ -17,10 +23,11 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 
 ## Expects in the place
 - On each agent template (`ReplicatedStorage.Assets.Agents.<AgentId>`), an **`Animations`
-  folder** holding:
-  - `SpinAnimation` (an `Animation`): the published spin clip's `AnimationId`,
-  - `Spin` (a `KeyframeSequence`): the hand-editable clip itself, built from Blender
-    ([[Blender to Roblox Animation]]).
+  folder** holding, per clip (`Hold`, `Shoot`, `Spin`):
+  - `<Clip>Animation` (an `Animation`): the published clip's `AnimationId`,
+  - `<Clip>` (a `KeyframeSequence`): the hand-editable clip itself, built from Blender
+    ([[Blender to Roblox Animation]]). `Hold` and `Shoot` key only the UpperTorso, Head and
+    arms (their HumanoidRootPart/LowerTorso poses have Weight 0), so the legs keep walking.
 
   Built so far: **DashDaring only** (Max). Brick has no `Animations` folder yet, so he
   keeps the old pose.
@@ -57,7 +64,7 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
   `Animate` script's jump/fall tracks and blends back into them on landing.
 
 ## Depends on
-- [[CombatService]] (the `Spinning` attribute), [[CharacterService]] (the rig and its
+- [[CombatService]] (the `Spinning` and `Firing` attributes; the gun's hand weld), [[CharacterService]] (the rig and its
   `Animate` script).
 
 ## Notes
@@ -66,7 +73,11 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 - **To publish the clip:** select `Animations.Spin`, open the Animation Editor, load it,
   Publish to Roblox under the place's owner, then paste the id into
   `Animations.SpinAnimation.AnimationId`.
-- **The clip ends on the rig's own landing** (2026-10-17): `Spinning` stays true about
+- **Hold starts on the rig's arrival** with a short retry: a `Play` right as the character
+  enters Workspace can silently not start, so `startHold` re-plays until the track reports
+  `IsPlaying` (up to 10 × 0.1 s). Verified: Hold is on from spawn, Shoot layers over it
+  while firing (barrel −12° → +5°) and drops out on release, no console errors.
+- **The spin clip ends on the rig's own landing** (2026-10-17): `Spinning` stays true about
   0.3–0.5 s after touchdown (CombatService's landing raycast runs on the replicated root),
   so the controller also stops the track and unhides the gun on `Humanoid.StateChanged` →
   `Landed`/`Running`. The server's spin state is untouched. Verified in play: the track

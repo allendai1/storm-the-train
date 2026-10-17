@@ -37,8 +37,9 @@ Session 5). Both react to `Health` reaching 0.
   and ragdolls.
 - Runtime-generated content: `Character.Weapon`, a clone of the weapon template
   **welded to the RightHand** (2026-10-17): the Handle sits at
-  `RightHand.RightGripAttachment * Constants.WEAPON_GRIP_OFFSET` (the tool grip
-  convention: the barrel, Handle −Z, along the attachment's +Y). Arm animations carry it.
+  `RightHand.RightGripAttachment * Constants.WEAPON_GRIP_OFFSET` (`CFrame.identity`: the
+  Roblox tool grip convention, so the barrel runs along the hand's −Y and the arm poses
+  aim it; at rest the rifle hangs barrel-down, the Hold clip lifts it). Arm animations carry it.
   Falls back to the root weld at `WEAPON_HOLD_OFFSET` if the rig has no RightHand.
   **Not a Tool** on purpose: Tools bring the backpack hotbar, equip toggling and the
   arm-raise grip, and the game switches weapons through crates with no inventory UI.
@@ -72,6 +73,7 @@ Session 5). Both react to `Health` reaching 0.
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
 | `SetInput` | client → server (unreliable) | `fire: boolean` | `Guard.boolean`. 30/s, burst 10. A bad payload is a strike |
+| `SetInput` (addition) | client → server (unreliable) | `fire` | Also mirrors the validated flag to the player attribute **`Firing`** (2026-10-17) for the clients' shoot pose ([[AgentAnimationController]]) |
 | `SpinLanded` | client → server | none | 4/s, burst 2. **Ends the player's own spin now** if one is running (2026-10-17). The client owns its physics and lands 0.3–0.5 s before the server's raycast sees it; this can only shorten the attack window, never extend it, and `spunInAir` still waits for the raycast, so trusting it is safe. The raycast and the 2.5 s cap stay as the backstop |
 | `RequestSpin` | client → server | none | 4/s, burst 2. **Once per airtime** (`spunInAir`, cleared when the player next stands on the map; a repeat is ignored, no strike). No cooldown. The player must be alive and airborne: no map geometry within hip height + 0.5 below the root |
 | `Effects` | server → all clients (unreliable) | an array of up to `EFFECTS_BATCH_SIZE` (10) records per send, flushed every Heartbeat | — |
