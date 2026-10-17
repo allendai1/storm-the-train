@@ -59,10 +59,11 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
   (`Max_Land`) should probably cut the spin on the client's own `Landed`.
 - The clip is a **tight somersault tuck** (2026-10-17, tightened twice at the user's
   request): hips 145°, knees folded 150°, torso and head curled 45° over the knees, arms
-  hugging the shins. The tux tails and shirt front are welded to the root, so they don't
-  follow the tuck.
-- **The gun is hidden while spinning** (user request, 2026-10-17): `setWeaponHidden` sets
-  `LocalTransparencyModifier` 1 on every part of `Character.Weapon` when `Spinning` goes
-  true and 0 when it goes false. Client-side only; the hand-set `Transparency` is untouched
+  hugging the shins. The shirt front and bow tie are welded to the UpperTorso and follow the
+  tuck; the tux tails hang off the LowerTorso and are hidden instead.
+- **The gun and the tux tails are hidden while spinning** (user request, 2026-10-17):
+  `setWeaponHidden` sets `LocalTransparencyModifier` 1 on every part of the character
+  children in `HIDE_WHILE_SPINNING` (`Weapon`, `TuxTails`) when `Spinning` goes true and 0
+  when it goes false. Add a name to that list to hide another root-welded piece. Client-side only; the hand-set `Transparency` is untouched
   and the server's muzzle keeps working. Verified in play (modifier 1 during the spin, 0
   after).

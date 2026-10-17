@@ -258,8 +258,8 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
 
 ## Unsaved work in Studio
 - **2026-10-17 (side session): save or publish.** `Assets.Agents.DashDaring.Animations`
-  (`Spin`, `SpinAnimation`) and `Controllers.AgentAnimationController` (spin clip and the
-  gun hidden while spinning). Then publish the
+  (`Spin`, `SpinAnimation`) and `Controllers.AgentAnimationController` (spin clip; the gun
+  and tux tails hidden while spinning). Then publish the
   spin clip from the Animation Editor and paste its id into `SpinAnimation`.
 - **2026-10-16 (local session): save or publish.** New or changed:
   - **Background Kit:** `Shared.BackgroundKit`, ParallaxController (replaced),
