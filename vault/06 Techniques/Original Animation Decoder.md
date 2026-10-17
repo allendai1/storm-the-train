@@ -365,6 +365,34 @@ and the Rodeo Kid's spin pose all read like the original.
    adds the actions (`Orig_<Name>_<clip>`) and optionally saves a copy.
 3. Polish, then export with steps 4–5 of [[Blender to Roblox Animation]].
 
+**Studio files, no Blender needed** (2026-10-17): `05 Assets/Animations/Studio/` has one
+`Orig_<character>.rbxm` per character (11 files, 211 clips; the agents plus the eight
+Wild West enemies). Each is a Folder of `KeyframeSequence`s named like the Blender actions
+(`Orig_Graham_RUN`, …), 15 keyframes per second, Linear, every pose Weight 1. Idle, run,
+hover and burning clips have `Loop` on and Movement priority; the rest are Action
+priority. Change either in the Properties panel.
+1. **Import:** in Explorer, right-click `ServerStorage` → **Insert from File** → pick the
+   `.rbxm`. A folder of KeyframeSequences appears.
+2. **Preview:** add an R15 dummy (Avatar → Rig Builder), open the Animation Editor on it,
+   create and save a blank animation once (this makes `ServerStorage.RBX_ANIMSAVES` with
+   an entry for the dummy), move the KeyframeSequences you want into that entry, then load
+   them from the editor's menu. They work on any R15 character, including our agent
+   templates.
+3. **Use in the game:** publish from the Animation Editor and paste the id into an
+   `Animation`'s `AnimationId`, as in [[Blender to Roblox Animation]]'s export notes. In
+   Studio playtests `KeyframeSequenceProvider:RegisterKeyframeSequence` gives a temporary
+   id.
+
+**Checked:** every pose equals the Blender action's `matrix_basis` (the R15 joint
+`Pose.CFrame` by the rig convention) to within 1e-6 at every frame, for Graham, the
+cowgirl, Big Bart and McGraw; all 11 files load in Lune 0.9.3's Roblox reader with the
+right classes, joint nesting, easing and loop flags. **Not yet played in Studio** (this
+was a cloud session). They're block-outs with the limits above.
+
+Made by `to_rbxmx.py` (XML), then converted to binary `.rbxm` with Lune:
+`python to_rbxmx.py agent_clips.json enemy_clips.json out/` then
+`lune run check.luau` (loads and checks each file, writes the `.rbxm`).
+
 ### `to_r15.py`
 ```python
 """Convert an original 2D clip into R15 joint angles (rotation about each joint's local X,
@@ -493,6 +521,99 @@ for n in names:
     if "default_pose" in n: continue
     r=convert(model,n); r["character"]=char; out.append(r)
 json.dump(out,open(sys.argv[3],"w"),separators=(",",":")); print(len(out),"clips ->",sys.argv[3])
+```
+
+### `to_rbxmx.py`
+```python
+"""Write the converted clips (make_clips_json.py output) as Roblox .rbxmx files:
+one Folder per character holding a KeyframeSequence per clip, ready for Insert from File.
+Pose.CFrame = CFrame.new(offset) * CFrame.Angles(angle, 0, 0), the same as the
+Blender action's matrix_basis (see Blender to Roblox Animation, step 1)."""
+import json, math, sys, pathlib
+from xml.sax.saxutils import escape
+
+PARENTS = {"LowerTorso": "HumanoidRootPart", "UpperTorso": "LowerTorso", "Head": "UpperTorso",
+    "RightUpperArm": "UpperTorso", "RightLowerArm": "RightUpperArm", "RightHand": "RightLowerArm",
+    "LeftUpperArm": "UpperTorso", "LeftLowerArm": "LeftUpperArm", "LeftHand": "LeftLowerArm",
+    "RightUpperLeg": "LowerTorso", "RightLowerLeg": "RightUpperLeg", "RightFoot": "RightLowerLeg",
+    "LeftUpperLeg": "LowerTorso", "LeftLowerLeg": "LeftUpperLeg", "LeftFoot": "LeftLowerLeg"}
+LOOP_WORDS = {"IDLE", "RUN", "HOVER"}  # whole words; ON_FIRE (burning) loops too
+PRIORITY = {"Idle": 0, "Movement": 1, "Action": 2}
+ref = 0
+
+def item(cls, props, children=""):
+    global ref; ref += 1
+    return f'<Item class="{cls}" referent="RBX{ref}"><Properties>{props}</Properties>{children}</Item>'
+
+def cframe(angle, off):
+    c, s = math.cos(angle), math.sin(angle)
+    v = dict(X=off[0], Y=off[1], Z=off[2], R00=1, R01=0, R02=0, R10=0, R11=c, R12=-s, R20=0, R21=s, R22=c)
+    return '<CoordinateFrame name="CFrame">' + "".join(f"<{k}>{float(x):.6g}</{k}>" for k, x in v.items()) + "</CoordinateFrame>"
+
+def pose(name, fr):
+    kids = "".join(pose(b, fr) for b, p in PARENTS.items() if p == name)
+    off = fr["offset"] if name == "LowerTorso" else (0, 0, 0)
+    props = (f'<string name="Name">{name}</string>{cframe(fr["angles"].get(name, 0.0), off)}'
+             '<token name="EasingStyle">0</token><token name="EasingDirection">0</token><float name="Weight">1</float>')
+    return item("Pose", props, kids)
+
+def sequence(c):
+    name = f"Orig_{c['character']}_{c['clip']}"
+    full = "_" + (c["character"] + "_" + c["clip"]).upper()
+    loop = bool(LOOP_WORDS & set(full.split("_"))) or "_ON_FIRE" in full
+    pr = PRIORITY["Movement" if loop else "Action"]
+    kfs = "".join(item("Keyframe", f'<string name="Name">Keyframe</string><float name="Time">{i / c["fps"]:.6g}</float>',
+                       pose("HumanoidRootPart", fr)) for i, fr in enumerate(c["frames"]))
+    props = (f'<string name="Name">{escape(name)}</string><bool name="Loop">{str(loop).lower()}</bool>'
+             f'<token name="Priority">{pr}</token>')
+    return item("KeyframeSequence", props, kfs)
+
+def write(clips, out_dir):
+    out = pathlib.Path(out_dir); out.mkdir(parents=True, exist_ok=True)
+    groups = {}
+    for c in clips: groups.setdefault(c["character"].split("_")[0], []).append(c)
+    for who, cs in groups.items():
+        body = item("Folder", f'<string name="Name">Orig_{who}</string>', "".join(sequence(c) for c in cs))
+        xml = ('<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+               'xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">' + body + "</roblox>")
+        (out / f"Orig_{who}.rbxmx").write_text(xml)
+        print(f"Orig_{who}.rbxmx: {len(cs)} clips")
+
+if __name__ == "__main__":
+    write([c for f in sys.argv[1:-1] for c in json.load(open(f))], sys.argv[-1])
+```
+
+### `check.luau` (Lune 0.9.3)
+```lua
+local fs = require("@lune/fs")
+local roblox = require("@lune/roblox")
+local Enum = roblox.Enum
+for _, f in fs.readDir("rbxmx") do
+	local model = roblox.deserializeModel(fs.readFile("rbxmx/" .. f))
+	local folder = model[1]
+	local seqs, poses, loops, maxT = 0, 0, 0, 0
+	for _, ks in folder:GetChildren() do
+		assert(ks.ClassName == "KeyframeSequence")
+		seqs += 1
+		if ks.Loop then loops += 1 end
+		assert(ks.Priority == Enum.AnimationPriority.Movement or ks.Priority == Enum.AnimationPriority.Action)
+		for _, kf in ks:GetChildren() do
+			assert(kf.ClassName == "Keyframe")
+			maxT = math.max(maxT, kf.Time)
+			local hrp = kf:FindFirstChild("HumanoidRootPart")
+			assert(hrp and hrp:FindFirstChild("LowerTorso"), "root poses")
+			for _, p in kf:GetDescendants() do
+				assert(p.ClassName == "Pose" and p.EasingStyle == Enum.PoseEasingStyle.Linear and p.Weight == 1)
+				poses += 1
+			end
+		end
+	end
+	local rh = folder:GetChildren()[1]:GetChildren()[1]:FindFirstChild("RightHand", true)
+	assert(rh and rh.Parent.Name == "RightLowerArm" and rh.Parent.Parent.Name == "RightUpperArm")
+	local out = folder.Name .. ".rbxm"
+	fs.writeFile("rbxm/" .. out, roblox.serializeModel(model))
+	print(`{f}: {folder.Name} ok, {seqs} sequences ({loops} looping), {poses} poses, longest {string.format("%.2f", maxT)} s -> {out}`)
+end
 ```
 
 ### `import_original_clips.py` (runs inside Blender)

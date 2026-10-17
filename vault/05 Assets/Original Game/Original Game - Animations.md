@@ -97,7 +97,8 @@ Per-weapon versions exist for most of these (`FIRE_ROCKETLAUNCHER`, `RUN_MINIGUN
   poses and timing in Blender ([[Blender to Roblox Animation]]).
 - **Converted to Blender** (2026-10-17): every agent and Wild West-mapped enemy clip is
   an action on our R15 rig in `05 Assets/Animations/Original_Clips_Agents.blend` and
-  `Original_Clips_Enemies.blend`, as block-outs to polish ([[Original Animation Decoder]]).
+  `Original_Clips_Enemies.blend`, as block-outs to polish, and as Studio files ready to
+  import in `05 Assets/Animations/Studio/` ([[Original Animation Decoder]]).
 - **The art itself is the original's:** use it as reference, not in our game.
 
 Related: [[Original Game]] · [[Original Animation Decoder]] · [[Feel and Look Asset Specs]] · [[Original Mechanics Match]]
