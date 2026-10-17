@@ -6,6 +6,7 @@ tags: [techniques, moc]
 Reusable how-tos, especially Blender modeling techniques that worked for this project.
 Create new notes from [[Templates/Technique|Technique template]].
 
+- [[Blender to Roblox Animation]] — R15 armature with Roblox-aligned bone axes, bake poses to a KeyframeSequence; used for Max_Spin
 - [[Studio Setup Checklist]] — place, game and Studio settings to set before Session 1
 - [[M0 Bootstrap Code]] — setup script and bootstrap, ModeService, Guard, Types and Constants sources to paste in Session 1
 - [[Background Kit Code]] — draft BackgroundKit module, ParallaxController with variant tiles, a safety-net service and the Background Kit Studio plugin (not run yet)

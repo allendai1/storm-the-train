@@ -39,6 +39,7 @@ One note per code system in Studio (path, API, remotes). Create from [[Templates
 - [[CombatService]] — server fire loop, hitscan + rockets, spin, damage, Effects (implemented)
 - [[PickupService]] — personal weapon crates, plus PickupController (implemented)
 - [[EffectsController]] — tracers, rockets, explosions, sparks, KO pops (implemented)
+- [[AgentAnimationController]] — plays the agents' clips from the rig's `Animations` folder; the spin on `Spinning` (implemented)
 - [[EnemyService]] — enemy spawning, AI archetypes, enemy projectiles, ragdoll knockouts (implemented)
 - [[SpawnService]] — plays the spawn timeline: budget waves, solo mids, blueprint thief (implemented)
 - [[RunStateService]] — the run loop: lobby/ready, start, cleared/wiped, results, PLAY AGAIN (implemented)
@@ -67,6 +68,7 @@ Architecture decision records. Create from [[Templates/Decision|Decision templat
 Dated session notes live in `04 Devlog/` (Obsidian daily notes are configured to put them there).
 - [[2026-10-13]] — first design session: GDD, design notes, art direction, ADRs, M1/M2 specs
 - [[2026-10-14]] — M2 Sessions 8–11 built: score/coins, multi-train runs and checkpoints, Brick and swapping, Mayhem and gadgets
+- [[2026-10-17]] — F3's spin clip built in Blender and wired in Studio (AgentAnimationController); the Blender→Roblox animation technique
 - [[2026-10-16]] — Design open questions decided: vote and pad rules, crates, tutorial, barks, the Invisible Bow, run-end coins, the login streak
 - New entries use the [[Templates/Devlog|Devlog template]].
 

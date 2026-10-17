@@ -1,6 +1,6 @@
 ---
 tags: [status]
-updated: 2026-10-16
+updated: 2026-10-17
 ---
 # Project Status
 
@@ -88,6 +88,13 @@ checkpoint and the leap**.
   original's double jump, the spin once per airtime with no cooldown and half-damage
   windows, knockback ÷ `Weight`. Verified in play: jump height, spin, mid-air swap both
   ways, no script errors.
+
+**Done in Studio (side session, 2026-10-17):** **F3's spin clip.** `Max_Spin` was
+authored in Blender ([[Blender to Roblox Animation]]) and lives on the DashDaring template
+as `Animations.Spin` (KeyframeSequence) plus `Animations.SpinAnimation`; the new
+[[AgentAnimationController]] plays it while `Spinning` is true. Verified in play. **It
+isn't published yet:** Studio plays the KeyframeSequence directly, the live game needs the
+id pasted into `SpinAnimation` (steps in the system note).
 
 **Next in Studio:** save the place, then §12 items 5–9 (aim and weapon stats, score,
 Mayhem per damage, enemy roster changes, the spawn timeline), then F3 (Max's feel). Finish verifying Session 11 (the
@@ -178,6 +185,10 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   timeout to PLAY AGAIN?
 
 ## Known issues / open problems
+- **The spin keeps going about 0.4–0.5 s after landing:** `Spinning` goes false that long
+  after the Humanoid's `Landed` state (CombatService's raycast landing check), so the
+  spin clip loops on the ground for a few frames. Fix with the F3 landing clip, or cut the
+  track on the client's own `Landed` ([[AgentAnimationController]]).
 - **F2 [[Combat Polish]] checks still open** (verified so far: i-frames, rifle flinch,
   muzzle flashes, spin start/landing/refusals, off-screen spawns, camera lead, the dynamite
   fuse blink, Bart's 26.7):
@@ -246,6 +257,9 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   of the camera. Tune this in Session 6.
 
 ## Unsaved work in Studio
+- **2026-10-17 (side session): save or publish.** `Assets.Agents.DashDaring.Animations`
+  (`Spin`, `SpinAnimation`) and `Controllers.AgentAnimationController`. Then publish the
+  spin clip from the Animation Editor and paste its id into `SpinAnimation`.
 - **2026-10-16 (local session): save or publish.** New or changed:
   - **Background Kit:** `Shared.BackgroundKit`, ParallaxController (replaced),
     `Services.BackgroundStudioService`, `ServerStorage.Tools.BackgroundKitPlugin` (also
