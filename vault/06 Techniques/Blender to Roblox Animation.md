@@ -31,8 +31,15 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
 5. Also export an FBX (`object_types ARMATURE+MESH`, `bake_anim`, `-Z forward / Y up`) and
    save the `.blend` next to it, as the editable source.
 
-6. **Preview a pose in Edit mode** without the Animation Editor: clone the rig into
-   `Workspace`, anchor it, and walk its `AnimationConstraint`s setting
+6. **Pivot a whole-body spin on the body, not the hip.** The Root joint sits at the hip, so
+   a rotation-only Root pose orbits the body around the hip. At export, give the Root pose
+   a translation: `T = CFrame.new(target) * R * CFrame.new(-c)`, where `c` is the posed
+   body's volume centroid in the hip frame and `target` is where that centroid should sit
+   (the HumanoidRootPart centre is `(0, 1, 0)` in the hip frame). Measure `c` on a posed
+   copy (step 7) with the same part list you'll judge it by; for `Max_Spin` it is
+   `(0, 0.72, -0.81)`. Verified: the centroid then stays within 0.06 studs over the spin.
+7. **Preview or measure a pose in Edit mode** without the Animation Editor: clone the rig
+   into `Workspace`, anchor it, and walk its `AnimationConstraint`s setting
    `child.CFrame = parent.CFrame * Attachment0.CFrame * Pose.CFrame * Attachment1.CFrame:Inverse()`,
    then `screen_capture` from +X (the template faces −Z, so +X is the side view). Delete
    the clone afterwards. Welded cosmetics (tails, gun) don't follow joints.

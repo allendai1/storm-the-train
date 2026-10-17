@@ -56,10 +56,14 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 - **To publish the clip:** select `Animations.Spin`, open the Animation Editor, load it,
   Publish to Roblox under the place's owner, then paste the id into
   `Animations.SpinAnimation.AnimationId`.
-- **Seen in the test:** `Spinning` stays true about 0.4–0.5 s after the Humanoid's `Landed`
-  state, so the spin loops on the ground for a few frames. That's CombatService's landing
-  check (a raycast from the replicated root), not this controller; the F3 landing clip
-  (`Max_Land`) should probably cut the spin on the client's own `Landed`.
+- **The clip ends on the rig's own landing** (2026-10-17): `Spinning` stays true about
+  0.3–0.5 s after touchdown (CombatService's landing raycast runs on the replicated root),
+  so the controller also stops the track and unhides the gun on `Humanoid.StateChanged` →
+  `Landed`/`Running`. The server's spin state is untouched. Verified in play: the track
+  stops at `Running` while `Spinning` is still true.
+- **The spin pivots on the body's centroid**, parked on the HumanoidRootPart centre: the
+  Root pose carries a translation per frame ([[Blender to Roblox Animation]] step 6).
+  Verified: the centroid stays within 0.06 studs through the spin.
 - The clip is a **tight somersault tuck** (2026-10-17, tightened twice at the user's
   request): hips 145°, knees folded 150°, torso and head curled 45° over the knees, arms
   hugging the shins. The shirt front and bow tie are welded to the UpperTorso and follow the

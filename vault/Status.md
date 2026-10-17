@@ -185,10 +185,10 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   timeout to PLAY AGAIN?
 
 ## Known issues / open problems
-- **The spin keeps going about 0.4–0.5 s after landing:** `Spinning` goes false that long
-  after the Humanoid's `Landed` state (CombatService's raycast landing check), so the
-  spin clip loops on the ground for a few frames. Fix with the F3 landing clip, or cut the
-  track on the client's own `Landed` ([[AgentAnimationController]]).
+- **`Spinning` clears about 0.3–0.5 s after landing** (CombatService's raycast landing
+  check on the replicated root). The clip no longer shows it ([[AgentAnimationController]]
+  stops on the rig's own landing), but the server's spin hits and half-damage window run
+  that long on the ground too.
 - **F2 [[Combat Polish]] checks still open** (verified so far: i-frames, rifle flinch,
   muzzle flashes, spin start/landing/refusals, off-screen spawns, camera lead, the dynamite
   fuse blink, Bart's 26.7):
