@@ -24,9 +24,17 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 
   Built so far: **DashDaring only** (Max). Brick has no `Animations` folder yet, so he
   keeps the old pose.
+- **`UpperTorso.SpinWeaponAttachment`** on the agent template: where the gun's `Handle`
+  sits during the spin (hand-editable; Max's is `CFrame.new(0, -0.6, -0.7) *
+  CFrame.Angles(100°, 0, 0)`, the barrel up along the curled spine).
 - The rig's joints are **`AnimationConstraint`s** (not Motor6Ds), which the `Animator`
   drives the same way. The `Animator` lives under the Humanoid.
-- Runtime-generated content: _none_. While `SpinAnimation.AnimationId` is empty, in Studio
+- Runtime-generated content: **`Character.SpinWeapon`**, a client-only clone of
+  `Character.Weapon` shown while spinning (the real gun is welded to the root, which
+  physics owns, so the clip can't turn it). The clone drops the root `WeldConstraint`, is
+  massless and non-colliding, and is `Weld`ed by its `Handle` to the UpperTorso at
+  `SpinWeaponAttachment`; destroyed when the spin ends. It's a clone of a hand-built
+  template, so nothing is styled in code. While `SpinAnimation.AnimationId` is empty, in Studio
   only, the controller registers the `Spin` KeyframeSequence with
   `KeyframeSequenceProvider` and plays it through the temporary id. **The live game needs
   the published id** (see Notes).
@@ -68,7 +76,10 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
   request): hips 145°, knees folded 150°, torso and head curled 45° over the knees, arms
   hugging the shins. The shirt front and bow tie are welded to the UpperTorso and follow the
   tuck; the tux tails hang off the LowerTorso and are hidden instead.
-- **The gun and the tux tails are hidden while spinning** (user request, 2026-10-17):
+- **The gun spins with him** (user request, 2026-10-17): the real gun is hidden and the
+  torso-welded `SpinWeapon` copy shows instead (above). Verified in play: the copy appears
+  with the track and is destroyed on `Landed`.
+- **The real gun and the tux tails are hidden while spinning** (user request, 2026-10-17):
   `setWeaponHidden` sets `LocalTransparencyModifier` 1 on every part of the character
   children in `HIDE_WHILE_SPINNING` (`Weapon`, `TuxTails`) when `Spinning` goes true and 0
   when it goes false. Add a name to that list to hide another root-welded piece. Client-side only; the hand-set `Transparency` is untouched
