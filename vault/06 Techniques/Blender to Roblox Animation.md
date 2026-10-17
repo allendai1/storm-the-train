@@ -31,6 +31,12 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
 5. Also export an FBX (`object_types ARMATURE+MESH`, `bake_anim`, `-Z forward / Y up`) and
    save the `.blend` next to it, as the editable source.
 
+6. **Preview a pose in Edit mode** without the Animation Editor: clone the rig into
+   `Workspace`, anchor it, and walk its `AnimationConstraint`s setting
+   `child.CFrame = parent.CFrame * Attachment0.CFrame * Pose.CFrame * Attachment1.CFrame:Inverse()`,
+   then `screen_capture` from +X (the template faces −Z, so +X is the side view). Delete
+   the clone afterwards. Welded cosmetics (tails, gun) don't follow joints.
+
 ## Roblox export notes
 - The scripts build **`KeyframeSequence`s**, not published assets. To publish: select the
   KeyframeSequence, open the Animation Editor, load it, Publish to Roblox under the place's
@@ -43,8 +49,9 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
   0–17 for an 18 f loop); Roblox wraps to time 0 after the last keyframe.
 
 ## Example
-- `Max_Spin`: 18 f at 30 fps, two front flips (one per 9 f, 0.3 s), tucked legs, arms
-  fore and aft. Verified in a playtest on 2026-10-17 (the rig's joints are
+- `Max_Spin`: 18 f at 30 fps, two front flips (one per 9 f, 0.3 s) in a somersault tuck
+  (hips 130°, knees −140°, torso −35°, head −40°, arms 70° forward with the elbows bent
+  −70° to hug the shins). Verified in a playtest on 2026-10-17 (the rig's joints are
   `AnimationConstraint`s; the Animator drives them like Motor6Ds). Played by
   [[AgentAnimationController]].
 

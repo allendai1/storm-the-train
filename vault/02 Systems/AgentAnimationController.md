@@ -57,5 +57,7 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
   state, so the spin loops on the ground for a few frames. That's CombatService's landing
   check (a raycast from the replicated root), not this controller; the F3 landing clip
   (`Max_Land`) should probably cut the spin on the client's own `Landed`.
-- The clip is tucked legs with the arms fore and aft (a pinwheel in the X–Y plane), not the
-  spec's "gun tucked in": the weapon is welded to the root and doesn't follow the arms.
+- The clip is a **somersault tuck** (2026-10-17, second pass at the user's request): hips
+  130°, knees folded 140°, torso and head curled over the knees, arms hugging the shins.
+  The gun, tux tails and shirt front are welded to the root, so they don't follow the
+  tuck; that's the spec's Q4 (weapon weld), not the clip.
