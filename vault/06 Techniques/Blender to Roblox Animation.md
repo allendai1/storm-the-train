@@ -49,9 +49,9 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
   0–17 for an 18 f loop); Roblox wraps to time 0 after the last keyframe.
 
 ## Example
-- `Max_Spin`: 18 f at 30 fps, two front flips (one per 9 f, 0.3 s) in a somersault tuck
-  (hips 130°, knees −140°, torso −35°, head −40°, arms 70° forward with the elbows bent
-  −70° to hug the shins). Verified in a playtest on 2026-10-17 (the rig's joints are
+- `Max_Spin`: 18 f at 30 fps, two front flips (one per 9 f, 0.3 s) in a tight somersault tuck
+  (hips 145°, knees −150°, torso −45°, head −45°, arms 85° forward with the elbows bent
+  −95° to hug the shins; about 2.7 studs across). Verified in a playtest on 2026-10-17 (the rig's joints are
   `AnimationConstraint`s; the Animator drives them like Motor6Ds). Played by
   [[AgentAnimationController]].
 

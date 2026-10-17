@@ -7,8 +7,8 @@ side: client
 
 ## Purpose
 Plays the agents' state animations (F3, Max's feel) from the rig's `Animations` folder.
-Today that is only the **spin**: the track plays while the player attribute `Spinning`
-(set by [[CombatService]]) is true and stops when it goes false, for every player's
+Today that is only the **spin**: the track plays and the gun is hidden while the player
+attribute `Spinning` (set by [[CombatService]]) is true, and both revert when it goes false, for every player's
 character, so teammates' spins show too. Cosmetic only; the spin's hits are server-side.
 
 ## Code
@@ -57,7 +57,12 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
   state, so the spin loops on the ground for a few frames. That's CombatService's landing
   check (a raycast from the replicated root), not this controller; the F3 landing clip
   (`Max_Land`) should probably cut the spin on the client's own `Landed`.
-- The clip is a **somersault tuck** (2026-10-17, second pass at the user's request): hips
-  130°, knees folded 140°, torso and head curled over the knees, arms hugging the shins.
-  The gun, tux tails and shirt front are welded to the root, so they don't follow the
-  tuck; that's the spec's Q4 (weapon weld), not the clip.
+- The clip is a **tight somersault tuck** (2026-10-17, tightened twice at the user's
+  request): hips 145°, knees folded 150°, torso and head curled 45° over the knees, arms
+  hugging the shins. The tux tails and shirt front are welded to the root, so they don't
+  follow the tuck.
+- **The gun is hidden while spinning** (user request, 2026-10-17): `setWeaponHidden` sets
+  `LocalTransparencyModifier` 1 on every part of `Character.Weapon` when `Spinning` goes
+  true and 0 when it goes false. Client-side only; the hand-set `Transparency` is untouched
+  and the server's muzzle keeps working. Verified in play (modifier 1 during the spin, 0
+  after).
