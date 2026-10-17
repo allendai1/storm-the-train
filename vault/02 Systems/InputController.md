@@ -28,6 +28,7 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
 |------|-----------|---------|-------------------|
 | `SetInput` | client → server (unreliable) | `fire` | See [[CombatService]] |
 | `RequestSpin` | client → server | none | See [[CombatService]] |
+| `SpinLanded` | client → server | none | Sent once when the controller's own landing check passes after a spin, so the server ends the spin without waiting for its raycast. See [[CombatService]] |
 
 ## Data / state
 - Bound to RenderStep `SideOnInput` at `RenderPriority.Input`.
@@ -50,7 +51,7 @@ modes are `Scriptable`, so nothing moves the character unless this controller do
   - on a trigger change,
   - and resent every `INPUT_RESEND_INTERVAL` (0.5 s), because the remote is unreliable
     and a lost release must recover.
-- `RequestSpin` is sent with each spin.
+- `RequestSpin` is sent with each spin, and `SpinLanded` on the landing after it.
 - It clears held keys and the trigger when the window loses focus.
 
 ## Depends on

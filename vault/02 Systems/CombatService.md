@@ -67,6 +67,7 @@ Session 5). Both react to `Health` reaching 0.
 | Name | Direction | Payload | Server validation |
 |------|-----------|---------|-------------------|
 | `SetInput` | client → server (unreliable) | `fire: boolean` | `Guard.boolean`. 30/s, burst 10. A bad payload is a strike |
+| `SpinLanded` | client → server | none | 4/s, burst 2. **Ends the player's own spin now** if one is running (2026-10-17). The client owns its physics and lands 0.3–0.5 s before the server's raycast sees it; this can only shorten the attack window, never extend it, and `spunInAir` still waits for the raycast, so trusting it is safe. The raycast and the 2.5 s cap stay as the backstop |
 | `RequestSpin` | client → server | none | 4/s, burst 2. **Once per airtime** (`spunInAir`, cleared when the player next stands on the map; a repeat is ignored, no strike). No cooldown. The player must be alive and airborne: no map geometry within hip height + 0.5 below the root |
 | `Effects` | server → all clients (unreliable) | an array of up to `EFFECTS_BATCH_SIZE` (10) records per send, flushed every Heartbeat | — |
 
@@ -150,7 +151,9 @@ Built from [[Combat Polish Code]] §7 and adapted to the live script. It uses
 - **The spin lasts until landing:**
   - a `RequestSpin` while already spinning is ignored (no strike),
   - every Heartbeat, `stepSpins` hits each enemy within `SpinRadius` once (`spinHits`),
-  - the spin ends on landing, on death, or after `SPIN_MAX_TIME` (2.5 s, a hover cap),
+  - the spin ends on landing (the server raycast, or the client's `SpinLanded` notice, which
+    arrives about 0.07 s after touchdown instead of 0.3–0.5 s), on death, or after
+    `SPIN_MAX_TIME` (2.5 s, a hover cap),
   - **once per airtime, no cooldown** (2026-10-16, [[Original Mechanics Match]] §3.3):
     `spunInAir` blocks a second spin until the player stands on the map again,
   - **half damage** for `SPIN_GUARD_WINDOW` (0.2 s) after a spin starts and after it ends

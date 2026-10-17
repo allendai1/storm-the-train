@@ -185,10 +185,6 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   timeout to PLAY AGAIN?
 
 ## Known issues / open problems
-- **`Spinning` clears about 0.3–0.5 s after landing** (CombatService's raycast landing
-  check on the replicated root). The clip no longer shows it ([[AgentAnimationController]]
-  stops on the rig's own landing), but the server's spin hits and half-damage window run
-  that long on the ground too.
 - **F2 [[Combat Polish]] checks still open** (verified so far: i-frames, rifle flinch,
   muzzle flashes, spin start/landing/refusals, off-screen spawns, camera lead, the dynamite
   fuse blink, Bart's 26.7):
@@ -260,7 +256,8 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
 - **2026-10-17 (side session): save or publish.** `Assets.Agents.DashDaring.Animations`
   (`Spin`, `SpinAnimation`), `DashDaring.UpperTorso.SpinWeaponAttachment` and
   `Controllers.AgentAnimationController` (spin clip; the gun rides the torso during the
-  spin, tux tails hidden). Then publish the
+  spin, tux tails hidden), `Remotes.SpinLanded` with its CombatService handler and the
+  InputController send. Then publish the
   spin clip from the Animation Editor and paste its id into `SpinAnimation`.
 - **2026-10-16 (local session): save or publish.** New or changed:
   - **Background Kit:** `Shared.BackgroundKit`, ParallaxController (replaced),
