@@ -65,9 +65,12 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
   0–17 for an 18 f loop); Roblox wraps to time 0 after the last keyframe.
 
 ## Example
-- `Max_Rifle.blend`: `Max_Hold` (30 f, two hands, barrel ~12° down with a 3° bob) and
-  `Max_Shoot` (5 f: aim level, 1 f kick with the muzzle up 6° and the shoulders back, 3 f
-  recover). Actions export as separate FBX takes.
+- `Max_Rifle.blend`: `Max_Hold` (30 f, two hands, right shoulder 62° forward / elbow 21°
+  / 25° in, barrel ~10° down with a slow bob) and `Max_Shoot` (5 f: shoulder 92° / elbow
+  0° / 10° in, a shoulder-level straight-arm aim; 1 f kick with the muzzle up ~8° and the
+  shoulders back, 3 f recover). Lesson: adduction (pulling the raised arm toward the body
+  centre) costs height, about 0.4 studs at 45°, because the R15 upper arm sits outboard of
+  the shoulder joint; raise the arm first, then pull in only as far as the height allows. Actions export as separate FBX takes.
 - `Max_Spin`: 18 f at 30 fps, two front flips (one per 9 f, 0.3 s) in a tight somersault tuck
   (hips 145°, knees −150°, torso −45°, head −45°, arms 85° forward with the elbows bent
   −95° to hug the shins; about 2.7 studs across). Verified in a playtest on 2026-10-17 (the rig's joints are

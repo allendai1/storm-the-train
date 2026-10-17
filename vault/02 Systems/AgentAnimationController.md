@@ -8,10 +8,11 @@ side: client
 ## Purpose
 Plays the agents' state animations (F3, Max's feel) from the rig's `Animations` folder.
 Three clips so far, all for every player's character (teammates see them too):
-- **Hold** (always on, `Idle` priority, loop): the two-handed rifle hold, barrel about 12°
-  down, with a slow breathing bob.
-- **Shoot** (`Action`, loop while the player attribute `Firing` is true): arms up, barrel
-  level, a 5-frame recoil kick. The track speed is `5/30 ÷ FireInterval` of the held
+- **Hold** (always on, `Idle` priority, loop): the two-handed ready stance, gun at chest
+  height (right hand at HRP +0.0), barrel about 10° down, with a slow breathing bob.
+- **Shoot** (`Action`, loop while the player attribute `Firing` is true): the gun raised to
+  shoulder level (right hand at +0.67 to +0.80, the shoulder joint is +0.80), arm nearly
+  straight, barrel level, a 5-frame recoil that kicks the muzzle to about +8°. The track speed is `5/30 ÷ FireInterval` of the held
   weapon, so one kick lands per shot (0.95× for the rifle).
 - **Spin** (`Action2`): the somersault. The track plays and the gun is hidden while the player
   attribute `Spinning` (set by [[CombatService]]) is true, and both revert when it goes false, for every player's
@@ -76,7 +77,9 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 - **Hold starts on the rig's arrival** with a short retry: a `Play` right as the character
   enters Workspace can silently not start, so `startHold` re-plays until the track reports
   `IsPlaying` (up to 10 × 0.1 s). Verified: Hold is on from spawn, Shoot layers over it
-  while firing (barrel −12° → +5°) and drops out on release, no console errors.
+  while firing (barrel −10° → level, hand chest → shoulder) and drops out on release, no
+  console errors. Tuned up twice on 2026-10-17 at the user's request ("ready to shoot",
+  "shoulder level").
 - **The spin clip ends on the rig's own landing** (2026-10-17): `Spinning` stays true about
   0.3–0.5 s after touchdown (CombatService's landing raycast runs on the replicated root),
   so the controller also stops the track and unhides the gun on `Humanoid.StateChanged` →
