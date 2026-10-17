@@ -40,6 +40,9 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 ## Data / state
 - Per player: the current `AnimationTrack?`, dropped on `CharacterRemoving` and re-checked
   on `CharacterAdded` (a mid-air swap keeps `Spinning` true, so the new rig spins too).
+- The track plays at **`SPIN_SPEED` 2.5×** (user request, 2026-10-17: the spin should read
+  as a blur, not a body; the clip's one flip per 0.3 s becomes one per 0.12 s, about 8
+  flips a second). Tune that constant, not the clip.
 - The track plays at `Action2` with a 0.05 s fade in and out, so it wins over the
   `Animate` script's jump/fall tracks and blends back into them on landing.
 
