@@ -95,9 +95,9 @@ Per-weapon versions exist for most of these (`FIRE_ROCKETLAUNCHER`, `RUN_MINIGUN
 ## Using it
 - **As reference:** open the viewer, step frame by frame with onion skin, and match key
   poses and timing in Blender ([[Blender to Roblox Animation]]).
-- **Retargeting** (possible later): the clips only rotate bones in the screen plane, which
-  is exactly what our side-on camera shows. A script could turn a clip's per-frame bone
-  rotations into a Blender action on the R15 rig, as a starting block-out to polish.
+- **Converted to Blender** (2026-10-17): every agent and Wild West-mapped enemy clip is
+  an action on our R15 rig in `05 Assets/Animations/Original_Clips_Agents.blend` and
+  `Original_Clips_Enemies.blend`, as block-outs to polish ([[Original Animation Decoder]]).
 - **The art itself is the original's:** use it as reference, not in our game.
 
 Related: [[Original Game]] · [[Original Animation Decoder]] · [[Feel and Look Asset Specs]] · [[Original Mechanics Match]]

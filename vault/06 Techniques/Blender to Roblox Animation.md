@@ -53,6 +53,12 @@ First used for `Max_Spin` ([[2026-10-17]]). Source files live in `05 Assets/Anim
    the upper-body bones; the builder gives the structural parents Weight 0. Mind that the
    rig faces +Y in Blender, so `look`'s "front" view is its back.
 
+9. **Starting from the original's animation** (2026-10-17): `Original_Clips_Agents.blend`
+   and `Original_Clips_Enemies.blend` hold the original's clips converted onto this rig as
+   actions (`Orig_*`). Append the one you want into your working file (File → Append →
+   Action), polish it, and export as in steps 4–5. How they're made and their limits:
+   [[Original Animation Decoder]].
+
 ## Roblox export notes
 - The scripts build **`KeyframeSequence`s**, not published assets. To publish: select the
   KeyframeSequence, open the Animation Editor, load it, Publish to Roblox under the place's

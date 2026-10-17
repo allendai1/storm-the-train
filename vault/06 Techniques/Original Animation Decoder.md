@@ -310,6 +310,242 @@ for d in out:
     if not d["parts"]: print("NO PARTS",d["id"])
 ```
 
+## Converting clips to Blender (R15)
+Turns an original clip into an **action on our R15 rig** (the rig in `Max_Spin.blend` and
+`Max_Rifle.blend`: a bone per R15 part, pointing +Z, roll 0, see [[Blender to Roblox Animation]]),
+as a **block-out to polish**, not a finished animation.
+
+**Ready-made files** in `05 Assets/Animations/` (built 2026-10-17 on copies of the local
+session's rigs; only the imported actions are in them):
+- `Original_Clips_Agents.blend`: 101 actions, `Orig_Graham_*` (for Max), `Orig_Mason_*`
+  (for Brick) and `Orig_Cowgirl_*`, on the rifle rig.
+- `Original_Clips_Enemies.blend`: 110 actions named `Orig_<our enemy>_<STATE>_<clip>`
+  (BandanaBandit, RodeoKid, DynamiteDan, LassoLucy, BigBart, SaloonDoorSam, McGraw,
+  MaRattler), every clip their original's script uses.
+
+**How the mapping works** (`to_r15.py`):
+- The original only rotates bones in the screen plane, which for our side-on character is
+  a rotation about each R15 joint's **local X** (+X swings a hanging limb forward, the
+  same sense as the original's anticlockwise rotation).
+- It measures **where each original limb points** in every frame (shoulder → elbow,
+  elbow → hand, body pivot → head), not the raw bone angles, so sprite drawing offsets
+  don't skew the result. The R15 angle is the one that points our limb the same way:
+  body → `LowerTorso` (the Root joint), head → `Head` (Neck), arms → `UpperArm` /
+  `LowerArm` / `Hand`. `UpperTorso` stays 0 (the original has one body piece).
+- **Legs use two-bone IK** onto the original's foot (the bottom of the leg sprite), with
+  the knee bending forward and the foot kept level, because the original's legs are
+  single rigid sprites and ours have knees.
+- **Head and hands** are measured against the original's rest pose.
+- The body's bob is a `LowerTorso` offset, scaled by hip-to-shoulder height. **Airborne
+  clips** (spin, jump, drop, hover, the leap jump) keep only the bob within the clip; the
+  height comes from physics.
+- **Timing is kept:** the original's 15 fps frames land on every other frame at 30 fps,
+  linear in between. Loops end on the last original frame (Roblox wraps to the start).
+- **Enemies** have no forearms in the original, so their elbows stay at 0.
+
+**Checked** on 2026-10-17 by evaluating the actions in Blender 5.2 and drawing Max's rig
+side-on next to the original frames: idle, run, fire, jump, spin, damage (Graham), the
+cowgirl's revolver fire, Big Bart's berserker wind-up, the Bandana Bandit's sai attack
+and the Rodeo Kid's spin pose all read like the original.
+
+**Limits to fix by hand when polishing:**
+- No depth: nothing twists or reaches across the body; the left hand doesn't grip a rifle
+  (use step 8 of [[Blender to Roblox Animation]] for the two-handed hold).
+- The original is chibi (big head, short legs), so a pose reads differently on R15
+  proportions; exaggerate where needed.
+- The original's `SPIN` is a held tuck: the code spins the character. Our `Max_Spin`
+  already exists.
+- The original's clips are longer than several of ours in [[Feel and Look Asset Specs]];
+  retime in Blender or with the track's playback speed.
+
+**Regenerate or convert other characters:**
+1. `python make_clips_json.py <Name> <model.cm> clips.json [clip names…]` (all clips if
+   none are given).
+2. `blender <rig>.blend --python import_original_clips.py -- clips.json [out.blend]`
+   adds the actions (`Orig_<Name>_<clip>`) and optionally saves a copy.
+3. Polish, then export with steps 4–5 of [[Blender to Roblox Animation]].
+
+### `to_r15.py`
+```python
+"""Convert an original 2D clip into R15 joint angles (rotation about each joint's local X,
+Roblox's screen-plane axis for a side-on character) plus a LowerTorso offset in studs."""
+import sys,os,math,json
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+from cm import parse
+M="vault/05 Assets/Original Game/assets/Models/"
+# R15 joint heights (studs) of our rig, from Max_Rifle.blend: hip, shoulder (for scale).
+R15_HIP, R15_SHOULDER = 2.19, 3.987
+AIRBORNE=("SPIN","JUMP","JUMP_FIRE","DROP","JE_HOVER","NTE_JUMP","N_SPIN","N_JUMP")
+R15_THIGH, R15_SHIN = 2.19-1.32, 1.32-0.393
+def wrap(a):
+    while a>math.pi: a-=2*math.pi
+    while a<=-math.pi: a+=2*math.pi
+    return a
+def local_pose(m,f):
+    pose=[list(r) for r in m["rest"]]
+    for typ,cnt,off,_,tr,_ in m["bindings"]: pose[tr][typ]=m["values"][off+min(f,cnt-1)]
+    return pose
+def convert(model_file, clip_name, quads_by_bone=None):
+    m=parse(M+model_file)
+    idx={n:i for i,n in m["trnames"]}
+    clip=next(c for c in m["clips"] if c[0]==clip_name)
+    dflt=next((c for c in m["clips"] if "default_pose" in c[0]),clip)
+    # leaf bones: point along their sprite's centre (body-part meshes only)
+    meshname={i:n for i,n in m["meshmap"]}
+    leafvec={}; legfoot={}
+    for i,q in enumerate(m["quads"]):
+        nn=meshname[i].lower()
+        for s in "lr":
+            if (nn.endswith(f"leg{s}") or nn.endswith(f"{s}_leg")) and f"xform_{s}_leg" in idx:
+                legfoot[s]=((q[0]+q[4])/2, q[1])  # bottom centre of the leg sprite (the foot)
+    for i,q in enumerate(m["quads"]):
+        n=meshname[i].lower()
+        for part,bone in (("head","xform_head"),("handl","xform_l_hand"),("handr","xform_r_hand"),("legl","xform_l_leg"),("legr","xform_r_leg"),("l_hand","xform_l_hand"),("r_hand","xform_r_hand"),("l_leg","xform_l_leg"),("r_leg","xform_r_leg")):
+            if n.endswith(part) and bone in idx and bone not in leafvec:
+                leafvec[bone]=((q[0]+q[4])/2,(q[1]+q[5])/2)
+    child={"xform_body":"xform_head","xform_r_arm":"xform_r_forearm","xform_l_arm":"xform_l_forearm","xform_r_forearm":"xform_r_hand","xform_l_forearm":"xform_l_hand"}
+    for s in "rl":
+        if f"xform_{s}_forearm" not in idx: child[f"xform_{s}_arm"]=f"xform_{s}_hand"
+    def frame_angles(f):
+        pose=local_pose(m,f); n=m["ntr"]
+        wrot=[0.0]*n; wpos=[(0.0,0.0)]*n
+        for i in range(n):
+            x,y,r=pose[i]; p=m["parents"][i]
+            if p<0: wrot[i]=r; wpos[i]=(x,y)
+            else:
+                c,s=math.cos(wrot[p]),math.sin(wrot[p])
+                wpos[i]=(wpos[p][0]+c*x-s*y, wpos[p][1]+s*x+c*y); wrot[i]=wrot[p]+r
+        def dir_(b):
+            i=idx[b]
+            if b in child and child[b] in idx:
+                cx,cy,_=pose[idx[child[b]]]; v=(cx,cy)
+            elif b in leafvec: v=leafvec[b]
+            else: v=(0,-1)
+            return wrot[i]+math.atan2(v[1],v[0])
+        th={b:dir_(b) for b in idx if b!="root"}
+        out={}
+        torso=th["xform_body"]
+        out["LowerTorso"]=wrap(torso-math.pi/2)
+        out["UpperTorso"]=0.0
+        out["Head"]=wrap(th["xform_head"]-torso)
+        for s,S in (("r","Right"),("l","Left")):
+            out[f"{S}UpperArm"]=wrap(th[f"xform_{s}_arm"]-torso+math.pi)
+            if f"xform_{s}_forearm" in idx:
+                out[f"{S}LowerArm"]=wrap(th[f"xform_{s}_forearm"]-th[f"xform_{s}_arm"])
+                out[f"{S}Hand"]=wrap(th[f"xform_{s}_hand"]-th[f"xform_{s}_forearm"])
+            else:
+                out[f"{S}LowerArm"]=0.0
+                out[f"{S}Hand"]=wrap(th[f"xform_{s}_hand"]-th[f"xform_{s}_arm"])
+            out[f"{S}UpperLeg"]=wrap(th[f"xform_{s}_leg"]-torso+math.pi)
+            out[f"{S}LowerLeg"]=0.0; out[f"{S}Foot"]=0.0
+        feet={}
+        for s in "lr":
+            i=idx[f"xform_{s}_leg"]; fx,fy=legfoot.get(s,(0,-20)); c,sn=math.cos(wrot[i]),math.sin(wrot[i])
+            feet[s]=((wpos[i][0]+c*fx-sn*fy)-wpos[i][0], (wpos[i][1]+sn*fx+c*fy)-wpos[i][1], wpos[i])
+        return out,wpos[idx["xform_body"]],pose,feet,torso
+    # scale: original hip-to-shoulder vs ours
+    _,_,p0,_,_=frame_angles(dflt[1])
+    sh=p0[idx["xform_r_arm"]][1]-p0[idx["xform_r_leg"]][1]
+    k=(R15_SHOULDER-R15_HIP)/max(1e-3,abs(sh))
+    base_ang,base,_,feet0,_=frame_angles(dflt[1])
+    L1,L2=R15_THIGH,R15_SHIN
+    legk={s:(L1+L2)*0.98/max(1e-3,math.hypot(feet0[s][0],feet0[s][1])) for s in "lr"}
+    # Head and hands: measure against the original's rest pose, so their sprites' drawing
+    # offset doesn't become a permanent tilt.
+    CAL=("Head","RightHand","LeftHand")
+    frames=[]
+    for f in range(clip[1],clip[2]+1):
+        ang,bp,_,feet,torso=frame_angles(f)
+        for j in CAL: ang[j]=wrap(ang[j]-base_ang[j])
+        # Legs: two-bone IK onto the original's foot, knee forward, foot kept level.
+        for s,S in (("r","Right"),("l","Left")):
+            dx,dy=feet[s][0]*legk[s],feet[s][1]*legk[s]
+            d=min(max(math.hypot(dx,dy),abs(L1-L2)+1e-3),L1+L2-1e-3)
+            psi=math.atan2(dx,-dy)
+            a=math.acos((L1*L1+d*d-L2*L2)/(2*L1*d)); b=math.acos((L2*L2+d*d-L1*L1)/(2*L2*d))
+            th,sh=psi+a,psi-b
+            ang[f"{S}UpperLeg"]=wrap(th-(torso-math.pi/2))
+            ang[f"{S}LowerLeg"]=wrap(sh-th)
+            ang[f"{S}Foot"]=wrap(-sh)
+        # LowerTorso offset in its joint space: X right, Y up, Z back (forward = -Z)
+        frames.append({"angles":{k_:round(v,4) for k_,v in ang.items()},"offset":[0.0,round((bp[1]-base[1])*k,4),round(-(bp[0]-base[0])*k,4)]})
+    # Airborne clips: height comes from physics, so keep only the bob within the clip.
+    if any(clip_name.upper().startswith(a) for a in AIRBORNE):
+        y0,z0=frames[0]["offset"][1],frames[0]["offset"][2]
+        for fr in frames: fr["offset"][1]=round(fr["offset"][1]-y0,4); fr["offset"][2]=round(fr["offset"][2]-z0,4)
+    return {"model":model_file,"clip":clip_name,"fps":m["fps"],"frames":frames,"scale":k}
+if __name__=="__main__":
+    r=convert(sys.argv[1],sys.argv[2])
+    print(r["clip"],len(r["frames"]),"frames, scale",round(r["scale"],4))
+    for fr in r["frames"][:3]: print({k:round(math.degrees(v)) for k,v in fr["angles"].items()},fr["offset"])
+```
+
+### `make_clips_json.py`
+```python
+import sys,os,json
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+from to_r15 import convert
+from cm import parse
+M="vault/05 Assets/Original Game/assets/Models/"
+out=[]; char,model=sys.argv[1],sys.argv[2]; wanted=sys.argv[4:]
+names=[c[0] for c in parse(M+model)["clips"]] if not wanted else wanted
+for n in names:
+    if "default_pose" in n: continue
+    r=convert(model,n); r["character"]=char; out.append(r)
+json.dump(out,open(sys.argv[3],"w"),separators=(",",":")); print(len(out),"clips ->",sys.argv[3])
+```
+
+### `import_original_clips.py` (runs inside Blender)
+```python
+"""Blender (5.x) importer: builds actions on an R15 rig (bones named like the R15 parts,
+pointing +Z, roll 0, as in Max_Spin.blend / Max_Rifle.blend) from clips converted by
+to_r15.py. Run inside Blender:  blender rig.blend --python import_original_clips.py -- clips.json
+Each clip becomes an action "Orig_<character>_<clip>" keyed at 30 fps (the original's 15 fps
+frames land on even frames, linear in between), rotation about each bone's local X."""
+import bpy, json, sys
+args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+clips = json.load(open(args[0]))
+rig = next(o for o in bpy.data.objects if o.type == "ARMATURE")
+scene = bpy.context.scene
+scene.render.fps = 30
+bpy.context.preferences.edit.keyframe_new_interpolation_type = "LINEAR"
+if rig.animation_data is None:
+    rig.animation_data_create()
+made = []
+for c in clips:
+    name = f"Orig_{c['character']}_{c['clip']}"
+    old = bpy.data.actions.get(name)
+    if old:
+        bpy.data.actions.remove(old)
+    act = bpy.data.actions.new(name)
+    act.use_fake_user = True
+    rig.animation_data.action = act
+    step = round(30 / c.get("fps", 15))
+    for i, fr in enumerate(c["frames"]):
+        frame = i * step
+        for bone, angle in fr["angles"].items():
+            pb = rig.pose.bones.get(bone)
+            if pb is None:
+                continue
+            pb.rotation_mode = "XYZ"
+            pb.rotation_euler = (angle, 0.0, 0.0)
+            pb.keyframe_insert("rotation_euler", frame=frame, group=bone)
+        lt = rig.pose.bones.get("LowerTorso")
+        if lt is not None:
+            lt.location = fr["offset"]
+            lt.keyframe_insert("location", frame=frame, group="LowerTorso")
+    act["source"] = f"Storm the Train: {c['model']} / {c['clip']} (reference)"
+    act.frame_range = (0, (len(c["frames"]) - 1) * step)
+    made.append(name)
+# leave every bone at rest when no action plays, and show the first clip
+for pb in rig.pose.bones:
+    pb.rotation_euler = (0, 0, 0); pb.location = (0, 0, 0)
+rig.animation_data.action = bpy.data.actions.get(made[0]) if made else None
+if len(args) > 1:
+    bpy.ops.wm.save_as_mainfile(filepath=args[1])
+print("Imported", len(made), "actions:", ", ".join(made))
+```
+
 ## Notes
 - Agents use the `_3` (full armour) texture of each part; enemies take their textures and
   weapons from their `scripts/Enemies/*.lua` archetype.
