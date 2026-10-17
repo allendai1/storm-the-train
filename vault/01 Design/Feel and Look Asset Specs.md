@@ -781,9 +781,12 @@ for the slice. **P3** = nice-to-have.
 3. **Rename `DashDaring` → `MaxMayhem`** in Studio? It's optional ([[Status]]); only the
    display name has to change. If yes, do it before the model swap. (The rename touches the attributes `Squad`/`OwnedAgents`, `STARTER_AGENT` and
    `Weapon_<AgentId>`.)
-4. **The weapon weld.** Keep the gun welded to the root (a stable muzzle on the server;
-   the poses must match it, the recommendation), or move it to `RightHand` (natural poses,
-   but the shot height would move with the animation)?
+4. **The weapon weld.** ~~Keep the gun welded to the root, or move it to `RightHand`?~~
+   **Decided 2026-10-17: both.** The visible gun is welded to `RightHand` at
+   `RightGripAttachment` (so the F3 poses can hold it naturally), and the server's shot
+   origin stays at the root offset `WEAPON_HOLD_OFFSET` ([[CombatService]]), so the shot
+   height is animation-proof. The shoot overlays (M8, M9) should bring the hands and gun
+   to roughly that height so tracers leave near the muzzle.
 5. **The downed pose.** Keep the `PlatformStand` physics flop, or keep the root upright and
    use an animated slump (`Max_DownedLoop`), which reads better as "revive me"?
 6. **Melee wind-up.** §5 wants anticipation before *every* enemy attack, but the built

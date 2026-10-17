@@ -35,8 +35,13 @@ Session 5). Both react to `Health` reaching 0.
   only. Shot rays use it with an Include filter of `workspace.Map` plus the live enemy
   hitboxes, so shots stop at train walls and enemies, and pass through players, bodies
   and ragdolls.
-- Runtime-generated content: `Character.Weapon`, a clone of the weapon template welded
-  to the HumanoidRootPart at `Constants.WEAPON_HOLD_OFFSET`.
+- Runtime-generated content: `Character.Weapon`, a clone of the weapon template
+  **welded to the RightHand** (2026-10-17): the Handle sits at
+  `RightHand.RightGripAttachment * Constants.WEAPON_GRIP_OFFSET` (the tool grip
+  convention: the barrel, Handle −Z, along the attachment's +Y). Arm animations carry it.
+  Falls back to the root weld at `WEAPON_HOLD_OFFSET` if the rig has no RightHand.
+  **Not a Tool** on purpose: Tools bring the backpack hotbar, equip toggling and the
+  arm-raise grip, and the game switches weapons through crates with no inventory UI.
 
 ## Public API
 - `CombatService.damageEnemy(enemy: Model, amount: number, by: Player?)`: lowers `Health`
@@ -91,7 +96,10 @@ Session 5). Both react to `Health` reaching 0.
   FireInterval`), and the first shot after a pause fires immediately. A player with
   Health ≤ 0 can't fire.
 - **Direction:** there's no player aim. Shots go straight along the facing (±X, from the
-  root's LookVector), starting at the Muzzle projected onto Z = 0. Mouse aim was removed
+  root's LookVector), starting at the Muzzle **as if the gun sat at `WEAPON_HOLD_OFFSET`
+  on the root** (`muzzlePosition` takes the Muzzle's offset in Handle space and applies it
+  at the root offset), projected onto Z = 0. So the shot height never moves with the arm
+  pose, whatever the hand does; verified 2026-10-17 (tracers and flashes at root +0.45). Mouse aim was removed
   2026-10-13; verified with the mouse held high, where the steepest tracer was 2° (auto-aim).
   - The **rifle's auto-aim** bends the shot toward the live enemy with the smallest angle
     inside `AutoAimAngle` and in range.

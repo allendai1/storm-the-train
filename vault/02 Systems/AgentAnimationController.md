@@ -32,7 +32,7 @@ character, so teammates' spins show too. Cosmetic only; the spin's hits are serv
 - Runtime-generated content: **`Character.SpinWeapon`**, a client-only clone of
   `Character.Weapon` shown while spinning (the real gun is welded to the root, which
   physics owns, so the clip can't turn it). The clone drops **only** the `WeldConstraint` to the
-  HumanoidRootPart (the weapon's parts hang on the Handle through their own
+  character (the hand weld; was the root weld) (the weapon's parts hang on the Handle through their own
   WeldConstraints; stripping those too made the gun fall apart mid-air, fixed
   2026-10-17), is massless and non-colliding, and is `Weld`ed by its `Handle` to the UpperTorso at
   `SpinWeaponAttachment`; destroyed when the spin ends. It's a clone of a hand-built

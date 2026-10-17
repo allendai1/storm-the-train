@@ -257,7 +257,8 @@ After the 2026-10-16 pass ([[2026-10-16]]), these are still open:
   (`Spin`, `SpinAnimation`), `DashDaring.UpperTorso.SpinWeaponAttachment` and
   `Controllers.AgentAnimationController` (spin clip; the gun rides the torso during the
   spin, tux tails hidden), `Remotes.SpinLanded` with its CombatService handler and the
-  InputController send. Then publish the
+  InputController send, the weapon welded to the RightHand with the shot origin kept on
+  the root (`Constants.WEAPON_GRIP_OFFSET`, `CombatService.setWeapon`/`muzzlePosition`). Then publish the
   spin clip from the Animation Editor and paste its id into `SpinAnimation`.
 - **2026-10-16 (local session): save or publish.** New or changed:
   - **Background Kit:** `Shared.BackgroundKit`, ParallaxController (replaced),
